@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import Experience from '../Experience.js';
 
 export default class Gamen {
-  constructor(posX, posZ, rot, text) {
+  constructor(posX, posZ, rot) {
     this.experience = new Experience();
 
     this.scene = this.experience.scene;
@@ -13,9 +13,6 @@ export default class Gamen {
 
     rot = typeof rot === 'undefined' ? 0 : rot;
     this.rot = rot;
-
-    text = typeof text === 'undefined' ? null : text;
-    this.text = text;
 
     this.setGeometry();
     this.setTextures();
@@ -32,15 +29,21 @@ export default class Gamen {
   }
 
   setMaterial() {
-    // this.material = new THREE.MeshBasicMaterial({ color: 'gray' });
-
     this.material = new THREE.MeshPhongMaterial({
       shininess: 100,
-      color: 'cyan',
+      color: 'rgb(255, 0, 255)',
       specular: 0xffffff,
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.15,
     });
+    // this.material = new THREE.MeshStandardMaterial({
+    //   transparent: true,
+    //   opacity: 0.1,
+    //   roughness: 0.1,
+    //   metalness: 0.8,
+    //   color: new THREE.Color(0xff00ff),
+    // });
+
     this.material.side = THREE.DoubleSide;
   }
 
@@ -48,6 +51,7 @@ export default class Gamen {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
 
     this.mesh.position.y = this.geometry.parameters.height / 2;
+
     this.mesh.position.x = this.posX;
     this.mesh.position.z = this.posZ;
     this.mesh.rotation.y = this.rot;

@@ -13,8 +13,14 @@ export default class World {
     this.scene = this.experience.scene;
 
     this.floor = new Floor();
-
     this.environment = new Environment();
+
+    this.debug = this.experience.debug;
+
+    // Debug
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder('world');
+    }
 
     /**
      *
@@ -139,152 +145,45 @@ export default class World {
     this.scene.add(this.groupCenterTop);
 
     /**
-     * 右上隅
-     */
-    this.groupTopRightCorner = new THREE.Group();
-
-    this.gamenTopRightOne = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50 + gamenWidth / 2,
-      floorHeight / 4 - gamenWidth * 3 - gamenWidth / 2,
-      Math.PI
-    );
-    this.gamenTopRightTwo = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50 + gamenWidth * 1.5,
-      floorHeight / 4 - gamenWidth * 3 - gamenWidth / 2,
-      Math.PI
-    );
-    this.gamenTopRightThree = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50,
-      floorHeight / 4 - gamenWidth * 3,
-      Math.PI * 0.5
-    );
-    this.gamenTopRightFour = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50 + gamenWidth,
-      floorHeight / 4 - gamenWidth * 3,
-      Math.PI * 0.5
-    );
-    this.gamenTopRightFive = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50 + gamenWidth * 2,
-      floorHeight / 4 - gamenWidth * 3,
-      Math.PI * 0.5
-    );
-
-    this.groupTopRightCorner.add(
-      this.gamenTopRightOne.mesh,
-      this.gamenTopRightTwo.mesh,
-      this.gamenTopRightThree.mesh,
-      this.gamenTopRightFour.mesh,
-      this.gamenTopRightFive.mesh
-    );
-    this.scene.add(this.groupTopRightCorner);
-    this.groupTopRightCorner.rotation.set(0, -Math.PI * 0.5, 0);
-    this.groupTopRightCorner.position.set(gamenWidth * 3, 0, 0);
-
-    /**
-     * 右下隅
-     */
-    this.groupBottomRightCorner = new THREE.Group();
-
-    this.gamenBottomRightOne = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50 + gamenWidth / 2,
-      floorHeight / 4 - gamenWidth * 3 - gamenWidth / 2,
-      Math.PI
-    );
-    this.gamenBottomRightTwo = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50 + gamenWidth * 1.5,
-      floorHeight / 4 - gamenWidth * 3 - gamenWidth / 2,
-      Math.PI
-    );
-    this.gamenBottomRightThree = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50,
-      floorHeight / 4 - gamenWidth * 3,
-      Math.PI * 0.5
-    );
-    this.gamenBottomRightFour = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50 + gamenWidth,
-      floorHeight / 4 - gamenWidth * 3,
-      Math.PI * 0.5
-    );
-    this.gamenBottomRightFive = new Gamen(
-      -floorWidth / 2 + floorWidth / 5 - floorWidth / 50 + gamenWidth * 2,
-      floorHeight / 4 - gamenWidth * 3,
-      Math.PI * 0.5
-    );
-
-    this.groupBottomRightCorner.add(
-      this.gamenBottomRightOne.mesh,
-      this.gamenBottomRightTwo.mesh,
-      this.gamenBottomRightThree.mesh,
-      this.gamenBottomRightFour.mesh,
-      this.gamenBottomRightFive.mesh
-    );
-    this.scene.add(this.groupBottomRightCorner);
-    this.groupBottomRightCorner.rotation.set(0, -Math.PI * 1, 0);
-    this.groupBottomRightCorner.position.set(gamenWidth * 0.5, 0, 0);
-
-    /**
      * 中前
      */
     this.groupCenterFront = new THREE.Group();
 
-    this.gamenCenterFrontOne = new Gamen(
-      -floorWidth / 2 +
-        floorWidth / 5 -
-        floorWidth / 50 +
-        gamenWidth / 2 +
-        gamenWidth * 3,
-      floorHeight / 4 - gamenWidth * 3 - gamenWidth / 2 - gamenWidth / 2,
-      Math.PI
-    );
-    this.gamenCenterFrontTwo = new Gamen(
-      -floorWidth / 2 +
-        floorWidth / 5 -
-        floorWidth / 50 +
-        gamenWidth * 1.5 +
-        gamenWidth * 3,
-      floorHeight / 4 - gamenWidth * 3 - gamenWidth / 2 - gamenWidth / 2,
-      Math.PI
-    );
+    this.gamenCenterFrontOne = new Gamen(gamenWidth / 2, gamenWidth, 0);
+    this.gamenCenterFrontTwo = new Gamen(gamenWidth * 1.5, gamenWidth, Math.PI);
+
     this.groupCenterFront.add(
       this.gamenCenterFrontOne.mesh,
       this.gamenCenterFrontTwo.mesh
     );
     this.scene.add(this.groupCenterFront);
-    this.groupCenterFront.position.set(-gamenWidth, 0, gamenWidth * 3);
+
+    // I am bad at maths.
+    this.groupCenterFront.position.set(-0.707, 0, -0.293);
+
     //
+
     this.groupCenterFrontRotated = new THREE.Group();
 
-    this.gamenCenterFrontThree = new Gamen(
-      -floorWidth / 2 +
-        floorWidth / 5 -
-        floorWidth / 50 +
-        gamenWidth * 1.5 +
-        gamenWidth * 3,
-      floorHeight / 4 - gamenWidth * 3 - gamenWidth / 2 - gamenWidth / 2,
+    this.gamenCenterFrontRotatedOne = new Gamen(
+      gamenWidth / 2,
+      gamenWidth,
       Math.PI
     );
-    this.gamenCenterFrontThree.mesh.translateX(gamenWidth * 2);
-    this.gamenCenterFrontThree.mesh.translateZ(-gamenWidth * 3);
-
-    this.gamenCenterFrontFour = new Gamen(
-      -floorWidth / 2 +
-        floorWidth / 5 -
-        floorWidth / 50 +
-        gamenWidth * 1.5 +
-        gamenWidth * 3,
-      floorHeight / 4 - gamenWidth * 3 - gamenWidth / 2 - gamenWidth / 2,
+    this.gamenCenterFrontRotatedTwo = new Gamen(
+      gamenWidth * 1.5,
+      gamenWidth,
       Math.PI
     );
-    this.gamenCenterFrontFour.mesh.translateX(gamenWidth);
-    this.gamenCenterFrontFour.mesh.translateZ(-gamenWidth * 3);
 
     this.groupCenterFrontRotated.add(
-      this.gamenCenterFrontThree.mesh,
-      this.gamenCenterFrontFour.mesh
+      this.gamenCenterFrontRotatedOne.mesh,
+      this.gamenCenterFrontRotatedTwo.mesh
     );
-    this.groupCenterFrontRotated.rotateY(5.6);
-    this.groupCenterFrontRotated.position.set(0.35, 0, 1);
     this.scene.add(this.groupCenterFrontRotated);
+
+    // I am bad at maths.
+    this.groupCenterFrontRotated.rotateY(-Math.PI * 0.25);
   }
 
   update() {
