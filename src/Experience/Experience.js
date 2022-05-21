@@ -37,7 +37,7 @@ export default class Experience {
     this.renderer = new Renderer();
 
     const axesHelper = new THREE.AxesHelper(5);
-    this.scene.add(axesHelper);
+    // this.scene.add(axesHelper);
 
     this.world = new World();
 

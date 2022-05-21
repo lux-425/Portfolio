@@ -29,10 +29,18 @@ export default class Floor {
   }
 
   setMaterial() {
-    this.material = new THREE.MeshStandardMaterial();
-    this.material.color.set('#9ea4ab');
-    this.material.roughness = 0.0;
-    this.material.metalness = 0.3;
+    // this.material = new THREE.MeshStandardMaterial();
+    // this.material.color.set('#9ea4ab');
+    // this.material.color.set('white');
+    // this.material.roughness = 0.0;
+    // this.material.metalness = 0.0;
+    this.material = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color('white'),
+      roughness: 0,
+      metalness: 0,
+      ior: 2.3,
+      reflectivity: 1
+    });
 
     // Debug
     if (this.debug.active) {
@@ -49,15 +57,14 @@ export default class Floor {
         .max(1)
         .step(0.001)
         .name('metalness');
-    
     }
   }
 
   setMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.rotation.x = - Math.PI * 0.5;
+    this.mesh.rotation.x = -Math.PI * 0.5;
 
-    this.mesh.receiveShadow = true;
+    this.mesh.receiveShadow = false;
 
     this.scene.add(this.mesh);
   }

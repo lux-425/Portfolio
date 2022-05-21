@@ -29,20 +29,26 @@ export default class Gamen {
   }
 
   setMaterial() {
-    this.material = new THREE.MeshPhongMaterial({
-      shininess: 100,
-      color: 'rgb(255, 0, 255)',
-      specular: 0xffffff,
-      transparent: true,
-      opacity: 0.15,
-    });
+    // this.material = new THREE.MeshPhongMaterial({
+    //   shininess: 100,
+    //   color: 'rgb(255, 0, 255)',
+    //   specular: 0xffffff,
+    //   transparent: true,
+    //   opacity: 0.15,
+    // });
     // this.material = new THREE.MeshStandardMaterial({
     //   transparent: true,
     //   opacity: 0.1,
     //   roughness: 0.1,
-    //   metalness: 0.8,
-    //   color: new THREE.Color(0xff00ff),
+    //   metalness: 0.0,
+    //   color: new THREE.Color(0xffffff),
     // });
+    this.material = new THREE.MeshPhysicalMaterial({
+      roughness: 0,
+      metalness: 0,
+      transparent: true,
+      opacity: 0.25
+    });
 
     this.material.side = THREE.DoubleSide;
   }
@@ -56,6 +62,6 @@ export default class Gamen {
     this.mesh.position.z = this.posZ;
     this.mesh.rotation.y = this.rot;
 
-    this.mesh.castShadow = true;
+    this.mesh.castShadow = false;
   }
 }

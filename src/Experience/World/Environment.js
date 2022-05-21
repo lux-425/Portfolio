@@ -15,7 +15,7 @@ export default class Environment {
     }
 
     this.setSunLight();
-    this.setSpotLight();
+    // this.setSpotLight();
 
     this.setEnvironmentMap();
   }
@@ -23,16 +23,18 @@ export default class Environment {
   setSunLight() {
     this.sunLight = new THREE.DirectionalLight('#b9d8e3', 4);
 
-    this.sunLight.castShadow = true;
+    this.sunLight.castShadow = false;
     this.sunLight.shadow.camera.far = 15;
     this.sunLight.shadow.mapSize.set(1024, 1024);
     this.sunLight.shadow.normalBias = 0.05;
 
-    this.sunLight.position.set(1, Math.PI * 2, 0);
+    this.sunLight.position.set(0, Math.PI * 2, 0);
 
     // HELPER
     const helper = new THREE.DirectionalLightHelper(this.sunLight, 5);
     // this.scene.add(helper);
+
+    this.sunLight.intensity = 0.44;
 
     this.scene.add(this.sunLight);
 
@@ -42,7 +44,7 @@ export default class Environment {
         .add(this.sunLight, 'intensity')
         .min(0)
         .max(10)
-        .step(0.001)
+        .step(0.1)
         .name('sunLightIntensity');
 
       this.debugFolder
@@ -70,10 +72,10 @@ export default class Environment {
 
   setSpotLight() {
     this.spotLight = new THREE.SpotLight('#b4dbe4');
-    this.spotLight.intensity = 20;
-    this.spotLight.position.set(-5, 8, 4);
+    this.spotLight.intensity = 1.5;
+    this.spotLight.position.set(-1.4, 8, 1.4);
 
-    this.spotLight.castShadow = true;
+    this.spotLight.castShadow = false;
     this.spotLight.shadow.mapSize.width = 1024 * 2;
     this.spotLight.shadow.mapSize.height = 1024 * 2;
     this.spotLight.shadow.focus = 1;
@@ -94,7 +96,7 @@ export default class Environment {
         .add(this.spotLight, 'intensity')
         .min(0)
         .max(100)
-        .step(0.001)
+        .step(0.1)
         .name('spotLightIntensity');
 
       this.debugFolder
