@@ -29,18 +29,18 @@ export default class Floor {
   }
 
   setMaterial() {
-    // this.material = new THREE.MeshStandardMaterial();
-    // this.material.color.set('#9ea4ab');
-    // this.material.color.set('white');
-    // this.material.roughness = 0.0;
-    // this.material.metalness = 0.0;
-    this.material = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('white'),
-      roughness: 0,
-      metalness: 0,
-      ior: 2.3,
-      reflectivity: 1
-    });
+    this.material = new THREE.MeshStandardMaterial();
+    this.material.color.set('#9ea4ab');
+    this.material.color.set('white');
+    this.material.roughness = 0.0;
+    this.material.metalness = 0.5;
+    // this.material = new THREE.MeshPhysicalMaterial({
+    //   color: new THREE.Color('white'),
+    //   roughness: 0,
+    //   metalness: 0,
+    //   ior: 2.3,
+    //   reflectivity: 1
+    // });
 
     // Debug
     if (this.debug.active) {

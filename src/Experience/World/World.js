@@ -5,9 +5,7 @@ import Experience from '../Experience.js';
 import Environment from './Environment.js';
 import Floor from './Floor.js';
 import Gamen from './Gamen.js';
-
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js';
-import { Reflector } from 'three/examples/jsm/objects/Reflector.js';
+import GroundLight from './GroundLight.js';
 
 export default class World {
   constructor() {
@@ -35,122 +33,40 @@ export default class World {
      * 画面
      *
      */
-    // this.setTopLeftGamens();
+    this.setTopLeftGamens();
     this.setBottomLeftGamens();
-    // this.setCenterTopGamens();
+    this.setCenterTopGamens();
     // this.setCenterFrontGamens();
 
     /**
      * テスト!!!
      */
-    // MIRROR
-    var geometry = new THREE.PlaneBufferGeometry(1, 2);
-    var verticalMirror = new Reflector(geometry, {
-      clipBias: 0.003,
-      textureWidth: window.innerWidth * window.devicePixelRatio,
-      textureHeight: window.innerHeight * window.devicePixelRatio,
-      color: 0x889999,
-    });
-    verticalMirror.position.x =
-      -this.floorWidth / 2 +
-      this.floorWidth / 5 -
-      this.floorWidth / 50 +
-      this.gamenWidth / 2;
-    verticalMirror.position.y = 1;
-    verticalMirror.position.z =
-      this.floorHeight / 4 + this.gamenWidth / 2 + 0.001;
-    // verticalMirror.rotation.set(-Math.PI * 0.5, 0, 0);
-    // verticalMirror.material.transparent = true;
-    // this.scene.add(verticalMirror);
-
-    // RECT AREA LIGHT
-    this.rectAreaLight = new THREE.RectAreaLight('orange', 0.01, 0.01, 0.01);
-    this.rectAreaLight.position.set(
-      -this.floorWidth / 2 +
-        this.floorWidth / 5 -
-        this.floorWidth / 50 +
-        this.gamenWidth / 2 -
-        0.5,
-      1,
-      this.floorHeight / 4 + this.gamenWidth / 2 + 0.002
-    );
-    this.rectAreaLight.rotation.set(0, -Math.PI * 0.5, 0);
-
-    this.rectAreaLight.height = 2;
-
-    // this.rectAreaLight.intensity = 2;
-    this.rectAreaLight.power = 13;
-
-    // Looks at the center of the scene
-    // this.rectAreaLight.lookAt(new THREE.Vector3());
-
-    this.scene.add(this.rectAreaLight);
-    this.rectAreaLightHelper = new RectAreaLightHelper(this.rectAreaLight);
-    // this.scene.add(this.rectAreaLightHelper);
-
-    // SECOND RECT AREA LIGHT
-    this.rectAreaLight2 = new THREE.RectAreaLight('green', 0.01, 0.01, 0.01);
-    this.rectAreaLight2.position.set(
-      -this.floorWidth / 2 +
-        this.floorWidth / 5 -
-        this.floorWidth / 50 +
-        this.gamenWidth / 2 -
-        0.5,
-      1,
-      this.floorHeight / 4 + this.gamenWidth / 2 + 0.002
-    );
-    this.rectAreaLight2.rotation.set(0, -Math.PI * 1.5, 0);
-
-    this.rectAreaLight2.height = 2;
-
-    // this.rectAreaLight2.intensity = 2;
-    this.rectAreaLight2.power = 13;
-
-    this.rectAreaLight2.translateZ(1);
-
-    // Looks at the center of the scene
-    // this.rectAreaLight.lookAt(new THREE.Vector3());
-
-    this.scene.add(this.rectAreaLight2);
-    this.rectAreaLightHelper2 = new RectAreaLightHelper(this.rectAreaLight2);
-    // this.scene.add(this.rectAreaLightHelper2);
+    this.debugParams = {};
+    this.debugParams.gLsPower = 50;
+    this.debugParams.gLsY = 0.01;
 
     /**
      * Debug
      */
     if (this.debug.active) {
-      // RECT AREA LIGHT
       this.debugFolder
-        .add(this.rectAreaLight.position, 'x')
-        .min(-5)
-        .max(5)
-        .step(0.001)
-        .name('rectAreaLightX');
-      this.debugFolder
-        .add(this.rectAreaLight.position, 'z')
-        .min(-5)
-        .max(5)
-        .step(0.001)
-        .name('rectAreaLightZ');
-      this.debugFolder
-        .add(this.rectAreaLight.rotation, 'y')
-        .min(-5)
-        .max(5)
-        .step(0.001)
-        .name('rectAreaLightRotationY');
-      this.debugFolder
-        .add(this.rectAreaLight, 'power')
+        .add(this.debugParams, 'gLsPower')
         .min(0)
-        .max(300)
-        .step(1)
-        .name('rectAreaLightPower');
+        .max(100)
+        .step(0.1)
+        .name('groundLightsPower');
       this.debugFolder
-        .add(this.rectAreaLight2, 'power')
+        .add(this.debugParams, 'gLsY')
         .min(0)
-        .max(900)
-        .step(1)
-        .name('rectAreaLight2Power');
+        .max(10)
+        .step(0.01)
+        .name('groundLightsY');
     }
+
+    /**
+     * 線ライト
+     */
+    this.setGroundLights();
   }
 
   /**
@@ -165,7 +81,9 @@ export default class World {
         this.floorWidth / 50 +
         this.gamenWidth / 2,
       this.floorHeight / 4 - this.gamenWidth * 3 - this.gamenWidth / 2,
-      Math.PI
+      Math.PI,
+      'purple',
+      'magenta'
     );
     this.gamenTopLeftTwo = new Gamen(
       -this.floorWidth / 2 +
@@ -173,12 +91,16 @@ export default class World {
         this.floorWidth / 50 +
         this.gamenWidth * 1.5,
       this.floorHeight / 4 - this.gamenWidth * 3 - this.gamenWidth / 2,
-      Math.PI
+      Math.PI,
+      'purple',
+      'magenta'
     );
     this.gamenTopLeftThree = new Gamen(
       -this.floorWidth / 2 + this.floorWidth / 5 - this.floorWidth / 50,
       this.floorHeight / 4 - this.gamenWidth * 3,
-      Math.PI * 0.5
+      Math.PI * 0.5,
+      'purple',
+      'magenta'
     );
     this.gamenTopLeftFour = new Gamen(
       -this.floorWidth / 2 +
@@ -186,7 +108,9 @@ export default class World {
         this.floorWidth / 50 +
         this.gamenWidth,
       this.floorHeight / 4 - this.gamenWidth * 3,
-      Math.PI * 0.5
+      Math.PI * 0.5,
+      'purple',
+      'magenta'
     );
     this.gamenTopLeftFive = new Gamen(
       -this.floorWidth / 2 +
@@ -194,7 +118,9 @@ export default class World {
         this.floorWidth / 50 +
         this.gamenWidth * 2,
       this.floorHeight / 4 - this.gamenWidth * 3,
-      Math.PI * 0.5
+      Math.PI * 0.5,
+      'purple',
+      'magenta'
     );
 
     this.groupTopLeftCorner.add(
@@ -216,12 +142,16 @@ export default class World {
     this.gamenBottomLeftOne = new Gamen(
       -this.floorWidth / 2 + this.floorWidth / 5 - this.floorWidth / 50,
       this.floorHeight / 4 - this.gamenWidth,
-      Math.PI * 0.5
+      Math.PI * 0.5,
+      'orange',
+      'green'
     );
     this.gamenBottomLeftTwo = new Gamen(
       -this.floorWidth / 2 + this.floorWidth / 5 - this.floorWidth / 50,
       this.floorHeight / 4,
-      Math.PI * 0.5
+      Math.PI * 0.5,
+      'orange',
+      'green'
     );
     this.gamenBottomLeftThree = new Gamen(
       -this.floorWidth / 2 +
@@ -229,12 +159,14 @@ export default class World {
         this.floorWidth / 50 +
         this.gamenWidth / 2,
       this.floorHeight / 4 + this.gamenWidth / 2,
-      Math.PI
+      Math.PI,
+      'orange',
+      'green'
     );
 
     this.groupBottomLeftCorner.add(
-      // this.gamenBottomLeftOne.mesh,
-      // this.gamenBottomLeftTwo.mesh,
+      this.gamenBottomLeftOne.mesh,
+      this.gamenBottomLeftTwo.mesh,
       this.gamenBottomLeftThree.mesh
     );
     this.scene.add(this.groupBottomLeftCorner);
@@ -252,7 +184,9 @@ export default class World {
         this.floorWidth / 50 +
         this.gamenWidth * 3,
       this.floorHeight / 4 - this.gamenWidth * 3 - this.gamenWidth / 2,
-      Math.PI * 0.5
+      Math.PI * 0.5,
+      'red',
+      'blue'
     );
     this.gamengamenCenterTopTwo = new Gamen(
       -this.floorWidth / 2 +
@@ -264,7 +198,9 @@ export default class World {
         this.gamenWidth * 3 -
         this.gamenWidth / 2 -
         this.gamenWidth / 2,
-      Math.PI
+      Math.PI,
+      'red',
+      'blue'
     );
     this.gamengamenCenterTopThree = new Gamen(
       -this.floorWidth / 2 +
@@ -276,7 +212,9 @@ export default class World {
         this.gamenWidth * 3 -
         this.gamenWidth / 2 -
         this.gamenWidth / 2,
-      Math.PI
+      Math.PI,
+      'red',
+      'blue'
     );
 
     this.groupCenterTop.add(
@@ -337,7 +275,46 @@ export default class World {
     this.groupCenterFrontRotated.rotateY(-Math.PI * 0.25);
   }
 
+  setGroundLights() {
+    this.GroundLight1 = new GroundLight(
+      -2,
+      this.debugParams.gLsPower,
+      this.debugParams.gLsY
+    );
+    this.GroundLight2 = new GroundLight(
+      -4,
+      this.debugParams.gLsPower,
+      this.debugParams.gLsY
+    );
+    this.GroundLight3 = new GroundLight(
+      0,
+      this.debugParams.gLsPower,
+      this.debugParams.gLsY
+    );
+    this.GroundLight4 = new GroundLight(
+      2,
+      this.debugParams.gLsPower,
+      this.debugParams.gLsY
+    );
+    this.GroundLight5 = new GroundLight(
+      4,
+      this.debugParams.gLsPower,
+      this.debugParams.gLsY
+    );
+  }
+
   update() {
-    return null;
+    // Ground lights
+    this.GroundLight1.rectAreaLight.power = this.debugParams.gLsPower;
+    this.GroundLight2.rectAreaLight.power = this.debugParams.gLsPower;
+    this.GroundLight3.rectAreaLight.power = this.debugParams.gLsPower;
+    this.GroundLight4.rectAreaLight.power = this.debugParams.gLsPower;
+    this.GroundLight5.rectAreaLight.power = this.debugParams.gLsPower;
+
+    this.GroundLight1.rectAreaLight.position.y = this.debugParams.gLsY;
+    this.GroundLight2.rectAreaLight.position.y = this.debugParams.gLsY;
+    this.GroundLight3.rectAreaLight.position.y = this.debugParams.gLsY;
+    this.GroundLight4.rectAreaLight.position.y = this.debugParams.gLsY;
+    this.GroundLight5.rectAreaLight.position.y = this.debugParams.gLsY;
   }
 }

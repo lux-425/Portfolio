@@ -34,7 +34,7 @@ export default class Environment {
     const helper = new THREE.DirectionalLightHelper(this.sunLight, 5);
     // this.scene.add(helper);
 
-    this.sunLight.intensity = 0.44;
+    this.sunLight.intensity = 2;
 
     this.scene.add(this.sunLight);
 
@@ -87,6 +87,8 @@ export default class Environment {
     // HELPER
     const helper = new THREE.DirectionalLightHelper(this.spotLight, 5);
     // this.scene.add(helper);
+
+    this.spotLight.intensity = 20;
 
     this.scene.add(this.spotLight);
 
