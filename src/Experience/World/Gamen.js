@@ -50,7 +50,8 @@ export default class Gamen {
       roughness: 0,
       metalness: 0,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.25,
+      color: 'white',
     });
 
     this.material.side = THREE.DoubleSide;
@@ -80,7 +81,7 @@ export default class Gamen {
     );
 
     this.rectAreaLight.height = 2;
-    this.rectAreaLight.power = 13;
+    this.rectAreaLight.power = 130;
 
     this.rectAreaLight.position.set(this.posX, 1, this.posZ);
     this.rectAreaLight.rotateY(this.rot + Math.PI * 0.5);
@@ -100,7 +101,7 @@ export default class Gamen {
     );
 
     this.rectAreaLight2.height = 2;
-    this.rectAreaLight2.power = 13;
+    this.rectAreaLight2.power = 130;
 
     this.rectAreaLight2.position.set(this.posX, 1, this.posZ);
     this.rectAreaLight2.rotateY(this.rot - Math.PI * 0.5);
