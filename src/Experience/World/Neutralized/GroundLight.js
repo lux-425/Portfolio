@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import Experience from '../Experience.js';
+import Experience from '../../Experience.js.js';
 
 import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js';
 
