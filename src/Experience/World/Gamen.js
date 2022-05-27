@@ -14,7 +14,7 @@ export default class Gamen {
   }
 
   setGeometry() {
-    this.geometry = new THREE.PlaneGeometry(1, 2);
+    this.geometry = new THREE.PlaneGeometry(0.9, 1.9);
   }
 
   // setTextures() {
@@ -39,8 +39,9 @@ export default class Gamen {
       roughness: 0,
       metalness: 0,
       transparent: true,
-      opacity: 0.8,
-      color: 'red',
+      opacity: 0.15
+      ,
+      color: 'cyan',
     });
     this.material.side = THREE.DoubleSide;
   }
