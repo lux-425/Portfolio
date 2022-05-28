@@ -21,7 +21,8 @@ export default class Floor {
   }
 
   setGeometry() {
-    this.geometry = new THREE.PlaneGeometry(10, 8);
+    this.geometry =
+    new THREE.PlaneGeometry(25, 6.9, 10, 10);
   }
 
   setTextures() {
@@ -29,17 +30,14 @@ export default class Floor {
   }
 
   setMaterial() {
-    this.material = new THREE.MeshStandardMaterial();
-    this.material.color.set('gray');
-    this.material.roughness = 0.0;
-    this.material.metalness = 0.5;
-    // this.material = new THREE.MeshPhysicalMaterial({
-    //   color: new THREE.Color('white'),
-    //   roughness: 0,
-    //   metalness: 0,
-    //   ior: 2.3,
-    //   reflectivity: 1
-    // });
+    this.material = new THREE.MeshPhysicalMaterial({
+      metalness: 1,
+      roughness: 0,
+      color: new THREE.Color('white'),
+      // wireframe: true,
+      transparent: true,
+      opacity: 0.25
+    });
 
     // Debug
     if (this.debug.active) {
@@ -61,10 +59,18 @@ export default class Floor {
 
   setMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.rotation.x = -Math.PI * 0.5;
 
     this.mesh.receiveShadow = false;
 
+    this.mesh.rotateX(-Math.PI * 0.5);
+    this.mesh.position.set(0, -3, 2);
+
     this.scene.add(this.mesh);
+
+    // テスト　！！！
+    this.geometry.setAttribute(
+      'uv2',
+      new THREE.Float32BufferAttribute(this.geometry.attributes.uv.array, 2)
+    );
   }
 }

@@ -28,7 +28,7 @@ export default class Renderer {
     this.instance.shadowMap.enabled = true;
     this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    this.instance.setClearColor('#8ea1b3');
+    // this.instance.setClearColor('#8ea1b3');
     // this.instance.setClearColor('#35587d');
     // this.instance.setClearColor('black');
     

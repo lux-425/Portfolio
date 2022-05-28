@@ -2,6 +2,9 @@ import * as THREE from 'three';
 
 import Experience from '../Experience.js';
 
+import gamenVertexShader from '../../Shaders/Gamen/vertex.glsl';
+import gamenFragmentShader from '../../Shaders/Gamen/fragment.glsl';
+
 export default class Gamen {
   constructor() {
     this.experience = new Experience();
@@ -14,7 +17,7 @@ export default class Gamen {
   }
 
   setGeometry() {
-    this.geometry = new THREE.PlaneGeometry(0.9, 1.9);
+    this.geometry = new THREE.PlaneGeometry(0.9, 1.9, 32, 32);
   }
 
   // setTextures() {
@@ -22,28 +25,29 @@ export default class Gamen {
   // }
 
   setMaterial() {
-    // this.material = new THREE.MeshPhongMaterial({
-    //   shininess: 100,
-    //   specular: 0xffffff,
+    // this.material = new THREE.MeshPhysicalMaterial({
+    //   roughness: 0,
+    //   metalness: 0,
     //   transparent: true,
-    //   opacity: 0.2,
+    //   opacity: 0.15
+    //   ,
+    //   color: 'cyan',
     // });
-    // this.material = new THREE.MeshStandardMaterial({
-    //   transparent: true,
-    //   opacity: 0.2,
-    //   roughness: 0.0,
-    //   metalness: 0.0,
-    //   color: 'white',
-    // });
-    this.material = new THREE.MeshPhysicalMaterial({
-      roughness: 0,
-      metalness: 0,
+    // this.material.side = THREE.DoubleSide;
+
+    this.material = new THREE.ShaderMaterial({
+      vertexShader: gamenVertexShader,
+      fragmentShader: gamenFragmentShader,
+      side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.15
-      ,
-      color: 'cyan',
+      uniforms: {
+        uTime: {value:0},
+
+      },
+
+      
     });
-    this.material.side = THREE.DoubleSide;
+
   }
 
   setMesh() {
