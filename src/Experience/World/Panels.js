@@ -4,64 +4,109 @@ import Experience from '../Experience.js';
 
 import Gamen from './Gamen.js';
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
-
 export default class Panels {
-  constructor() {
+  constructor(position) {
     this.experience = new Experience();
 
     this.scene = this.experience.scene;
 
-    // LOADER
-    // this.dracoLoader = new DRACOLoader();
-    // this.dracoLoader.setDecoderPath('/draco/');
+    this.pos = position;
 
-    this.gltfLoader = new GLTFLoader();
-    // this.gltfLoader.setDRACOLoader(this.dracoLoader);
+    this.setGamens();
 
-    this.setPanels();
+    this.setAnimation();
   }
 
-  setPanels() {
-    this.gltfLoader.load('../../models/frame.glb', (gltf) => {
-      this.model = gltf.scene;
-      // this.model.traverse((o) => {
-      //   if (o.isMesh)
-      //     o.material = new THREE.MeshPhysicalMaterial({
-      //       // side: THREE.DoubleSide,
-      //       // wireframe: true
-      //     });
-      // });
+  setGamens() {
+    this.gamens = [];
 
-      this.scene.add(this.model);
+    switch (this.pos) {
+      case 'left':
+        this.gamenOne = new Gamen();
+        this.gamenOne.mesh.translateX(-4);
+        this.gamenOne.mesh.translateZ(2);
+        this.gamens.push(this.gamenOne.mesh);
 
-      this.model.translateX(-4);
-      this.model.translateZ(2);
-      // this.model.rotateY(Math.PI * 0.25);
-    });
+        this.gamenTwo = new Gamen();
+        this.gamenTwo.mesh.translateX(-4.534);
+        this.gamenTwo.mesh.translateZ(1.47);
+        this.gamenTwo.mesh.rotateY(-Math.PI * 0.5);
+        this.gamens.push(this.gamenTwo.mesh);
 
-    
-    this.gamenOne = new Gamen();
-    this.gamenOne.mesh.translateX(-4);
-    this.gamenOne.mesh.translateZ(2);
+        this.gamenThree = new Gamen();
+        this.gamenThree.mesh.translateX(-4.534);
+        this.gamenThree.mesh.translateZ(0.47);
+        this.gamenThree.mesh.rotateY(-Math.PI * 0.5);
+        this.gamens.push(this.gamenThree.mesh);
+        break;
+      case 'center':
+        this.gamenOne = new Gamen();
+        this.gamenOne.mesh.rotateY((11 * Math.PI) / 6 - 0.086);
+        this.gamenOne.mesh.translateX(-0.425);
+        this.gamenOne.mesh.translateZ(1.695);
+        this.gamens.push(this.gamenOne.mesh);
 
-    this.gamenTwo = new Gamen();
-    this.gamenTwo.mesh.translateX(-4.534);
-    this.gamenTwo.mesh.translateZ(1.47);
-    this.gamenTwo.mesh.rotateY(-Math.PI * 0.5);
+        this.gamenTwo = new Gamen();
+        this.gamenTwo.mesh.rotateY((11 * Math.PI) / 6 - 0.086);
+        this.gamenTwo.mesh.translateX(0.57);
+        this.gamenTwo.mesh.translateZ(1.696);
+        this.gamens.push(this.gamenTwo.mesh);
 
-    this.gamenThree = new Gamen();
-    this.gamenThree.mesh.translateX(-4.534);
-    this.gamenThree.mesh.translateZ(0.47);
-    this.gamenThree.mesh.rotateY(-Math.PI * 0.5);
+        this.gamenThree = new Gamen();
+        this.gamenThree.mesh.translateX(-0.22);
+        this.gamenThree.mesh.translateZ(0.766);
+        this.gamens.push(this.gamenThree.mesh);
 
-    console.log(this.gamenOne)
+        this.gamenFour = new Gamen();
+        this.gamenFour.mesh.translateX(-1.22);
+        this.gamenFour.mesh.translateZ(0.766);
+        this.gamens.push(this.gamenFour.mesh);
+        break;
+      case 'right':
+        this.gamenOne = new Gamen();
+        this.gamenOne.mesh.translateX(3.54);
+        this.gamenOne.mesh.translateZ(2.0);
+        this.gamens.push(this.gamenOne.mesh);
 
-    this.scene.add(
-      this.gamenOne.mesh,
-      this.gamenTwo.mesh,
-      this.gamenThree.mesh
-    );
+        this.gamenTwo = new Gamen();
+        this.gamenTwo.mesh.translateX(2.54);
+        this.gamenTwo.mesh.translateZ(2.0);
+        this.gamens.push(this.gamenTwo.mesh);
+
+        this.gamenThree = new Gamen();
+        this.gamenThree.mesh.rotateY(-(11 * Math.PI) / 6 + 0.1725);
+        this.gamenThree.mesh.translateX(0.82);
+        this.gamenThree.mesh.translateZ(2.76);
+        this.gamens.push(this.gamenThree.mesh);
+
+        this.gamenFour = new Gamen();
+        this.gamenFour.mesh.translateX(4.24);
+        this.gamenFour.mesh.translateZ(1.498);
+        this.gamenFour.mesh.rotateY(Math.PI * 1.35 + 0.135);
+        this.gamens.push(this.gamenFour.mesh);
+        break;
+      default:
+        console.log('宇宙中');
+    }
+
+    this.scene.add(...this.gamens);
+  }
+
+  setAnimation() {
+    const clock = new THREE.Clock();
+
+    const tick = () => {
+      const elapsedTime = clock.getElapsedTime();
+
+      // Update gamens
+      for (let gamen of this.gamens) {
+        gamen.material.uniforms.uTime.value = elapsedTime;
+      }
+
+      // Call tick again on the next frame
+      window.requestAnimationFrame(tick);
+    };
+
+    tick();
   }
 }

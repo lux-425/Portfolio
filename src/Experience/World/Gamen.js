@@ -19,8 +19,6 @@ export default class Gamen {
     this.setMaterial();
     this.setMesh();
 
-    this.setAnimation();
-
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('gamen');
       this.setDebug();
@@ -63,21 +61,7 @@ export default class Gamen {
     this.mesh.position.y = this.geometry.parameters.height / 2;
   }
 
-  setAnimation() {
-    const clock = new THREE.Clock();
 
-    const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
-
-      // Update gamen
-      this.material.uniforms.uTime.value = elapsedTime;
-
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
-
-    tick();
-  }
 
   setDebug() {
     this.debugFolder

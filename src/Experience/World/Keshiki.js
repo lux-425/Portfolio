@@ -75,9 +75,11 @@ export default class Keshiki {
     this.keshiki.material.wireframe = true;
 
     // テスト！！！
-    this.keshiki.rotateX(-Math.PI * 0.15);
-    this.keshiki.translateY(0);
-    this.keshiki.translateZ(-25);
+    // this.keshiki.rotateX(-Math.PI * 0.15);
+    // this.keshiki.translateY(35);
+    this.keshiki.translateY(5);
+    // this.keshiki.translateZ(-25);
+    this.keshiki.translateZ(-30);
   }
 
   setAnimation() {

@@ -32,7 +32,7 @@ export default class Camera {
 
     this.instance.position.set(
       0,
-      4,
+      1,
       10
     );
 
