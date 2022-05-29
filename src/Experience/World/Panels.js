@@ -36,24 +36,27 @@ export default class Panels {
 
       this.scene.add(this.model);
 
-      this.model.translateX(-3);
+      this.model.translateX(-4);
       this.model.translateZ(2);
       // this.model.rotateY(Math.PI * 0.25);
     });
 
+    
     this.gamenOne = new Gamen();
-    this.gamenOne.mesh.translateX(-3);
+    this.gamenOne.mesh.translateX(-4);
     this.gamenOne.mesh.translateZ(2);
 
     this.gamenTwo = new Gamen();
-    this.gamenTwo.mesh.translateX(-3.534);
+    this.gamenTwo.mesh.translateX(-4.534);
     this.gamenTwo.mesh.translateZ(1.47);
     this.gamenTwo.mesh.rotateY(-Math.PI * 0.5);
 
     this.gamenThree = new Gamen();
-    this.gamenThree.mesh.translateX(-3.534);
+    this.gamenThree.mesh.translateX(-4.534);
     this.gamenThree.mesh.translateZ(0.47);
     this.gamenThree.mesh.rotateY(-Math.PI * 0.5);
+
+    console.log(this.gamenOne)
 
     this.scene.add(
       this.gamenOne.mesh,
