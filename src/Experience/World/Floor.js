@@ -12,6 +12,7 @@ export default class Floor {
     // Debug
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('floor');
+      this.debugFolder.close();
     }
 
     this.setGeometry();
@@ -63,7 +64,7 @@ export default class Floor {
     this.mesh.receiveShadow = false;
 
     this.mesh.rotateX(-Math.PI * 0.5);
-    this.mesh.position.set(0, -3, 2);
+    this.mesh.position.set(0, 0, 2);
 
     this.scene.add(this.mesh);
 

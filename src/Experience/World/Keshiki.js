@@ -25,6 +25,7 @@ export default class Keshiki {
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('keshiki');
       this.setDebug();
+      this.debugFolder.close();
     }
   }
 
@@ -39,20 +40,20 @@ export default class Keshiki {
     //   1.2
     // );
 
-    this.keshikiGeometry = new THREE.PlaneGeometry(105, 55,512 ,512);
+    this.keshikiGeometry = new THREE.PlaneGeometry(105, 55, 512, 512);
     this.keshikiMaterial = new THREE.ShaderMaterial({
       vertexShader: keshikiVertexShader,
       fragmentShader: keshikiFragmentShader,
       uniforms: {
         uTime: { value: 0 },
 
-        uBigWavesElevation: { value: 0.045   },
-        uBigWavesFrequency: { value: new THREE.Vector2(-0.02, -5) },
-        uBigWavesSpeed: { value: -0.04 },
+        uBigWavesElevation: { value: 1.52 },
+        uBigWavesFrequency: { value: new THREE.Vector2(12.0, 12.0) },
+        uBigWavesSpeed: { value: -0.8 },
 
-        uSmallWavesElevation: { value:10 },
-        uSmallWavesFrequency: { value: 0.025 },
-        uSmallWavesSpeed: { value: 0.08},
+        uSmallWavesElevation: { value: 10 },
+        uSmallWavesFrequency: { value: -0.05 },
+        uSmallWavesSpeed: { value: 0.08 },
         uSmallWavesIterations: { value: 1 },
 
         uDepthColor: { value: new THREE.Color(this.debugObject.depthColor) },
@@ -74,8 +75,8 @@ export default class Keshiki {
     this.keshiki.material.wireframe = true;
 
     // テスト！！！
-    this.keshiki.rotateX(-Math.PI*0.15)
-    this.keshiki.translateY(0)
+    this.keshiki.rotateX(-Math.PI * 0.15);
+    this.keshiki.translateY(0);
     this.keshiki.translateZ(-25);
   }
 
@@ -103,17 +104,29 @@ export default class Keshiki {
       .step(0.001)
       .name('uBigWavesElevation');
     this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uBigWavesFrequency.value, 'x')
+      .add(this.keshikiMaterial.uniforms.uSmallWavesElevation, 'value')
       .min(-5)
-      .max(5)
+      .max(20)
+      .step(0.001)
+      .name('uSmallWavesElevation');
+    this.debugFolder
+      .add(this.keshikiMaterial.uniforms.uBigWavesFrequency.value, 'x')
+      .min(0)
+      .max(30)
       .step(0.001)
       .name('uBigWavesFrequencyX');
     this.debugFolder
       .add(this.keshikiMaterial.uniforms.uBigWavesFrequency.value, 'y')
-      .min(-5)
-      .max(5)
+      .min(0)
+      .max(30)
       .step(0.001)
       .name('uBigWavesFrequencyY');
+    this.debugFolder
+      .add(this.keshikiMaterial.uniforms.uSmallWavesFrequency, 'value')
+      .min(0)
+      .max(5)
+      .step(0.001)
+      .name('uSmallWavesFrequency');
     this.debugFolder
       .add(this.keshikiMaterial.uniforms.uBigWavesSpeed, 'value')
       .min(-5)
@@ -127,21 +140,9 @@ export default class Keshiki {
       .step(0.001)
       .name('uSmallWavesSpeed');
     this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uSmallWavesElevation, 'value')
-      .min(-5)
-      .max(10)
-      .step(0.001)
-      .name('uSmallWavesElevation');
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uSmallWavesFrequency, 'value')
-      .min(-5)
-      .max(5)
-      .step(0.001)
-      .name('uSmallWavesFrequency');
-    this.debugFolder
       .add(this.keshikiMaterial.uniforms.uSmallWavesIterations, 'value')
       .min(0)
-      .max(8)
+      .max(4)
       .step(1)
       .name('uSmallWavesIterations');
     this.debugFolder
@@ -169,7 +170,7 @@ export default class Keshiki {
     this.debugFolder
       .add(this.keshikiMaterial.uniforms.uColorMultiplier, 'value')
       .min(0)
-      .max(10)
+      .max(5)
       .step(0.001)
       .name('uColorMultiplier');
   }

@@ -9,11 +9,23 @@ export default class Gamen {
   constructor() {
     this.experience = new Experience();
 
-    // this.scene = this.experience.scene;
+    this.scene = this.experience.scene;
+
+    // Debug
+    this.debug = this.experience.debug;
+    this.debugObject = {};
 
     this.setGeometry();
     this.setMaterial();
     this.setMesh();
+
+    this.setAnimation();
+
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder('gamen');
+      this.setDebug();
+      this.debugFolder.close()
+    }
   }
 
   setGeometry() {
@@ -25,29 +37,24 @@ export default class Gamen {
   // }
 
   setMaterial() {
-    // this.material = new THREE.MeshPhysicalMaterial({
-    //   roughness: 0,
-    //   metalness: 0,
-    //   transparent: true,
-    //   opacity: 0.15
-    //   ,
-    //   color: 'cyan',
-    // });
-    // this.material.side = THREE.DoubleSide;
-
     this.material = new THREE.ShaderMaterial({
       vertexShader: gamenVertexShader,
       fragmentShader: gamenFragmentShader,
       side: THREE.DoubleSide,
       transparent: true,
       uniforms: {
-        uTime: {value:0},
+        uTime: { value: 0 },
 
+        uUeBreathingElevation: { value: 0.44 },
+        uUeBreathingFrequency: { value: new THREE.Vector2(1.24, 2.4) },
+        uUeBreathingSpeed: { value: -0.8 },
+
+        uShitaBreathingElevation: { value: 10.0 },
+        uShitaBreathingFrequency: { value: 5.0 },
+        uShitaBreathingSpeed: { value: 0.3 },
+        uShitaBreathingIterations: { value: 3 },
       },
-
-      
     });
-
   }
 
   setMesh() {
@@ -56,51 +63,70 @@ export default class Gamen {
     this.mesh.position.y = this.geometry.parameters.height / 2;
   }
 
-  // setLights() {
-  //   // 左
-  //   this.rectAreaLight = new THREE.RectAreaLight(
-  //     this.lColor1,
-  //     0.01,
-  //     0.01,
-  //     0.01
-  //   );
+  setAnimation() {
+    const clock = new THREE.Clock();
 
-  //   this.rectAreaLight.height = 2;
-  //   this.rectAreaLight.power = 130;
+    const tick = () => {
+      const elapsedTime = clock.getElapsedTime();
 
-  //   this.rectAreaLight.position.set(this.posX, 1, this.posZ);
-  //   this.rectAreaLight.rotateY(this.rot + Math.PI * 0.5);
+      // Update gamen
+      this.material.uniforms.uTime.value = elapsedTime;
 
-  //   this.rectAreaLight.translateZ(0.5);
+      // Call tick again on the next frame
+      window.requestAnimationFrame(tick);
+    };
 
-  //   this.scene.add(this.rectAreaLight);
-  //   // this.rectAreaLightHelper = new RectAreaLightHelper(this.rectAreaLight);
-  //   // this.scene.add(this.rectAreaLightHelper);
+    tick();
+  }
 
-  //   // 右
-  //   this.rectAreaLight2 = new THREE.RectAreaLight(
-  //     this.lColor2,
-  //     0.01,
-  //     0.01,
-  //     0.01
-  //   );
-
-  //   this.rectAreaLight2.height = 2;
-  //   this.rectAreaLight2.power = 130;
-
-  //   this.rectAreaLight2.position.set(this.posX, 1, this.posZ);
-  //   this.rectAreaLight2.rotateY(this.rot - Math.PI * 0.5);
-
-  //   this.rectAreaLight2.translateZ(0.5);
-
-  //   this.scene.add(this.rectAreaLight2);
-  //   // this.rectAreaLightHelper2 = new RectAreaLightHelper(this.rectAreaLight2);
-  //   // this.scene.add(this.rectAreaLightHelper2);
-
-  //   // テスト!!!
-  //   // this.rectAreaLight.height = 0.1;
-  //   // this.rectAreaLight2.height = 0.1;
-  //   // this.rectAreaLight.translateY(-0.9);
-  //   // this.rectAreaLight2.translateY(-0.9);
-  // }
+  setDebug() {
+    this.debugFolder
+      .add(this.material.uniforms.uUeBreathingElevation, 'value')
+      .min(-5)
+      .max(10)
+      .step(0.001)
+      .name('uUeBreathingElevation');
+    this.debugFolder
+      .add(this.material.uniforms.uShitaBreathingElevation, 'value')
+      .min(-5)
+      .max(10)
+      .step(0.001)
+      .name('uShitaBreathingElevation');
+    this.debugFolder
+      .add(this.material.uniforms.uUeBreathingFrequency.value, 'x')
+      .min(0)
+      .max(5)
+      .step(0.001)
+      .name('uUeBreathingFrequencyX');
+    this.debugFolder
+      .add(this.material.uniforms.uUeBreathingFrequency.value, 'y')
+      .min(0)
+      .max(5)
+      .step(0.001)
+      .name('uUeBreathingFrequencyY');
+    this.debugFolder
+      .add(this.material.uniforms.uShitaBreathingFrequency, 'value')
+      .min(-5)
+      .max(5)
+      .step(0.001)
+      .name('uShitaBreathingFrequency');
+    this.debugFolder
+      .add(this.material.uniforms.uUeBreathingSpeed, 'value')
+      .min(-5)
+      .max(5)
+      .step(0.001)
+      .name('uUeBreathingSpeed');
+    this.debugFolder
+      .add(this.material.uniforms.uShitaBreathingSpeed, 'value')
+      .min(-5)
+      .max(5)
+      .step(0.001)
+      .name('uShitaBreathingSpeed');
+    this.debugFolder
+      .add(this.material.uniforms.uShitaBreathingIterations, 'value')
+      .min(0)
+      .max(4)
+      .step(1)
+      .name('uShitaBreathingIterations');
+  }
 }

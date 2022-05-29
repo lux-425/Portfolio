@@ -9,6 +9,7 @@ uniform float uSmallWavesSpeed;
 uniform float uSmallWavesIterations;
 
 varying float vElevation;
+varying vec2 vUv;
 
 // Classic Perlin 3D Noise 
 // by Stefan Gustavson
@@ -109,7 +110,7 @@ void main() {
             * uSmallWavesElevation / i);
   }
 
-  modelPosition.y += elevation;
+  modelPosition.z += elevation;
 
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
@@ -118,4 +119,5 @@ void main() {
 
   // Varyings
   vElevation = elevation;
+  vUv = uv;
 }
