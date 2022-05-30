@@ -33,15 +33,16 @@ export default class Panels {
     switch (this.pos) {
       case 'left':
         this.gamenParams = {
-          ueBreathingElevation: 8.0,
+          ueBreathingElevation: 5.0,
           shitaBreathingElevation: 10.0,
-          ueBreathingFrequency: { x: 1.24, y: 2.4 },
-          shitaBreathingFrequency: 5.0,
-          ueBreathingSpeed: -0.8,
-          shitaBreathingSpeed: 0.3,
+          ueBreathingFrequency: { x: 0.8, y: 0.8 },
+          shitaBreathingFrequency: -5.0,
+          ueBreathingSpeed: -0.4,
+          shitaBreathingSpeed: 0.2,
           shitaBreathingIterations: 1.0,
           color: '#0000ff',
-          opacity: 0.66,
+          opacity: 0.88,
+          shader: 'left'
         };
 
         this.gamenOne = new Gamen(this.gamenParams);
@@ -67,11 +68,12 @@ export default class Panels {
           shitaBreathingElevation: 10.0,
           ueBreathingFrequency: { x: 1.24, y: 2.4 },
           shitaBreathingFrequency: 5.0,
-          ueBreathingSpeed: -0.8,
+          ueBreathingSpeed: 0.2,
           shitaBreathingSpeed: 0.3,
-          shitaBreathingIterations: 3.0,
+          shitaBreathingIterations: 1.0,
           color: '#ff0000',
           opacity: 0.66,
+          shader: 'center',
         };
 
         this.gamenOne = new Gamen(this.gamenParams);
@@ -107,6 +109,7 @@ export default class Panels {
           shitaBreathingIterations: 2.0,
           color: '#00ff00',
           opacity: 0.66,
+          shader: 'right',
         };
 
         this.gamenOne = new Gamen(this.gamenParams);
@@ -170,6 +173,10 @@ export default class Panels {
           this.gamenParams.color
         );
         gamen.material.uniforms.uOpacity.value = this.gamenParams.opacity;
+        // gamen.material.uniforms.uOpacity.value = Math.max(
+        //   0.55,
+        //   Math.sin(elapsedTime * 1.25)*1.25
+        // );
       }
 
       // Call tick again on the next frame

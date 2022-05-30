@@ -2,8 +2,12 @@ import * as THREE from 'three';
 
 import Experience from '../Experience.js';
 
-import gamenVertexShader from '../../Shaders/Gamen/vertex.glsl';
-import gamenFragmentShader from '../../Shaders/Gamen/fragment.glsl';
+import gamenVertexShaderLeft from '../../Shaders/Gamen/LeftSide/vertex.glsl';
+import gamenFragmentShaderLeft from '../../Shaders/Gamen/LeftSide/fragment.glsl';
+import gamenVertexShaderCenter from '../../Shaders/Gamen/Center/vertex.glsl';
+import gamenFragmentShaderCenter from '../../Shaders/Gamen/Center/fragment.glsl';
+import gamenVertexShaderRight from '../../Shaders/Gamen/RightSide/vertex.glsl';
+import gamenFragmentShaderRight from '../../Shaders/Gamen/RightSide/fragment.glsl';
 
 export default class Gamen {
   constructor(gamenParams) {
@@ -21,6 +25,29 @@ export default class Gamen {
     this.color = gamenParams.color;
     this.opacity = gamenParams.opacity;
 
+    switch (gamenParams.shader) {
+      case 'left':
+        this.shader = {
+          vertex: gamenVertexShaderLeft,
+          fragment: gamenFragmentShaderLeft,
+        };
+        break;
+      case 'center':
+        this.shader = {
+          vertex: gamenVertexShaderCenter,
+          fragment: gamenFragmentShaderCenter,
+        };
+        break;
+      case 'right':
+        this.shader = {
+          vertex: gamenVertexShaderRight,
+          fragment: gamenFragmentShaderRight,
+        };
+        break;
+      default:
+        '透明';
+    }
+
     this.setGeometry();
     this.setMaterial();
     this.setMesh();
@@ -36,8 +63,8 @@ export default class Gamen {
 
   setMaterial() {
     this.material = new THREE.ShaderMaterial({
-      vertexShader: gamenVertexShader,
-      fragmentShader: gamenFragmentShader,
+      vertexShader: this.shader.vertex,
+      fragmentShader: this.shader.fragment,
       side: THREE.DoubleSide,
       transparent: true,
       uniforms: {
