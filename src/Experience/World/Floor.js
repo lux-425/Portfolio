@@ -32,12 +32,12 @@ export default class Floor {
 
   setMaterial() {
     this.material = new THREE.MeshPhysicalMaterial({
-      metalness: 1,
+      metalness: 0.9,
       roughness: 0,
       color: new THREE.Color('white'),
       // wireframe: true,
       transparent: true,
-      opacity: 0.25
+      opacity: 0.90
     });
 
     // Debug

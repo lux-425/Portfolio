@@ -19,7 +19,7 @@ export default class Environment {
     // this.setAmbientLight();
     this.setSunLight();
     // this.setSpotLight();
-    this.setCenterPointLight();
+    // this.setCenterPointLight();
     // this.setTestLight();
 
     this.setEnvironmentMap();
@@ -32,11 +32,19 @@ export default class Environment {
     // this.scene.fog = this.fog;
   }
 
-  setTestLight() {}
+  setTestLight() {
+    this.centerPointLight1 = new THREE.PointLight('#ff0000', 5, 5);
+    this.centerPointLight1.position.set(0, 1.5, 7);
+    this.scene.add(this.centerPointLight1);
+
+    this.centerPointLight2 = new THREE.PointLight('#00ff00', 5, 5);
+    this.centerPointLight2.position.set(0, 1, 7.5);
+    this.scene.add(this.centerPointLight2);
+  }
 
   setCenterPointLight() {
-    this.centerPointLight = new THREE.PointLight('#ffffff', 5, 15);
-    this.centerPointLight.position.set(0, 1, 6);
+    this.centerPointLight = new THREE.PointLight('#0000ff', 5, 5);
+    this.centerPointLight.position.set(0, 0.5, 8);
     this.scene.add(this.centerPointLight);
 
     this.centerPointLight.shadow.mapSize.width = 256;
@@ -212,12 +220,22 @@ export default class Environment {
       this.elapsedTime = this.clock.getElapsedTime();
 
       // Update Lights
-      this.centerPointLightAngle = this.elapsedTime;
+      // this.centerPointLightAngle = this.elapsedTime;
 
-      this.centerPointLight.position.x =
-        Math.cos(this.centerPointLightAngle) * 4;
-      this.centerPointLight.position.z =
-        Math.sin(this.centerPointLightAngle) * 4;
+      // this.centerPointLight.position.x =
+      //   Math.cos(this.centerPointLightAngle) * 2 - 4.5;
+      // this.centerPointLight.position.z =
+      //   Math.sin(this.centerPointLightAngle) * 2 + 1.5;
+
+      // this.centerPointLight1.position.x =
+      //   Math.cos(this.centerPointLightAngle) * 3;
+      // this.centerPointLight1.position.z =
+      //   Math.sin(this.centerPointLightAngle) * 3 + 1.5;
+
+      // this.centerPointLight2.position.x =
+      //   Math.cos(this.centerPointLightAngle) * 2 + 4.5;
+      // this.centerPointLight2.position.z =
+      //   Math.sin(this.centerPointLightAngle) * 2 + 1.5;
 
       // Call tick again on the next frame
       window.requestAnimationFrame(this.tick);

@@ -9,6 +9,9 @@ uniform float uShitaBreathingFrequency;
 uniform float uShitaBreathingSpeed;
 uniform float uShitaBreathingIterations;
 
+uniform vec3 uColor;
+uniform float uOpacity;
+
 #define PI 3.1415926535897932384626433832795
 
 varying vec2 vUv;
@@ -307,14 +310,12 @@ void main() {
   // Clamp the strength
   strength = clamp(strength, 0.0, 1.0);
 
-  vec3 color = vec3(0.5, 0, 1);
-
-  vec3 mixedColor = mix(color, uvColor, strength);
+  vec3 mixedColor = mix(uColor, uvColor, strength / breathing);
 
   /**
   */
-  gl_FragColor = vec4(mixedColor, max(strength*0.66, breathing));
+  gl_FragColor = vec4(mixedColor, strength * uOpacity);
 
   // Black and white
-  // gl_FragColor = vec4(strength*0.5, strength*0.0, strength, 0.25);
+  // gl_FragColor = vec4(strength, strength, strength, 0.55);
 }

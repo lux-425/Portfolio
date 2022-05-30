@@ -19,7 +19,6 @@ export default class World {
 
     this.floor = new Floor();
     this.environment = new Environment();
-
     this.keshiki = new Keshiki();
 
     // Loaders
@@ -77,7 +76,6 @@ export default class World {
 
       this.model.translateX(-4);
       this.model.translateZ(2);
-      // this.model.rotateY(Math.PI * 0.25);
     });
     /**
      * 左
