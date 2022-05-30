@@ -19,15 +19,12 @@ varying vec2 vUv;
 float random(vec2 st) {
   return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
 }
-
 vec2 rotate(vec2 uv, float rotation, vec2 mid) {
   return vec2(cos(rotation) * (uv.x - mid.x) + sin(rotation) * (uv.y - mid.y) + mid.x, cos(rotation) * (uv.y - mid.y) - sin(rotation) * (uv.x - mid.x) + mid.y);
 }
-
 vec4 permute(vec4 x) {
   return mod(((x * 34.0) + 1.0) * x, 289.0);
 }
-
 //	Classic Perlin 2D Noise 
 //	by Stefan Gustavson
 //
@@ -297,10 +294,9 @@ void main() {
   // SIMPLE DIRECTIONAL TRANSITION
   // float breathing = sin(uvColor.y + uTime) * cos(uvColor.x + uTime);
 
-  // FLAMES
   float breathing = sin(uvColor.y * uUeBreathingFrequency.x + uTime * uUeBreathingSpeed) * sin(uvColor.y * uUeBreathingFrequency.y + uTime * uUeBreathingSpeed) * uUeBreathingElevation;
   for(float i = 1.0; i <= uShitaBreathingIterations; i++) {
-    breathing *= abs(cnoise(vec2(-uvColor.xy * uShitaBreathingFrequency * i + uTime * uShitaBreathingSpeed)) * uShitaBreathingElevation / i);
+    breathing *= abs(cnoise(vec2(-uvColor.xy * (uShitaBreathingFrequency + sin(uTime * 0.35)) * i + uTime * uShitaBreathingSpeed)) * uShitaBreathingElevation / i);
   }
   float strength = 1.0 - abs(cnoise(vUv * breathing));
 
@@ -314,7 +310,7 @@ void main() {
 
   /**
   */
-  gl_FragColor = vec4(mixedColor, strength * uOpacity);
+  gl_FragColor = vec4(mixedColor, strength * abs(max(uOpacity, uOpacity + sin(uTime * 0.5))));
 
   // Black and white
   // gl_FragColor = vec4(strength, strength, strength, 0.55);

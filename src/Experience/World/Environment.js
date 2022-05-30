@@ -19,7 +19,7 @@ export default class Environment {
     // this.setAmbientLight();
     this.setSunLight();
     // this.setSpotLight();
-    // this.setCenterPointLight();
+    this.setCenterPointLight();
     // this.setTestLight();
 
     this.setEnvironmentMap();
@@ -43,7 +43,7 @@ export default class Environment {
   }
 
   setCenterPointLight() {
-    this.centerPointLight = new THREE.PointLight('#0000ff', 5, 5);
+    this.centerPointLight = new THREE.PointLight('#ffffff', 5, 15);
     this.centerPointLight.position.set(0, 0.5, 8);
     this.scene.add(this.centerPointLight);
 
@@ -220,12 +220,12 @@ export default class Environment {
       this.elapsedTime = this.clock.getElapsedTime();
 
       // Update Lights
-      // this.centerPointLightAngle = this.elapsedTime;
+      this.centerPointLightAngle = this.elapsedTime;
 
-      // this.centerPointLight.position.x =
-      //   Math.cos(this.centerPointLightAngle) * 2 - 4.5;
-      // this.centerPointLight.position.z =
-      //   Math.sin(this.centerPointLightAngle) * 2 + 1.5;
+      this.centerPointLight.position.x =
+        Math.cos(this.centerPointLightAngle) * 2 - 4.5;
+      this.centerPointLight.position.z =
+        Math.sin(this.centerPointLightAngle) * 2 + 1.5;
 
       // this.centerPointLight1.position.x =
       //   Math.cos(this.centerPointLightAngle) * 3;

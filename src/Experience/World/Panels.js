@@ -42,12 +42,13 @@ export default class Panels {
           shitaBreathingIterations: 1.0,
           color: '#0000ff',
           opacity: 0.88,
-          shader: 'left'
+          shader: 'left',
         };
 
         this.gamenOne = new Gamen(this.gamenParams);
         this.gamenOne.mesh.translateX(-4);
         this.gamenOne.mesh.translateZ(2);
+        this.gamenOne.mesh.rotateY(Math.PI);
         this.gamens.push(this.gamenOne.mesh);
 
         this.gamenTwo = new Gamen(this.gamenParams);
@@ -59,20 +60,20 @@ export default class Panels {
         this.gamenThree = new Gamen(this.gamenParams);
         this.gamenThree.mesh.translateX(-4.534);
         this.gamenThree.mesh.translateZ(0.47);
-        this.gamenThree.mesh.rotateY(-Math.PI * 0.5);
+        this.gamenThree.mesh.rotateY(Math.PI * 0.5);
         this.gamens.push(this.gamenThree.mesh);
         break;
       case 'center':
         this.gamenParams = {
-          ueBreathingElevation: 8.0,
-          shitaBreathingElevation: 10.0,
-          ueBreathingFrequency: { x: 1.24, y: 2.4 },
+          ueBreathingElevation: 10.0,
+          shitaBreathingElevation: 8.0,
+          ueBreathingFrequency: { x: 5.0, y: 5.0 },
           shitaBreathingFrequency: 5.0,
-          ueBreathingSpeed: 0.2,
-          shitaBreathingSpeed: 0.3,
-          shitaBreathingIterations: 1.0,
+          ueBreathingSpeed: 0.5,
+          shitaBreathingSpeed: -0.4,
+          shitaBreathingIterations: 2.0,
           color: '#ff0000',
-          opacity: 0.66,
+          opacity: 0.88,
           shader: 'center',
         };
 
@@ -86,6 +87,7 @@ export default class Panels {
         this.gamenTwo.mesh.rotateY((11 * Math.PI) / 6 - 0.086);
         this.gamenTwo.mesh.translateX(0.57);
         this.gamenTwo.mesh.translateZ(1.696);
+        this.gamenTwo.mesh.rotateY(Math.PI);
         this.gamens.push(this.gamenTwo.mesh);
 
         this.gamenThree = new Gamen(this.gamenParams);
@@ -96,42 +98,44 @@ export default class Panels {
         this.gamenFour = new Gamen(this.gamenParams);
         this.gamenFour.mesh.translateX(-1.22);
         this.gamenFour.mesh.translateZ(0.766);
+        this.gamenFour.mesh.rotateY(Math.PI);
         this.gamens.push(this.gamenFour.mesh);
         break;
       case 'right':
         this.gamenParams = {
           ueBreathingElevation: 8.0,
           shitaBreathingElevation: 10.0,
-          ueBreathingFrequency: { x: 1.24, y: 2.4 },
+          ueBreathingFrequency: { x: 1.0, y: 1.0 },
           shitaBreathingFrequency: 5.0,
           ueBreathingSpeed: -0.8,
           shitaBreathingSpeed: 0.3,
-          shitaBreathingIterations: 2.0,
+          shitaBreathingIterations: 3.0,
           color: '#00ff00',
           opacity: 0.66,
           shader: 'right',
         };
 
         this.gamenOne = new Gamen(this.gamenParams);
-        this.gamenOne.mesh.translateX(3.54);
+        this.gamenOne.mesh.translateX(2.54);
         this.gamenOne.mesh.translateZ(2.0);
+        this.gamenOne.mesh.rotateY(Math.PI);
         this.gamens.push(this.gamenOne.mesh);
 
         this.gamenTwo = new Gamen(this.gamenParams);
-        this.gamenTwo.mesh.translateX(2.54);
+        this.gamenTwo.mesh.translateX(3.54);
         this.gamenTwo.mesh.translateZ(2.0);
         this.gamens.push(this.gamenTwo.mesh);
 
         this.gamenThree = new Gamen(this.gamenParams);
-        this.gamenThree.mesh.rotateY(-(11 * Math.PI) / 6 + 0.1725);
-        this.gamenThree.mesh.translateX(0.82);
-        this.gamenThree.mesh.translateZ(2.76);
+        this.gamenThree.mesh.translateX(4.24);
+        this.gamenThree.mesh.translateZ(1.498);
+        this.gamenThree.mesh.rotateY(Math.PI * 0.35 + 0.135);
         this.gamens.push(this.gamenThree.mesh);
 
         this.gamenFour = new Gamen(this.gamenParams);
-        this.gamenFour.mesh.translateX(4.24);
-        this.gamenFour.mesh.translateZ(1.498);
-        this.gamenFour.mesh.rotateY(Math.PI * 1.35 + 0.135);
+        this.gamenFour.mesh.rotateY(-(11 * Math.PI) / 6 + 0.1725);
+        this.gamenFour.mesh.translateX(0.82);
+        this.gamenFour.mesh.translateZ(2.76);
         this.gamens.push(this.gamenFour.mesh);
         break;
       default:
@@ -151,6 +155,7 @@ export default class Panels {
       for (let gamen of this.gamens) {
         gamen.material.uniforms.uTime.value = elapsedTime;
 
+        // TWEAKING
         gamen.material.uniforms.uUeBreathingElevation.value =
           this.gamenParams.ueBreathingElevation;
         gamen.material.uniforms.uUeBreathingFrequency.value.x =
@@ -173,10 +178,10 @@ export default class Panels {
           this.gamenParams.color
         );
         gamen.material.uniforms.uOpacity.value = this.gamenParams.opacity;
-        // gamen.material.uniforms.uOpacity.value = Math.max(
-        //   0.55,
-        //   Math.sin(elapsedTime * 1.25)*1.25
-        // );
+
+        // テスト！！！
+
+
       }
 
       // Call tick again on the next frame
@@ -241,9 +246,7 @@ export default class Panels {
       .max(4)
       .step(1)
       .name('shitaBreathingIterations');
-    this.debugFolder
-      .addColor(this.gamenParams, 'color')
-      .name('color');
+    this.debugFolder.addColor(this.gamenParams, 'color').name('color');
     this.debugFolder
       .add(this.gamenParams, 'opacity')
       .min(0)

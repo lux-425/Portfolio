@@ -19,7 +19,6 @@ varying vec2 vUv;
 float rand(vec2 c) {
   return fract(sin(dot(c.xy, vec2(12.9898, 78.233))) * 43758.5453);
 }
-
 vec4 permute(vec4 x) {
   return mod(((x * 34.0) + 1.0) * x, 289.0);
 }
@@ -387,19 +386,16 @@ void main() {
   /**
   * Breathing patterns
   */
+  float breathing = sin(-uvColor.x * uUeBreathingFrequency.x + uTime * uUeBreathingSpeed) * sin(-uvColor.x * uUeBreathingFrequency.y + uTime * uUeBreathingSpeed) * uUeBreathingElevation;
 
-  // SIMPLE DIRECTIONAL TRANSITION
-  // float breathing = sin(uvColor.y + uTime) * cos(uvColor.x + uTime);
-
-  // FLAMES
-  float breathing = sin(-uvColor.y * uUeBreathingFrequency.y + uTime * uUeBreathingSpeed) * sin(-uvColor.y * uUeBreathingFrequency.y + uTime * uUeBreathingSpeed) * uUeBreathingElevation;
-
-  vec4 arg = vec4(1, 2, 4, 8);
+  vec4 rep = vec4(6, 2, 2, 9);
 
   for(float i = 1.0; i <= uShitaBreathingIterations; i++) {
-    breathing *= abs(cnoise(vec4(-uvColor.xy * uShitaBreathingFrequency * i + uTime * uShitaBreathingSpeed, uvColor), arg) * uShitaBreathingElevation / i);
+    breathing *= abs(cnoise(vec4(uvColor.xy * (uShitaBreathingFrequency * (sin(uTime * 0.1) * sin(uTime * 0.1))) * i + uTime * uShitaBreathingSpeed, uvColor), rep) * uShitaBreathingElevation / i);
   }
-  float strength = 1.0 - abs(cnoise(vec4(vUv * breathing, vUv / breathing), arg));
+
+  float strength = 1.0 - abs(cnoise(vec4(sin(vUv - uTime), sin(vUv - uTime)), rep));
+  strength *= 1.0 - abs(cnoise(vec4(vUv - strength / breathing, vUv + strength / breathing), rep));
 
   /*
   * Colored patterns
@@ -407,11 +403,11 @@ void main() {
   // Clamp the strength
   strength = clamp(strength, 0.0, 1.0);
 
-  vec3 mixedColor = mix(uColor, uvColor, strength / breathing);
+  vec3 mixedColor = mix(uColor, uvColor, (strength / breathing) * 1.1);
 
   /**
   */
-  gl_FragColor = vec4(mixedColor, strength * uOpacity);
+  gl_FragColor = vec4(mixedColor, strength * abs(max(uOpacity, uOpacity + sin(-uTime * 0.5))));
 
   // Black and white
   // gl_FragColor = vec4(strength, strength, strength, 0.55);

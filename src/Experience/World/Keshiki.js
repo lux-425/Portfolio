@@ -30,17 +30,17 @@ export default class Keshiki {
   }
 
   setKeshiki() {
-    // this.keshikiGeometry = new THREE.SphereGeometry(
-    //   110,
-    //   1024,
-    //   1024,
-    //   -Math.PI*2.165,
-    //   -2.1,
-    //   1.0,
-    //   1.2
-    // );
+    this.keshikiGeometry = new THREE.SphereGeometry(
+      110,
+      1024,
+      1024,
+      -Math.PI*2.165,
+      -2.1,
+      1.0,
+      1.2
+    );
 
-    this.keshikiGeometry = new THREE.PlaneGeometry(105, 55, 512, 512);
+    // this.keshikiGeometry = new THREE.PlaneGeometry(105, 55, 512, 512);
     this.keshikiMaterial = new THREE.ShaderMaterial({
       vertexShader: keshikiVertexShader,
       fragmentShader: keshikiFragmentShader,
@@ -77,7 +77,7 @@ export default class Keshiki {
     // テスト！！！
     // this.keshiki.rotateX(-Math.PI * 0.15);
     // this.keshiki.translateY(35);
-    this.keshiki.translateY(5);
+    this.keshiki.translateY(20);
     // this.keshiki.translateZ(-25);
     this.keshiki.translateZ(-30);
   }
