@@ -41,12 +41,14 @@ export default class World {
     /**
      * ポリゴン
      */
-    this.polygonCone = new Polygon('cone', -70, -30, 0.0001);
+    this.polygonCone = new Polygon('cone', -70, -70, 0.0001);
 
-    this.polygonCircle = new Polygon('circle', -70, -30, -0.0005);
-    this.polygonCircle.polygon.translateY(25);
+    this.polygonCircle = new Polygon('circle', -70, -70, -0.0005);
+    this.polygonCircle.polygon.translateY(18);
 
-    this.polygonCylinder = new Polygon('cylinder', 75, -45, 0.0001);
+    this.polygonCylinder = new Polygon('cylinder', 75, -75, 0.0001);
+
+    this.polygonCube = new Polygon('cube', 0, 0, 0);
 
     /**
      * テスト!!!
@@ -75,7 +77,6 @@ export default class World {
       this.scene.add(this.model);
 
       this.model.translateX(-4);
-      this.model.translateZ(2);
     });
     /**
      * 左

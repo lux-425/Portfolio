@@ -23,7 +23,7 @@ export default class Floor {
 
   setGeometry() {
     this.geometry =
-    new THREE.PlaneGeometry(25, 6.9, 10, 10);
+    new THREE.PlaneGeometry(15, 10, 10, 10);
   }
 
   setTextures() {
@@ -63,8 +63,8 @@ export default class Floor {
 
     this.mesh.receiveShadow = false;
 
+    this.mesh.translateZ(2);
     this.mesh.rotateX(-Math.PI * 0.5);
-    this.mesh.position.set(0, 0, 2);
 
     this.scene.add(this.mesh);
 

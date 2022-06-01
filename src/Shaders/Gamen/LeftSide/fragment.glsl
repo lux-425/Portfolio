@@ -310,7 +310,7 @@ void main() {
 
   /**
   */
-  gl_FragColor = vec4(mixedColor, strength * abs(max(uOpacity, uOpacity + sin(uTime * 0.5))));
+  gl_FragColor = vec4(mixedColor, strength * uOpacity);
 
   // Black and white
   // gl_FragColor = vec4(strength, strength, strength, 0.55);

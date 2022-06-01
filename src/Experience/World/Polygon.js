@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import Experience from '../Experience.js';
 
 export default class Polygon {
-  constructor(type, posX, posZ, RotY) {
+  constructor(type, posX, posZ, speed) {
     this.experience = new Experience();
 
     this.scene = this.experience.scene;
@@ -11,7 +11,7 @@ export default class Polygon {
     this.posX = posX;
     // this.posY = typeof posY !== 'undefined' ? posY : -6;
     this.posZ = posZ;
-    this.RotY = RotY;
+    this.speed = speed;
 
     this.type = type;
 
@@ -22,18 +22,29 @@ export default class Polygon {
   setPolygon() {
     switch (this.type) {
       case 'cone':
-        this.polygonGeometry = new THREE.ConeGeometry(25, 50, 18, 4);
+        this.polygonGeometry = new THREE.ConeGeometry(18, 36, 18, 4);
         this.polygonMaterial = new THREE.MeshBasicMaterial({
           color: 0xffffff,
         });
         break;
       case 'circle':
-        this.polygonGeometry = new THREE.CircleGeometry(30, 13);
+        this.polygonGeometry = new THREE.CircleGeometry(20, 13);
         this.polygonMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
         this.polygonGeometry.rotateX(Math.PI * 0.5);
         break;
       case 'cylinder':
-        this.polygonGeometry = new THREE.CylinderGeometry(18, 18, 40, 16, 4, true);
+        this.polygonGeometry = new THREE.CylinderGeometry(
+          18,
+          18,
+          40,
+          16,
+          4,
+          true
+        );
+        this.polygonMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        break;
+      case 'cube':
+        this.polygonGeometry = new THREE.BoxGeometry(210, 210, 310, 5, 5);
         this.polygonMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
         break;
       default:
@@ -59,13 +70,15 @@ export default class Polygon {
       // Update polygon
       switch (this.type) {
         case 'cone':
-          this.polygon.rotateY(Math.sin(deltaTime * this.RotY));
+          this.polygon.rotateY(Math.sin(deltaTime * this.speed));
           break;
         case 'circle':
-          this.polygon.rotateY(Math.sin(deltaTime * this.RotY));
+          this.polygon.rotateY(Math.sin(deltaTime * this.speed));
           break;
         case 'cylinder':
-          this.polygon.rotateY(Math.tan(deltaTime * this.RotY ));
+          this.polygon.rotateY(Math.tan(deltaTime * this.speed));
+          break;
+        case 'cube':
           break;
       }
 
