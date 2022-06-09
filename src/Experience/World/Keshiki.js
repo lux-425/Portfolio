@@ -30,15 +30,6 @@ export default class Keshiki {
   }
 
   setKeshiki() {
-    // this.keshikiGeometry = new THREE.SphereGeometry(
-    //   110,
-    //   1024,
-    //   1024,
-    //   -Math.PI*2.165,
-    //   -2.1,
-    //   1.0,
-    //   1.2
-    // );
 
     this.keshikiGeometry = new THREE.PlaneGeometry(85, 45, 512, 512);
     this.keshikiMaterial = new THREE.ShaderMaterial({

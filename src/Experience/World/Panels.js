@@ -41,13 +41,16 @@ export default class Panels {
           shitaBreathingSpeed: 0.2,
           shitaBreathingIterations: 1.0,
           color: '#0000ff',
-          opacity: 0.88,
+          opacity: 0.58,
           shader: 'left',
         };
 
         this.gamenOne = new Gamen(this.gamenParams);
         this.gamenOne.mesh.translateX(-4);
-        // this.gamenOne.mesh.translateZ(2);
+        //
+        // this.gamenOne.mesh.translateZ(5);
+        // this.gamenOne.mesh.translateX(4);
+        //
         this.gamenOne.mesh.rotateY(Math.PI);
         this.gamens.push(this.gamenOne.mesh);
 

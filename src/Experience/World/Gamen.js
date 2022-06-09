@@ -9,6 +9,9 @@ import gamenFragmentShaderCenter from '../../Shaders/Gamen/Center/fragment.glsl'
 import gamenVertexShaderRight from '../../Shaders/Gamen/RightSide/vertex.glsl';
 import gamenFragmentShaderRight from '../../Shaders/Gamen/RightSide/fragment.glsl';
 
+// テスト！！！
+import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
+
 export default class Gamen {
   constructor(gamenParams) {
     this.experience = new Experience();
@@ -29,7 +32,8 @@ export default class Gamen {
       case 'left':
         this.shader = {
           vertex: gamenVertexShaderLeft,
-          fragment: gamenFragmentShaderLeft,
+          // fragment: gamenFragmentShaderLeft,
+          fragment: gamenFragmentShaderLecture,
         };
         break;
       case 'center':

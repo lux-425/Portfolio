@@ -2,6 +2,9 @@ import * as THREE from 'three';
 
 import Experience from '../Experience.js';
 
+import floorVertexShader from '../../Shaders/Floor/vertex.glsl';
+import floorFragmentShader from '../../Shaders/Floor/fragment.glsl';
+
 export default class Floor {
   constructor() {
     this.experience = new Experience();
@@ -10,6 +13,11 @@ export default class Floor {
     this.debug = this.experience.debug;
 
     // Debug
+    this.debug = this.experience.debug;
+
+    this.debugObject = {};
+    this.debugObject.floorColor = '#6b6b6b';
+
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('floor');
       this.debugFolder.close();
@@ -19,11 +27,14 @@ export default class Floor {
     this.setTextures();
     this.setMaterial();
     this.setMesh();
+
+    this.setDebug();
+
+    this.setAnimation();
   }
 
   setGeometry() {
-    this.geometry =
-    new THREE.PlaneGeometry(15, 10, 10, 10);
+    this.geometry = new THREE.PlaneGeometry(15, 10, 100, 100);
   }
 
   setTextures() {
@@ -31,31 +42,21 @@ export default class Floor {
   }
 
   setMaterial() {
-    this.material = new THREE.MeshPhysicalMaterial({
-      metalness: 0.9,
-      roughness: 0,
-      color: new THREE.Color('white'),
-      // wireframe: true,
-      transparent: true,
-      opacity: 0.90
+    this.material = new THREE.ShaderMaterial({
+      vertexShader: floorVertexShader,
+      fragmentShader: floorFragmentShader,
+      // side: THREE.DoubleSide,
+      // transparent: true,
+      wireframe: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uColor: { value: new THREE.Color(this.debugObject.floorColor) },
+        uOpacity: { value: 1.0 },
+        uOpacityColor: { value: 1.0 },
+        uSpeed: { value: 0.5 },
+        uMargin: { value: 0.05 },
+      },
     });
-
-    // Debug
-    if (this.debug.active) {
-      this.debugFolder
-        .add(this.material, 'roughness')
-        .min(0)
-        .max(1)
-        .step(0.001)
-        .name('roughness');
-
-      this.debugFolder
-        .add(this.material, 'metalness')
-        .min(0)
-        .max(1)
-        .step(0.001)
-        .name('metalness');
-    }
   }
 
   setMesh() {
@@ -73,5 +74,54 @@ export default class Floor {
       'uv2',
       new THREE.Float32BufferAttribute(this.geometry.attributes.uv.array, 2)
     );
+  }
+
+  setAnimation() {
+    const clock = new THREE.Clock();
+
+    const tick = () => {
+      const elapsedTime = clock.getElapsedTime();
+
+      // Update floor
+      this.material.uniforms.uTime.value = elapsedTime;
+
+      // Call tick again on the next frame
+      window.requestAnimationFrame(tick);
+    };
+
+    tick();
+  }
+
+  setDebug() {
+    // Debug
+    if (this.debug.active) {
+      this.debugFolder
+        .add(this.material.uniforms.uSpeed, 'value')
+        .min(0)
+        .max(10)
+        .step(0.001)
+        .name('speed');
+      this.debugFolder
+        .add(this.material.uniforms.uMargin, 'value')
+        .min(0)
+        .max(1)
+        .step(0.0001)
+        .name('margin');
+      this.debugFolder
+        .add(this.material.uniforms.uOpacity, 'value')
+        .min(0)
+        .max(1)
+        .step(0.001)
+        .name('opacity');
+      this.debugFolder
+        .add(this.material.uniforms.uOpacityColor, 'value')
+        .min(0)
+        .max(1)
+        .step(0.001)
+        .name('opacityColor');
+      this.debugFolder
+        .addColor(this.material.uniforms.uColor, 'value')
+        .name('color');
+    }
   }
 }
