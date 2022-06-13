@@ -12,6 +12,8 @@ import Keshiki from './Keshiki.js';
 import Polygon from './Polygon.js';
 import Text from "./Text.js"
 
+import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
+
 export default class World {
   constructor() {
     this.experience = new Experience();
@@ -57,10 +59,39 @@ export default class World {
     this.debugParams = {};
 
     this.setText();
+
+    this.leftPanels.gamenOne.material.fragmentShader =
+      gamenFragmentShaderLecture;
   }
 
-  setText() {
+  async setText() {
     this.text = new Text();
+    // console.log(this.text);
+
+    await this.text.waitForLoad();
+    // console.log(this.text.model);
+
+    this.textModel = this.text.model;
+    this.scene.add(this.textModel);
+
+    this.textModel.translateX(-4);
+    this.textModel.translateZ(0.001)
+
+    console.log(this.textModel.children[0].children[0]);
+
+    // this.textModel.children[0].material.transparent = true;
+    // this.textModel.children[0].material.opacity = 0.1;
+
+    this.textModel.children[0].children[0].material.color = new THREE.Color(
+      0xffffff
+    );
+    this.textModel.children[0].children[0].material.emissive = new THREE.Color(0xffffff);
+
+    this.textModel.children[0].children[0].material.vertexColors = true;
+    // this.textModel.children[0].material.dithering = true;
+
+    // this.textModel.children[0].children[0].translateX(-1);
+
   }
 
   setPanels() {

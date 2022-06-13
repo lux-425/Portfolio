@@ -32,8 +32,8 @@ export default class Gamen {
       case 'left':
         this.shader = {
           vertex: gamenVertexShaderLeft,
-          // fragment: gamenFragmentShaderLeft,
-          fragment: gamenFragmentShaderLecture,
+          fragment: gamenFragmentShaderLeft,
+          // fragment: gamenFragmentShaderLecture,
         };
         break;
       case 'center':

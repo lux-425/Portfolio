@@ -2,6 +2,11 @@ import * as THREE from 'three';
 
 import Experience from '../Experience.js';
 
+// import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+// import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+
 export default class Text {
   constructor() {
     this.experience = new Experience();
@@ -14,6 +19,10 @@ export default class Text {
       this.debugFolder = this.debug.ui.addFolder('text');
     }
 
+    // Loaders
+    this.gltfLoader = new GLTFLoader();
+    // this.gltfLoader.setDRACOLoader(this.dracoLoader);
+
     /**
      * テスト!!!
      */
@@ -21,27 +30,49 @@ export default class Text {
 
     //
 
-    this.paragraphs = [
-      {
-        position: new THREE.Vector3(0, 1.7, 5),
-        element: document.querySelector('.paragraph-0'),
-      },
-    ];
+    // Blender's model
+    this._loadingPromise = this.loadModel(
+      this.gltfLoader,
+      '../../models/Gamen/gamen_000.glb'
+    ).then((result) => {
+      this.model = result.scene;
+      // console.log(this.model);
+      this.setAnimation();
+    });
+  }
 
-    this.setAnimation();
+  waitForLoad() {
+    return this._loadingPromise;
+  }
+
+  loadModel(loader, url) {
+    return new Promise((resolve, reject) => {
+      loader.load(
+        url,
+
+        (gltf) => {
+          resolve(gltf);
+        },
+
+        undefined,
+
+        (error) => {
+          console.error('An error happened.', error);
+          reject(error);
+        }
+      );
+    });
   }
 
   setAnimation() {
+    const clock = new THREE.Clock();
 
     const tick = () => {
-      for (const paragraph of this.paragraphs) {
-        const screenPosition = paragraph.position.clone();
-        screenPosition.project(this.scene.children[0]);
+      const elapsedTime = clock.getElapsedTime();
 
-        const translateX = screenPosition.x * this.experience.sizes.width * 0.5;
-        const translateY = -screenPosition.y * this.experience.sizes.height * 0.5;
-        paragraph.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
-      }
+      // Update text
+      this.model.children[0].children[0].material.emissiveIntensity =
+        Math.cos(elapsedTime * 0.66) + 1.5;
 
       // Call tick again on the next frame
       window.requestAnimationFrame(tick);
