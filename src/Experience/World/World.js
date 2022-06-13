@@ -10,6 +10,7 @@ import Floor from './Floor.js';
 import Panels from './Panels.js';
 import Keshiki from './Keshiki.js';
 import Polygon from './Polygon.js';
+import Text from "./Text.js"
 
 export default class World {
   constructor() {
@@ -25,8 +26,8 @@ export default class World {
     this.gltfLoader = new GLTFLoader();
     // this.gltfLoader.setDRACOLoader(this.dracoLoader);
 
-    this.debug = this.experience.debug;
     // Debug
+    this.debug = this.experience.debug;
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('world');
     }
@@ -55,11 +56,11 @@ export default class World {
      */
     this.debugParams = {};
 
-    /**
-     * Debug
-     */
-    if (this.debug.active) {
-    }
+    this.setText();
+  }
+
+  setText() {
+    this.text = new Text();
   }
 
   setPanels() {

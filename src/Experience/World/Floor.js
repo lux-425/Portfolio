@@ -53,7 +53,7 @@ export default class Floor {
         uColor: { value: new THREE.Color(this.debugObject.floorColor) },
         uOpacity: { value: 1.0 },
         uOpacityColor: { value: 1.0 },
-        uSpeed: { value: 0.5 },
+        uSpeed: { value: 0.1 },
         uMargin: { value: 0.05 },
       },
     });
