@@ -18,7 +18,7 @@ import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
 
 export default class World {
   constructor() {
-    var TWEEN = require('@tweenjs/tween.js');
+    // TWEEN = require('@tweenjs/tween.js');
     // console.log(TWEEN);
 
     this.experience = new Experience();
@@ -67,6 +67,15 @@ export default class World {
 
     this.setAnimation();
 
+    this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({ color: 'red' });
+    this.buttonRefresh = new THREE.Mesh(
+      this.buttonRefreshGeometry,
+      this.buttonRefreshMaterial
+    );
+    this.buttonRefresh.position.set(0, 2.2, 4.95);
+    this.scene.add(this.buttonRefresh);
+
     this.leftPanels.gamenOne.material.fragmentShader =
       gamenFragmentShaderLecture;
   }
@@ -88,22 +97,37 @@ export default class World {
     );
 
     this.textModel.translateX(-4);
-    this.textModel.translateZ(0.001)
+    this.textModel.translateZ(0.001);
     // this.textModel.translateZ(5.001);
 
     console.log(this.textModel);
 
     //
 
+    this.animateText(TWEEN);
+
+    for (let i = 0; i < 10; i++) {
+      setTimeout(() => {
+        this.animateText(TWEEN);
+      }, 3000 + i * 3000);
+    }
+
+    //
+  }
+
+  animateText(TWEEN) {
     /**
-     * PROFIL
+     * TITLE
      */
-    this.textModel.children[0].children[0].translateZ(-0.21);
-    this.textModel.children[0].children[1].translateZ(-0.32);
-    this.textModel.children[0].children[2].translateZ(-0.43);
-    this.textModel.children[0].children[3].translateZ(-0.54);
-    this.textModel.children[0].children[4].translateZ(0.55);
-    this.textModel.children[0].children[5].translateZ(0.55);
+    this.textModel.children[0].children[0].translateZ(-0.25);
+    this.textModel.children[0].children[1].translateZ(-0.35);
+    this.textModel.children[0].children[2].translateZ(-0.45);
+    this.textModel.children[0].children[3].translateZ(-0.55);
+    this.textModel.children[0].children[4].translateZ(0.3);
+    this.textModel.children[0].children[5].translateZ(0.3);
+    for (var i = 0; i < 6; i++) {
+      this.textModel.children[0].children[i].scale.set(1, 1, 1);
+    }
 
     for (var i = 0; i < 6; i++) {
       var tweenTranslate = new TWEEN.Tween(
@@ -128,7 +152,7 @@ export default class World {
         .to(
           {
             x: 1.1,
-            y: 1,
+            y: 1.1,
             z: 1.1,
           },
           100
@@ -141,24 +165,46 @@ export default class World {
     }
 
     /**
-     * TITLE
+     * HEADERS
      */
-
     this.textModel.children[1].material = new THREE.MeshBasicMaterial({
       color: 'white',
       transparent: true,
       opacity: 0,
       // wireframe: true,
     });
-    var tweenAppear = new TWEEN.Tween(this.textModel.children[1].material)
+    var tweenAppearHeaders = new TWEEN.Tween(
+      this.textModel.children[1].material
+    )
       .to({ opacity: 1 }, 1500)
       .easing(TWEEN.Easing.Bounce.Out)
       .onComplete(() => {
         // this.textModel.children[1].material.color = new THREE.Color("white");
       });
-    tweenAppear.start();
+    setTimeout(() => {
+      tweenAppearHeaders.start();
+    }, 200);
 
-    //
+    /**
+     * PARAGRAPHS
+     */
+    this.textModel.children[2].material = new THREE.MeshBasicMaterial({
+      color: 'white',
+      transparent: true,
+      opacity: 0,
+      // wireframe: true,
+    });
+    var tweenAppearParagraphs = new TWEEN.Tween(
+      this.textModel.children[2].material
+    )
+      .to({ opacity: 1 }, 1500)
+      .easing(TWEEN.Easing.Bounce.Out)
+      .onComplete(() => {
+        // this.textModel.children[1].material.color = new THREE.Color("white");
+      });
+    setTimeout(() => {
+      tweenAppearParagraphs.start();
+    }, 600);
   }
 
   setPanels() {
@@ -185,11 +231,11 @@ export default class World {
     /**
      * 中心
      */
-    this.centerPanels = new Panels('center');
+    // this.centerPanels = new Panels('center');
     /**
      * 右
      */
-    this.rightPanels = new Panels('right');
+    // this.rightPanels = new Panels('right');
   }
 
   update() {}
