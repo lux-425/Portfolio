@@ -20,7 +20,7 @@ export default class Keshiki {
     this.debugObject.surfaceColor = '#ffffff';
 
     this.setKeshiki();
-    this.setAnimation();
+    // this.setAnimation();
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('keshiki');

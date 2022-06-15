@@ -37,7 +37,7 @@ export default class Text {
     ).then((result) => {
       this.model = result.scene;
       // console.log(this.model);
-      this.setAnimation();
+      // this.setAnimation();
     });
   }
 
@@ -71,8 +71,8 @@ export default class Text {
       const elapsedTime = clock.getElapsedTime();
 
       // Update text
-      this.model.children[0].children[0].material.emissiveIntensity =
-        Math.cos(elapsedTime * 0.66) + 1.5;
+      // this.model.children[0].children[0].material.emissiveIntensity =
+      //   Math.cos(elapsedTime * 0.66) + 1.5;
 
       // Call tick again on the next frame
       window.requestAnimationFrame(tick);
