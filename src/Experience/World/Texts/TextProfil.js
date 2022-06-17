@@ -11,11 +11,6 @@ export default class TextProfil {
     this.scene = this.experience.scene;
 
     /**
-     * Raycaster
-     */
-    this.raycaster = new THREE.Raycaster();
-
-    /**
      * REFRESH ANIMATION BUTTON
      */
     this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
@@ -30,22 +25,6 @@ export default class TextProfil {
     this.buttonRefresh.position.set(-4, 2.2, 0);
     this.buttonRefresh.name = 'buttonRefreshProfil';
     this.scene.add(this.buttonRefresh);
-
-    window.addEventListener('click', () => {
-      if (this.currentIntersect) {
-        switch (this.currentIntersect) {
-          case 'buttonRefreshProfil':
-            this.scene.add(this.textModel);
-            this.animateText();
-            console.log(this.scene);
-            break;
-          case 'arrowHitboxProfil':
-            this.scene.remove(this.textModel);
-            console.log(this.scene);
-            break;
-        }
-      }
-    });
 
     // LOAD MODEL
     this.model = new TextProfilModel();
@@ -228,33 +207,6 @@ export default class TextProfil {
 
     const tick = () => {
       TWEEN.update();
-
-      // Raycasting
-      this.raycaster.setFromCamera(
-        this.experience.mouse,
-        this.experience.camera.instance
-      );
-
-      this.objectsToTest = [this.buttonRefresh, this.arrowHitboxProfil];
-      this.intersects = this.raycaster.intersectObjects(this.objectsToTest);
-
-      if (this.intersects.length) {
-        if (!this.currentIntersect) {
-          // console.log('mouse enter');
-          if (this.intersects[0].object.name === 'arrowHitboxProfil') {
-            this.tweenTranslateRightArrowProfil.start();
-          }
-        }
-        this.currentIntersect = this.intersects[0].object.name;
-      } else {
-        if (this.currentIntersect) {
-          // console.log('mouse leave');
-          if (this.currentIntersect === 'arrowHitboxProfil') {
-            this.tweenTranslateLeftArrowProfil.start();
-          }
-        }
-        this.currentIntersect = null;
-      }
 
       // Call tick again on the next frame
       window.requestAnimationFrame(tick);

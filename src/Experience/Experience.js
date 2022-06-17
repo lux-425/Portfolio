@@ -39,8 +39,6 @@ export default class Experience {
     const axesHelper = new THREE.AxesHelper(5);
     // this.scene.add(axesHelper);
 
-    this.world = new World();
-
     // Sizes' resize event
     this.sizes.on('resized', () => {
       this.resize();
@@ -59,6 +57,9 @@ export default class Experience {
       this.mouse.x = (event.clientX / this.sizes.width) * 2 - 1;
       this.mouse.y = -(event.clientY / this.sizes.height) * 2 + 1;
     });
+
+    // 世界の始まり
+    this.world = new World();
   }
 
   resize() {

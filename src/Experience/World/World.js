@@ -10,7 +10,10 @@ import Floor from './Floor.js';
 import Panels from './Panels.js';
 import Keshiki from './Keshiki.js';
 import Polygon from './Polygon.js';
-import Text from './Text.js';
+
+import Yubisashi from '../Yubisashi.js';
+import TextProfil from './Texts/TextProfil.js';
+import TextShoukai from './Texts/TextShoukai.js';
 
 import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
 
@@ -60,7 +63,7 @@ export default class World {
      */
     this.debugParams = {};
 
-    this.setText('000');
+    this.setTexts();
 
     // SHADER LECTURE
     this.leftPanels.gamenOne.material.fragmentShader =
@@ -71,15 +74,17 @@ export default class World {
       gamenFragmentShaderLecture;
   }
 
-  setText(panel) {
-    this.panelText = new Text(panel);
+  setTexts() {
+    this.textProfil = new TextProfil();
+    this.textShoukai = new TextShoukai();
 
-    // setTimeout(() => {
-    //   this.scene.add(this.panelText.text.textModel);
-    // }, 3000);
-    // setTimeout(() => {
-    //   this.scene.remove(this.panelText.text.textModel);
-    // }, 6000);
+    setTimeout(() => {
+      this.yubisashiMono = [
+        this.textProfil.arrowHitboxProfil,
+        this.textProfil.buttonRefresh,
+      ];
+      this.yubisashi = new Yubisashi(this.yubisashiMono);
+    }, 2000);
   }
 
   setPanels() {

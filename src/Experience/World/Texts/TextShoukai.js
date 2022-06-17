@@ -2,49 +2,69 @@ import * as THREE from 'three';
 
 import Experience from '../../Experience.js';
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-// import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import TextShoukaiModel from './TextsModels/TextShoukaiModel.js';
 
-export default class TextShoukai {
+export default class TextProfil {
   constructor() {
     this.experience = new Experience();
 
     this.scene = this.experience.scene;
 
-    // Loaders
-    this.gltfLoader = new GLTFLoader();
-    // this.gltfLoader.setDRACOLoader(this.dracoLoader);
-
-    // Blender's model
-    this._loadingPromise = this.loadModel(
-      this.gltfLoader,
-      '../../models/Gamen/gamen_001-2.glb'
-    ).then((result) => {
-      this.model = result.scene;
-      // console.log(this.model);
+    /**
+     * REFRESH ANIMATION BUTTON
+     */
+    this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
+      color: 'red',
+      name: 'buttonRefresh',
     });
+    this.buttonRefresh = new THREE.Mesh(
+      this.buttonRefreshGeometry,
+      this.buttonRefreshMaterial
+    );
+    this.buttonRefresh.position.set(-4.5, 2.2, -1);
+    this.buttonRefresh.name = 'buttonRefreshShoukai';
+    this.scene.add(this.buttonRefresh);
+
+    // LOAD MODEL
+    this.model = new TextShoukaiModel();
+    this.setModel();
   }
 
-  waitForLoad() {
-    return this._loadingPromise;
+  async setModel() {
+    await this.model.waitForLoad();
+    this.textModel = this.model.model.children[0];
+    this.scene.add(this.textModel);
+
+    this.textModel.translateY(4);
+
+    this.animateText();
+
+    this.setAnimation();
   }
 
-  loadModel(loader, url) {
-    return new Promise((resolve, reject) => {
-      loader.load(
-        url,
+  animateText() {
+    var TWEEN = require('@tweenjs/tween.js');
 
-        (gltf) => {
-          resolve(gltf);
-        },
+    console.log(this.textModel);
 
-        undefined,
+    /**
+     * ARROW
+     */
+    this.arrowHitboxShoukai = this.textModel.children[1];
+    this.arrowHitboxShoukai.visible = false;
+  }
 
-        (error) => {
-          console.error('An error happened.', error);
-          reject(error);
-        }
-      );
-    });
+  setAnimation() {
+    var TWEEN = require('@tweenjs/tween.js');
+
+    const tick = () => {
+      TWEEN.update();
+
+      // Call tick again on the next frame
+      window.requestAnimationFrame(tick);
+    };
+
+    tick();
   }
 }
