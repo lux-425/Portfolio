@@ -43,13 +43,17 @@ export default class Environment {
   }
 
   setCenterPointLight() {
-    this.centerPointLight = new THREE.PointLight('#ffffff', 5, 15);
-    this.centerPointLight.position.set(0, 0.5, 10);
+    this.centerPointLight = new THREE.PointLight('#ffffff', 1, 10);
+    this.centerPointLight.position.set(0, 0.5, 0);
     this.scene.add(this.centerPointLight);
 
     this.centerPointLight.shadow.mapSize.width = 256;
     this.centerPointLight.shadow.mapSize.height = 256;
     this.centerPointLight.shadow.camera.far = 7;
+
+    // HELPER
+    const helper = new THREE.PointLightHelper(this.centerPointLight, 5);
+    // this.scene.add(helper);
 
     // Debug
     if (this.debug.active) {
@@ -220,12 +224,12 @@ export default class Environment {
       this.elapsedTime = this.clock.getElapsedTime();
 
       // Update Lights
-      this.centerPointLightAngle = this.elapsedTime;
+      this.centerPointLightAngle = this.elapsedTime * 0.7;
 
       this.centerPointLight.position.x =
-        Math.cos(this.centerPointLightAngle) * 2;
+        Math.cos(this.centerPointLightAngle) * 2 - 4;
       this.centerPointLight.position.z =
-        Math.sin(this.centerPointLightAngle) * 2;
+        Math.sin(this.centerPointLightAngle) * 2 - 1;
 
       // this.centerPointLight1.position.x =
       //   Math.cos(this.centerPointLightAngle) * 3;
