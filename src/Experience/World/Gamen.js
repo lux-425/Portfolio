@@ -96,6 +96,7 @@ export default class Gamen {
 
   setMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.name = 'gamen';
 
     this.mesh.position.y = this.geometry.parameters.height / 2;
   }

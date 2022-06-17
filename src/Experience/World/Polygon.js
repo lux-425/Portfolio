@@ -29,11 +29,15 @@ export default class Polygon {
         this.polygonMaterial = new THREE.MeshBasicMaterial({
           color: 0xffffff,
         });
+        this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
+        this.mesh.name = 'cone';
         break;
       case 'circle':
         this.polygonGeometry = new THREE.CircleGeometry(20, 13);
         this.polygonMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
         this.polygonGeometry.rotateX(Math.PI * 0.5);
+        this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
+        this.mesh.name = 'circle';
         break;
       case 'cylinder':
         this.polygonGeometry = new THREE.CylinderGeometry(
@@ -45,10 +49,16 @@ export default class Polygon {
           true
         );
         this.polygonMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
+        this.mesh.name = 'cylinder';
         break;
       case 'cube':
         this.polygonGeometry = new THREE.BoxGeometry(900, 450, 900, 2, 1);
-        this.polygonMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.1, transparent: true });
+        this.polygonMaterial = new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          opacity: 0.1,
+          transparent: true,
+        });
         // this.polygonMaterial = new THREE.ShaderMaterial({
         //   vertexShader: cubeVertexShader,
         //   fragmentShader: cubeFragmentShader,
@@ -59,15 +69,16 @@ export default class Polygon {
         //     uTime: { value: 0 },
         //   },
         // });
+        this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
+        this.mesh.name = 'cube';
         break;
       default:
         console.log('無');
     }
 
-    this.polygon = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
-    this.scene.add(this.polygon);
+    this.scene.add(this.mesh);
 
-    this.polygon.position.set(this.posX, -5, this.posZ);
+    this.mesh.position.set(this.posX, -5, this.posZ);
 
     this.polygonMaterial.wireframe = true;
   }
@@ -83,13 +94,13 @@ export default class Polygon {
       // Update polygon
       switch (this.type) {
         case 'cone':
-          this.polygon.rotateY(Math.sin(deltaTime * this.speed));
+          this.mesh.rotateY(Math.sin(deltaTime * this.speed));
           break;
         case 'circle':
-          this.polygon.rotateY(Math.sin(deltaTime * this.speed));
+          this.mesh.rotateY(Math.sin(deltaTime * this.speed));
           break;
         case 'cylinder':
-          this.polygon.rotateY(Math.tan(deltaTime * this.speed));
+          this.mesh.rotateY(Math.tan(deltaTime * this.speed));
           break;
         case 'cube':
           // this.polygonMaterial.uniforms.uTime = deltaTime;

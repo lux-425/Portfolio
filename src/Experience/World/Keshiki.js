@@ -57,18 +57,19 @@ export default class Keshiki {
       },
     });
 
-    this.keshiki = new THREE.Mesh(this.keshikiGeometry, this.keshikiMaterial);
+    this.mesh = new THREE.Mesh(this.keshikiGeometry, this.keshikiMaterial);
+    this.mesh.name = 'keshiki';
 
-    // this.keshiki.rotation.x = -Math.PI * 0.25;
-    this.keshiki.position.set(0, 10, -55.5);
+    // this.mesh.rotation.x = -Math.PI * 0.25;
+    this.mesh.position.set(0, 10, -55.5);
 
-    this.scene.add(this.keshiki);
+    this.scene.add(this.mesh);
 
-    // this.keshiki.material.wireframe = true;
+    // this.mesh.material.wireframe = true;
 
     // テスト！！！
-    // this.keshiki.rotateX(-Math.PI * 0.15);
-    this.keshiki.translateZ(-25);
+    // this.mesh.rotateX(-Math.PI * 0.15);
+    this.mesh.translateZ(-25);
   }
 
   setAnimation() {

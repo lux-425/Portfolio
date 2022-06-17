@@ -61,6 +61,7 @@ export default class Floor {
 
   setMesh() {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.name = 'floor';
 
     this.mesh.receiveShadow = false;
 
