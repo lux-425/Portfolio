@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 
 import Experience from '../../Experience.js';
-
-import TextProfilModel from './TextsModels/TextProfilModel.js';
+import TextModel from './TextModel.js';
 
 export default class TextProfil {
   constructor() {
@@ -16,7 +15,6 @@ export default class TextProfil {
     this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
     this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
       color: 'red',
-      name: 'buttonRefresh',
     });
     this.buttonRefresh = new THREE.Mesh(
       this.buttonRefreshGeometry,
@@ -27,7 +25,7 @@ export default class TextProfil {
     this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
-    this.model = new TextProfilModel();
+    this.model = new TextModel('../../../models/Gamen/gamen_000.glb');
     this.setModel();
   }
 

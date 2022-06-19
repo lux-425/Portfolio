@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import Experience from '../../Experience.js';
 import TextModel from './TextModel.js';
 
-export default class TextShoukai {
+export default class TextKeiken {
   constructor() {
     this.experience = new Experience();
 
@@ -20,12 +20,12 @@ export default class TextShoukai {
       this.buttonRefreshGeometry,
       this.buttonRefreshMaterial
     );
-    this.buttonRefresh.position.set(-4.5, 2.2, -1);
-    this.buttonRefresh.name = 'buttonRefreshShoukai';
+    this.buttonRefresh.position.set(-0.5, 2.2, -0.5);
+    this.buttonRefresh.name = 'buttonRefreshKeiken';
     this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
-    this.model = new TextModel('../../../models/Gamen/gamen_001-2.glb');
+    this.model = new TextModel('../../../models/Gamen/gamen_003-4_intro.glb');
     this.setModel();
   }
 
@@ -34,7 +34,11 @@ export default class TextShoukai {
     this.textModel = this.model.model.children[0];
     this.scene.add(this.textModel);
 
-    this.textModel.translateY(4);
+    this.textModel.position.set(
+      this.experience.world.centerPanels.gamenOne.mesh.position.x,
+      1,
+      this.experience.world.centerPanels.gamenOne.mesh.position.z
+    );
 
     this.animateText();
 
@@ -45,6 +49,9 @@ export default class TextShoukai {
     var TWEEN = require('@tweenjs/tween.js');
 
     console.log(this.textModel);
+
+    this.textModel.children[0].children[0].children[0].material.emissive =
+      new THREE.Color('white');
 
     /**
      * ARROW

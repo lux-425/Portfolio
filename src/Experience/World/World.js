@@ -12,8 +12,10 @@ import Keshiki from './Keshiki.js';
 import Polygon from './Polygon.js';
 
 import Yubisashi from '../Yubisashi.js';
+
 import TextProfil from './Texts/TextProfil.js';
 import TextShoukai from './Texts/TextShoukai.js';
+import TextKeiken from './Texts/TextKeiken.js';
 
 import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
 
@@ -72,11 +74,16 @@ export default class World {
       gamenFragmentShaderLecture;
     this.leftPanels.gamenThree.material.fragmentShader =
       gamenFragmentShaderLecture;
+    this.centerPanels.gamenOne.material.fragmentShader =
+      gamenFragmentShaderLecture;
+    this.centerPanels.gamenTwo.material.fragmentShader =
+      gamenFragmentShaderLecture;
   }
 
   setTexts() {
     this.textProfil = new TextProfil();
     this.textShoukai = new TextShoukai();
+    this.textKeiken = new TextKeiken();
 
     setTimeout(() => {
       this.yubisashiMono = [
@@ -111,7 +118,7 @@ export default class World {
     /**
      * 中心
      */
-    // this.centerPanels = new Panels('center');
+    this.centerPanels = new Panels('center');
     /**
      * 右
      */

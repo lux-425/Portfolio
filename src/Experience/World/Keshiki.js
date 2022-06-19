@@ -61,7 +61,7 @@ export default class Keshiki {
     this.mesh.name = 'keshiki';
 
     // this.mesh.rotation.x = -Math.PI * 0.25;
-    this.mesh.position.set(0, 10, -55.5);
+    this.mesh.position.set(0, 5, -55.5);
 
     this.scene.add(this.mesh);
 

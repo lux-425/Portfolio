@@ -16,7 +16,7 @@ export default class Floor {
     this.debug = this.experience.debug;
 
     this.debugObject = {};
-    this.debugObject.floorColor = '#364a54';
+    this.debugObject.floorColor = '#5a4635';
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('floor');
