@@ -44,7 +44,7 @@ export default class TextShoukai {
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    console.log(this.textModel);
+    // console.log(this.textModel);
 
     /**
      * ARROW
