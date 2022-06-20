@@ -28,14 +28,18 @@ export default class TextKeiken {
     this.modelIntro = new TextModel(
       '../../../models/Gamen/gamen_003-4_intro.glb'
     );
+    this.model = new TextModel('../../../models/Gamen/gamen_003-4.glb');
 
     this.setModel();
   }
 
   async setModel() {
+    /**
+     * INTRO
+     */
     await this.modelIntro.waitForLoad();
     this.textModelIntro = this.modelIntro.model.children[0];
-    this.scene.add(this.textModelIntro);
+    // this.scene.add(this.textModelIntro);
 
     this.textModelIntro.position.set(
       this.experience.world.centerPanels.gamenOne.mesh.position.x,
@@ -43,6 +47,40 @@ export default class TextKeiken {
       this.experience.world.centerPanels.gamenOne.mesh.position.z
     );
 
+    this.textModelIntro.children[0].children[0].children[0].material.emissive =
+      new THREE.Color('white');
+    this.textModelIntro.children[0].children[0].children[0].material.transparent = true;
+
+    /**
+     * TEXT
+     */
+    await this.model.waitForLoad();
+    this.textModel = this.model.model.children[0];
+    this.scene.add(this.textModel);
+
+    console.log(this.textModel);
+
+    this.textModel.position.set(
+      this.experience.world.centerPanels.gamenOne.mesh.position.x,
+      1,
+      this.experience.world.centerPanels.gamenOne.mesh.position.z
+    );
+
+    // LOGOS
+    this.textModel.children[1].children[3].material.depthTest = true;
+    this.textModel.children[1].children[3].material.depthWrite = true;
+
+    this.textModel.children[1].children[4].material.depthTest = true;
+    this.textModel.children[1].children[4].material.depthWrite = true;
+
+    // CONTENT
+    this.textModel.children[0].children[0].children[0].material.emissive =
+      new THREE.Color('white');
+    this.textModel.children[0].children[0].children[0].material.transparent = true;
+
+    /**
+     * ANIMATIONS
+     */
     this.animateText();
 
     this.setAnimation();
@@ -53,9 +91,6 @@ export default class TextKeiken {
 
     // console.log(this.textModelIntro);
 
-    this.textModelIntro.children[0].children[0].children[0].material.emissive =
-      new THREE.Color('white');
-
     this.animateIntro();
 
     /**
@@ -64,6 +99,11 @@ export default class TextKeiken {
   }
 
   animateIntro() {
+    var TWEEN = require('@tweenjs/tween.js');
+
+    this.textModelIntro.visible = true;
+    this.textModelIntro.children[0].children[0].children[0].material.opacity = 1;
+
     /**
      * 実
      */
@@ -103,6 +143,19 @@ export default class TextKeiken {
     setTimeout(() => {
       this.animateIntroKen();
     }, 2950);
+
+    setTimeout(() => {
+      var tweenJitsumukeikenDisappear = new TWEEN.Tween(
+        this.textModelIntro.children[0].children[0].children[0].material
+      )
+        .to({ opacity: 0 }, 400)
+        .easing(TWEEN.Easing.Cubic.Out);
+      tweenJitsumukeikenDisappear.start();
+    }, 5000);
+
+    setTimeout(() => {
+      this.textModelIntro.visible = false;
+    }, 5200);
   }
 
   animateIntroJitsu() {
