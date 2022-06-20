@@ -52,12 +52,14 @@ export default class TextProfil {
     this.titleProfil.children[0].material.emissive = new THREE.Color('white');
     this.titleProfil.children[0].material.emissiveIntensity = 5;
 
-    this.titleProfil.children[0].translateZ(-0.25);
-    this.titleProfil.children[1].translateZ(-0.35);
-    this.titleProfil.children[2].translateZ(-0.45);
-    this.titleProfil.children[3].translateZ(-0.55);
-    this.titleProfil.children[4].translateZ(0.3);
-    this.titleProfil.children[5].translateZ(0.3);
+    this.titlePos = [-0.15, -0.2, -0.25, -0.35, 0.1, 0.1];
+
+    this.titleProfil.children[0].translateZ(this.titlePos[0]);
+    this.titleProfil.children[1].translateZ(this.titlePos[1]);
+    this.titleProfil.children[2].translateZ(this.titlePos[2]);
+    this.titleProfil.children[3].translateZ(this.titlePos[3]);
+    this.titleProfil.children[4].translateZ(this.titlePos[4]);
+    this.titleProfil.children[5].translateZ(this.titlePos[5]);
     for (var i = 0; i < 6; i++) {
       this.titleProfil.children[i].scale.set(1, 1, 1);
     }
@@ -68,9 +70,9 @@ export default class TextProfil {
       )
         .to(
           {
-            x: 0,
-            y: 0.001,
-            z: 0,
+            x: this.titleProfil.children[i].position.x,
+            y: this.titleProfil.children[i].position.y,
+            z: this.titleProfil.children[i].position.z - this.titlePos[i],
           },
           1000 + i * -100
         )

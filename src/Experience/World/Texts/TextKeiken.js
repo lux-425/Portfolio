@@ -39,7 +39,7 @@ export default class TextKeiken {
      */
     await this.modelIntro.waitForLoad();
     this.textModelIntro = this.modelIntro.model.children[0];
-    // this.scene.add(this.textModelIntro);
+    this.scene.add(this.textModelIntro);
 
     this.textModelIntro.position.set(
       this.experience.world.centerPanels.gamenOne.mesh.position.x,
@@ -56,7 +56,7 @@ export default class TextKeiken {
      */
     await this.model.waitForLoad();
     this.textModel = this.model.model.children[0];
-    this.scene.add(this.textModel);
+    // this.scene.add(this.textModel);
 
     console.log(this.textModel);
 
@@ -67,16 +67,16 @@ export default class TextKeiken {
     );
 
     // LOGOS
-    this.textModel.children[1].children[3].material.depthTest = true;
-    this.textModel.children[1].children[3].material.depthWrite = true;
+    // this.textModel.children[1].children[3].material.depthTest = true;
+    // this.textModel.children[1].children[3].material.depthWrite = true;
 
-    this.textModel.children[1].children[4].material.depthTest = true;
-    this.textModel.children[1].children[4].material.depthWrite = true;
+    // this.textModel.children[1].children[4].material.depthTest = true;
+    // this.textModel.children[1].children[4].material.depthWrite = true;
 
     // CONTENT
-    this.textModel.children[0].children[0].children[0].material.emissive =
+    this.textModel.children[0].children[2].material.emissive =
       new THREE.Color('white');
-    this.textModel.children[0].children[0].children[0].material.transparent = true;
+    // this.textModel.children[0].children[0].children[0].material.transparent = true;
 
     /**
      * ANIMATIONS
