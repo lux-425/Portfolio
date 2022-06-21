@@ -89,10 +89,11 @@ export default class World {
       this.yubisashiMono = [
         this.textProfil.arrowHitboxProfil,
         this.textProfil.buttonRefresh,
+        this.textKeiken.arrowHitboxKeiken,
         this.textKeiken.buttonRefresh,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
-    }, 2000);
+    }, 7000);
   }
 
   setPanels() {

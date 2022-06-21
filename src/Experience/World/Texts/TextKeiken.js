@@ -67,35 +67,184 @@ export default class TextKeiken {
     );
 
     // LOGOS
-    // this.textModel.children[1].children[3].material.depthTest = true;
-    // this.textModel.children[1].children[3].material.depthWrite = true;
-
-    // this.textModel.children[1].children[4].material.depthTest = true;
-    // this.textModel.children[1].children[4].material.depthWrite = true;
+    this.textModel.children[0].children[5].material.depthTest = true;
+    this.textModel.children[0].children[5].material.depthWrite = true;
+    this.textModel.children[1].children[9].material.depthTest = true;
+    this.textModel.children[1].children[9].material.depthWrite = true;
+    this.textModel.children[1].children[10].material.depthTest = true;
+    this.textModel.children[1].children[10].material.depthWrite = true;
 
     // CONTENT
-    this.textModel.children[0].children[2].material.emissive =
-      new THREE.Color('white');
-    // this.textModel.children[0].children[0].children[0].material.transparent = true;
+    this.textModel.children[0].children[2].material.emissive = new THREE.Color(
+      'white'
+    );
+    this.textModel.children[0].children[2].material.transparent = true;
 
     /**
      * ANIMATIONS
      */
-    this.animateText();
+    this.animate();
 
     this.setAnimation();
+  }
+
+  animate() {
+    this.scene.remove(this.textModel);
+
+    this.animateIntro();
+
+    setTimeout(() => {
+      this.scene.add(this.textModel);
+      this.animateText();
+    }, 5250);
   }
 
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    // console.log(this.textModelIntro);
+    // LOGOS
+    this.textModel.children[0].children[5].visible = false;
+    this.textModel.children[1].children[9].visible = false;
+    this.textModel.children[1].children[10].visible = false;
 
-    this.animateIntro();
+    /**
+     * HEADERS & TITLES
+     */
+    this.headersTitlesKeiken = [
+      this.textModel.children[0].children[0].children[0],
+      this.textModel.children[0].children[0].children[1],
+      this.textModel.children[0].children[1],
+      this.textModel.children[0].children[4],
+      this.textModel.children[1].children[1].children[0],
+      this.textModel.children[1].children[1].children[1],
+      this.textModel.children[1].children[2].children[0],
+      this.textModel.children[1].children[2].children[1],
+      this.textModel.children[1].children[2].children[2],
+      this.textModel.children[1].children[8],
+      this.textModel.children[1].children[4],
+    ];
+    this.headersTitlesKeikenMaterial = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 1,
+      transparent: true,
+      opacity: 0,
+    });
+    for (var i = 0; i < this.headersTitlesKeiken.length; i++) {
+      this.headersTitlesKeiken[i].material = this.headersTitlesKeikenMaterial;
+    }
+
+    var tweenAppearHeadersTitles = new TWEEN.Tween(
+      this.headersTitlesKeikenMaterial
+    )
+      .to({ opacity: 1 }, 1500)
+      .easing(TWEEN.Easing.Bounce.Out);
+    tweenAppearHeadersTitles.start();
+
+    /**
+     * PARAGRAPHS
+     */
+    this.paragraphsKeiken = [
+      this.textModel.children[0].children[2],
+      this.textModel.children[0].children[3],
+      this.textModel.children[1].children[3],
+      this.textModel.children[1].children[7],
+    ];
+    this.paragraphsKeikenMaterial = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 1,
+      transparent: true,
+      opacity: 0,
+    });
+    for (var i = 0; i < this.paragraphsKeiken.length; i++) {
+      this.paragraphsKeiken[i].material = this.paragraphsKeikenMaterial;
+    }
+
+    var tweenAppearParagraphs = new TWEEN.Tween(this.paragraphsKeikenMaterial)
+      .to({ opacity: 1 }, 500)
+      .easing(TWEEN.Easing.Bounce.InOut);
+    setTimeout(() => {
+      tweenAppearParagraphs.start();
+    }, 500);
 
     /**
      * ARROW
      */
+    this.arrowHitboxKeiken = this.textModel.children[1].children[5];
+    this.arrowHitboxKeiken.visible = false;
+
+    this.arrowKeiken = this.textModel.children[1].children[6];
+    this.arrowKeiken.material = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 1,
+      transparent: true,
+      opacity: 0,
+    });
+
+    this.arrowTextKeiken = this.textModel.children[1].children[0];
+    for (var i = 0; i < this.arrowTextKeiken.children.length; i++) {
+      this.arrowTextKeiken.children[i].material =
+        new THREE.MeshStandardMaterial({
+          emissive: 'white',
+          emissiveIntensity: 1,
+          transparent: true,
+          opacity: 0,
+        });
+    }
+
+    // ARROW APPEARANCE
+    var tweenAppearArrowKeiken = new TWEEN.Tween(this.arrowKeiken.material)
+      .to({ opacity: 1 }, 2500)
+      .easing(TWEEN.Easing.Bounce.In)
+      .onComplete(() => {});
+    setTimeout(() => {
+      tweenAppearArrowKeiken.start();
+    }, 1000);
+
+    // ARROW TEXT APPEARANCE
+    this.tweenAppearTextKeiken = () => {
+      for (var i = 0; i < this.arrowTextKeiken.children.length; i++) {
+        var tweenAppearTextKeiken = new TWEEN.Tween(
+          this.arrowTextKeiken.children[i].material
+        )
+          .to({ opacity: 1 }, 600 + i * 200)
+          .easing(TWEEN.Easing.Exponential.In);
+        tweenAppearTextKeiken.start();
+      }
+    };
+    this.tweenDisappearTextKeiken = () => {
+      for (var i = 0; i < this.arrowTextKeiken.children.length; i++) {
+        var tweenDisappearTextKeiken = new TWEEN.Tween(
+          this.arrowTextKeiken.children[i].material
+        )
+          .to({ opacity: 0 }, 500)
+          .easing(TWEEN.Easing.Exponential.Out);
+        tweenDisappearTextKeiken.start();
+      }
+    };
+
+    // ARROW TRANSLATION
+    this.tweenTranslateRightArrowKeiken = new TWEEN.Tween(
+      this.arrowKeiken.position
+    )
+      .to({ x: -0.12 }, 500)
+      .easing(TWEEN.Easing.Exponential.In)
+      .onStart(() => {
+        this.tweenAppearTextKeiken();
+      });
+    this.tweenTranslateLeftArrowKeiken = new TWEEN.Tween(
+      this.arrowKeiken.position
+    )
+      .to({ x: -0.4595 }, 1000)
+      .easing(TWEEN.Easing.Exponential.Out)
+      .onStart(() => {
+        this.tweenDisappearTextKeiken();
+      });
+
+    setTimeout(() => {
+      this.textModel.children[0].children[5].visible = true;
+      this.textModel.children[1].children[9].visible = true;
+      this.textModel.children[1].children[10].visible = true;
+    }, 50);
   }
 
   animateIntro() {

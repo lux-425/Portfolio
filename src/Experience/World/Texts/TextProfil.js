@@ -52,7 +52,7 @@ export default class TextProfil {
     this.titleProfil.children[0].material.emissive = new THREE.Color('white');
     this.titleProfil.children[0].material.emissiveIntensity = 5;
 
-    this.titlePos = [-0.15, -0.2, -0.25, -0.35, 0.1, 0.1];
+    this.titlePos = [-0.15, -0.2, -0.25, -0.35, 0.2, 0.2];
 
     this.titleProfil.children[0].translateZ(this.titlePos[0]);
     this.titleProfil.children[1].translateZ(this.titlePos[1]);
