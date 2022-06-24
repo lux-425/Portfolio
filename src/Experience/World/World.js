@@ -75,6 +75,10 @@ export default class World {
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
     //   gamenFragmentShaderLecture;
+    // this.centerPanels.gamenOne.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.centerPanels.gamenTwo.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
     this.centerPanels.gamenThree.material.fragmentShader =
       gamenFragmentShaderLecture;
     this.centerPanels.gamenFour.material.fragmentShader =
@@ -93,10 +97,10 @@ export default class World {
         // this.textProfil.buttonRefresh,
         // this.textKeiken.arrowHitboxKeiken,
         // this.textKeiken.buttonRefresh,
-        this.textProject.buttonRefresh
+        this.textProject.buttonRefresh,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
-    },500);
+    }, 500);
   }
 
   setPanels() {
