@@ -16,6 +16,7 @@ import Yubisashi from '../Yubisashi.js';
 import TextProfil from './Texts/TextProfil.js';
 import TextShoukai from './Texts/TextShoukai.js';
 import TextKeiken from './Texts/TextKeiken.js';
+import TextProject from './Texts/TextProject.js';
 
 import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
 
@@ -68,22 +69,23 @@ export default class World {
     this.setTexts();
 
     // SHADER LECTURE
-    this.leftPanels.gamenOne.material.fragmentShader =
+    // this.leftPanels.gamenOne.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.leftPanels.gamenTwo.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.leftPanels.gamenThree.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    this.centerPanels.gamenThree.material.fragmentShader =
       gamenFragmentShaderLecture;
-    this.leftPanels.gamenTwo.material.fragmentShader =
-      gamenFragmentShaderLecture;
-    this.leftPanels.gamenThree.material.fragmentShader =
-      gamenFragmentShaderLecture;
-    this.centerPanels.gamenOne.material.fragmentShader =
-      gamenFragmentShaderLecture;
-    this.centerPanels.gamenTwo.material.fragmentShader =
+    this.centerPanels.gamenFour.material.fragmentShader =
       gamenFragmentShaderLecture;
   }
 
   setTexts() {
-    this.textProfil = new TextProfil();
-    this.textShoukai = new TextShoukai();
-    this.textKeiken = new TextKeiken();
+    // this.textProfil = new TextProfil();
+    // this.textShoukai = new TextShoukai();
+    // this.textKeiken = new TextKeiken();
+    this.textProject = new TextProject();
 
     setTimeout(() => {
       this.yubisashiMono = [
@@ -124,7 +126,7 @@ export default class World {
     /**
      * 右
      */
-    // this.rightPanels = new Panels('right');
+    this.rightPanels = new Panels('right');
   }
 
   update() {}

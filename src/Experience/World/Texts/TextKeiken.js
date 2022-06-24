@@ -58,8 +58,6 @@ export default class TextKeiken {
     this.textModel = this.model.model.children[0];
     // this.scene.add(this.textModel);
 
-    console.log(this.textModel);
-
     this.textModel.position.set(
       this.experience.world.centerPanels.gamenOne.mesh.position.x,
       1,

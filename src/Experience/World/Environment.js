@@ -18,7 +18,7 @@ export default class Environment {
 
     // this.setAmbientLight();
     this.setSunLight();
-    // this.setSpotLight();
+    this.setSpotLight();
     this.setCenterPointLight();
     // this.setTestLight();
 
@@ -43,8 +43,8 @@ export default class Environment {
   }
 
   setCenterPointLight() {
-    this.centerPointLight = new THREE.PointLight('#ffffff', 1, 10);
-    this.centerPointLight.position.set(0, 0.5, 0);
+    this.centerPointLight = new THREE.PointLight('#ffffff', 1, 3);
+    this.centerPointLight.position.set(1, 1, 1);
     this.scene.add(this.centerPointLight);
 
     this.centerPointLight.shadow.mapSize.width = 256;
@@ -92,23 +92,28 @@ export default class Environment {
   }
 
   setSunLight() {
-    this.sunLight = new THREE.DirectionalLight('#b9d8e3', 4);
+    this.sunLight = new THREE.DirectionalLight('#b9d8e3', 1);
+    this.sunLightBis = new THREE.DirectionalLight('#b9d8e3', 1);
 
     this.sunLight.shadow.camera.far = 15;
     this.sunLight.shadow.mapSize.set(1024, 1024);
     this.sunLight.shadow.normalBias = 0.05;
 
-    this.sunLight.position.set(-3, 10, 5);
+    this.sunLight.position.set(-3, 5, 3);
+    this.sunLightBis.position.set(4, 5, -4);
 
     this.sunLight.castShadow = false;
 
     // HELPER
     const helper = new THREE.DirectionalLightHelper(this.sunLight, 5);
     // this.scene.add(helper);
+    const helperBis = new THREE.DirectionalLightHelper(this.sunLightBis, 5);
+    // this.scene.add(helperBis);
 
-    this.sunLight.intensity = 1;
+    this.sunLight.intensity = 2;
 
     this.scene.add(this.sunLight);
+    this.scene.add(this.sunLightBis);
 
     // Debug
     if (this.debug.active) {
@@ -144,8 +149,8 @@ export default class Environment {
 
   setSpotLight() {
     this.spotLight = new THREE.SpotLight('#b4dbe4');
-    this.spotLight.intensity = 5;
-    this.spotLight.position.set(0, 5, 5);
+    this.spotLight.intensity = 2;
+    this.spotLight.position.set(-4, 3.5, -5);
 
     this.spotLight.shadow.mapSize.width = 1024 * 2;
     this.spotLight.shadow.mapSize.height = 1024 * 2;
@@ -159,7 +164,7 @@ export default class Environment {
 
     // HELPER
     const helper = new THREE.DirectionalLightHelper(this.spotLight, 5);
-    this.scene.add(helper);
+    // this.scene.add(helper);
 
     this.scene.add(this.spotLight);
 
@@ -224,12 +229,12 @@ export default class Environment {
       this.elapsedTime = this.clock.getElapsedTime();
 
       // Update Lights
-      this.centerPointLightAngle = this.elapsedTime * 0.7;
+      this.centerPointLightAngle = this.elapsedTime * 0.42;
 
       this.centerPointLight.position.x =
-        Math.cos(this.centerPointLightAngle) * 2 - 4;
+        Math.cos(this.centerPointLightAngle) * 4 + 1;
       this.centerPointLight.position.z =
-        Math.sin(this.centerPointLightAngle) * 2 - 1;
+        Math.sin(this.centerPointLightAngle) * 4 + 2;
 
       // this.centerPointLight1.position.x =
       //   Math.cos(this.centerPointLightAngle) * 3;
