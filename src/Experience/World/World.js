@@ -30,7 +30,7 @@ export default class World {
 
     this.floor = new Floor();
     this.environment = new Environment();
-    this.keshiki = new Keshiki();
+    // this.keshiki = new Keshiki();
 
     // Loaders
     this.gltfLoader = new GLTFLoader();
@@ -89,13 +89,14 @@ export default class World {
 
     setTimeout(() => {
       this.yubisashiMono = [
-        this.textProfil.arrowHitboxProfil,
-        this.textProfil.buttonRefresh,
-        this.textKeiken.arrowHitboxKeiken,
-        this.textKeiken.buttonRefresh,
+        // this.textProfil.arrowHitboxProfil,
+        // this.textProfil.buttonRefresh,
+        // this.textKeiken.arrowHitboxKeiken,
+        // this.textKeiken.buttonRefresh,
+        this.textProject.buttonRefresh
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
-    }, 7000);
+    },500);
   }
 
   setPanels() {
@@ -118,7 +119,7 @@ export default class World {
     /**
      * 左
      */
-    this.leftPanels = new Panels('left');
+    // this.leftPanels = new Panels('left');
     /**
      * 中心
      */
@@ -126,7 +127,7 @@ export default class World {
     /**
      * 右
      */
-    this.rightPanels = new Panels('right');
+    // this.rightPanels = new Panels('right');
   }
 
   update() {}

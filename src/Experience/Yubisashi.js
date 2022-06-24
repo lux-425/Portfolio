@@ -39,6 +39,9 @@ export default class Yubisashi {
           case 'arrowHitboxKeiken':
             this.scene.remove(this.experience.world.textKeiken.textModel);
             break;
+          case 'buttonRefreshProject':
+            this.experience.world.textProject.animate();
+            break;
         }
       }
     });
