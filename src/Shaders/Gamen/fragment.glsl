@@ -192,5 +192,5 @@ void main(void) {
   float n = F.y - F.x;
 
   // n *= dots;
-  gl_FragColor = vec4(n*0.8, n*0.8, n*0.8, uOpacity * 0.55);
+  gl_FragColor = vec4(n, n, n, uOpacity * 0.55);
 }

@@ -30,7 +30,7 @@ export default class World {
 
     this.floor = new Floor();
     this.environment = new Environment();
-    // this.keshiki = new Keshiki();
+    this.keshiki = new Keshiki();
 
     // Loaders
     this.gltfLoader = new GLTFLoader();
@@ -69,8 +69,8 @@ export default class World {
     this.setTexts();
 
     // SHADER LECTURE
-    // this.leftPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
+    this.leftPanels.gamenOne.material.fragmentShader =
+      gamenFragmentShaderLecture;
     // this.leftPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
@@ -86,21 +86,21 @@ export default class World {
   }
 
   setTexts() {
-    // this.textProfil = new TextProfil();
+    this.textProfil = new TextProfil();
     // this.textShoukai = new TextShoukai();
     // this.textKeiken = new TextKeiken();
     this.textProject = new TextProject();
 
     setTimeout(() => {
       this.yubisashiMono = [
-        // this.textProfil.arrowHitboxProfil,
-        // this.textProfil.buttonRefresh,
+        this.textProfil.arrowHitboxProfil,
+        this.textProfil.buttonRefresh,
         // this.textKeiken.arrowHitboxKeiken,
         // this.textKeiken.buttonRefresh,
         this.textProject.buttonRefresh,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
-    }, 500);
+    }, 3000);
   }
 
   setPanels() {
@@ -110,8 +110,8 @@ export default class World {
       // this.model.traverse((o) => {
       //   if (o.isMesh)
       //     o.material = new THREE.MeshPhysicalMaterial({
-      //       // side: THREE.DoubleSide,
-      //       // wireframe: true
+      //       side: THREE.DoubleSide,
+      //       wireframe: true
       //     });
       // });
 
@@ -123,7 +123,7 @@ export default class World {
     /**
      * 左
      */
-    // this.leftPanels = new Panels('left');
+    this.leftPanels = new Panels('left');
     /**
      * 中心
      */
@@ -131,7 +131,7 @@ export default class World {
     /**
      * 右
      */
-    // this.rightPanels = new Panels('right');
+    this.rightPanels = new Panels('right');
   }
 
   update() {}

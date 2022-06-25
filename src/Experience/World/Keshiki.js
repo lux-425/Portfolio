@@ -16,8 +16,8 @@ export default class Keshiki {
     // Debug
     this.debug = this.experience.debug;
     this.debugObject = {};
-    this.debugObject.depthColor = '#bd2eff';
-    this.debugObject.surfaceColor = '#ffffff';
+    this.debugObject.depthColor = '#0037db';
+    this.debugObject.surfaceColor = '#2e46ff';
 
     this.setKeshiki();
     this.setAnimation();
@@ -39,21 +39,21 @@ export default class Keshiki {
       uniforms: {
         uTime: { value: 0 },
 
-        uBigWavesElevation: { value: 1.52 },
-        uBigWavesFrequency: { value: new THREE.Vector2(12.0, 12.0) },
-        uBigWavesSpeed: { value: -0.8 },
+        uBigWavesElevation: { value: 1.3 },
+        uBigWavesFrequency: { value: new THREE.Vector2(6.9, 5.5) },
+        uBigWavesSpeed: { value: 1 },
 
-        uSmallWavesElevation: { value: 10 },
-        uSmallWavesFrequency: { value: -0.05 },
-        uSmallWavesSpeed: { value: 0.08 },
+        uSmallWavesElevation: { value: 20 },
+        uSmallWavesFrequency: { value: 0.055 },
+        uSmallWavesSpeed: { value: 0.1 },
         uSmallWavesIterations: { value: 1 },
 
         uDepthColor: { value: new THREE.Color(this.debugObject.depthColor) },
         uSurfaceColor: {
           value: new THREE.Color(this.debugObject.surfaceColor),
         },
-        uColorOffset: { value: 0.55 },
-        uColorMultiplier: { value: 0.8 },
+        uColorOffset: { value: 1},
+        uColorMultiplier: { value: 5.0 },
       },
     });
 
@@ -65,7 +65,7 @@ export default class Keshiki {
 
     this.scene.add(this.mesh);
 
-    // this.mesh.material.wireframe = true;
+    this.mesh.material.wireframe = false;
 
     // テスト！！！
     // this.mesh.rotateX(-Math.PI * 0.15);

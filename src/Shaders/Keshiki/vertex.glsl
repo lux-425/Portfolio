@@ -99,8 +99,8 @@ float cnoise(vec3 P)
 void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
-  float elevation = sin(modelPosition.x * uBigWavesFrequency.y + uTime * uBigWavesSpeed) 
-                  * sin(modelPosition.y * uBigWavesFrequency.x + uTime * uBigWavesSpeed) 
+  float elevation = sin(modelPosition.x * (sin(uTime*uBigWavesFrequency.y)*0.015) + uTime * uBigWavesSpeed) 
+                  * sin(modelPosition.y * (sin(uTime *uBigWavesFrequency.x)*0.015) + uTime * uBigWavesSpeed) 
                   * uBigWavesElevation;
 
   for(float i = 1.0; i <= uSmallWavesIterations; i++) {

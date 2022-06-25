@@ -225,7 +225,7 @@ export default class TextProject {
     /**
      * ロ
      */
-    console.log(this.ro);
+    // console.log(this.ro);
 
     setTimeout(() => {
       this.ro.position.set(0, 0, 0.4006);
@@ -266,7 +266,7 @@ export default class TextProject {
       // ANIMATIONS
       this.tweenSymbol = () => {
         var tweenRotationSymbol = new TWEEN.Tween(this.roTriangle.rotation)
-          .to({ x: 0, y: Math.PI * 2, z: 0 }, 200)
+          .to({ x: 0, y: -Math.PI * 2, z: 0 }, 200)
           .easing(TWEEN.Easing.Circular.InOut)
           .onComplete(() => {
             this.roTriangle.visible = false;

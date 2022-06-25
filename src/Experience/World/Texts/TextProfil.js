@@ -20,7 +20,7 @@ export default class TextProfil {
       this.buttonRefreshGeometry,
       this.buttonRefreshMaterial
     );
-    this.buttonRefresh.position.set(-4, 2.2, 0);
+    this.buttonRefresh.position.set(-3, 1.2, 0);
     this.buttonRefresh.name = 'buttonRefreshProfil';
     this.scene.add(this.buttonRefresh);
 

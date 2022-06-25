@@ -92,8 +92,8 @@ export default class Environment {
   }
 
   setSunLight() {
-    this.sunLight = new THREE.DirectionalLight('#b9d8e3', 1);
-    this.sunLightBis = new THREE.DirectionalLight('#b9d8e3', 1);
+    this.sunLight = new THREE.DirectionalLight('#b9d8e3', 5);
+    this.sunLightBis = new THREE.DirectionalLight('#b9d8e3',5);
 
     this.sunLight.shadow.camera.far = 15;
     this.sunLight.shadow.mapSize.set(1024, 1024);
@@ -110,7 +110,6 @@ export default class Environment {
     const helperBis = new THREE.DirectionalLightHelper(this.sunLightBis, 5);
     // this.scene.add(helperBis);
 
-    this.sunLight.intensity = 2;
 
     this.scene.add(this.sunLight);
     this.scene.add(this.sunLightBis);
@@ -149,7 +148,7 @@ export default class Environment {
 
   setSpotLight() {
     this.spotLight = new THREE.SpotLight('#b4dbe4');
-    this.spotLight.intensity = 2;
+    this.spotLight.intensity = 1;
     this.spotLight.position.set(-4, 3.5, -5);
 
     this.spotLight.shadow.mapSize.width = 1024 * 2;
