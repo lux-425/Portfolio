@@ -52,12 +52,14 @@ export default class World {
     /**
      * ポリゴン
      */
-    this.polygonCone = new Polygon('cone', -70, -70, 0.0001);
+    this.polygonCone = new Polygon('cone', -13, -8, 0.0001);
+    this.polygonCone.mesh.translateY(6)
 
-    this.polygonCircle = new Polygon('circle', -70, -70, -0.0005);
-    this.polygonCircle.mesh.translateY(18);
+    this.polygonCircle = new Polygon('circle', 16, -11, -0.0005);
+    this.polygonCircle.mesh.translateY(7);
 
-    this.polygonCylinder = new Polygon('cylinder', 75, -75, 0.0001);
+    this.polygonCylinder = new Polygon('cylinder', 16, -11, 0.0001);
+    this.polygonCylinder.mesh.translateY(4)
 
     this.polygonCube = new Polygon('cube', 0, 0, 0);
 
@@ -114,6 +116,7 @@ export default class World {
       //       wireframe: true
       //     });
       // });
+      // this.model.children[0].material.wireframe = true
 
       this.scene.add(this.model);
 

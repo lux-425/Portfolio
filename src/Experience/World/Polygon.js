@@ -25,7 +25,7 @@ export default class Polygon {
   setPolygon() {
     switch (this.type) {
       case 'cone':
-        this.polygonGeometry = new THREE.ConeGeometry(18, 36, 18, 4);
+        this.polygonGeometry = new THREE.ConeGeometry(4, 6, 8, 4);
         this.polygonMaterial = new THREE.MeshBasicMaterial({
           color: 0xffffff,
         });
@@ -33,27 +33,20 @@ export default class Polygon {
         this.mesh.name = 'cone';
         break;
       case 'circle':
-        this.polygonGeometry = new THREE.CircleGeometry(20, 13);
+        this.polygonGeometry = new THREE.CircleGeometry(6, 6);
         this.polygonMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
         this.polygonGeometry.rotateX(Math.PI * 0.5);
         this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
         this.mesh.name = 'circle';
         break;
       case 'cylinder':
-        this.polygonGeometry = new THREE.CylinderGeometry(
-          18,
-          18,
-          40,
-          16,
-          4,
-          true
-        );
+        this.polygonGeometry = new THREE.CylinderGeometry(3, 5, 6, 16, 4, true);
         this.polygonMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
         this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
         this.mesh.name = 'cylinder';
         break;
       case 'cube':
-        this.polygonGeometry = new THREE.BoxGeometry(900, 450, 900, 2, 1);
+        this.polygonGeometry = new THREE.BoxGeometry(100, 50, 100, 2, 1);
         this.polygonMaterial = new THREE.MeshBasicMaterial({
           color: 0xffffff,
           opacity: 0.1,
@@ -101,9 +94,6 @@ export default class Polygon {
           break;
         case 'cylinder':
           this.mesh.rotateY(Math.tan(deltaTime * this.speed));
-          break;
-        case 'cube':
-          // this.polygonMaterial.uniforms.uTime = deltaTime;
           break;
       }
 

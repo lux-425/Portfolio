@@ -16,8 +16,8 @@ export default class Keshiki {
     // Debug
     this.debug = this.experience.debug;
     this.debugObject = {};
-    this.debugObject.depthColor = '#0037db';
-    this.debugObject.surfaceColor = '#2e46ff';
+    this.debugObject.depthColor = '#758cff';
+    this.debugObject.surfaceColor = '#75d1ff';
 
     this.setKeshiki();
     this.setAnimation();
@@ -31,7 +31,7 @@ export default class Keshiki {
 
   setKeshiki() {
 
-    this.keshikiGeometry = new THREE.PlaneGeometry(85, 45, 512, 512);
+    this.keshikiGeometry = new THREE.PlaneGeometry(30, 15, 512, 512);
     this.keshikiMaterial = new THREE.ShaderMaterial({
       vertexShader: keshikiVertexShader,
       fragmentShader: keshikiFragmentShader,
@@ -39,21 +39,21 @@ export default class Keshiki {
       uniforms: {
         uTime: { value: 0 },
 
-        uBigWavesElevation: { value: 1.3 },
-        uBigWavesFrequency: { value: new THREE.Vector2(6.9, 5.5) },
-        uBigWavesSpeed: { value: 1 },
+        uBigWavesElevation: { value: 0.55 },
+        uBigWavesFrequency: { value: new THREE.Vector2(0, 0.55) },
+        uBigWavesSpeed: { value: -0.55 },
 
-        uSmallWavesElevation: { value: 20 },
-        uSmallWavesFrequency: { value: 0.055 },
-        uSmallWavesSpeed: { value: 0.1 },
-        uSmallWavesIterations: { value: 1 },
+        uSmallWavesElevation: { value: 5.55 },
+        uSmallWavesFrequency: { value: 0.25 },
+        uSmallWavesSpeed: { value: 0.2 },
+        uSmallWavesIterations: { value: 2 },
 
         uDepthColor: { value: new THREE.Color(this.debugObject.depthColor) },
         uSurfaceColor: {
           value: new THREE.Color(this.debugObject.surfaceColor),
         },
         uColorOffset: { value: 1},
-        uColorMultiplier: { value: 5.0 },
+        uColorMultiplier: { value: 1 },
       },
     });
 
@@ -61,15 +61,13 @@ export default class Keshiki {
     this.mesh.name = 'keshiki';
 
     // this.mesh.rotation.x = -Math.PI * 0.25;
-    this.mesh.position.set(0, 5, -55.5);
+    this.mesh.position.set(0, 3, -16);
 
     this.scene.add(this.mesh);
 
     this.mesh.material.wireframe = false;
 
-    // テスト！！！
-    // this.mesh.rotateX(-Math.PI * 0.15);
-    this.mesh.translateZ(-25);
+    console.log(this.mesh.position);
   }
 
   setAnimation() {
