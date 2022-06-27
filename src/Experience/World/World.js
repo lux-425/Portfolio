@@ -100,7 +100,7 @@ export default class World {
         this.textProject.buttonRefresh,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
-    }, 3000);
+    }, 7000);
   }
 
   setPanels() {

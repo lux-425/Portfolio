@@ -43,7 +43,7 @@ export default class Environment {
   }
 
   setCenterPointLight() {
-    this.centerPointLight = new THREE.PointLight('#ffffff', 1, 3);
+    this.centerPointLight = new THREE.PointLight('#ffffff', 1, 2);
     this.centerPointLight.position.set(1, 1, 1);
     this.scene.add(this.centerPointLight);
 
@@ -92,8 +92,8 @@ export default class Environment {
   }
 
   setSunLight() {
-    this.sunLight = new THREE.DirectionalLight('#b9d8e3', 5);
-    this.sunLightBis = new THREE.DirectionalLight('#b9d8e3',5);
+    this.sunLight = new THREE.DirectionalLight('#b9d8e3', 6);
+    this.sunLightBis = new THREE.DirectionalLight('#b9d8e3',6);
 
     this.sunLight.shadow.camera.far = 15;
     this.sunLight.shadow.mapSize.set(1024, 1024);
@@ -228,12 +228,12 @@ export default class Environment {
       this.elapsedTime = this.clock.getElapsedTime();
 
       // Update Lights
-      this.centerPointLightAngle = this.elapsedTime * 0.42;
+      this.centerPointLightAngle = this.elapsedTime;
 
       this.centerPointLight.position.x =
-        Math.cos(this.centerPointLightAngle) * 4 + 1;
+        Math.cos(this.centerPointLightAngle) * 5 + 1;
       this.centerPointLight.position.z =
-        Math.sin(this.centerPointLightAngle) * 4 + 2;
+        Math.sin(this.centerPointLightAngle) * 5 + 2;
 
       // this.centerPointLight1.position.x =
       //   Math.cos(this.centerPointLightAngle) * 3;
