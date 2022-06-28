@@ -30,7 +30,6 @@ export default class Keshiki {
   }
 
   setKeshiki() {
-
     this.keshikiGeometry = new THREE.PlaneGeometry(30, 15, 512, 512);
     this.keshikiMaterial = new THREE.ShaderMaterial({
       vertexShader: keshikiVertexShader,
@@ -46,13 +45,13 @@ export default class Keshiki {
         uSmallWavesElevation: { value: 5.55 },
         uSmallWavesFrequency: { value: 0.25 },
         uSmallWavesSpeed: { value: 0.2 },
-        uSmallWavesIterations: { value: 2 },
+        uSmallWavesIterations: { value: 3 },
 
         uDepthColor: { value: new THREE.Color(this.debugObject.depthColor) },
         uSurfaceColor: {
           value: new THREE.Color(this.debugObject.surfaceColor),
         },
-        uColorOffset: { value: 1},
+        uColorOffset: { value: 1 },
         uColorMultiplier: { value: 1 },
       },
     });
@@ -66,8 +65,6 @@ export default class Keshiki {
     this.scene.add(this.mesh);
 
     this.mesh.material.wireframe = false;
-
-    console.log(this.mesh.position);
   }
 
   setAnimation() {

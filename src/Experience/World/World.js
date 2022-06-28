@@ -71,8 +71,8 @@ export default class World {
     this.setTexts();
 
     // SHADER LECTURE
-    this.leftPanels.gamenOne.material.fragmentShader =
-      gamenFragmentShaderLecture;
+    // this.leftPanels.gamenOne.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
@@ -88,15 +88,15 @@ export default class World {
   }
 
   setTexts() {
-    this.textProfil = new TextProfil();
+    // this.textProfil = new TextProfil();
     // this.textShoukai = new TextShoukai();
     // this.textKeiken = new TextKeiken();
     this.textProject = new TextProject();
 
     setTimeout(() => {
       this.yubisashiMono = [
-        this.textProfil.arrowHitboxProfil,
-        this.textProfil.buttonRefresh,
+        // this.textProfil.arrowHitboxProfil,
+        // this.textProfil.buttonRefresh,
         // this.textKeiken.arrowHitboxKeiken,
         // this.textKeiken.buttonRefresh,
         this.textProject.buttonRefresh,

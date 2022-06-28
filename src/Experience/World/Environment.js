@@ -18,7 +18,7 @@ export default class Environment {
 
     // this.setAmbientLight();
     this.setSunLight();
-    // this.setSpotLight();
+    this.setSpotLight();
     this.setCenterPointLight();
     // this.setTestLight();
 
