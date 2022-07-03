@@ -159,7 +159,7 @@ export default class Environment {
     this.spotLight.shadow.camera.far = 10;
     this.spotLight.shadow.camera.fov = 300;
 
-    this.spotLight.angle = Math.PI / 2;
+    // this.spotLight.angle = Math.PI / 2;
 
     // HELPER
     const helper = new THREE.DirectionalLightHelper(this.spotLight, 5);
