@@ -60,11 +60,11 @@ export default class Keshiki {
     this.mesh.name = 'keshiki';
 
     // this.mesh.rotation.x = -Math.PI * 0.25;
-    this.mesh.position.set(0, 3, -16);
+    this.mesh.position.set(0, 4, -18);
 
     this.scene.add(this.mesh);
 
-    this.mesh.material.wireframe = false;
+    this.mesh.material.wireframe = true;
   }
 
   setAnimation() {

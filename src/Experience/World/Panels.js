@@ -41,7 +41,7 @@ export default class Panels {
           shitaBreathingSpeed: 0.2,
           shitaBreathingIterations: 1.0,
           color: '#0000ff',
-          opacity: 0.58,
+          opacity: 0.88,
           shader: 'left',
         };
 

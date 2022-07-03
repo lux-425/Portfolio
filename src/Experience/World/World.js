@@ -28,9 +28,9 @@ export default class World {
 
     this.scene = this.experience.scene;
 
-    this.floor = new Floor();
+    // this.floor = new Floor();
     this.environment = new Environment();
-    this.keshiki = new Keshiki();
+    // this.keshiki = new Keshiki();
 
     // Loaders
     this.gltfLoader = new GLTFLoader();
@@ -53,15 +53,20 @@ export default class World {
      * ポリゴン
      */
     this.polygonCone = new Polygon('cone', -13, -8, 0.0001);
-    this.polygonCone.mesh.translateY(6)
+    this.polygonCone.mesh.position.set(-10, 1.501, -9);
 
     this.polygonCircle = new Polygon('circle', 16, -11, -0.0005);
     this.polygonCircle.mesh.translateY(7);
+    this.polygonCircle.mesh.position.set(-10, 3, -9);
 
     this.polygonCylinder = new Polygon('cylinder', 16, -11, 0.0001);
-    this.polygonCylinder.mesh.translateY(4)
+    this.polygonCylinder.mesh.position.set(10, 2.001, -9);
 
     this.polygonCube = new Polygon('cube', 0, 0, 0);
+    this.polygonCube.mesh.translateY(9);
+    this.polygonCube.mesh.translateY(3.49);
+
+    // this.keshiki.mesh.translateY(3.5);
 
     /**
      * テスト!!!
@@ -77,29 +82,29 @@ export default class World {
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
     //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenTwo.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    this.centerPanels.gamenThree.material.fragmentShader =
+    this.centerPanels.gamenOne.material.fragmentShader =
       gamenFragmentShaderLecture;
-    this.centerPanels.gamenFour.material.fragmentShader =
-      gamenFragmentShaderLecture;
+    this.centerPanels.gamenTwo.material.fragmentShader =
+    gamenFragmentShaderLecture;
+    // this.centerPanels.gamenThree.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.centerPanels.gamenFour.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
   }
 
   setTexts() {
     // this.textProfil = new TextProfil();
     // this.textShoukai = new TextShoukai();
-    // this.textKeiken = new TextKeiken();
-    this.textProject = new TextProject();
+    this.textKeiken = new TextKeiken();
+    // this.textProject = new TextProject();
 
     setTimeout(() => {
       this.yubisashiMono = [
         // this.textProfil.arrowHitboxProfil,
         // this.textProfil.buttonRefresh,
-        // this.textKeiken.arrowHitboxKeiken,
-        // this.textKeiken.buttonRefresh,
-        this.textProject.buttonRefresh,
+        this.textKeiken.arrowHitboxKeiken,
+        this.textKeiken.buttonRefresh,
+        // this.textProject.buttonRefresh,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }, 7000);
