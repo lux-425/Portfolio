@@ -30,7 +30,7 @@ export default class World {
 
     // this.floor = new Floor();
     this.environment = new Environment();
-    // this.keshiki = new Keshiki();
+    this.keshiki = new Keshiki();
 
     // Loaders
     this.gltfLoader = new GLTFLoader();
@@ -59,7 +59,7 @@ export default class World {
     this.polygonCircle.mesh.position.set(-10, 4.01, -11);
 
     this.polygonCylinder = new Polygon('cylinder', 16, -11, 0.0001);
-    this.polygonCylinder.mesh.position.set(7, 2.51, -16);
+    this.polygonCylinder.mesh.position.set(10, 2.51, -16);
 
     this.polygonCube = new Polygon('cube', 0, 0, 0);
     this.polygonCube.mesh.translateY(12.5);
@@ -84,7 +84,7 @@ export default class World {
     this.ball = new Polygon('ball', 0, 0, 0.001);
 
     this.torus = new Polygon('torus', 0, 0, 0.0006);
-    this.torus.mesh.position.set(7, 2.51, -16);
+    this.torus.mesh.position.set(10, 2.51, -16);
 
     /**
      * テスト!!!
@@ -100,29 +100,29 @@ export default class World {
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
     //   gamenFragmentShaderLecture;
-    this.centerPanels.gamenOne.material.fragmentShader =
+    // this.centerPanels.gamenOne.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.centerPanels.gamenTwo.material.fragmentShader =
+    // gamenFragmentShaderLecture;
+    this.centerPanels.gamenThree.material.fragmentShader =
       gamenFragmentShaderLecture;
-    this.centerPanels.gamenTwo.material.fragmentShader =
-    gamenFragmentShaderLecture;
-    // this.centerPanels.gamenThree.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenFour.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
+    this.centerPanels.gamenFour.material.fragmentShader =
+      gamenFragmentShaderLecture;
   }
 
   setTexts() {
     // this.textProfil = new TextProfil();
     // this.textShoukai = new TextShoukai();
-    this.textKeiken = new TextKeiken();
-    // this.textProject = new TextProject();
+    // this.textKeiken = new TextKeiken();
+    this.textProject = new TextProject();
 
     setTimeout(() => {
       this.yubisashiMono = [
         // this.textProfil.arrowHitboxProfil,
         // this.textProfil.buttonRefresh,
-        this.textKeiken.arrowHitboxKeiken,
-        this.textKeiken.buttonRefresh,
-        // this.textProject.buttonRefresh,
+        // this.textKeiken.arrowHitboxKeiken,
+        // this.textKeiken.buttonRefresh,
+        this.textProject.buttonRefresh,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }, 7000);

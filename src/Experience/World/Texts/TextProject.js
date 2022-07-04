@@ -28,6 +28,9 @@ export default class TextProject {
     this.modelIntro = new TextModel(
       '../../../models/Gamen/gamen_005-6_intro.glb'
     );
+
+    this.model = new TextModel('../../../models/Gamen/gamen_005-6.glb');
+
     this.setModel();
   }
 
@@ -35,13 +38,34 @@ export default class TextProject {
     // INTRO
     await this.modelIntro.waitForLoad();
     this.textModelIntro = this.modelIntro.model.children[0];
-    this.scene.add(this.textModelIntro);
+    // this.scene.add(this.textModelIntro);
 
     this.textModelIntro.translateX(-4);
 
     this.textModelIntro.children[0].children[0].children[0].material.emissive =
       new THREE.Color('white');
     this.textModelIntro.children[0].children[0].children[0].material.transparent = true;
+
+    /**
+     * TEXT
+     */
+    await this.model.waitForLoad();
+    this.textModel = this.model.model.children[0];
+
+    this.textModel.position.set(
+      this.experience.world.centerPanels.gamenFour.mesh.position.x,
+      1,
+      this.experience.world.centerPanels.gamenFour.mesh.position.z
+    );
+
+    // LOGOS
+    // this.textModel.children[0].children[5].material.depthTest = true;
+    // this.textModel.children[0].children[5].material.depthWrite = true;
+
+    // CONTENT
+    this.textModel.children[1].children[0].children[0].material.emissive =
+      new THREE.Color('white');
+    this.textModel.children[1].children[0].children[0].material.transparent = true;
 
     /**
      * ANIMATIONS
@@ -54,18 +78,18 @@ export default class TextProject {
   animate() {
     // this.scene.remove(this.textModel);
 
-    this.animateIntro();
+    // this.animateIntro();
 
     // setTimeout(() => {
-    //   this.scene.add(this.textModel);
-    //   this.animateText();
+    this.scene.add(this.textModel);
+    this.animateText();
     // }, 5250);
   }
 
   animateIntro() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    console.log(this.textModelIntro);
+    this.textModelIntro.visible = true;
 
     this.pu = this.textModelIntro.children[0].children[0];
     this.ro = this.textModelIntro.children[0].children[4];
@@ -427,6 +451,9 @@ export default class TextProject {
             setTimeout(() => {
               this.to.translateX(-0.75);
             }, 50);
+            setTimeout(() => {
+              this.textModelIntro.visible = false;
+            }, 300);
           });
         var tweenScaleSymbolTo = new TWEEN.Tween(this.toCircle.scale)
           .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
@@ -947,7 +974,7 @@ export default class TextProject {
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    // console.log(this.textModel);
+    console.log(this.textModel);
 
     /**
      * ARROW

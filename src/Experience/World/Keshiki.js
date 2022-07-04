@@ -30,15 +30,16 @@ export default class Keshiki {
   }
 
   setKeshiki() {
-    this.keshikiGeometry = new THREE.PlaneGeometry(30, 15, 512, 512);
+    this.keshikiGeometry = new THREE.PlaneGeometry(16, 10, 128, 128);
     this.keshikiMaterial = new THREE.ShaderMaterial({
       vertexShader: keshikiVertexShader,
       fragmentShader: keshikiFragmentShader,
       side: THREE.FrontSide,
+      // transparent: true,
       uniforms: {
         uTime: { value: 0 },
 
-        uBigWavesElevation: { value: 0.55 },
+        uBigWavesElevation: { value: 0.45 },
         uBigWavesFrequency: { value: new THREE.Vector2(0, 0.55) },
         uBigWavesSpeed: { value: -0.55 },
 
@@ -60,11 +61,11 @@ export default class Keshiki {
     this.mesh.name = 'keshiki';
 
     // this.mesh.rotation.x = -Math.PI * 0.25;
-    this.mesh.position.set(0, 4, -18);
+    this.mesh.position.set(0, 5, -18);
 
     this.scene.add(this.mesh);
 
-    this.mesh.material.wireframe = true;
+    // this.mesh.material.wireframe = true;
   }
 
   setAnimation() {

@@ -160,7 +160,7 @@ export default class Polygon {
         this.mesh.name = 'ball';
         break;
       case 'torus':
-        this.polygonGeometry = new THREE.TorusKnotGeometry(1, 0.2, 15, 15);
+        this.polygonGeometry = new THREE.TorusKnotGeometry(1, 0.2, 13, 13);
         this.polygonMaterial = new THREE.MeshBasicMaterial({
           color: 0xffffff,
           wireframe: true,
