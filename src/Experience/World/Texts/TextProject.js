@@ -58,14 +58,11 @@ export default class TextProject {
       this.experience.world.centerPanels.gamenFour.mesh.position.z
     );
 
-    // LOGOS
-    // this.textModel.children[0].children[5].material.depthTest = true;
-    // this.textModel.children[0].children[5].material.depthWrite = true;
-
     // CONTENT
-    this.textModel.children[1].children[0].children[0].material.emissive =
-      new THREE.Color('white');
-    this.textModel.children[1].children[0].children[0].material.transparent = true;
+    this.textModel.children[0].children[3].material.emissive = new THREE.Color(
+      'white'
+    );
+    this.textModel.children[0].children[3].material.transparent = true;
 
     /**
      * ANIMATIONS
@@ -979,6 +976,404 @@ export default class TextProject {
     /**
      * ARROW
      */
+    this.arrowProject = this.textModel.children[0].children[3];
+    this.arrowProject.material = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      transparent: true,
+      opacity: 0,
+    });
+
+    this.arrowHitboxProject = this.textModel.children[0].children[2];
+    this.arrowHitboxProject.visible = false;
+
+    this.arrowTextProject = this.textModel.children[0].children[0];
+    for (var i = 0; i < 3; i++) {
+      this.arrowTextProject.children[i].material =
+        new THREE.MeshStandardMaterial({
+          emissive: 'white',
+          transparent: true,
+          opacity: 0,
+        });
+    }
+
+    this.homeArrow = this.textModel.children[1].children[7];
+    this.homeArrow.visible = false;
+
+    /**
+     * REFERENCES
+     */
+    this.githubLogo = this.textModel.children[2];
+
+    this.visitLiveFrame = this.textModel.children[0].children[4];
+    this.visitLiveButton = this.textModel.children[0].children[13];
+    this.visitSoonButton = this.textModel.children[0].children[15];
+    this.visitSoonButton.visible = false;
+
+    this.navbarFrame = this.textModel.children[0].children[5];
+    this.navbarSep = this.textModel.children[0].children[14];
+    this.navbarIchi = this.textModel.children[0].children[1].children[0];
+    this.navbarNi = this.textModel.children[0].children[1].children[1];
+    this.navbarSan = this.textModel.children[0].children[1].children[2];
+    this.navbarYon = this.textModel.children[0].children[1].children[3];
+    this.navbarGo = this.textModel.children[0].children[1].children[4];
+    this.navbarRoku = this.textModel.children[0].children[1].children[5];
+    this.navbarTsugi = this.textModel.children[0].children[1].children[6];
+    this.navbarIchi.name = 'navbarIchi';
+    this.navbarNi.name = 'navbarNi';
+    this.navbarSan.name = 'navbarSan';
+    this.navbarYon.name = 'navbarYon';
+    this.navbarGo.name = 'navbarGo';
+    this.navbarRoku.name = 'navbarRoku';
+    this.navbarTsugi.name = 'navbarTsugi';
+
+    // PROJECT 1
+    this.project1 = this.textModel.children[1].children[0];
+    this.project1Title = this.textModel.children[1].children[0].children[0];
+    this.project1Description =
+      this.textModel.children[1].children[0].children[1];
+    this.project1Image = this.textModel.children[1].children[0].children[3];
+    this.project1ImageBis = this.textModel.children[1].children[0].children[2];
+    this.project1Stack = this.textModel.children[0].children[6];
+
+    this.project1.visible = false;
+    this.project1Stack.visible = false;
+
+    // PROJECT 2
+    this.project2 = this.textModel.children[1].children[1];
+    this.project2Title = this.textModel.children[1].children[1].children[0];
+    this.project2Description =
+      this.textModel.children[1].children[1].children[1];
+    this.project2Image = this.textModel.children[1].children[1].children[2];
+    this.project2ImageBis = this.textModel.children[1].children[1].children[3];
+    this.project2Stack = this.textModel.children[0].children[7];
+
+    this.project2.visible = false;
+    this.project2Stack.visible = false;
+
+    // PROJECT 3
+    this.project3 = this.textModel.children[1].children[2];
+    this.project3Title = this.textModel.children[1].children[2].children[1];
+    this.project3Description =
+      this.textModel.children[1].children[2].children[0];
+    this.project3Image = this.textModel.children[1].children[2].children[2];
+    this.project3Stack = this.textModel.children[0].children[8];
+
+    this.project3.visible = false;
+    this.project3Stack.visible = false;
+
+    // PROJECT 4
+    this.project4 = this.textModel.children[1].children[3];
+    this.project4Title = this.textModel.children[1].children[3].children[1];
+    this.project4Description =
+      this.textModel.children[1].children[3].children[0];
+    this.project4Image = this.textModel.children[1].children[3].children[3];
+    this.project4ImageBis = this.textModel.children[1].children[3].children[2];
+    this.project4Stack = this.textModel.children[0].children[9];
+
+    this.project4.visible = false;
+    this.project4Stack.visible = false;
+
+    // PROJECT 5
+    this.project5 = this.textModel.children[1].children[4];
+    this.project5Title = this.textModel.children[1].children[4].children[1];
+    this.project5Description =
+      this.textModel.children[1].children[4].children[0];
+    this.project5Image = this.textModel.children[1].children[4].children[2];
+    this.project5Stack = this.textModel.children[0].children[10];
+
+    this.project5.visible = false;
+    this.project5Stack.visible = false;
+
+    // PROJECT 6
+    this.project6 = this.textModel.children[1].children[5];
+    this.project6Title = this.textModel.children[1].children[5].children[2];
+    this.project6Description =
+      this.textModel.children[1].children[5].children[0];
+    this.project6TitleBis = this.textModel.children[1].children[5].children[3];
+    this.project6DescriptionBis =
+      this.textModel.children[1].children[5].children[1];
+    this.project6Stack = this.textModel.children[0].children[11];
+
+    this.project6.visible = false;
+    this.project6Stack.visible = false;
+
+    // PROJECT 7
+    this.project7 = this.textModel.children[1].children[6];
+    this.project7Title = this.textModel.children[1].children[6].children[1];
+    this.project7Description =
+      this.textModel.children[1].children[6].children[0];
+    this.project7Image = this.textModel.children[1].children[6].children[2];
+    this.project7Stack = this.textModel.children[0].children[12];
+
+    this.project7.visible = false;
+    this.project7Stack.visible = false;
+
+    /**
+     * ACTUAL TEXT
+     */
+    this.actualProject = this.project1;
+    this.actualTitle = this.project1Title;
+    this.actualDescription = this.project1Description;
+    this.actualStack = this.project1Stack;
+    this.actualImage = this.project1Image;
+    this.actualImageBis = this.project1ImageBis;
+
+    this.actualImage.visible = false;
+    this.actualImageBis.visible = false;
+
+    // IMAGES' TRANSPARENCE CORRECTION
+    this.githubLogo.material.depthTest = true;
+    this.githubLogo.material.depthWrite = true;
+    this.project1Image.material.depthTest = true;
+    this.project1Image.material.depthWrite = true;
+    this.project1ImageBis.material.depthTest = true;
+    this.project1ImageBis.material.depthWrite = true;
+    this.project2Image.material.depthTest = true;
+    this.project2Image.material.depthWrite = true;
+    this.project2ImageBis.material.depthTest = true;
+    this.project2ImageBis.material.depthWrite = true;
+    this.project3Image.material.depthTest = true;
+    this.project3Image.material.depthWrite = true;
+    this.project4Image.material.depthTest = true;
+    this.project4Image.material.depthWrite = true;
+    this.project4ImageBis.material.depthTest = true;
+    this.project4ImageBis.material.depthWrite = true;
+    this.project5Image.material.depthTest = true;
+    this.project5Image.material.depthWrite = true;
+
+    /**
+     * MATERIALS
+     */
+    this.projectTitleMaterial = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 1,
+      transparent: true,
+      opacity: 0,
+    });
+    this.projectParagraphMaterial = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 1,
+      transparent: true,
+      opacity: 0,
+    });
+
+    const titleArr = [
+      this.project1Title,
+      this.project2Title,
+      this.project3Title,
+      this.project4Title,
+      this.project5Title,
+      this.project6Title,
+      this.project7Title,
+    ];
+    const paragraphArr = [
+      this.project1Description,
+      this.project1Stack,
+      this.project2Description,
+      this.project2Stack,
+      this.project3Description,
+      this.project3Stack,
+      this.project4Description,
+      this.project4Stack,
+      this.project5Description,
+      this.project5Stack,
+      this.project6Description,
+      this.project6Stack,
+      this.project7Description,
+      this.project7Stack,
+    ];
+
+    for (var i = 0; i < titleArr.length; i++) {
+      titleArr[i].material = this.projectTitleMaterial;
+    }
+    for (var i = 0; i < paragraphArr.length; i++) {
+      paragraphArr[i].material = this.projectParagraphMaterial;
+    }
+
+    setTimeout(() => {
+      this.appearProjectText();
+    }, 500);
+  }
+
+  appearProjectText() {
+    var TWEEN = require('@tweenjs/tween.js');
+
+    var tweenAppearTitle = new TWEEN.Tween(this.actualTitle.material)
+      .to({ opacity: 1 }, 600)
+      .easing(TWEEN.Easing.Exponential.InOut)
+      .onStart(() => {
+        this.actualProject.visible = true;
+        this.actualStack.visible = true;
+      })
+      .onComplete(() => {
+        if (this.actualImage) this.actualImage.visible = true;
+        if (this.actualImageBis) this.actualImageBis.visible = true;
+      });
+    var tweenAppearDescriptionStack = new TWEEN.Tween(
+      this.actualDescription.material
+    )
+      .to({ opacity: 1 }, 800)
+      .easing(TWEEN.Easing.Exponential.InOut);
+
+    tweenAppearTitle.start();
+    tweenAppearDescriptionStack.start();
+  }
+
+  disappearProjectText() {
+    var TWEEN = require('@tweenjs/tween.js');
+
+    var tweenDisappearTitle = new TWEEN.Tween(this.actualTitle.material)
+      .to({ opacity: 0 }, 500)
+      .easing(TWEEN.Easing.Exponential.InOut)
+      .onStart(() => {
+        if (this.actualImage) this.actualImage.visible = false;
+        if (this.actualImageBis) this.actualImageBis.visible = false;
+      });
+    var tweenDisappearDescriptionStack = new TWEEN.Tween(
+      this.actualDescription.material
+    )
+      .to({ opacity: 0 }, 700)
+      .easing(TWEEN.Easing.Exponential.InOut)
+      .onComplete(() => {
+        this.actualProject.visible = false;
+        this.actualStack.visible = false;
+      });
+
+    tweenDisappearTitle.start();
+    tweenDisappearDescriptionStack.start();
+  }
+
+  navigateIchi() {
+    this.disappearProjectText();
+
+    setTimeout(() => {
+      this.actualProject = this.project1;
+      this.actualTitle = this.project1Title;
+      this.actualDescription = this.project1Description;
+      this.actualStack = this.project1Stack;
+      this.actualImage = this.project1Image;
+      this.actualImageBis = this.project1ImageBis;
+
+      this.visitLiveFrame.visible = true;
+      this.visitLiveButton.visible = true;
+      this.visitSoonButton.visible = false;
+
+      this.appearProjectText();
+    }, 1250);
+  }
+
+  navigateNi() {
+    this.disappearProjectText();
+
+    setTimeout(() => {
+      this.actualProject = this.project2;
+      this.actualTitle = this.project2Title;
+      this.actualDescription = this.project2Description;
+      this.actualStack = this.project2Stack;
+      this.actualImage = this.project2Image;
+      this.actualImageBis = this.project2ImageBis;
+
+      this.visitLiveFrame.visible = true;
+      this.visitLiveButton.visible = true;
+      this.visitSoonButton.visible = false;
+
+      this.appearProjectText();
+    }, 1250);
+  }
+
+  navigateSan() {
+    this.disappearProjectText();
+
+    setTimeout(() => {
+      this.actualProject = this.project3;
+      this.actualTitle = this.project3Title;
+      this.actualDescription = this.project3Description;
+      this.actualStack = this.project3Stack;
+      this.actualImage = this.project3Image;
+      this.actualImageBis = null;
+
+      this.visitLiveFrame.visible = true;
+      this.visitLiveButton.visible = true;
+      this.visitSoonButton.visible = false;
+
+      this.appearProjectText();
+    }, 1250);
+  }
+
+  navigateYon() {
+    this.disappearProjectText();
+
+    setTimeout(() => {
+      this.actualProject = this.project4;
+      this.actualTitle = this.project4Title;
+      this.actualDescription = this.project4Description;
+      this.actualStack = this.project4Stack;
+      this.actualImage = this.project4Image;
+      this.actualImageBis = this.project4ImageBis;
+
+      this.visitLiveFrame.visible = false;
+      this.visitLiveButton.visible = false;
+      this.visitSoonButton.visible = false;
+
+      this.appearProjectText();
+    }, 1250);
+  }
+
+  navigateGo() {
+    this.disappearProjectText();
+
+    setTimeout(() => {
+      this.actualProject = this.project5;
+      this.actualTitle = this.project5Title;
+      this.actualDescription = this.project5Description;
+      this.actualStack = this.project5Stack;
+      this.actualImage = this.project5Image;
+      this.actualImageBis = null;
+
+      this.visitLiveFrame.visible = false;
+      this.visitLiveButton.visible = false;
+      this.visitSoonButton.visible = false;
+
+      this.appearProjectText();
+    }, 1250);
+  }
+
+  navigateRoku() {
+    this.disappearProjectText();
+
+    setTimeout(() => {
+      this.actualProject = this.project6;
+      this.actualTitle = this.project6Title;
+      this.actualDescription = this.project6Description;
+      this.actualStack = this.project6Stack;
+      this.actualImage = null;
+      this.actualImageBis = null;
+
+      this.visitLiveFrame.visible = false;
+      this.visitLiveButton.visible = false;
+      this.visitSoonButton.visible = false;
+
+      this.appearProjectText();
+    }, 1250);
+  }
+
+  navigateNana() {
+    this.disappearProjectText();
+
+    setTimeout(() => {
+      this.actualProject = this.project7;
+      this.actualTitle = this.project7Title;
+      this.actualDescription = this.project7Description;
+      this.actualStack = this.project7Stack;
+      this.actualImage = this.project7Image;
+      this.actualImageBis = null;
+
+      this.visitLiveFrame.visible = true;
+      this.visitLiveButton.visible = false;
+      this.visitSoonButton.visible = true;
+
+      this.appearProjectText();
+    }, 1250);
   }
 
   setAnimation() {

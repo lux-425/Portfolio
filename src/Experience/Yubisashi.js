@@ -42,6 +42,27 @@ export default class Yubisashi {
           case 'buttonRefreshProject':
             this.experience.world.textProject.animate();
             break;
+          case 'navbarIchi':
+            this.experience.world.textProject.navigateIchi();
+            break;
+          case 'navbarNi':
+            this.experience.world.textProject.navigateNi();
+            break;
+          case 'navbarSan':
+            this.experience.world.textProject.navigateSan();
+            break;
+          case 'navbarYon':
+            this.experience.world.textProject.navigateYon();
+            break;
+          case 'navbarGo':
+            this.experience.world.textProject.navigateGo();
+            break;
+          case 'navbarRoku':
+            this.experience.world.textProject.navigateRoku();
+            break;
+          case 'navbarTsugi':
+            this.experience.world.textProject.navigateNana();
+            break;
         }
       }
     });
@@ -61,8 +82,8 @@ export default class Yubisashi {
       this.intersects = this.raycaster.intersectObjects(this.objectsToTest);
 
       if (this.intersects.length) {
+        // MOUSE ENTER
         if (!this.currentIntersect) {
-          // console.log('mouse enter');
           if (this.intersects[0].object.name === 'arrowHitboxProfil') {
             this.experience.world.textProfil.tweenTranslateRightArrowProfil.start();
           } else if (this.intersects[0].object.name === 'arrowHitboxKeiken') {
@@ -71,8 +92,8 @@ export default class Yubisashi {
         }
         this.currentIntersect = this.intersects[0].object.name;
       } else {
+        // MOUSE LEAVE
         if (this.currentIntersect) {
-          // console.log('mouse leave');
           if (this.currentIntersect === 'arrowHitboxProfil') {
             this.experience.world.textProfil.tweenTranslateLeftArrowProfil.start();
           } else if (this.currentIntersect === 'arrowHitboxKeiken') {

@@ -167,7 +167,6 @@ export default class TextProfil {
         )
           .to({ opacity: 1 }, 400 + i * 150)
           .easing(TWEEN.Easing.Exponential.In)
-          .onStart(() => {});
         tweenAppearTextProfil.start();
       }
     };
@@ -178,7 +177,6 @@ export default class TextProfil {
         )
           .to({ opacity: 0 }, 500)
           .easing(TWEEN.Easing.Exponential.Out)
-          .onStart(() => {});
         tweenDisappearTextProfil.start();
       }
     };

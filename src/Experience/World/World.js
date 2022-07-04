@@ -123,6 +123,13 @@ export default class World {
         // this.textKeiken.arrowHitboxKeiken,
         // this.textKeiken.buttonRefresh,
         this.textProject.buttonRefresh,
+        this.textProject.navbarIchi,
+        this.textProject.navbarNi,
+        this.textProject.navbarSan,
+        this.textProject.navbarYon,
+        this.textProject.navbarGo,
+        this.textProject.navbarRoku,
+        this.textProject.navbarTsugi,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }, 7000);
