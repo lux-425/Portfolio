@@ -150,11 +150,18 @@ export default class TextProfil {
         });
     }
 
+    this.homeArrowHitbox = this.textModel.children[7];
+    this.homeArrowHitbox.visible = false;
+    this.homeArrow = this.textModel.children[6];
+    this.homeArrow.visible = false;
+
     // ARROW APPEARANCE
     var tweenAppearArrowProfil = new TWEEN.Tween(this.arrowProfil.material)
       .to({ opacity: 1 }, 1500)
       .easing(TWEEN.Easing.Bounce.In)
-      .onComplete(() => {});
+      .onComplete(() => {
+        this.homeArrow.visible = true;
+      });
     setTimeout(() => {
       tweenAppearArrowProfil.start();
     }, 1000);
@@ -166,7 +173,7 @@ export default class TextProfil {
           this.arrowTextProfil.children[i].material
         )
           .to({ opacity: 1 }, 400 + i * 150)
-          .easing(TWEEN.Easing.Exponential.In)
+          .easing(TWEEN.Easing.Exponential.In);
         tweenAppearTextProfil.start();
       }
     };
@@ -176,7 +183,7 @@ export default class TextProfil {
           this.arrowTextProfil.children[i].material
         )
           .to({ opacity: 0 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out)
+          .easing(TWEEN.Easing.Exponential.Out);
         tweenDisappearTextProfil.start();
       }
     };

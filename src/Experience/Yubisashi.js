@@ -26,24 +26,35 @@ export default class Yubisashi {
     window.addEventListener('click', () => {
       if (this.currentIntersect) {
         switch (this.currentIntersect) {
+          case 'arrowHitboxProfil':
+            this.scene.remove(this.experience.world.textProfil.textModel);
+            break;
           case 'buttonRefreshProfil':
             this.scene.add(this.experience.world.textProfil.textModel);
             this.experience.world.textProfil.animateText();
             break;
-          case 'arrowHitboxProfil':
-            this.scene.remove(this.experience.world.textProfil.textModel);
+          case 'zarrowHomeHitboxProfil':
+            console.log('go home from profil');
+            break;
+
+          case 'arrowHitboxKeiken':
+            this.scene.remove(this.experience.world.textKeiken.textModel);
             break;
           case 'buttonRefreshKeiken':
             this.experience.world.textKeiken.animate();
             break;
-          case 'arrowHitboxKeiken':
-            this.scene.remove(this.experience.world.textKeiken.textModel);
+          case 'yarrowHomeHitbox':
+            console.log('go home from keiken');
+            break;
+
+          case 'arrowHitboxProject':
+            this.experience.world.textProject.animate();
             break;
           case 'buttonRefreshProject':
             this.experience.world.textProject.animate();
             break;
-          case 'arrowHitboxProject':
-            this.experience.world.textProject.animate();
+          case 'yhomeArrowHitbox':
+            console.log('go home from project');
             break;
           case 'navbarIchi':
             this.experience.world.textProject.navigateIchi();
@@ -66,8 +77,11 @@ export default class Yubisashi {
           case 'navbarTsugi':
             this.experience.world.textProject.navigateNana();
             break;
+          case 'zgithubHitbox':
+            console.log('visit repository');
+            break;
           case 'visitHitbox':
-            // Check actual tab and open site
+            console.log('visit live');
             break;
         }
       }

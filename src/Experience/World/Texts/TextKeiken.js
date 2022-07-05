@@ -56,7 +56,6 @@ export default class TextKeiken {
      */
     await this.model.waitForLoad();
     this.textModel = this.model.model.children[0];
-    // this.scene.add(this.textModel);
 
     this.textModel.position.set(
       this.experience.world.centerPanels.gamenOne.mesh.position.x,
@@ -65,8 +64,8 @@ export default class TextKeiken {
     );
 
     // LOGOS
-    this.textModel.children[0].children[5].material.depthTest = true;
-    this.textModel.children[0].children[5].material.depthWrite = true;
+    this.textModel.children[0].children[7].material.depthTest = true;
+    this.textModel.children[0].children[7].material.depthWrite = true;
     this.textModel.children[1].children[9].material.depthTest = true;
     this.textModel.children[1].children[9].material.depthWrite = true;
     this.textModel.children[1].children[10].material.depthTest = true;
@@ -101,7 +100,7 @@ export default class TextKeiken {
     var TWEEN = require('@tweenjs/tween.js');
 
     // LOGOS
-    this.textModel.children[0].children[5].visible = false;
+    this.textModel.children[0].children[7].visible = false;
     this.textModel.children[1].children[9].visible = false;
     this.textModel.children[1].children[10].visible = false;
 
@@ -189,6 +188,11 @@ export default class TextKeiken {
         });
     }
 
+    this.arrowHomeHitbox = this.textModel.children[0].children[5];
+    this.arrowHomeHitbox.visible = false;
+
+    this.arrowHome = this.textModel.children[0].children[6];
+
     // ARROW APPEARANCE
     var tweenAppearArrowKeiken = new TWEEN.Tween(this.arrowKeiken.material)
       .to({ opacity: 1 }, 2500)
@@ -239,7 +243,7 @@ export default class TextKeiken {
       });
 
     setTimeout(() => {
-      this.textModel.children[0].children[5].visible = true;
+      this.textModel.children[0].children[7].visible = true;
       this.textModel.children[1].children[9].visible = true;
       this.textModel.children[1].children[10].visible = true;
     }, 50);

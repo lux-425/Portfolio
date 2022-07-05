@@ -995,7 +995,8 @@ export default class TextProject {
 
     this.homeArrow = this.textModel.children[1].children[7];
     this.homeArrow.visible = false;
-    this.homeArrow.name = 'homeArrow';
+    this.homeArrowHitbox = this.textModel.children[0].children[1].children[16];
+    this.homeArrowHitbox.visible = false;
 
     // ARROW TEXT APPEARANCE
     this.tweenAppearTextArrow = () => {
@@ -1037,6 +1038,8 @@ export default class TextProject {
      * REFERENCES
      */
     this.githubLogo = this.textModel.children[2];
+    this.githubLogoHitbox = this.textModel.children[0].children[1].children[17];
+    this.githubLogoHitbox.visible = false;
 
     this.visitLiveFrame = this.textModel.children[0].children[4];
     this.visitLiveButton = this.textModel.children[0].children[13];
@@ -1048,6 +1051,7 @@ export default class TextProject {
 
     this.navbarFrame = this.textModel.children[0].children[5];
     this.navbarSep = this.textModel.children[0].children[14];
+    this.navbarLanguette = this.textModel.children[0].children[1].children[15];
 
     this.navbarIchi = this.textModel.children[0].children[1].children[1];
     this.navbarNi = this.textModel.children[0].children[1].children[2];
@@ -1306,6 +1310,8 @@ export default class TextProject {
       this.visitLiveButton.visible = true;
       this.visitSoonButton.visible = false;
 
+      this.navbarLanguette.position.set(-0.0266, 0.0003, -0.0127);
+
       this.appearProjectText();
     }, 700);
   }
@@ -1324,6 +1330,8 @@ export default class TextProject {
       this.visitLiveFrame.visible = true;
       this.visitLiveButton.visible = true;
       this.visitSoonButton.visible = false;
+
+      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.06);
 
       this.appearProjectText();
     }, 700);
@@ -1344,6 +1352,8 @@ export default class TextProject {
       this.visitLiveButton.visible = true;
       this.visitSoonButton.visible = false;
 
+      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.14);
+
       this.appearProjectText();
     }, 700);
   }
@@ -1362,6 +1372,8 @@ export default class TextProject {
       this.visitLiveFrame.visible = false;
       this.visitLiveButton.visible = false;
       this.visitSoonButton.visible = false;
+
+      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.22);
 
       this.appearProjectText();
     }, 700);
@@ -1382,6 +1394,8 @@ export default class TextProject {
       this.visitLiveButton.visible = false;
       this.visitSoonButton.visible = false;
 
+      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.3);
+
       this.appearProjectText();
     }, 700);
   }
@@ -1401,6 +1415,8 @@ export default class TextProject {
       this.visitLiveButton.visible = false;
       this.visitSoonButton.visible = false;
 
+      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.38);
+
       this.appearProjectText();
     }, 700);
   }
@@ -1419,6 +1435,8 @@ export default class TextProject {
       this.visitLiveFrame.visible = true;
       this.visitLiveButton.visible = false;
       this.visitSoonButton.visible = true;
+
+      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.46);
 
       this.appearProjectText();
     }, 700);
