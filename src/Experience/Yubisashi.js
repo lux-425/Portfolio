@@ -42,6 +42,9 @@ export default class Yubisashi {
           case 'buttonRefreshProject':
             this.experience.world.textProject.animate();
             break;
+          case 'arrowHitboxProject':
+            this.experience.world.textProject.animate();
+            break;
           case 'navbarIchi':
             this.experience.world.textProject.navigateIchi();
             break;
@@ -62,6 +65,9 @@ export default class Yubisashi {
             break;
           case 'navbarTsugi':
             this.experience.world.textProject.navigateNana();
+            break;
+          case 'visitHitbox':
+            // Check actual tab and open site
             break;
         }
       }
@@ -88,6 +94,8 @@ export default class Yubisashi {
             this.experience.world.textProfil.tweenTranslateRightArrowProfil.start();
           } else if (this.intersects[0].object.name === 'arrowHitboxKeiken') {
             this.experience.world.textKeiken.tweenTranslateRightArrowKeiken.start();
+          } else if (this.intersects[0].object.name === 'arrowHitboxProject') {
+            this.experience.world.textProject.tweenTranslateLeftArrow.start();
           }
         }
         this.currentIntersect = this.intersects[0].object.name;
@@ -98,6 +106,8 @@ export default class Yubisashi {
             this.experience.world.textProfil.tweenTranslateLeftArrowProfil.start();
           } else if (this.currentIntersect === 'arrowHitboxKeiken') {
             this.experience.world.textKeiken.tweenTranslateLeftArrowKeiken.start();
+          } else if (this.currentIntersect === 'arrowHitboxProject') {
+            this.experience.world.textProject.tweenTranslateRightArrow.start();
           }
         }
         this.currentIntersect = null;

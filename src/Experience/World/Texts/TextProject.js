@@ -38,7 +38,7 @@ export default class TextProject {
     // INTRO
     await this.modelIntro.waitForLoad();
     this.textModelIntro = this.modelIntro.model.children[0];
-    // this.scene.add(this.textModelIntro);
+    this.scene.add(this.textModelIntro);
 
     this.textModelIntro.translateX(-4);
 
@@ -73,14 +73,14 @@ export default class TextProject {
   }
 
   animate() {
-    // this.scene.remove(this.textModel);
+    this.scene.remove(this.textModel);
 
-    // this.animateIntro();
+    this.animateIntro();
 
-    // setTimeout(() => {
-    this.scene.add(this.textModel);
-    this.animateText();
-    // }, 5250);
+    setTimeout(() => {
+      this.scene.add(this.textModel);
+      this.animateText();
+    }, 3000);
   }
 
   animateIntro() {
@@ -971,17 +971,14 @@ export default class TextProject {
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    console.log(this.textModel);
+    // console.log(this.textModel);
 
     /**
      * ARROW
      */
     this.arrowProject = this.textModel.children[0].children[3];
-    this.arrowProject.material = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      transparent: true,
-      opacity: 0,
-    });
+    this.arrowProject.translateY(-0.01);
+    this.arrowProject.visible = false;
 
     this.arrowHitboxProject = this.textModel.children[0].children[2];
     this.arrowHitboxProject.visible = false;
@@ -998,6 +995,43 @@ export default class TextProject {
 
     this.homeArrow = this.textModel.children[1].children[7];
     this.homeArrow.visible = false;
+    this.homeArrow.name = 'homeArrow';
+
+    // ARROW TEXT APPEARANCE
+    this.tweenAppearTextArrow = () => {
+      for (var i = 0; i < 3; i++) {
+        var tweenAppearText = new TWEEN.Tween(
+          this.arrowTextProject.children[i].material
+        )
+          .to({ opacity: 1 }, 400 + i * 150)
+          .easing(TWEEN.Easing.Exponential.In);
+        tweenAppearText.start();
+      }
+    };
+    this.tweenDisappearTextArrow = () => {
+      for (var i = 0; i < 3; i++) {
+        var tweenDisappearText = new TWEEN.Tween(
+          this.arrowTextProject.children[i].material
+        )
+          .to({ opacity: 0 }, 500)
+          .easing(TWEEN.Easing.Exponential.Out);
+        tweenDisappearText.start();
+      }
+    };
+
+    // ARROW TRANSLATION
+    this.tweenTranslateLeftArrow = new TWEEN.Tween(this.arrowProject.position)
+      .to({ x: -0.24 }, 500)
+      .easing(TWEEN.Easing.Exponential.In)
+      .onStart(() => {
+        this.tweenAppearTextArrow();
+      });
+    this.tweenTranslateRightArrow = new TWEEN.Tween(this.arrowProject.position)
+      .to({ x: -0.4712 }, 1000)
+      .easing(TWEEN.Easing.Exponential.Out)
+      .onStart(() => {
+        this.tweenDisappearTextArrow();
+      });
 
     /**
      * REFERENCES
@@ -1008,16 +1042,20 @@ export default class TextProject {
     this.visitLiveButton = this.textModel.children[0].children[13];
     this.visitSoonButton = this.textModel.children[0].children[15];
     this.visitSoonButton.visible = false;
+    this.visitButtonHitbox =
+      this.textModel.children[0].children[1].children[14];
+    this.visitButtonHitbox.visible = false;
 
     this.navbarFrame = this.textModel.children[0].children[5];
     this.navbarSep = this.textModel.children[0].children[14];
-    this.navbarIchi = this.textModel.children[0].children[1].children[0];
-    this.navbarNi = this.textModel.children[0].children[1].children[1];
-    this.navbarSan = this.textModel.children[0].children[1].children[2];
-    this.navbarYon = this.textModel.children[0].children[1].children[3];
-    this.navbarGo = this.textModel.children[0].children[1].children[4];
-    this.navbarRoku = this.textModel.children[0].children[1].children[5];
-    this.navbarTsugi = this.textModel.children[0].children[1].children[6];
+
+    this.navbarIchi = this.textModel.children[0].children[1].children[1];
+    this.navbarNi = this.textModel.children[0].children[1].children[2];
+    this.navbarSan = this.textModel.children[0].children[1].children[3];
+    this.navbarYon = this.textModel.children[0].children[1].children[4];
+    this.navbarGo = this.textModel.children[0].children[1].children[5];
+    this.navbarRoku = this.textModel.children[0].children[1].children[6];
+    this.navbarTsugi = this.textModel.children[0].children[1].children[7];
     this.navbarIchi.name = 'navbarIchi';
     this.navbarNi.name = 'navbarNi';
     this.navbarSan.name = 'navbarSan';
@@ -1025,6 +1063,13 @@ export default class TextProject {
     this.navbarGo.name = 'navbarGo';
     this.navbarRoku.name = 'navbarRoku';
     this.navbarTsugi.name = 'navbarTsugi';
+    this.navbarIchi.visible = false;
+    this.navbarNi.visible = false;
+    this.navbarSan.visible = false;
+    this.navbarYon.visible = false;
+    this.navbarGo.visible = false;
+    this.navbarRoku.visible = false;
+    this.navbarTsugi.visible = false;
 
     // PROJECT 1
     this.project1 = this.textModel.children[1].children[0];
@@ -1191,7 +1236,10 @@ export default class TextProject {
     }
 
     setTimeout(() => {
-      this.appearProjectText();
+      this.navigateIchi();
+
+      this.homeArrow.visible = true;
+      this.arrowProject.visible = true;
     }, 500);
   }
 
@@ -1199,7 +1247,7 @@ export default class TextProject {
     var TWEEN = require('@tweenjs/tween.js');
 
     var tweenAppearTitle = new TWEEN.Tween(this.actualTitle.material)
-      .to({ opacity: 1 }, 600)
+      .to({ opacity: 1 }, 300)
       .easing(TWEEN.Easing.Exponential.InOut)
       .onStart(() => {
         this.actualProject.visible = true;
@@ -1212,7 +1260,7 @@ export default class TextProject {
     var tweenAppearDescriptionStack = new TWEEN.Tween(
       this.actualDescription.material
     )
-      .to({ opacity: 1 }, 800)
+      .to({ opacity: 1 }, 400)
       .easing(TWEEN.Easing.Exponential.InOut);
 
     tweenAppearTitle.start();
@@ -1223,7 +1271,7 @@ export default class TextProject {
     var TWEEN = require('@tweenjs/tween.js');
 
     var tweenDisappearTitle = new TWEEN.Tween(this.actualTitle.material)
-      .to({ opacity: 0 }, 500)
+      .to({ opacity: 0 }, 250)
       .easing(TWEEN.Easing.Exponential.InOut)
       .onStart(() => {
         if (this.actualImage) this.actualImage.visible = false;
@@ -1232,7 +1280,7 @@ export default class TextProject {
     var tweenDisappearDescriptionStack = new TWEEN.Tween(
       this.actualDescription.material
     )
-      .to({ opacity: 0 }, 700)
+      .to({ opacity: 0 }, 350)
       .easing(TWEEN.Easing.Exponential.InOut)
       .onComplete(() => {
         this.actualProject.visible = false;
@@ -1259,7 +1307,7 @@ export default class TextProject {
       this.visitSoonButton.visible = false;
 
       this.appearProjectText();
-    }, 1250);
+    }, 700);
   }
 
   navigateNi() {
@@ -1278,7 +1326,7 @@ export default class TextProject {
       this.visitSoonButton.visible = false;
 
       this.appearProjectText();
-    }, 1250);
+    }, 700);
   }
 
   navigateSan() {
@@ -1297,7 +1345,7 @@ export default class TextProject {
       this.visitSoonButton.visible = false;
 
       this.appearProjectText();
-    }, 1250);
+    }, 700);
   }
 
   navigateYon() {
@@ -1316,7 +1364,7 @@ export default class TextProject {
       this.visitSoonButton.visible = false;
 
       this.appearProjectText();
-    }, 1250);
+    }, 700);
   }
 
   navigateGo() {
@@ -1335,7 +1383,7 @@ export default class TextProject {
       this.visitSoonButton.visible = false;
 
       this.appearProjectText();
-    }, 1250);
+    }, 700);
   }
 
   navigateRoku() {
@@ -1354,7 +1402,7 @@ export default class TextProject {
       this.visitSoonButton.visible = false;
 
       this.appearProjectText();
-    }, 1250);
+    }, 700);
   }
 
   navigateNana() {
@@ -1373,7 +1421,7 @@ export default class TextProject {
       this.visitSoonButton.visible = true;
 
       this.appearProjectText();
-    }, 1250);
+    }, 700);
   }
 
   setAnimation() {

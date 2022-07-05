@@ -122,6 +122,7 @@ export default class World {
         // this.textProfil.buttonRefresh,
         // this.textKeiken.arrowHitboxKeiken,
         // this.textKeiken.buttonRefresh,
+        this.textProject.arrowHitboxProject,
         this.textProject.buttonRefresh,
         this.textProject.navbarIchi,
         this.textProject.navbarNi,
@@ -130,6 +131,7 @@ export default class World {
         this.textProject.navbarGo,
         this.textProject.navbarRoku,
         this.textProject.navbarTsugi,
+        this.textProject.visitButtonHitbox,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }, 7000);
