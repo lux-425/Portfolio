@@ -32,7 +32,7 @@ export default class Renderer {
     this.instance.setPixelRatio(this.sizes.pixelRatio);
 
     this.instance.setClearColor(0x101010);
-    // this.instance.setClearColor("black");
+    // this.instance.setClearColor(0x080808);
   }
 
   resize() {

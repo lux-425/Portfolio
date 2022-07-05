@@ -10,6 +10,7 @@ import Floor from './Floor.js';
 import Panels from './Panels.js';
 import Keshiki from './Keshiki.js';
 import Polygon from './Polygon.js';
+import Particles from './Particles.js';
 
 import Yubisashi from '../Yubisashi.js';
 
@@ -31,6 +32,7 @@ export default class World {
     // this.floor = new Floor();
     this.environment = new Environment();
     this.keshiki = new Keshiki();
+    this.particles = new Particles();
 
     // Loaders
     this.gltfLoader = new GLTFLoader();
@@ -59,7 +61,10 @@ export default class World {
     this.polygonCircle.mesh.position.set(-10, 4.01, -11);
 
     this.polygonCylinder = new Polygon('cylinder', 16, -11, 0.0001);
-    this.polygonCylinder.mesh.position.set(10, 2.51, -16);
+    this.polygonCylinder.mesh.position.set(10, 2.51, -14);
+
+    this.torus = new Polygon('torus', 0, 0, 0.0006);
+    this.torus.mesh.position.set(10, 2.51, -14);
 
     this.polygonCube = new Polygon('cube', 0, 0, 0);
     this.polygonCube.mesh.translateY(12.5);
@@ -83,9 +88,6 @@ export default class World {
 
     this.ball = new Polygon('ball', 0, 0, 0.001);
 
-    this.torus = new Polygon('torus', 0, 0, 0.0006);
-    this.torus.mesh.position.set(10, 2.51, -16);
-
     /**
      * テスト!!!
      */
@@ -105,10 +107,10 @@ export default class World {
     //   gamenFragmentShaderLecture;
     // this.centerPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenThree.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenFour.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
+    this.centerPanels.gamenThree.material.fragmentShader =
+      gamenFragmentShaderLecture;
+    this.centerPanels.gamenFour.material.fragmentShader =
+      gamenFragmentShaderLecture;
   }
 
   setTexts() {
@@ -116,7 +118,7 @@ export default class World {
     // this.textShoukai = new TextShoukai();
 
     // this.textKeiken = new TextKeiken();
-    // this.textProject = new TextProject();
+    this.textProject = new TextProject();
 
     setTimeout(() => {
       this.yubisashiMono = [
@@ -128,18 +130,18 @@ export default class World {
         // this.textKeiken.buttonRefresh,
         // this.textKeiken.arrowHomeHitbox,
 
-        // this.textProject.arrowHitboxProject,
-        // this.textProject.buttonRefresh,
-        // this.textProject.homeArrowHitbox,
-        // this.textProject.navbarIchi,
-        // this.textProject.navbarNi,
-        // this.textProject.navbarSan,
-        // this.textProject.navbarYon,
-        // this.textProject.navbarGo,
-        // this.textProject.navbarRoku,
-        // this.textProject.navbarTsugi,
-        // this.textProject.visitButtonHitbox,
-        // this.textProject.githubLogoHitbox,
+        this.textProject.arrowHitboxProject,
+        this.textProject.buttonRefresh,
+        this.textProject.homeArrowHitbox,
+        this.textProject.navbarIchi,
+        this.textProject.navbarNi,
+        this.textProject.navbarSan,
+        this.textProject.navbarYon,
+        this.textProject.navbarGo,
+        this.textProject.navbarRoku,
+        this.textProject.navbarTsugi,
+        this.textProject.visitButtonHitbox,
+        this.textProject.githubLogoHitbox,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }, 7000);

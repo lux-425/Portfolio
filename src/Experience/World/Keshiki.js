@@ -16,8 +16,8 @@ export default class Keshiki {
     // Debug
     this.debug = this.experience.debug;
     this.debugObject = {};
-    this.debugObject.depthColor = '#758cff';
-    this.debugObject.surfaceColor = '#75d1ff';
+    this.debugObject.depthColor = '#b152ff';
+    this.debugObject.surfaceColor = '#6600ff';
 
     this.setKeshiki();
     this.setAnimation();
@@ -30,7 +30,7 @@ export default class Keshiki {
   }
 
   setKeshiki() {
-    this.keshikiGeometry = new THREE.PlaneGeometry(16, 10, 128, 128);
+    this.keshikiGeometry = new THREE.PlaneGeometry(15, 9, 128, 128);
     this.keshikiMaterial = new THREE.ShaderMaterial({
       vertexShader: keshikiVertexShader,
       fragmentShader: keshikiFragmentShader,
@@ -39,11 +39,11 @@ export default class Keshiki {
       uniforms: {
         uTime: { value: 0 },
 
-        uBigWavesElevation: { value: 0.45 },
+        uBigWavesElevation: { value: 0.02 },
         uBigWavesFrequency: { value: new THREE.Vector2(0, 0.55) },
         uBigWavesSpeed: { value: -0.55 },
 
-        uSmallWavesElevation: { value: 5.55 },
+        uSmallWavesElevation: { value: 2.55 },
         uSmallWavesFrequency: { value: 0.25 },
         uSmallWavesSpeed: { value: 0.2 },
         uSmallWavesIterations: { value: 3 },
@@ -61,11 +61,11 @@ export default class Keshiki {
     this.mesh.name = 'keshiki';
 
     // this.mesh.rotation.x = -Math.PI * 0.25;
-    this.mesh.position.set(0, 5, -18);
+    this.mesh.position.set(0, 4.5, -18);
 
     this.scene.add(this.mesh);
 
-    // this.mesh.material.wireframe = true;
+    this.mesh.material.wireframe = true;
   }
 
   setAnimation() {
