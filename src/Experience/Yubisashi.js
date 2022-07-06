@@ -110,6 +110,14 @@ export default class Yubisashi {
             this.experience.world.textKeiken.tweenTranslateRightArrowKeiken.start();
           } else if (this.intersects[0].object.name === 'arrowHitboxProject') {
             this.experience.world.textProject.tweenTranslateLeftArrow.start();
+          } else if (
+            this.intersects[0].object.name === 'arrowHitboxGakuRight'
+          ) {
+            this.experience.world.textGaku.tweenArrowRightToggle.start();
+          } else if (
+            this.intersects[0].object.name === 'arrowHitboxGakuLeft001'
+          ) {
+            this.experience.world.textGaku.tweenArrowLeftToggle.start();
           }
         }
         this.currentIntersect = this.intersects[0].object.name;
@@ -122,6 +130,10 @@ export default class Yubisashi {
             this.experience.world.textKeiken.tweenTranslateLeftArrowKeiken.start();
           } else if (this.currentIntersect === 'arrowHitboxProject') {
             this.experience.world.textProject.tweenTranslateRightArrow.start();
+          } else if (this.currentIntersect === 'arrowHitboxGakuRight') {
+            this.experience.world.textGaku.tweenArrowRightOrigin.start();
+          } else if (this.currentIntersect === 'arrowHitboxGakuLeft001') {
+            this.experience.world.textGaku.tweenArrowLeftOrigin.start();
           }
         }
         this.currentIntersect = null;

@@ -64,11 +64,11 @@ export default class World {
     this.polygonCylinder = new Polygon('cylinder', 16, -11, 0.0001);
     this.polygonCylinder.mesh.position.set(10, 2.51, -14);
 
-    this.torus = new Polygon('torus', 0, 0, 0.0006);
-    this.torus.mesh.position.set(10, 2.51, -14);
+    this.polygonTorus = new Polygon('torus', 0, 0, 0.0006);
+    this.polygonTorus.mesh.position.set(10, 2.51, -14);
 
     this.polygonCube = new Polygon('cube', 0, 0, 0);
-    this.polygonCube.mesh.translateY(12.5);
+    this.polygonCube.mesh.translateY(15);
 
     this.polygonGem = new Polygon('gem', 0, 0, 0.0005);
     this.polygonGem.mesh.position.set(-8.5, 2.01, 14);
@@ -87,7 +87,7 @@ export default class World {
     this.polygonPyramidThree.mesh.position.set(-10, 0.505, 11);
     this.polygonPyramidThree.mesh.rotateY(Math.PI / 3);
 
-    this.ball = new Polygon('ball', 0, 0, 0.001);
+    this.polygonBall = new Polygon('ball', 0, 0, 0.001);
 
     /**
      * テスト!!!
@@ -97,21 +97,21 @@ export default class World {
     this.setTexts();
 
     // SHADER LECTURE
-    // this.leftPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
+    this.leftPanels.gamenOne.material.fragmentShader =
+      gamenFragmentShaderLecture;
     // this.leftPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
     //   gamenFragmentShaderLecture;
 
-    // this.centerPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenTwo.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenThree.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenFour.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
+    this.centerPanels.gamenOne.material.fragmentShader =
+      gamenFragmentShaderLecture;
+    this.centerPanels.gamenTwo.material.fragmentShader =
+      gamenFragmentShaderLecture;
+    this.centerPanels.gamenThree.material.fragmentShader =
+      gamenFragmentShaderLecture;
+    this.centerPanels.gamenFour.material.fragmentShader =
+      gamenFragmentShaderLecture;
 
     this.rightPanels.gamenOne.material.fragmentShader =
       gamenFragmentShaderLecture;
@@ -120,37 +120,40 @@ export default class World {
   }
 
   setTexts() {
-    // this.textProfil = new TextProfil();
-    // this.textShoukai = new TextShoukai();
+    this.textProfil = new TextProfil();
+    this.textShoukai = new TextShoukai();
 
-    // this.textKeiken = new TextKeiken();
-    // this.textProject = new TextProject();
+    this.textKeiken = new TextKeiken();
+    this.textProject = new TextProject();
 
     this.textGaku = new TextGaku();
 
     setTimeout(() => {
       this.yubisashiMono = [
-        // this.textProfil.arrowHitboxProfil,
-        // this.textProfil.buttonRefresh,
-        // this.textProfil.homeArrowHitbox,
+        this.textProfil.arrowHitboxProfil,
+        this.textProfil.buttonRefresh,
+        this.textProfil.homeArrowHitbox,
 
-        // this.textKeiken.arrowHitboxKeiken,
-        // this.textKeiken.buttonRefresh,
-        // this.textKeiken.arrowHomeHitbox,
+        this.textKeiken.arrowHitboxKeiken,
+        this.textKeiken.buttonRefresh,
+        this.textKeiken.arrowHomeHitbox,
 
-        // this.textProject.arrowHitboxProject,
-        // this.textProject.buttonRefresh,
-        // this.textProject.homeArrowHitbox,
-        // this.textProject.navbarIchi,
-        // this.textProject.navbarNi,
-        // this.textProject.navbarSan,
-        // this.textProject.navbarYon,
-        // this.textProject.navbarGo,
-        // this.textProject.navbarRoku,
-        // this.textProject.navbarTsugi,
-        // this.textProject.visitButtonHitbox,
-        // this.textProject.githubLogoHitbox,
+        this.textProject.arrowHitboxProject,
+        this.textProject.buttonRefresh,
+        this.textProject.homeArrowHitbox,
+        this.textProject.navbarIchi,
+        this.textProject.navbarNi,
+        this.textProject.navbarSan,
+        this.textProject.navbarYon,
+        this.textProject.navbarGo,
+        this.textProject.navbarRoku,
+        this.textProject.navbarTsugi,
+        this.textProject.visitButtonHitbox,
+        this.textProject.githubLogoHitbox,
 
+        this.textGaku.arrowHitboxGakuRight,
+        this.textGaku.arrowHitboxGakuLeft,
+        this.textGaku.arrowHomeHitboxGaku,
         this.textGaku.buttonRefresh,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
@@ -173,7 +176,6 @@ export default class World {
       this.scene.add(this.model);
 
       this.model.translateX(-4);
-      // this.model.translateZ(5);
     });
     /**
      * 左

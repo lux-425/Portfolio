@@ -65,7 +65,7 @@ export default class Polygon {
         this.mesh.name = 'cylinder';
         break;
       case 'cube':
-        this.polygonGeometry = new THREE.BoxGeometry(35, 15, 50, 100, 0, 100);
+        this.polygonGeometry = new THREE.BoxGeometry(35, 20, 50, 100, 0, 100);
         this.polygonMaterial = new THREE.ShaderMaterial({
           vertexShader: cubeVertexShader,
           fragmentShader: cubeFragmentShader,
