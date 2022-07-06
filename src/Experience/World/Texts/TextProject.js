@@ -1309,6 +1309,7 @@ export default class TextProject {
       this.visitLiveFrame.visible = true;
       this.visitLiveButton.visible = true;
       this.visitSoonButton.visible = false;
+      this.githubLogo.visible = true;
 
       this.navbarLanguette.position.set(-0.0266, 0.0003, -0.0127);
 
@@ -1330,6 +1331,7 @@ export default class TextProject {
       this.visitLiveFrame.visible = true;
       this.visitLiveButton.visible = true;
       this.visitSoonButton.visible = false;
+      this.githubLogo.visible = true;
 
       this.navbarLanguette.position.set(-0.0266, 0.0003, 0.06);
 
@@ -1351,6 +1353,7 @@ export default class TextProject {
       this.visitLiveFrame.visible = true;
       this.visitLiveButton.visible = true;
       this.visitSoonButton.visible = false;
+      this.githubLogo.visible = true;
 
       this.navbarLanguette.position.set(-0.0266, 0.0003, 0.14);
 
@@ -1372,6 +1375,7 @@ export default class TextProject {
       this.visitLiveFrame.visible = false;
       this.visitLiveButton.visible = false;
       this.visitSoonButton.visible = false;
+      this.githubLogo.visible = true;
 
       this.navbarLanguette.position.set(-0.0266, 0.0003, 0.22);
 
@@ -1393,6 +1397,7 @@ export default class TextProject {
       this.visitLiveFrame.visible = false;
       this.visitLiveButton.visible = false;
       this.visitSoonButton.visible = false;
+      this.githubLogo.visible = true;
 
       this.navbarLanguette.position.set(-0.0266, 0.0003, 0.3);
 
@@ -1414,6 +1419,7 @@ export default class TextProject {
       this.visitLiveFrame.visible = false;
       this.visitLiveButton.visible = false;
       this.visitSoonButton.visible = false;
+      this.githubLogo.visible = true;
 
       this.navbarLanguette.position.set(-0.0266, 0.0003, 0.38);
 
@@ -1435,6 +1441,7 @@ export default class TextProject {
       this.visitLiveFrame.visible = true;
       this.visitLiveButton.visible = false;
       this.visitSoonButton.visible = true;
+      this.githubLogo.visible = false;
 
       this.navbarLanguette.position.set(-0.0266, 0.0003, 0.46);
 

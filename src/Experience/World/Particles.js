@@ -21,14 +21,14 @@ export default class Particles {
     const particleTexture = textureLoader.load('/textures/particles/hotaru.png');
 
     this.particlesGeometry = new THREE.BufferGeometry();
-    this.count = 15555;
+    this.count = 10055;
 
     const positions = new Float32Array(this.count * 3);
     const colors = new Float32Array(this.count * 3);
 
     for (let i = 0; i < this.count * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 60;
-      colors[i] = Math.random();
+      positions[i] = (Math.random() - 0.5) * 80;
+      colors[i] = 1;
     }
 
     this.particlesGeometry.setAttribute(

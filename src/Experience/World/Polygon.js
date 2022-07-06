@@ -224,7 +224,7 @@ export default class Polygon {
           break;
         case 'torus':
           this.mesh.rotateX(-Math.sin(deltaTime * this.speed));
-          this.mesh.rotateY(Math.sin(deltaTime * this.speed * 0.5));
+          this.mesh.rotateY(Math.sin(deltaTime * this.speed * 0.8));
           this.mesh.position.y = 2.6 + Math.sin(-elapsedTime * 0.3);
           break;
       }

@@ -18,6 +18,7 @@ import TextProfil from './Texts/TextProfil.js';
 import TextShoukai from './Texts/TextShoukai.js';
 import TextKeiken from './Texts/TextKeiken.js';
 import TextProject from './Texts/TextProject.js';
+import TextGaku from './Texts/TextGaku.js';
 
 import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
 
@@ -107,9 +108,14 @@ export default class World {
     //   gamenFragmentShaderLecture;
     // this.centerPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
-    this.centerPanels.gamenThree.material.fragmentShader =
+    // this.centerPanels.gamenThree.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.centerPanels.gamenFour.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+
+    this.rightPanels.gamenOne.material.fragmentShader =
       gamenFragmentShaderLecture;
-    this.centerPanels.gamenFour.material.fragmentShader =
+    this.rightPanels.gamenTwo.material.fragmentShader =
       gamenFragmentShaderLecture;
   }
 
@@ -118,7 +124,9 @@ export default class World {
     // this.textShoukai = new TextShoukai();
 
     // this.textKeiken = new TextKeiken();
-    this.textProject = new TextProject();
+    // this.textProject = new TextProject();
+
+    this.textGaku = new TextGaku();
 
     setTimeout(() => {
       this.yubisashiMono = [
@@ -130,18 +138,20 @@ export default class World {
         // this.textKeiken.buttonRefresh,
         // this.textKeiken.arrowHomeHitbox,
 
-        this.textProject.arrowHitboxProject,
-        this.textProject.buttonRefresh,
-        this.textProject.homeArrowHitbox,
-        this.textProject.navbarIchi,
-        this.textProject.navbarNi,
-        this.textProject.navbarSan,
-        this.textProject.navbarYon,
-        this.textProject.navbarGo,
-        this.textProject.navbarRoku,
-        this.textProject.navbarTsugi,
-        this.textProject.visitButtonHitbox,
-        this.textProject.githubLogoHitbox,
+        // this.textProject.arrowHitboxProject,
+        // this.textProject.buttonRefresh,
+        // this.textProject.homeArrowHitbox,
+        // this.textProject.navbarIchi,
+        // this.textProject.navbarNi,
+        // this.textProject.navbarSan,
+        // this.textProject.navbarYon,
+        // this.textProject.navbarGo,
+        // this.textProject.navbarRoku,
+        // this.textProject.navbarTsugi,
+        // this.textProject.visitButtonHitbox,
+        // this.textProject.githubLogoHitbox,
+
+        this.textGaku.buttonRefresh,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }, 7000);
