@@ -104,10 +104,10 @@ export default class World {
     // this.leftPanels.gamenThree.material.fragmentShader =
     //   gamenFragmentShaderLecture;
 
-    this.centerPanels.gamenOne.material.fragmentShader =
-      gamenFragmentShaderLecture;
-    this.centerPanels.gamenTwo.material.fragmentShader =
-      gamenFragmentShaderLecture;
+    // this.centerPanels.gamenOne.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.centerPanels.gamenTwo.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
     this.centerPanels.gamenThree.material.fragmentShader =
       gamenFragmentShaderLecture;
     this.centerPanels.gamenFour.material.fragmentShader =

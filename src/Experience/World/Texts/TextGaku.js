@@ -129,19 +129,43 @@ export default class TextGaku {
     /**
      * ANIMATIONS
      */
+    this.tweenArrowTextAppear = (text) => {
+      var tweenArrowTextAppear = new TWEEN.Tween(text.material)
+        .to({ opacity: 1 }, 1000)
+        .easing(TWEEN.Easing.Cubic.InOut);
+      tweenArrowTextAppear.start();
+    };
+    this.tweenArrowTextDisappear = (text) => {
+      var tweenArrowTextAppear = new TWEEN.Tween(text.material)
+        .to({ opacity: 0 }, 100)
+        .easing(TWEEN.Easing.Exponential.Out);
+      tweenArrowTextAppear.start();
+    };
+
     this.tweenArrowRightOrigin = new TWEEN.Tween(this.arrowGakuRight.position)
       .to({ x: -0.462 }, 500)
-      .easing(TWEEN.Easing.Exponential.Out);
+      .easing(TWEEN.Easing.Exponential.Out)
+      .onStart(() => {
+        this.tweenArrowTextDisappear(this.arrowTextGakuRight);
+      });
     this.tweenArrowRightToggle = new TWEEN.Tween(this.arrowGakuRight.position)
-      .to({ x: -0.3 }, 500)
-      .easing(TWEEN.Easing.Exponential.InOut);
-
+      .to({ x: -0.33 }, 500)
+      .easing(TWEEN.Easing.Exponential.InOut)
+      .onStart(() => {
+        this.tweenArrowTextAppear(this.arrowTextGakuRight);
+      });
     this.tweenArrowLeftOrigin = new TWEEN.Tween(this.arrowGakuLeft.position)
       .to({ x: -0.462 }, 500)
-      .easing(TWEEN.Easing.Exponential.Out);
+      .easing(TWEEN.Easing.Exponential.Out)
+      .onStart(() => {
+        this.tweenArrowTextDisappear(this.arrowTextGakuLeft);
+      });
     this.tweenArrowLeftToggle = new TWEEN.Tween(this.arrowGakuLeft.position)
       .to({ x: -0.3 }, 500)
-      .easing(TWEEN.Easing.Exponential.InOut);
+      .easing(TWEEN.Easing.Exponential.InOut)
+      .onStart(() => {
+        this.tweenArrowTextAppear(this.arrowTextGakuLeft);
+      });
 
     /**
      * ANIMATE
@@ -152,13 +176,42 @@ export default class TextGaku {
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    console.log(this.textModel);
+    // console.log(this.textModel);
 
-    /**
-     * ARROWS
-     */
-    this.arrowGakuRight.visible = true;
-    this.arrowGakuLeft.visible = true;
+    // INIT
+    this.arrowGakuRight.visible = false;
+    this.arrowGakuLeft.visible = false;
+    this.logoLeft.visible = false;
+    this.logoRight.visible = false;
+    this.arrowHomeGakuLeft.visible = false;
+    this.arrowHomeGakuRight.visible = false;
+    this.titleLeft.material.opacity = 0;
+    this.textLeft.material.opacity = 0;
+
+    var tweenTitlesDates = new TWEEN.Tween(this.titleLeft.material)
+      .to({ opacity: 1 }, 1000)
+      .easing(TWEEN.Easing.Circular.InOut)
+      .onStart(() => {
+        this.logoLeft.visible = true;
+        this.logoRight.visible = true;
+      })
+      .onComplete(() => {
+        this.arrowHomeGakuLeft.visible = true;
+        this.arrowHomeGakuRight.visible = true;
+      });
+
+    var tweenTexts = new TWEEN.Tween(this.textLeft.material)
+      .to({ opacity: 1 }, 1500)
+      .easing(TWEEN.Easing.Bounce.InOut)
+      .onComplete(() => {
+        this.arrowGakuRight.visible = true;
+        this.arrowGakuLeft.visible = true;
+      });
+
+    setTimeout(() => {
+      tweenTexts.start();
+      tweenTitlesDates.start();
+    }, 2000);
   }
 
   setAnimation() {

@@ -83,6 +83,9 @@ export default class Yubisashi {
           case 'visitHitbox':
             console.log('visit live');
             break;
+          case 'buttonRefreshGaku':
+            this.experience.world.textGaku.animateText();
+            break;
         }
       }
     });
@@ -114,10 +117,16 @@ export default class Yubisashi {
             this.intersects[0].object.name === 'arrowHitboxGakuRight'
           ) {
             this.experience.world.textGaku.tweenArrowRightToggle.start();
+            // this.experience.world.textGaku.tweenArrowTextAppear(
+            //   this.experience.world.textGaku.arrowTextGakuRight
+            // );
           } else if (
             this.intersects[0].object.name === 'arrowHitboxGakuLeft001'
           ) {
             this.experience.world.textGaku.tweenArrowLeftToggle.start();
+            // this.experience.world.textGaku.tweenArrowTextAppear(
+            //   this.experience.world.textGaku.arrowTextGakuLeft
+            // );
           }
         }
         this.currentIntersect = this.intersects[0].object.name;
@@ -132,8 +141,14 @@ export default class Yubisashi {
             this.experience.world.textProject.tweenTranslateRightArrow.start();
           } else if (this.currentIntersect === 'arrowHitboxGakuRight') {
             this.experience.world.textGaku.tweenArrowRightOrigin.start();
+            // this.experience.world.textGaku.tweenArrowTextDisappear(
+            //   this.experience.world.textGaku.arrowTextGakuRight
+            // );
           } else if (this.currentIntersect === 'arrowHitboxGakuLeft001') {
             this.experience.world.textGaku.tweenArrowLeftOrigin.start();
+            // this.experience.world.textGaku.tweenArrowTextDisappear(
+            //   this.experience.world.textGaku.arrowTextGakuLeft
+            // );
           }
         }
         this.currentIntersect = null;

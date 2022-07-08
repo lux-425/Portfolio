@@ -236,7 +236,7 @@ export default class TextKeiken {
     this.tweenTranslateLeftArrowKeiken = new TWEEN.Tween(
       this.arrowKeiken.position
     )
-      .to({ x: -0.4595 }, 1000)
+      .to({ x: -0.5095 }, 1000)
       .easing(TWEEN.Easing.Exponential.Out)
       .onStart(() => {
         this.tweenDisappearTextKeiken();
