@@ -19,6 +19,7 @@ import TextShoukai from './Texts/TextShoukai.js';
 import TextKeiken from './Texts/TextKeiken.js';
 import TextProject from './Texts/TextProject.js';
 import TextGaku from './Texts/TextGaku.js';
+import TextKyoumi from './Texts/TextKyoumi.js';
 
 import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
 
@@ -97,8 +98,8 @@ export default class World {
     this.setTexts();
 
     // SHADER LECTURE
-    this.leftPanels.gamenOne.material.fragmentShader =
-      gamenFragmentShaderLecture;
+    // this.leftPanels.gamenOne.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
@@ -108,14 +109,16 @@ export default class World {
     //   gamenFragmentShaderLecture;
     // this.centerPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
-    this.centerPanels.gamenThree.material.fragmentShader =
-      gamenFragmentShaderLecture;
-    this.centerPanels.gamenFour.material.fragmentShader =
-      gamenFragmentShaderLecture;
+    // this.centerPanels.gamenThree.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.centerPanels.gamenFour.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
 
-    this.rightPanels.gamenOne.material.fragmentShader =
-      gamenFragmentShaderLecture;
-    this.rightPanels.gamenTwo.material.fragmentShader =
+    // this.rightPanels.gamenOne.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.rightPanels.gamenTwo.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    this.rightPanels.gamenThree.material.fragmentShader =
       gamenFragmentShaderLecture;
   }
 
@@ -127,6 +130,7 @@ export default class World {
     this.textProject = new TextProject();
 
     this.textGaku = new TextGaku();
+    this.textKyoumi = new TextKyoumi();
 
     setTimeout(() => {
       this.yubisashiMono = [
@@ -155,6 +159,11 @@ export default class World {
         this.textGaku.arrowHitboxGakuLeft,
         this.textGaku.arrowHomeHitboxGaku,
         this.textGaku.buttonRefresh,
+
+        this.textKyoumi.buttonRefresh,
+        this.textKyoumi.arrowHomeHitbox,
+        this.textKyoumi.arrowLeftHitbox,
+        this.textKyoumi.arrowRightHitbox,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }, 7000);

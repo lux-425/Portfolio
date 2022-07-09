@@ -86,6 +86,10 @@ export default class Yubisashi {
           case 'buttonRefreshGaku':
             this.experience.world.textGaku.animateText();
             break;
+
+          case 'buttonRefreshKyoumi':
+            this.experience.world.textKyoumi.animateText();
+            break;
         }
       }
     });
@@ -117,16 +121,18 @@ export default class Yubisashi {
             this.intersects[0].object.name === 'arrowHitboxGakuRight'
           ) {
             this.experience.world.textGaku.tweenArrowRightToggle.start();
-            // this.experience.world.textGaku.tweenArrowTextAppear(
-            //   this.experience.world.textGaku.arrowTextGakuRight
-            // );
           } else if (
             this.intersects[0].object.name === 'arrowHitboxGakuLeft001'
           ) {
             this.experience.world.textGaku.tweenArrowLeftToggle.start();
-            // this.experience.world.textGaku.tweenArrowTextAppear(
-            //   this.experience.world.textGaku.arrowTextGakuLeft
-            // );
+          } else if (
+            this.intersects[0].object.name === 'arrowHitboxKyoumiLeft'
+          ) {
+            this.experience.world.textKyoumi.tweenToggleArrowLeft.start();
+          } else if (
+            this.intersects[0].object.name === 'arrowHitboxKyoumiRight'
+          ) {
+            this.experience.world.textKyoumi.tweenToggleArrowRight.start();
           }
         }
         this.currentIntersect = this.intersects[0].object.name;
@@ -141,14 +147,12 @@ export default class Yubisashi {
             this.experience.world.textProject.tweenTranslateRightArrow.start();
           } else if (this.currentIntersect === 'arrowHitboxGakuRight') {
             this.experience.world.textGaku.tweenArrowRightOrigin.start();
-            // this.experience.world.textGaku.tweenArrowTextDisappear(
-            //   this.experience.world.textGaku.arrowTextGakuRight
-            // );
           } else if (this.currentIntersect === 'arrowHitboxGakuLeft001') {
             this.experience.world.textGaku.tweenArrowLeftOrigin.start();
-            // this.experience.world.textGaku.tweenArrowTextDisappear(
-            //   this.experience.world.textGaku.arrowTextGakuLeft
-            // );
+          } else if (this.currentIntersect === 'arrowHitboxKyoumiLeft') {
+            this.experience.world.textKyoumi.tweenOriginArrowLeft.start();
+          } else if (this.currentIntersect === 'arrowHitboxKyoumiRight') {
+            this.experience.world.textKyoumi.tweenOriginArrowRight.start();
           }
         }
         this.currentIntersect = null;
