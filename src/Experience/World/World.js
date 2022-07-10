@@ -99,17 +99,17 @@ export default class World {
     this.setTexts();
 
     // SHADER LECTURE
-    // this.leftPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
+    this.leftPanels.gamenOne.material.fragmentShader =
+      gamenFragmentShaderLecture;
     // this.leftPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
     //   gamenFragmentShaderLecture;
 
-    // this.centerPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenTwo.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
+    this.centerPanels.gamenOne.material.fragmentShader =
+      gamenFragmentShaderLecture;
+    this.centerPanels.gamenTwo.material.fragmentShader =
+      gamenFragmentShaderLecture;
     // this.centerPanels.gamenThree.material.fragmentShader =
     //   gamenFragmentShaderLecture;
     // this.centerPanels.gamenFour.material.fragmentShader =
@@ -126,48 +126,48 @@ export default class World {
   }
 
   setTexts() {
-    this.textProfil = new TextProfil();
-    this.textShoukai = new TextShoukai();
+    // this.textProfil = new TextProfil();
+    // this.textShoukai = new TextShoukai();
 
     this.textKeiken = new TextKeiken();
-    this.textProject = new TextProject();
+    // this.textProject = new TextProject();
 
-    this.textGaku = new TextGaku();
-    this.textKyoumi = new TextKyoumi();
+    // this.textGaku = new TextGaku();
+    // this.textKyoumi = new TextKyoumi();
     this.textGengo = new TextGengo();
 
     setTimeout(() => {
       this.yubisashiMono = [
-        this.textProfil.arrowHitboxProfil,
-        this.textProfil.buttonRefresh,
-        this.textProfil.homeArrowHitbox,
+        // this.textProfil.arrowHitboxProfil,
+        // this.textProfil.buttonRefresh,
+        // this.textProfil.homeArrowHitbox,
 
         this.textKeiken.arrowHitboxKeiken,
         this.textKeiken.buttonRefresh,
         this.textKeiken.arrowHomeHitbox,
 
-        this.textProject.arrowHitboxProject,
-        this.textProject.buttonRefresh,
-        this.textProject.homeArrowHitbox,
-        this.textProject.navbarIchi,
-        this.textProject.navbarNi,
-        this.textProject.navbarSan,
-        this.textProject.navbarYon,
-        this.textProject.navbarGo,
-        this.textProject.navbarRoku,
-        this.textProject.navbarTsugi,
-        this.textProject.visitButtonHitbox,
-        this.textProject.githubLogoHitbox,
+        // this.textProject.arrowHitboxProject,
+        // this.textProject.buttonRefresh,
+        // this.textProject.homeArrowHitbox,
+        // this.textProject.navbarIchi,
+        // this.textProject.navbarNi,
+        // this.textProject.navbarSan,
+        // this.textProject.navbarYon,
+        // this.textProject.navbarGo,
+        // this.textProject.navbarRoku,
+        // this.textProject.navbarTsugi,
+        // this.textProject.visitButtonHitbox,
+        // this.textProject.githubLogoHitbox,
 
-        this.textGaku.arrowHitboxGakuRight,
-        this.textGaku.arrowHitboxGakuLeft,
-        this.textGaku.arrowHomeHitboxGaku,
-        this.textGaku.buttonRefresh,
+        // this.textGaku.arrowHitboxGakuRight,
+        // this.textGaku.arrowHitboxGakuLeft,
+        // this.textGaku.arrowHomeHitboxGaku,
+        // this.textGaku.buttonRefresh,
 
-        this.textKyoumi.buttonRefresh,
-        this.textKyoumi.arrowHomeHitbox,
-        this.textKyoumi.arrowLeftHitbox,
-        this.textKyoumi.arrowRightHitbox,
+        // this.textKyoumi.buttonRefresh,
+        // this.textKyoumi.arrowHomeHitbox,
+        // this.textKyoumi.arrowLeftHitbox,
+        // this.textKyoumi.arrowRightHitbox,
 
         this.textGengo.buttonRefresh,
         this.textGengo.hitboxHon,

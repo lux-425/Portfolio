@@ -8,20 +8,23 @@ export default class Particles {
 
     this.scene = this.experience.scene;
 
-    this.setParticles();
+    this.setBigParticles();
+    this.setSmallParticles();
 
     this.setAnimation();
   }
 
-  setParticles() {
+  setBigParticles() {
     /**
      * Textures
      */
     const textureLoader = new THREE.TextureLoader();
-    const particleTexture = textureLoader.load('/textures/particles/hotaru.png');
+    const particleTexture = textureLoader.load(
+      '/textures/particles/hotaru.png'
+    );
 
     this.particlesGeometry = new THREE.BufferGeometry();
-    this.count = 10055;
+    this.count = 8055;
 
     const positions = new Float32Array(this.count * 3);
     const colors = new Float32Array(this.count * 3);
@@ -41,7 +44,7 @@ export default class Particles {
     );
 
     this.particlesMaterial = new THREE.PointsMaterial({
-      size: 0.1,
+      size: 0.08,
       sizeAttenuation: true,
     });
 
@@ -60,6 +63,53 @@ export default class Particles {
     this.scene.add(this.particles);
   }
 
+  setSmallParticles() {
+    /**
+     * Textures
+     */
+    const textureLoader = new THREE.TextureLoader();
+    const particleTexture = textureLoader.load(
+      '/textures/particles/hotaru.png'
+    );
+
+    this.smallParticlesGeometry = new THREE.BufferGeometry();
+    this.countBis = 1055;
+
+    const positions = new Float32Array(this.count * 3);
+    const colors = new Float32Array(this.count * 3);
+
+    for (let i = 0; i < this.countBis * 3; i++) {
+      positions[i] = (Math.random() - 0.5) * 20;
+      colors[i] = 1;
+    }
+
+    this.smallParticlesGeometry.setAttribute(
+      'position',
+      new THREE.BufferAttribute(positions, 3)
+    );
+    this.smallParticlesGeometry.setAttribute(
+      'color',
+      new THREE.BufferAttribute(colors, 3)
+    );
+
+    this.smallParticlesMaterial = new THREE.PointsMaterial({
+      size: 0.025,
+      sizeAttenuation: true,
+    });
+
+    this.smallParticlesMaterial.transparent = true;
+    this.smallParticlesMaterial.alphaMap = particleTexture;
+    this.smallParticlesMaterial.depthWrite = false;
+    this.smallParticlesMaterial.blending = THREE.AdditiveBlending;
+    this.smallParticlesMaterial.vertexColors = true;
+
+    this.smallParticles = new THREE.Points(
+      this.smallParticlesGeometry,
+      this.smallParticlesMaterial
+    );
+    this.scene.add(this.smallParticles);
+  }
+
   setAnimation() {
     const clock = new THREE.Clock();
 
@@ -67,8 +117,11 @@ export default class Particles {
       const elapsedTime = clock.getElapsedTime();
 
       // Update particles
-      this.particles.rotation.y = elapsedTime * 0.01;
+      this.particles.rotation.y = -elapsedTime * 0.008;
       this.particles.position.y = Math.sin(elapsedTime * 0.1);
+
+      this.smallParticles.rotation.y = elapsedTime * 0.1;
+      this.smallParticles.position.y = Math.cos(elapsedTime * 0.2);
 
       window.requestAnimationFrame(tick);
     };

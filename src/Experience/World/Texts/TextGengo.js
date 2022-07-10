@@ -58,7 +58,7 @@ export default class TextGengo {
   setVariables() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    console.log(this.textModelLeft);
+    // console.log(this.textModelLeft);
 
     /**
      * LEFT PANEL
@@ -94,24 +94,63 @@ export default class TextGengo {
     this.arrowTextLeft = this.textModelRight.children[0].children[6];
     this.arrowTextRight = this.textModelRight.children[0].children[7];
 
+    // 画像
+    for (var i = 11; i < 22; i++) {
+      switch (this.textModelRight.children[0].children[i].name) {
+        case 'anki':
+          this.anki = this.textModelRight.children[0].children[i];
+          break;
+        case 'bunproStats':
+          this.bunproStats = this.textModelRight.children[0].children[i];
+          break;
+        case 'bunpro':
+          this.bunpro = this.textModelRight.children[0].children[i];
+          break;
+        case 'jlpt':
+          this.jlptPhoto = this.textModelRight.children[0].children[i];
+          break;
+        case 'ankiStats':
+          this.ankiStats = this.textModelRight.children[0].children[i];
+          break;
+        case 'tobira':
+          this.tobira = this.textModelRight.children[0].children[i];
+          break;
+        case 'rtk':
+          this.rtk = this.textModelRight.children[0].children[i];
+          break;
+        case 'kanzenN2':
+          this.kanzenN2 = this.textModelRight.children[0].children[i];
+          break;
+        case 'kanzenN3':
+          this.kanzenN3 = this.textModelRight.children[0].children[i];
+          break;
+        case 'mnn1':
+          this.mnn1 = this.textModelRight.children[0].children[i];
+          break;
+        case 'mnn2':
+          this.mnn2 = this.textModelRight.children[0].children[i];
+          break;
+      }
+    }
+
     // 本
     this.honNames = this.textModelRight.children[0].children[8];
-    this.rtk = this.textModelRight.children[0].children[17];
-    this.mnn1 = this.textModelRight.children[0].children[20];
-    this.mnn2 = this.textModelRight.children[0].children[21];
-    this.tobira = this.textModelRight.children[0].children[16];
-    this.kanzenN3 = this.textModelRight.children[0].children[19];
-    this.kanzenN2 = this.textModelRight.children[0].children[18];
+    // this.rtk = this.textModelRight.children[0].children[17];
+    // this.mnn1 = this.textModelRight.children[0].children[20];
+    // this.mnn2 = this.textModelRight.children[0].children[21];
+    // this.tobira = this.textModelRight.children[0].children[16];
+    // this.kanzenN3 = this.textModelRight.children[0].children[19];
+    // this.kanzenN2 = this.textModelRight.children[0].children[18];
 
     // ソフトエア
     this.softwaresNames = this.textModelRight.children[0].children[10];
-    this.anki = this.textModelRight.children[0].children[11];
-    this.ankiStats = this.textModelRight.children[0].children[15];
-    this.bunpro = this.textModelRight.children[0].children[13];
-    this.bunproStats = this.textModelRight.children[0].children[12];
+    // this.anki = this.textModelRight.children[0].children[11];
+    // this.ankiStats = this.textModelRight.children[0].children[15];
+    // this.bunpro = this.textModelRight.children[0].children[13];
+    // this.bunproStats = this.textModelRight.children[0].children[12];
 
     // ＪＬＰＴ
-    this.jlptPhoto = this.textModelRight.children[0].children[14];
+    // this.jlptPhoto = this.textModelRight.children[0].children[14];
     this.jlptWaiting = this.textModelRight.children[0].children[9];
 
     /**
@@ -182,9 +221,6 @@ export default class TextGengo {
     /**
      * ARROWS' TRANSLATION
      */
-    console.log(this.hitboxLeft);
-    console.log(this.hitboxRight);
-
     this.tweenToggleArrowLeft = new TWEEN.Tween(this.arrowLeft.position)
       .to({ x: 0.3507 }, 500)
       .easing(TWEEN.Easing.Cubic.Out)
@@ -216,7 +252,7 @@ export default class TextGengo {
      */
     setTimeout(() => {
       this.animateText();
-    }, 1000);
+    }, 3000);
   }
 
   animateText() {
@@ -253,9 +289,7 @@ export default class TextGengo {
       });
     tweenAppearArrows.start();
 
-    setTimeout(() => {
-      this.toggleJLPT();
-    }, 1000);
+    this.toggleJLPT();
   }
 
   appearPanel() {
