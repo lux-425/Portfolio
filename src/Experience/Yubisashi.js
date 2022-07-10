@@ -90,6 +90,19 @@ export default class Yubisashi {
           case 'buttonRefreshKyoumi':
             this.experience.world.textKyoumi.animateText();
             break;
+
+          case 'buttonRefreshGengo':
+            this.experience.world.textGengo.animateText();
+            break;
+          case 'buttonHitboxHon':
+            this.experience.world.textGengo.toggleHon();
+            break;
+          case 'buttonHitboxSoftwares':
+            this.experience.world.textGengo.toggleSoftwares();
+            break;
+          case 'buttonHitboxJLPT':
+            this.experience.world.textGengo.toggleJLPT();
+            break;
         }
       }
     });
@@ -133,6 +146,14 @@ export default class Yubisashi {
             this.intersects[0].object.name === 'arrowHitboxKyoumiRight'
           ) {
             this.experience.world.textKyoumi.tweenToggleArrowRight.start();
+          } else if (
+            this.intersects[0].object.name === 'arrowHitboxGengoLeft'
+          ) {
+            this.experience.world.textGengo.tweenToggleArrowLeft.start();
+          } else if (
+            this.intersects[0].object.name === 'arrowHitboxGengoRight'
+          ) {
+            this.experience.world.textGengo.tweenToggleArrowRight.start();
           }
         }
         this.currentIntersect = this.intersects[0].object.name;
@@ -153,6 +174,10 @@ export default class Yubisashi {
             this.experience.world.textKyoumi.tweenOriginArrowLeft.start();
           } else if (this.currentIntersect === 'arrowHitboxKyoumiRight') {
             this.experience.world.textKyoumi.tweenOriginArrowRight.start();
+          } else if (this.currentIntersect === 'arrowHitboxGengoLeft') {
+            this.experience.world.textGengo.tweenOriginArrowLeft.start();
+          } else if (this.currentIntersect === 'arrowHitboxGengoRight') {
+            this.experience.world.textGengo.tweenOriginArrowRight.start();
           }
         }
         this.currentIntersect = null;

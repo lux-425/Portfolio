@@ -20,6 +20,7 @@ import TextKeiken from './Texts/TextKeiken.js';
 import TextProject from './Texts/TextProject.js';
 import TextGaku from './Texts/TextGaku.js';
 import TextKyoumi from './Texts/TextKyoumi.js';
+import TextGengo from './Texts/TextGengo.js';
 
 import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
 
@@ -120,6 +121,8 @@ export default class World {
     //   gamenFragmentShaderLecture;
     this.rightPanels.gamenThree.material.fragmentShader =
       gamenFragmentShaderLecture;
+    this.rightPanels.gamenFour.material.fragmentShader =
+      gamenFragmentShaderLecture;
   }
 
   setTexts() {
@@ -131,6 +134,7 @@ export default class World {
 
     this.textGaku = new TextGaku();
     this.textKyoumi = new TextKyoumi();
+    this.textGengo = new TextGengo();
 
     setTimeout(() => {
       this.yubisashiMono = [
@@ -164,6 +168,13 @@ export default class World {
         this.textKyoumi.arrowHomeHitbox,
         this.textKyoumi.arrowLeftHitbox,
         this.textKyoumi.arrowRightHitbox,
+
+        this.textGengo.buttonRefresh,
+        this.textGengo.hitboxHon,
+        this.textGengo.hitboxSoftwares,
+        this.textGengo.hitboxJLPT,
+        this.textGengo.hitboxLeft,
+        this.textGengo.hitboxRight,
       ];
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }, 7000);
