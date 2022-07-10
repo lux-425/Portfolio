@@ -250,9 +250,7 @@ export default class TextGengo {
     /**
      * ANIMATE
      */
-    setTimeout(() => {
-      this.animateText();
-    }, 3000);
+    this.animateText();
   }
 
   animateText() {

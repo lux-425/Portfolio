@@ -65,11 +65,20 @@ export default class TextProject {
     this.textModel.children[0].children[3].material.transparent = true;
 
     /**
+     * INIT
+     */
+    this.setVariables();
+
+    // this.setAnimation();
+  }
+
+  setVariables() {
+    this.actualTab = 'ichi';
+
+    /**
      * ANIMATIONS
      */
     this.animate();
-
-    this.setAnimation();
   }
 
   animate() {
@@ -1298,6 +1307,8 @@ export default class TextProject {
   navigateIchi() {
     this.disappearProjectText();
 
+    this.actualTab = 'ichi';
+
     setTimeout(() => {
       this.actualProject = this.project1;
       this.actualTitle = this.project1Title;
@@ -1319,6 +1330,8 @@ export default class TextProject {
 
   navigateNi() {
     this.disappearProjectText();
+
+    this.actualTab = 'ni';
 
     setTimeout(() => {
       this.actualProject = this.project2;
@@ -1342,6 +1355,8 @@ export default class TextProject {
   navigateSan() {
     this.disappearProjectText();
 
+    this.actualTab = 'san';
+
     setTimeout(() => {
       this.actualProject = this.project3;
       this.actualTitle = this.project3Title;
@@ -1363,6 +1378,8 @@ export default class TextProject {
 
   navigateYon() {
     this.disappearProjectText();
+
+    this.actualTab = 'yon';
 
     setTimeout(() => {
       this.actualProject = this.project4;
@@ -1386,6 +1403,8 @@ export default class TextProject {
   navigateGo() {
     this.disappearProjectText();
 
+    this.actualTab = 'go';
+
     setTimeout(() => {
       this.actualProject = this.project5;
       this.actualTitle = this.project5Title;
@@ -1408,6 +1427,8 @@ export default class TextProject {
   navigateRoku() {
     this.disappearProjectText();
 
+    this.actualTab = 'roku';
+
     setTimeout(() => {
       this.actualProject = this.project6;
       this.actualTitle = this.project6Title;
@@ -1429,6 +1450,8 @@ export default class TextProject {
 
   navigateNana() {
     this.disappearProjectText();
+
+    this.actualTab = 'nana';
 
     setTimeout(() => {
       this.actualProject = this.project7;

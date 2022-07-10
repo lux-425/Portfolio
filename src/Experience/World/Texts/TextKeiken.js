@@ -64,12 +64,15 @@ export default class TextKeiken {
     );
 
     // LOGOS
-    this.textModel.children[0].children[7].material.depthTest = true;
-    this.textModel.children[0].children[7].material.depthWrite = true;
+    this.sterimedLogo = this.textModel.children[0].children[7];
+    this.faureciaLogo = this.textModel.children[1].children[10];
+
+    this.sterimedLogo.material.depthTest = true;
+    this.sterimedLogo.material.depthWrite = true;
     this.textModel.children[1].children[9].material.depthTest = true;
     this.textModel.children[1].children[9].material.depthWrite = true;
-    this.textModel.children[1].children[10].material.depthTest = true;
-    this.textModel.children[1].children[10].material.depthWrite = true;
+    this.faureciaLogo.material.depthTest = true;
+    this.faureciaLogo.material.depthWrite = true;
 
     // CONTENT
     this.textModel.children[0].children[2].material.emissive = new THREE.Color(

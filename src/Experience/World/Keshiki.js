@@ -5,8 +5,6 @@ import Experience from '../Experience.js';
 import keshikiVertexShader from '../../shaders/Keshiki/vertex.glsl';
 import keshikiFragmentShader from '../../shaders/Keshiki/fragment.glsl';
 
-import * as dat from 'lil-gui';
-
 export default class Keshiki {
   constructor() {
     this.experience = new Experience();
@@ -65,7 +63,7 @@ export default class Keshiki {
 
     this.scene.add(this.mesh);
 
-    this.mesh.material.wireframe = true;
+    // this.mesh.material.wireframe = true;
   }
 
   setAnimation() {
