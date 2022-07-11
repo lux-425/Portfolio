@@ -63,7 +63,7 @@ export default class Keshiki {
 
     this.scene.add(this.mesh);
 
-    // this.mesh.material.wireframe = true;
+    this.mesh.material.wireframe = true;
   }
 
   setAnimation() {

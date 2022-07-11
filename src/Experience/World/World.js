@@ -14,6 +14,7 @@ import Particles from './Particles.js';
 
 import Yubisashi from '../Yubisashi.js';
 
+import TextKeshiki from './Texts/TextKeshiki.js';
 import TextProfil from './Texts/TextProfil.js';
 import TextShoukai from './Texts/TextShoukai.js';
 import TextKeiken from './Texts/TextKeiken.js';
@@ -126,6 +127,8 @@ export default class World {
   }
 
   setTexts() {
+    this.keshikiText = new TextKeshiki();
+
     this.textProfil = new TextProfil();
     this.textShoukai = new TextShoukai();
 
