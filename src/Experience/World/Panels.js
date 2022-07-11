@@ -107,11 +107,11 @@ export default class Panels {
       case 'right':
         this.gamenParams = {
           ueBreathingElevation: 10.0,
-          shitaBreathingElevation: 3.0,
-          ueBreathingFrequency: { x: 2.0, y: 2.0 },
-          shitaBreathingFrequency: 2.0,
-          ueBreathingSpeed: -0.3,
-          shitaBreathingSpeed: -0.5,
+          shitaBreathingElevation: 10.0,
+          ueBreathingFrequency: { x: 5.0, y: 5.0 },
+          shitaBreathingFrequency: 1.55,
+          ueBreathingSpeed: 0.055,
+          shitaBreathingSpeed: 1.55,
           shitaBreathingIterations: 1.0,
           color: '#00ff00',
           opacity: 0.88,

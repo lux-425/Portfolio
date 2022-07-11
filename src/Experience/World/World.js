@@ -127,7 +127,7 @@ export default class World {
   }
 
   setTexts() {
-    this.keshikiText = new TextKeshiki();
+    this.textKeshiki = new TextKeshiki();
 
     this.textProfil = new TextProfil();
     this.textShoukai = new TextShoukai();
@@ -141,6 +141,8 @@ export default class World {
 
     setTimeout(() => {
       this.yubisashiMono = [
+        this.textKeshiki.buttonRefresh,
+
         this.polygonBall.mesh,
         this.polygonTorus.mesh,
         this.polygonGlobeTwo.mesh,

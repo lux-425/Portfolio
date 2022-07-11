@@ -26,6 +26,10 @@ export default class Yubisashi {
     window.addEventListener('click', () => {
       if (this.currentIntersect) {
         switch (this.currentIntersect) {
+          case 'buttonRefreshKeshiki':
+            this.experience.world.textKeshiki.animateText();
+            break;
+
           case 'ball':
             this.experience.world.polygonBall.mesh.material.color =
               new THREE.Color(
