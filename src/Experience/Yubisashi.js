@@ -202,6 +202,7 @@ export default class Yubisashi {
 
       if (this.intersects.length) {
         document.body.style.cursor = 'pointer';
+
         // MOUSE ENTER
         if (!this.currentIntersect) {
           if (this.intersects[0].object.name === 'arrowHitboxProfil') {
@@ -239,6 +240,7 @@ export default class Yubisashi {
         this.currentIntersect = this.intersects[0].object.name;
       } else {
         document.body.style.cursor = 'default';
+
         // MOUSE LEAVE
         if (this.currentIntersect) {
           if (this.currentIntersect === 'arrowHitboxProfil') {

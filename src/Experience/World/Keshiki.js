@@ -5,11 +5,49 @@ import Experience from '../Experience.js';
 import keshikiVertexShader from '../../shaders/Keshiki/vertex.glsl';
 import keshikiFragmentShader from '../../shaders/Keshiki/fragment.glsl';
 
+// import TextKeshiki from './Texts/TextKeshiki.js';
+
 export default class Keshiki {
   constructor() {
     this.experience = new Experience();
 
     this.scene = this.experience.scene;
+
+    /**
+     * Raycaster
+     */
+    this.raycaster = new THREE.Raycaster();
+
+    this.objectsToTest = [];
+
+    this.area = 'gengoErabu';
+
+    /**
+     *
+     * CLICK EVENTS
+     *
+     */
+    window.addEventListener('click', () => {
+      if (this.currentIntersect) {
+        switch (this.currentIntersect) {
+          case 'francaisHitbox':
+            this.hideLanguages();
+            this.experience.world.textKeshiki.contact.material.opacity = 1;
+            break;
+          case 'nihongoHitbox':
+            this.hideLanguages();
+            this.experience.world.textKeshiki.contact.material.opacity = 1;
+            break;
+          case 'englishHitbox':
+            this.hideLanguages();
+            this.experience.world.textKeshiki.contact.material.opacity = 1;
+            break;
+          case 'contactHitbox':
+            window.open('https://linktr.ee/garcialuc');
+            break;
+        }
+      }
+    });
 
     // Debug
     this.debug = this.experience.debug;
@@ -18,6 +56,7 @@ export default class Keshiki {
     this.debugObject.surfaceColor = '#6600ff';
 
     this.setKeshiki();
+
     this.setAnimation();
 
     if (this.debug.active) {
@@ -25,6 +64,14 @@ export default class Keshiki {
       this.setDebug();
       this.debugFolder.close();
     }
+  }
+
+  hideLanguages() {
+    this.area = 'gamenErabu';
+
+    this.experience.world.textKeshiki.nihongo.visible = false;
+    this.experience.world.textKeshiki.francais.visible = false;
+    this.experience.world.textKeshiki.nihongo.visible = false;
   }
 
   setKeshiki() {
@@ -72,8 +119,64 @@ export default class Keshiki {
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
 
+      // Raycasting
+      this.raycaster.setFromCamera(
+        this.experience.mouse,
+        this.experience.camera.instance
+      );
+
+      this.intersects = this.raycaster.intersectObjects(this.objectsToTest);
+
       // Update keshiki
       this.keshikiMaterial.uniforms.uTime.value = elapsedTime;
+
+      if (this.intersects.length) {
+        document.body.style.cursor = 'pointer';
+
+        // MOUSE ENTER
+        if (!this.currentIntersect) {
+          if (this.area === 'gengoErabu') {
+            if (this.intersects[0].object.name === 'francaisHitbox') {
+              this.experience.world.textKeshiki.nihongo.visible = false;
+              this.experience.world.textKeshiki.english.visible = false;
+            } else if (this.intersects[0].object.name === 'nihongoHitbox') {
+              this.experience.world.textKeshiki.francais.visible = false;
+              this.experience.world.textKeshiki.english.visible = false;
+            } else if (this.intersects[0].object.name === 'englishHitbox') {
+              this.experience.world.textKeshiki.nihongo.visible = false;
+              this.experience.world.textKeshiki.francais.visible = false;
+            }
+          } else if (this.area === 'gamenErabu') {
+            if (this.intersects[0].object.name === 'contactHitbox') {
+              // enter contact hitbox
+            }
+          }
+        }
+        this.currentIntersect = this.intersects[0].object.name;
+      } else {
+        document.body.style.cursor = 'default';
+
+        // MOUSE LEAVE
+        if (this.currentIntersect) {
+          if (this.area === 'gengoErabu') {
+            if (this.currentIntersect === 'francaisHitbox') {
+              this.experience.world.textKeshiki.nihongo.visible = true;
+              this.experience.world.textKeshiki.english.visible = true;
+            } else if (this.currentIntersect === 'nihongoHitbox') {
+              this.experience.world.textKeshiki.francais.visible = true;
+              this.experience.world.textKeshiki.english.visible = true;
+            } else if (this.currentIntersect === 'englishHitbox') {
+              this.experience.world.textKeshiki.francais.visible = true;
+              this.experience.world.textKeshiki.nihongo.visible = true;
+            }
+          } else if (this.area === 'gamenErabu') {
+            if (this.currentIntersect === 'contactHitbox') {
+              // leave contact hitbox
+            }
+          }
+        }
+        this.currentIntersect = null;
+      }
 
       // Call tick again on the next frame
       window.requestAnimationFrame(tick);

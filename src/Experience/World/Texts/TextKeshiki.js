@@ -66,6 +66,8 @@ export default class TextKeshiki {
     this.englishHitbox = this.textModel.children[4];
     this.englishHitbox.visible = false;
 
+    this.select.translateY(0.01);
+
     this.aboutNihongo1 = this.textModel.children[0].children[0];
     this.aboutNihongo2 = this.textModel.children[0].children[1];
     this.aboutNihongo3 = this.textModel.children[0].children[2];
@@ -142,6 +144,13 @@ export default class TextKeshiki {
      * OBJECT READY
      */
     this.experience.world.objectsReadyArr[7] = true;
+
+    this.experience.world.keshiki.objectsToTest.push(
+      this.contactHitbox,
+      this.englishHitbox,
+      this.nihongoHitbox,
+      this.francaisHitbox
+    );
 
     /**
      * ANIMATE
