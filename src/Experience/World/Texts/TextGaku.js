@@ -37,8 +37,6 @@ export default class TextGaku {
     this.textModel.translateX(-4);
 
     this.setVariables();
-
-    // this.setAnimation();
   }
 
   setVariables() {
@@ -166,6 +164,11 @@ export default class TextGaku {
       .onStart(() => {
         this.tweenArrowTextAppear(this.arrowTextGakuLeft);
       });
+
+    /**
+     * OBJECT READY
+     */
+    this.experience.world.objectsReadyArr[4] = true;
 
     /**
      * ANIMATE

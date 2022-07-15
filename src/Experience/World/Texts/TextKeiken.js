@@ -63,53 +63,32 @@ export default class TextKeiken {
       this.experience.world.centerPanels.gamenOne.mesh.position.z
     );
 
-    // LOGOS
-    this.sterimedLogo = this.textModel.children[0].children[7];
-    this.faureciaLogo = this.textModel.children[1].children[10];
-
-    this.sterimedLogo.material.depthTest = true;
-    this.sterimedLogo.material.depthWrite = true;
-    this.textModel.children[1].children[9].material.depthTest = true;
-    this.textModel.children[1].children[9].material.depthWrite = true;
-    this.faureciaLogo.material.depthTest = true;
-    this.faureciaLogo.material.depthWrite = true;
-
     // CONTENT
     this.textModel.children[0].children[2].material.emissive = new THREE.Color(
       'white'
     );
     this.textModel.children[0].children[2].material.transparent = true;
 
-    /**
-     * ANIMATIONS
-     */
-    this.animate();
+    this.setVariables();
 
     this.setAnimation();
   }
-
-  animate() {
-    this.scene.remove(this.textModel);
-
-    this.animateIntro();
-
-    setTimeout(() => {
-      this.scene.add(this.textModel);
-      this.animateText();
-    }, 5250);
-  }
-
-  animateText() {
+  setVariables() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    // LOGOS
-    this.textModel.children[0].children[7].visible = false;
-    this.textModel.children[1].children[9].visible = false;
-    this.textModel.children[1].children[10].visible = false;
+    this.arrowHitboxKeiken = this.textModel.children[1].children[5];
+    this.arrowHomeHitbox = this.textModel.children[0].children[5];
+    this.arrowKeiken = this.textModel.children[1].children[6];
+    this.arrowTextKeiken = this.textModel.children[1].children[0];
+    this.arrowHome = this.textModel.children[0].children[6];
 
-    /**
-     * HEADERS & TITLES
-     */
+    this.arrowKeiken.material = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 1,
+      transparent: true,
+      opacity: 0,
+    });
+
     this.headersTitlesKeiken = [
       this.textModel.children[0].children[0].children[0],
       this.textModel.children[0].children[0].children[1],
@@ -129,20 +108,7 @@ export default class TextKeiken {
       transparent: true,
       opacity: 0,
     });
-    for (var i = 0; i < this.headersTitlesKeiken.length; i++) {
-      this.headersTitlesKeiken[i].material = this.headersTitlesKeikenMaterial;
-    }
 
-    var tweenAppearHeadersTitles = new TWEEN.Tween(
-      this.headersTitlesKeikenMaterial
-    )
-      .to({ opacity: 1 }, 1500)
-      .easing(TWEEN.Easing.Bounce.Out);
-    tweenAppearHeadersTitles.start();
-
-    /**
-     * PARAGRAPHS
-     */
     this.paragraphsKeiken = [
       this.textModel.children[0].children[2],
       this.textModel.children[0].children[3],
@@ -155,55 +121,151 @@ export default class TextKeiken {
       transparent: true,
       opacity: 0,
     });
-    for (var i = 0; i < this.paragraphsKeiken.length; i++) {
-      this.paragraphsKeiken[i].material = this.paragraphsKeikenMaterial;
-    }
 
-    var tweenAppearParagraphs = new TWEEN.Tween(this.paragraphsKeikenMaterial)
-      .to({ opacity: 1 }, 500)
-      .easing(TWEEN.Easing.Bounce.InOut);
-    setTimeout(() => {
-      tweenAppearParagraphs.start();
-    }, 500);
+    // LOGOS
+    this.sterimedLogo = this.textModel.children[0].children[7];
+    this.faureciaLogo = this.textModel.children[1].children[10];
+
+    this.sterimedLogo.material.depthTest = true;
+    this.sterimedLogo.material.depthWrite = true;
+    this.textModel.children[1].children[9].material.depthTest = true;
+    this.textModel.children[1].children[9].material.depthWrite = true;
+    this.faureciaLogo.material.depthTest = true;
+    this.faureciaLogo.material.depthWrite = true;
 
     /**
-     * ARROW
+     *
+     * INTRO
+     *
      */
-    this.arrowHitboxKeiken = this.textModel.children[1].children[5];
-    this.arrowHitboxKeiken.visible = false;
+    this.jitsu = this.textModelIntro.children[0].children[2];
+    this.mu = this.textModelIntro.children[0].children[0];
+    this.kei = this.textModelIntro.children[0].children[1];
+    this.ken = this.textModelIntro.children[0].children[3];
 
-    this.arrowKeiken = this.textModel.children[1].children[6];
-    this.arrowKeiken.material = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      emissiveIntensity: 1,
-      transparent: true,
-      opacity: 0,
-    });
+    this.jitsuArr = [
+      this.jitsu.children[1],
+      this.jitsu.children[2],
+      this.jitsu.children[3],
+      this.jitsu.children[5],
+      this.jitsu.children[4],
+      this.jitsu.children[0],
+    ];
+    this.jitsuPos = [
+      { x: 0.011739253997802734, y: 0, z: -0.20095087587833405 },
+      {
+        x: 0.011739253997802734,
+        y: 0.00012731552124023438,
+        z: -0.20095087587833405,
+      },
+      {
+        x: 0.011739253997802734,
+        y: 0.00012731552124023438,
+        z: -0.20095087587833405,
+      },
+      {
+        x: 0.011739253997802734,
+        y: 0.00012731552124023438,
+        z: -0.20095087587833405,
+      },
+      { x: 0.011739253997802734, y: 0, z: -0.20095087587833405 },
+      { x: 0.011739253997802734, y: 0, z: -0.20095087587833405 },
+    ];
 
-    this.arrowTextKeiken = this.textModel.children[1].children[0];
-    for (var i = 0; i < this.arrowTextKeiken.children.length; i++) {
-      this.arrowTextKeiken.children[i].material =
-        new THREE.MeshStandardMaterial({
-          emissive: 'white',
-          emissiveIntensity: 1,
-          transparent: true,
-          opacity: 0,
-        });
-    }
+    this.muArr = [
+      this.mu.children[2],
+      this.mu.children[0],
+      this.mu.children[1],
+      this.mu.children[3],
+    ];
+    this.muPos = [
+      { x: -0.03281068801879883, y: 0, z: -0.14692486822605133 },
+      { x: -0.03281068801879883, y: 0, z: -0.14692486822605133 },
+      { x: -0.03281068801879883, y: 0, z: -0.14692486822605133 },
+      { x: -0.03281068801879883, y: 0, z: -0.14692486822605133 },
+    ];
 
-    this.arrowHomeHitbox = this.textModel.children[0].children[5];
-    this.arrowHomeHitbox.visible = false;
+    this.keiArr = [
+      this.kei.children[6],
+      this.kei.children[0],
+      this.kei.children[1],
+      this.kei.children[8],
+      this.kei.children[7],
+      this.kei.children[2],
+      this.kei.children[5],
+      this.kei.children[3],
+      this.kei.children[4],
+    ];
+    this.keiPos = [
+      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
+      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
+      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
+      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
+      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
+      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
+      {
+        x: -0.12781119346618652,
+        y: 0.0008783340454101562,
+        z: -0.14021135866641998,
+      },
+      {
+        x: -0.12781119346618652,
+        y: 0.002004861831665039,
+        z: -0.14021135866641998,
+      },
+      {
+        x: -0.12781119346618652,
+        y: 0.002004861831665039,
+        z: -0.14021135866641998,
+      },
+    ];
 
-    this.arrowHome = this.textModel.children[0].children[6];
-
-    // ARROW APPEARANCE
-    var tweenAppearArrowKeiken = new TWEEN.Tween(this.arrowKeiken.material)
-      .to({ opacity: 1 }, 2500)
-      .easing(TWEEN.Easing.Bounce.In)
-      .onComplete(() => {});
-    setTimeout(() => {
-      tweenAppearArrowKeiken.start();
-    }, 1000);
+    this.kenArr = [
+      this.ken.children[13],
+      this.ken.children[8],
+      this.ken.children[9],
+      this.ken.children[10],
+      this.ken.children[16],
+      this.ken.children[15],
+      this.ken.children[14],
+      this.ken.children[11],
+      this.ken.children[12],
+      this.ken.children[0],
+      this.ken.children[1],
+      this.ken.children[2],
+      this.ken.children[3],
+      this.ken.children[4],
+      this.ken.children[5],
+      this.ken.children[6],
+      this.ken.children[7],
+    ];
+    this.kenPos = [
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      {
+        x: -0.17416763305664062,
+        y: 0.00011301040649414062,
+        z: -0.0840793326497078,
+      },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.20796465873718262, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+      {
+        x: -0.17416763305664062,
+        y: 0.00011301040649414062,
+        z: -0.0840793326497078,
+      },
+      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
+    ];
 
     // ARROW TEXT APPEARANCE
     this.tweenAppearTextKeiken = () => {
@@ -245,11 +307,26 @@ export default class TextKeiken {
         this.tweenDisappearTextKeiken();
       });
 
+    /**
+     * OBJECT READY
+     */
+    this.experience.world.objectsReadyArr[2] = true;
+
+    /**
+     * ANIMATE
+     */
+    this.animate();
+  }
+
+  animate() {
+    this.scene.remove(this.textModel);
+
+    this.animateIntro();
+
     setTimeout(() => {
-      this.textModel.children[0].children[7].visible = true;
-      this.textModel.children[1].children[9].visible = true;
-      this.textModel.children[1].children[10].visible = true;
-    }, 50);
+      this.scene.add(this.textModel);
+      this.animateText();
+    }, 5250);
   }
 
   animateIntro() {
@@ -261,15 +338,11 @@ export default class TextKeiken {
     /**
      * 実
      */
-    this.jitsu = this.textModelIntro.children[0].children[2];
-
     this.animateIntroJitsu();
 
     /**
      * 務
      */
-    this.mu = this.textModelIntro.children[0].children[0];
-
     this.mu.visible = false;
 
     setTimeout(() => {
@@ -279,8 +352,6 @@ export default class TextKeiken {
     /**
      * 経
      */
-    this.kei = this.textModelIntro.children[0].children[1];
-
     this.kei.visible = false;
 
     setTimeout(() => {
@@ -290,8 +361,6 @@ export default class TextKeiken {
     /**
      * 験
      */
-    this.ken = this.textModelIntro.children[0].children[3];
-
     this.ken.visible = false;
 
     setTimeout(() => {
@@ -312,37 +381,81 @@ export default class TextKeiken {
     }, 5200);
   }
 
-  animateIntroJitsu() {
+  animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    this.jitsuArr = [
-      this.jitsu.children[1],
-      this.jitsu.children[2],
-      this.jitsu.children[3],
-      this.jitsu.children[5],
-      this.jitsu.children[4],
-      this.jitsu.children[0],
-    ];
-    this.jitsuPos = [
-      { x: 0.011739253997802734, y: 0, z: -0.20095087587833405 },
-      {
-        x: 0.011739253997802734,
-        y: 0.00012731552124023438,
-        z: -0.20095087587833405,
-      },
-      {
-        x: 0.011739253997802734,
-        y: 0.00012731552124023438,
-        z: -0.20095087587833405,
-      },
-      {
-        x: 0.011739253997802734,
-        y: 0.00012731552124023438,
-        z: -0.20095087587833405,
-      },
-      { x: 0.011739253997802734, y: 0, z: -0.20095087587833405 },
-      { x: 0.011739253997802734, y: 0, z: -0.20095087587833405 },
-    ];
+    this.headersTitlesKeikenMaterial.opacity = 0;
+    this.paragraphsKeikenMaterial.opacity = 0;
+    this.arrowKeiken.material.opacity = 0;
+
+    // LOGOS
+    this.textModel.children[0].children[7].visible = false;
+    this.textModel.children[1].children[9].visible = false;
+    this.textModel.children[1].children[10].visible = false;
+
+    /**
+     * HEADERS & TITLES
+     */
+    for (var i = 0; i < this.headersTitlesKeiken.length; i++) {
+      this.headersTitlesKeiken[i].material = this.headersTitlesKeikenMaterial;
+    }
+
+    var tweenAppearHeadersTitles = new TWEEN.Tween(
+      this.headersTitlesKeikenMaterial
+    )
+      .to({ opacity: 1 }, 1500)
+      .easing(TWEEN.Easing.Bounce.Out);
+    tweenAppearHeadersTitles.start();
+
+    /**
+     * PARAGRAPHS
+     */
+    for (var i = 0; i < this.paragraphsKeiken.length; i++) {
+      this.paragraphsKeiken[i].material = this.paragraphsKeikenMaterial;
+    }
+
+    var tweenAppearParagraphs = new TWEEN.Tween(this.paragraphsKeikenMaterial)
+      .to({ opacity: 1 }, 500)
+      .easing(TWEEN.Easing.Bounce.InOut);
+    setTimeout(() => {
+      tweenAppearParagraphs.start();
+    }, 500);
+
+    /**
+     * ARROW
+     */
+    this.arrowHitboxKeiken.visible = false;
+
+    for (var i = 0; i < this.arrowTextKeiken.children.length; i++) {
+      this.arrowTextKeiken.children[i].material =
+        new THREE.MeshStandardMaterial({
+          emissive: 'white',
+          emissiveIntensity: 1,
+          transparent: true,
+          opacity: 0,
+        });
+    }
+
+    this.arrowHomeHitbox.visible = false;
+
+    // ARROW APPEARANCE
+    var tweenAppearArrowKeiken = new TWEEN.Tween(this.arrowKeiken.material)
+      .to({ opacity: 1 }, 2500)
+      .easing(TWEEN.Easing.Bounce.In)
+      .onComplete(() => {});
+    setTimeout(() => {
+      tweenAppearArrowKeiken.start();
+    }, 1000);
+
+    setTimeout(() => {
+      this.textModel.children[0].children[7].visible = true;
+      this.textModel.children[1].children[9].visible = true;
+      this.textModel.children[1].children[10].visible = true;
+    }, 50);
+  }
+
+  animateIntroJitsu() {
+    var TWEEN = require('@tweenjs/tween.js');
 
     //　一画
     this.jitsuArr[0].translateZ(-0.15);
@@ -398,19 +511,6 @@ export default class TextKeiken {
   animateIntroMu() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    this.muArr = [
-      this.mu.children[2],
-      this.mu.children[0],
-      this.mu.children[1],
-      this.mu.children[3],
-    ];
-    this.muPos = [
-      { x: -0.03281068801879883, y: 0, z: -0.14692486822605133 },
-      { x: -0.03281068801879883, y: 0, z: -0.14692486822605133 },
-      { x: -0.03281068801879883, y: 0, z: -0.14692486822605133 },
-      { x: -0.03281068801879883, y: 0, z: -0.14692486822605133 },
-    ];
-
     //　一画
     this.muArr[0].translateZ(-0.2);
     // 二画
@@ -432,41 +532,6 @@ export default class TextKeiken {
 
   animateIntroKei() {
     var TWEEN = require('@tweenjs/tween.js');
-
-    this.keiArr = [
-      this.kei.children[6],
-      this.kei.children[0],
-      this.kei.children[1],
-      this.kei.children[8],
-      this.kei.children[7],
-      this.kei.children[2],
-      this.kei.children[5],
-      this.kei.children[3],
-      this.kei.children[4],
-    ];
-    this.keiPos = [
-      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
-      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
-      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
-      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
-      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
-      { x: -0.12884235382080078, y: 0, z: -0.14070619642734528 },
-      {
-        x: -0.12781119346618652,
-        y: 0.0008783340454101562,
-        z: -0.14021135866641998,
-      },
-      {
-        x: -0.12781119346618652,
-        y: 0.002004861831665039,
-        z: -0.14021135866641998,
-      },
-      {
-        x: -0.12781119346618652,
-        y: 0.002004861831665039,
-        z: -0.14021135866641998,
-      },
-    ];
 
     //　一画
     this.keiArr[0].translateZ(-0.2);
@@ -558,53 +623,6 @@ export default class TextKeiken {
 
   animateIntroKen() {
     var TWEEN = require('@tweenjs/tween.js');
-
-    this.kenArr = [
-      this.ken.children[13],
-      this.ken.children[8],
-      this.ken.children[9],
-      this.ken.children[10],
-      this.ken.children[16],
-      this.ken.children[15],
-      this.ken.children[14],
-      this.ken.children[11],
-      this.ken.children[12],
-      this.ken.children[0],
-      this.ken.children[1],
-      this.ken.children[2],
-      this.ken.children[3],
-      this.ken.children[4],
-      this.ken.children[5],
-      this.ken.children[6],
-      this.ken.children[7],
-    ];
-    this.kenPos = [
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      {
-        x: -0.17416763305664062,
-        y: 0.00011301040649414062,
-        z: -0.0840793326497078,
-      },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.20796465873718262, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-      {
-        x: -0.17416763305664062,
-        y: 0.00011301040649414062,
-        z: -0.0840793326497078,
-      },
-      { x: -0.17416763305664062, y: 0, z: -0.0840793326497078 },
-    ];
 
     //　一画
     this.kenArr[0].translateZ(-0.15);

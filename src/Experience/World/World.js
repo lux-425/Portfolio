@@ -43,6 +43,7 @@ export default class World {
     // this.gltfLoader.setDRACOLoader(this.dracoLoader);
 
     // Debug
+    // this.debugParams = {};
     this.debug = this.experience.debug;
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('world');
@@ -56,7 +57,7 @@ export default class World {
     this.setPanels();
 
     /**
-     * ポリゴン
+     * SET ポリゴン~~~~
      */
     this.polygonCone = new Polygon('cone', -13, -8, 0.0001);
     this.polygonCone.mesh.position.set(-10, 2.01, -11);
@@ -93,15 +94,25 @@ export default class World {
     this.polygonBall = new Polygon('ball', 0, 0, 0.001);
 
     /**
-     * テスト!!!
+     * SET TEXTS AND YUBISASHI'S PENDING
      */
-    this.debugParams = {};
+    this.objectsReadyArr = [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ];
+    this.waitObjectsReady();
 
     this.setTexts();
 
     // SHADER LECTURE
-    // this.leftPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
+    this.leftPanels.gamenOne.material.fragmentShader =
+      gamenFragmentShaderLecture;
     // this.leftPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
@@ -126,20 +137,13 @@ export default class World {
       gamenFragmentShaderLecture;
   }
 
-  setTexts() {
-    this.textKeshiki = new TextKeshiki();
-
-    this.textProfil = new TextProfil();
-    this.textShoukai = new TextShoukai();
-
-    this.textKeiken = new TextKeiken();
-    this.textProject = new TextProject();
-
-    this.textGaku = new TextGaku();
-    this.textKyoumi = new TextKyoumi();
-    this.textGengo = new TextGengo();
-
-    setTimeout(() => {
+  waitObjectsReady() {
+    // console.log(this.objectsReadyArr);
+    if (!this.objectsReadyArr.every(Boolean)) {
+      setTimeout(() => {
+        this.waitObjectsReady();
+      }, 100);
+    } else {
       this.yubisashiMono = [
         this.textKeshiki.buttonRefresh,
 
@@ -193,8 +197,23 @@ export default class World {
         this.textGengo.bunpro,
         this.textGengo.rtk,
       ];
+
       this.yubisashi = new Yubisashi(this.yubisashiMono);
-    }, 7000);
+    }
+  }
+
+  setTexts() {
+    this.textKeshiki = new TextKeshiki();
+
+    this.textProfil = new TextProfil();
+    this.textShoukai = new TextShoukai();
+
+    this.textKeiken = new TextKeiken();
+    this.textProject = new TextProject();
+
+    this.textGaku = new TextGaku();
+    this.textKyoumi = new TextKyoumi();
+    this.textGengo = new TextGengo();
   }
 
   setPanels() {

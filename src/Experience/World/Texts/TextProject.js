@@ -69,14 +69,262 @@ export default class TextProject {
      */
     this.setVariables();
 
-    // this.setAnimation();
+    this.setAnimation();
   }
 
   setVariables() {
     this.actualTab = 'ichi';
 
     /**
-     * ANIMATIONS
+     *
+     *
+     * INTRO
+     *
+     *
+     */
+    this.pu = this.textModelIntro.children[0].children[0];
+    this.ro = this.textModelIntro.children[0].children[4];
+    this.ji = this.textModelIntro.children[0].children[3];
+    this.e = this.textModelIntro.children[0].children[5];
+    this.ku = this.textModelIntro.children[0].children[2];
+    this.to = this.textModelIntro.children[0].children[1];
+    /**
+     * MATERIAL
+     */
+    this.dotMaterial = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 1,
+      transparent: true,
+      opacity: 0,
+    });
+
+    /**
+     * ジ
+     */
+    this.jiDot = this.ji.children[0];
+    this.jiTsubu1 = this.ji.children[1];
+    this.jiTsubu2 = this.ji.children[2];
+    this.jiTsubu3 = this.ji.children[3];
+    this.jiSen = [
+      this.ji.children[5],
+      this.ji.children[6],
+      this.ji.children[7],
+    ];
+    this.jiLosange = this.ji.children[4];
+
+    /**
+     * プ
+     */
+    this.puDot = this.pu.children[0];
+    this.puArrows = [this.pu.children[1], this.pu.children[2]];
+    this.puPoints = this.pu.children[3];
+
+    /**
+     * ト
+     */
+    this.toDot = this.to.children[0];
+    this.toArrowLeft = this.to.children[1];
+    this.toArrowRight = this.to.children[2];
+    this.toCircle = this.to.children[3];
+    this.toSen = [
+      this.to.children[4],
+      this.to.children[5],
+      this.to.children[6],
+    ];
+
+    /**
+     * ロ
+     */
+    this.roDot = this.ro.children[0];
+    this.roKakkoLeft = this.ro.children[1];
+    this.roKakkoRight = this.ro.children[2];
+    this.roTriangle = this.ro.children[6];
+
+    /**
+     * ク
+     */
+    this.kuDot = this.ku.children[0];
+    this.kuSen = [
+      this.ku.children[1],
+      this.ku.children[2],
+      this.ku.children[3],
+    ];
+    this.kuSquare = this.ku.children[4];
+
+    /**
+     * ェ
+     */
+    this.eDot = this.e.children[0];
+    this.eDashLeft = this.e.children[1];
+    this.eDashRight = this.e.children[2];
+    this.eWaveLeft = this.e.children[3];
+    this.eWaveRight = this.e.children[4];
+    this.eTriangle = this.e.children[8];
+
+    /**
+     *
+     * 
+     * TEXT
+     *
+     * 
+     */
+    this.githubLogo = this.textModel.children[2];
+    this.githubLogoHitbox = this.textModel.children[0].children[1].children[17];
+    this.visitLiveFrame = this.textModel.children[0].children[4];
+    this.visitLiveButton = this.textModel.children[0].children[13];
+    this.visitSoonButton = this.textModel.children[0].children[15];
+    this.visitButtonHitbox =
+      this.textModel.children[0].children[1].children[14];
+
+    this.arrowProject = this.textModel.children[0].children[3];
+    this.arrowHitboxProject = this.textModel.children[0].children[2];
+    this.arrowTextProject = this.textModel.children[0].children[0];
+    this.homeArrow = this.textModel.children[1].children[7];
+    this.homeArrowHitbox = this.textModel.children[0].children[1].children[16];
+
+    this.navbarFrame = this.textModel.children[0].children[5];
+    this.navbarSep = this.textModel.children[0].children[14];
+    this.navbarLanguette = this.textModel.children[0].children[1].children[15];
+
+    this.navbarIchi = this.textModel.children[0].children[1].children[1];
+    this.navbarNi = this.textModel.children[0].children[1].children[2];
+    this.navbarSan = this.textModel.children[0].children[1].children[3];
+    this.navbarYon = this.textModel.children[0].children[1].children[4];
+    this.navbarGo = this.textModel.children[0].children[1].children[5];
+    this.navbarRoku = this.textModel.children[0].children[1].children[6];
+    this.navbarTsugi = this.textModel.children[0].children[1].children[7];
+
+    this.navbarIchi.name = 'navbarIchi';
+    this.navbarNi.name = 'navbarNi';
+    this.navbarSan.name = 'navbarSan';
+    this.navbarYon.name = 'navbarYon';
+    this.navbarGo.name = 'navbarGo';
+    this.navbarRoku.name = 'navbarRoku';
+    this.navbarTsugi.name = 'navbarTsugi';
+
+    this.project1 = this.textModel.children[1].children[0];
+    this.project1Title = this.textModel.children[1].children[0].children[0];
+    this.project1Description =
+      this.textModel.children[1].children[0].children[1];
+    this.project1Image = this.textModel.children[1].children[0].children[3];
+    this.project1ImageBis = this.textModel.children[1].children[0].children[2];
+    this.project1Stack = this.textModel.children[0].children[6];
+
+    this.project2 = this.textModel.children[1].children[1];
+    this.project2Title = this.textModel.children[1].children[1].children[0];
+    this.project2Description =
+      this.textModel.children[1].children[1].children[1];
+    this.project2Image = this.textModel.children[1].children[1].children[2];
+    this.project2ImageBis = this.textModel.children[1].children[1].children[3];
+    this.project2Stack = this.textModel.children[0].children[7];
+
+    this.project3 = this.textModel.children[1].children[2];
+    this.project3Title = this.textModel.children[1].children[2].children[1];
+    this.project3Description =
+      this.textModel.children[1].children[2].children[0];
+    this.project3Image = this.textModel.children[1].children[2].children[2];
+    this.project3Stack = this.textModel.children[0].children[8];
+
+    this.project4 = this.textModel.children[1].children[3];
+    this.project4Title = this.textModel.children[1].children[3].children[1];
+    this.project4Description =
+      this.textModel.children[1].children[3].children[0];
+    this.project4Image = this.textModel.children[1].children[3].children[3];
+    this.project4ImageBis = this.textModel.children[1].children[3].children[2];
+    this.project4Stack = this.textModel.children[0].children[9];
+
+    this.project5 = this.textModel.children[1].children[4];
+    this.project5Title = this.textModel.children[1].children[4].children[1];
+    this.project5Description =
+      this.textModel.children[1].children[4].children[0];
+    this.project5Image = this.textModel.children[1].children[4].children[2];
+    this.project5Stack = this.textModel.children[0].children[10];
+
+    this.project6 = this.textModel.children[1].children[5];
+    this.project6Title = this.textModel.children[1].children[5].children[2];
+    this.project6Description =
+      this.textModel.children[1].children[5].children[0];
+    this.project6TitleBis = this.textModel.children[1].children[5].children[3];
+    this.project6DescriptionBis =
+      this.textModel.children[1].children[5].children[1];
+    this.project6Stack = this.textModel.children[0].children[11];
+
+    this.project7 = this.textModel.children[1].children[6];
+    this.project7Title = this.textModel.children[1].children[6].children[1];
+    this.project7Description =
+      this.textModel.children[1].children[6].children[0];
+    this.project7Image = this.textModel.children[1].children[6].children[2];
+    this.project7Stack = this.textModel.children[0].children[12];
+
+    // IMAGES' TRANSPARENCE CORRECTION
+    this.githubLogo.material.depthTest = true;
+    this.githubLogo.material.depthWrite = true;
+    this.project1Image.material.depthTest = true;
+    this.project1Image.material.depthWrite = true;
+    this.project1ImageBis.material.depthTest = true;
+    this.project1ImageBis.material.depthWrite = true;
+    this.project2Image.material.depthTest = true;
+    this.project2Image.material.depthWrite = true;
+    this.project2ImageBis.material.depthTest = true;
+    this.project2ImageBis.material.depthWrite = true;
+    this.project3Image.material.depthTest = true;
+    this.project3Image.material.depthWrite = true;
+    this.project4Image.material.depthTest = true;
+    this.project4Image.material.depthWrite = true;
+    this.project4ImageBis.material.depthTest = true;
+    this.project4ImageBis.material.depthWrite = true;
+    this.project5Image.material.depthTest = true;
+    this.project5Image.material.depthWrite = true;
+
+    /**
+     * MATERIALS
+     */
+    this.projectTitleMaterial = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 1,
+      transparent: true,
+      opacity: 0,
+    });
+    this.projectParagraphMaterial = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 1,
+      transparent: true,
+      opacity: 0,
+    });
+
+    this.titleArr = [
+      this.project1Title,
+      this.project2Title,
+      this.project3Title,
+      this.project4Title,
+      this.project5Title,
+      this.project6Title,
+      this.project7Title,
+    ];
+    this.paragraphArr = [
+      this.project1Description,
+      this.project1Stack,
+      this.project2Description,
+      this.project2Stack,
+      this.project3Description,
+      this.project3Stack,
+      this.project4Description,
+      this.project4Stack,
+      this.project5Description,
+      this.project5Stack,
+      this.project6Description,
+      this.project6Stack,
+      this.project7Description,
+      this.project7Stack,
+    ];
+
+    /**
+     * OBJECT READY
+     */
+    this.experience.world.objectsReadyArr[3] = true;
+
+    /**
+     * ANIMATE
      */
     this.animate();
   }
@@ -97,28 +345,11 @@ export default class TextProject {
 
     this.textModelIntro.visible = true;
 
-    this.pu = this.textModelIntro.children[0].children[0];
-    this.ro = this.textModelIntro.children[0].children[4];
-    this.ji = this.textModelIntro.children[0].children[3];
-    this.e = this.textModelIntro.children[0].children[5];
-    this.ku = this.textModelIntro.children[0].children[2];
-    this.to = this.textModelIntro.children[0].children[1];
-
     this.ro.visible = false;
     this.ji.visible = false;
     this.e.visible = false;
     this.ku.visible = false;
     this.to.visible = false;
-
-    /**
-     * MATERIALS
-     */
-    this.dotMaterial = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      emissiveIntensity: 1,
-      transparent: true,
-      opacity: 0,
-    });
 
     /**
      * ジ
@@ -129,14 +360,10 @@ export default class TextProject {
     this.ji.rotation.set(0, 0, 0);
 
     // 点
-    this.jiDot = this.ji.children[0];
     this.jiDot.material = this.dotMaterial;
     this.jiDot.scale.set(5, 5, 5);
 
     // 小雨
-    this.jiTsubu1 = this.ji.children[1];
-    this.jiTsubu2 = this.ji.children[2];
-    this.jiTsubu3 = this.ji.children[3];
     this.jiTsubu1.position.set(-0.5, 0, -0.55);
     this.jiTsubu2.position.set(-0.35, 0, -0.55);
     this.jiTsubu3.position.set(0.5, 0, -0.55);
@@ -145,11 +372,6 @@ export default class TextProject {
     this.jiTsubu3.visible = false;
 
     // 線
-    this.jiSen = [
-      this.ji.children[5],
-      this.ji.children[6],
-      this.ji.children[7],
-    ];
     this.jiSen[0].position.set(-0.3722, 0.0003, -0.1358);
     this.jiSen[1].position.set(-0.6134, 0.0003, -0.1358);
     this.jiSen[2].position.set(-0.8537, 0.0003, -0.1358);
@@ -158,7 +380,6 @@ export default class TextProject {
     this.jiSen[2].visible = false;
 
     // ◇
-    this.jiLosange = this.ji.children[4];
     this.jiLosange.scale.set(0.077, 0.077, 0.077);
     this.jiLosange.rotation.set(0, 0, 0);
     this.jiLosange.visible = false;
@@ -281,12 +502,10 @@ export default class TextProject {
     this.pu.rotation.set(0, 0, 0);
 
     // 点
-    this.puDot = this.pu.children[0];
     this.puDot.scale.set(6, 6, 6);
     this.puDot.material = this.dotMaterial;
 
     // 矢印
-    this.puArrows = [this.pu.children[1], this.pu.children[2]];
     this.puArrows[0].position.set(-0.318, 0, -0.6489);
     this.puArrows[1].position.set(0.6339, 0, -0.5868);
     this.puArrows[0].visible = false;
@@ -302,7 +521,6 @@ export default class TextProject {
     this.sen[2].visible = false;
 
     // Points
-    this.puPoints = this.pu.children[3];
     this.puPoints.scale.set(0.077, 0.077, 0.077);
     this.puPoints.rotation.set(0, 0, 0);
     this.puPoints.visible = false;
@@ -414,30 +632,21 @@ export default class TextProject {
     this.to.rotation.set(0, 0, 0);
 
     // 点
-    this.toDot = this.to.children[0];
     this.toDot.material = this.dotMaterial;
     this.toDot.scale.set(4, 4, 4);
 
     // <<< >>>
-    this.toArrowLeft = this.to.children[1];
-    this.toArrowRight = this.to.children[2];
     this.toArrowLeft.position.set(-0.0666, 0, 0.0687);
     this.toArrowRight.position.set(0.0694, 0, 0.0731);
     this.toArrowLeft.visible = false;
     this.toArrowRight.visible = false;
 
     // 〇
-    this.toCircle = this.to.children[3];
     this.toCircle.scale.set(0.077, 0.077, 0.077);
     this.toCircle.rotation.set(0, 0, 0);
     this.toCircle.visible = false;
 
     // 線
-    this.toSen = [
-      this.to.children[4],
-      this.to.children[5],
-      this.to.children[6],
-    ];
     this.toSen[0].position.set(-0.3722, 0.0003, -0.1365);
     this.toSen[1].position.set(-0.6134, 0.0003, -0.1365);
     this.toSen[2].position.set(-0.8537, 0.0003, -0.1365);
@@ -561,13 +770,10 @@ export default class TextProject {
       this.ro.rotation.set(0, 0, 0);
 
       // 点
-      this.roDot = this.ro.children[0];
       this.roDot.material = this.dotMaterial;
       this.roDot.scale.set(4, 4, 4);
 
       // 〚〛
-      this.roKakkoLeft = this.ro.children[1];
-      this.roKakkoRight = this.ro.children[2];
       this.roKakkoLeft.position.set(-0.231, 0, -0.015);
       this.roKakkoRight.position.set(0.2255859375, 0, -0.01503384206444025);
       this.roKakkoLeft.visible = false;
@@ -587,7 +793,6 @@ export default class TextProject {
       this.sen[2].visible = false;
 
       // ▽
-      this.roTriangle = this.ro.children[6];
       this.roTriangle.scale.set(0.077, 0.077, 0.077);
       this.roTriangle.rotation.set(0, 0, 0);
       this.roTriangle.visible = false;
@@ -703,16 +908,10 @@ export default class TextProject {
     this.ku.rotation.set(0, 0, 0);
 
     // 点
-    this.kuDot = this.ku.children[0];
     this.kuDot.scale.set(6, 6, 6);
     this.kuDot.material = this.dotMaterial;
 
     // 線
-    this.kuSen = [
-      this.ku.children[1],
-      this.ku.children[2],
-      this.ku.children[3],
-    ];
     this.kuSen[0].position.set(-0.3722, 0.0003, -0.1314);
     this.kuSen[1].position.set(-0.3722, 0.0003, -0.1314);
     this.kuSen[2].position.set(-0.3722, 0.0003, -0.1314);
@@ -721,7 +920,6 @@ export default class TextProject {
     this.kuSen[2].visible = false;
 
     // □
-    this.kuSquare = this.ku.children[4];
     this.kuSquare.scale.set(0.077, 0.077, 0.077);
     this.kuSquare.rotation.set(0, 0, 0);
     this.kuSquare.visible = false;
@@ -818,15 +1016,10 @@ export default class TextProject {
     this.e.rotation.set(0, 0, 0);
 
     // 点
-    this.eDot = this.e.children[0];
     this.eDot.material = this.dotMaterial;
     this.eDot.scale.set(4, 4, 4);
 
     // |~||~|
-    this.eDashLeft = this.e.children[1];
-    this.eDashRight = this.e.children[2];
-    this.eWaveLeft = this.e.children[3];
-    this.eWaveRight = this.e.children[4];
     this.eDashLeft.position.set(-0.4105, 0, 0.0686);
     this.eDashRight.position.set(0.4105, 0, 0.0686);
     this.eWaveLeft.position.set(-0.2658, 0, -0.2289);
@@ -837,7 +1030,6 @@ export default class TextProject {
     this.eWaveRight.visible = false;
 
     // ▽
-    this.eTriangle = this.e.children[8];
     this.eTriangle.scale.set(0.077, 0.077, 0.077);
     this.eTriangle.rotation.set(0, 0, 0);
     this.eTriangle.visible = false;
@@ -985,14 +1177,11 @@ export default class TextProject {
     /**
      * ARROW
      */
-    this.arrowProject = this.textModel.children[0].children[3];
     this.arrowProject.translateY(-0.01);
     this.arrowProject.visible = false;
 
-    this.arrowHitboxProject = this.textModel.children[0].children[2];
     this.arrowHitboxProject.visible = false;
 
-    this.arrowTextProject = this.textModel.children[0].children[0];
     for (var i = 0; i < 3; i++) {
       this.arrowTextProject.children[i].material =
         new THREE.MeshStandardMaterial({
@@ -1002,9 +1191,7 @@ export default class TextProject {
         });
     }
 
-    this.homeArrow = this.textModel.children[1].children[7];
     this.homeArrow.visible = false;
-    this.homeArrowHitbox = this.textModel.children[0].children[1].children[16];
     this.homeArrowHitbox.visible = false;
 
     // ARROW TEXT APPEARANCE
@@ -1046,36 +1233,12 @@ export default class TextProject {
     /**
      * REFERENCES
      */
-    this.githubLogo = this.textModel.children[2];
-    this.githubLogoHitbox = this.textModel.children[0].children[1].children[17];
     this.githubLogoHitbox.visible = false;
 
-    this.visitLiveFrame = this.textModel.children[0].children[4];
-    this.visitLiveButton = this.textModel.children[0].children[13];
-    this.visitSoonButton = this.textModel.children[0].children[15];
     this.visitSoonButton.visible = false;
-    this.visitButtonHitbox =
-      this.textModel.children[0].children[1].children[14];
+
     this.visitButtonHitbox.visible = false;
 
-    this.navbarFrame = this.textModel.children[0].children[5];
-    this.navbarSep = this.textModel.children[0].children[14];
-    this.navbarLanguette = this.textModel.children[0].children[1].children[15];
-
-    this.navbarIchi = this.textModel.children[0].children[1].children[1];
-    this.navbarNi = this.textModel.children[0].children[1].children[2];
-    this.navbarSan = this.textModel.children[0].children[1].children[3];
-    this.navbarYon = this.textModel.children[0].children[1].children[4];
-    this.navbarGo = this.textModel.children[0].children[1].children[5];
-    this.navbarRoku = this.textModel.children[0].children[1].children[6];
-    this.navbarTsugi = this.textModel.children[0].children[1].children[7];
-    this.navbarIchi.name = 'navbarIchi';
-    this.navbarNi.name = 'navbarNi';
-    this.navbarSan.name = 'navbarSan';
-    this.navbarYon.name = 'navbarYon';
-    this.navbarGo.name = 'navbarGo';
-    this.navbarRoku.name = 'navbarRoku';
-    this.navbarTsugi.name = 'navbarTsugi';
     this.navbarIchi.visible = false;
     this.navbarNi.visible = false;
     this.navbarSan.visible = false;
@@ -1085,89 +1248,35 @@ export default class TextProject {
     this.navbarTsugi.visible = false;
 
     // PROJECT 1
-    this.project1 = this.textModel.children[1].children[0];
-    this.project1Title = this.textModel.children[1].children[0].children[0];
-    this.project1Description =
-      this.textModel.children[1].children[0].children[1];
-    this.project1Image = this.textModel.children[1].children[0].children[3];
-    this.project1ImageBis = this.textModel.children[1].children[0].children[2];
-    this.project1Stack = this.textModel.children[0].children[6];
-
     this.project1.visible = false;
     this.project1Stack.visible = false;
 
     // PROJECT 2
-    this.project2 = this.textModel.children[1].children[1];
-    this.project2Title = this.textModel.children[1].children[1].children[0];
-    this.project2Description =
-      this.textModel.children[1].children[1].children[1];
-    this.project2Image = this.textModel.children[1].children[1].children[2];
-    this.project2ImageBis = this.textModel.children[1].children[1].children[3];
-    this.project2Stack = this.textModel.children[0].children[7];
-
     this.project2.visible = false;
     this.project2Stack.visible = false;
 
     // PROJECT 3
-    this.project3 = this.textModel.children[1].children[2];
-    this.project3Title = this.textModel.children[1].children[2].children[1];
-    this.project3Description =
-      this.textModel.children[1].children[2].children[0];
-    this.project3Image = this.textModel.children[1].children[2].children[2];
-    this.project3Stack = this.textModel.children[0].children[8];
-
     this.project3.visible = false;
     this.project3Stack.visible = false;
 
     // PROJECT 4
-    this.project4 = this.textModel.children[1].children[3];
-    this.project4Title = this.textModel.children[1].children[3].children[1];
-    this.project4Description =
-      this.textModel.children[1].children[3].children[0];
-    this.project4Image = this.textModel.children[1].children[3].children[3];
-    this.project4ImageBis = this.textModel.children[1].children[3].children[2];
-    this.project4Stack = this.textModel.children[0].children[9];
-
     this.project4.visible = false;
     this.project4Stack.visible = false;
 
     // PROJECT 5
-    this.project5 = this.textModel.children[1].children[4];
-    this.project5Title = this.textModel.children[1].children[4].children[1];
-    this.project5Description =
-      this.textModel.children[1].children[4].children[0];
-    this.project5Image = this.textModel.children[1].children[4].children[2];
-    this.project5Stack = this.textModel.children[0].children[10];
-
     this.project5.visible = false;
     this.project5Stack.visible = false;
 
     // PROJECT 6
-    this.project6 = this.textModel.children[1].children[5];
-    this.project6Title = this.textModel.children[1].children[5].children[2];
-    this.project6Description =
-      this.textModel.children[1].children[5].children[0];
-    this.project6TitleBis = this.textModel.children[1].children[5].children[3];
-    this.project6DescriptionBis =
-      this.textModel.children[1].children[5].children[1];
-    this.project6Stack = this.textModel.children[0].children[11];
-
     this.project6.visible = false;
     this.project6Stack.visible = false;
 
     // PROJECT 7
-    this.project7 = this.textModel.children[1].children[6];
-    this.project7Title = this.textModel.children[1].children[6].children[1];
-    this.project7Description =
-      this.textModel.children[1].children[6].children[0];
-    this.project7Image = this.textModel.children[1].children[6].children[2];
-    this.project7Stack = this.textModel.children[0].children[12];
-
     this.project7.visible = false;
     this.project7Stack.visible = false;
 
     /**
-     * ACTUAL TEXT
+     * INIT ACTUAL TEXT
      */
     this.actualProject = this.project1;
     this.actualTitle = this.project1Title;
@@ -1179,73 +1288,11 @@ export default class TextProject {
     this.actualImage.visible = false;
     this.actualImageBis.visible = false;
 
-    // IMAGES' TRANSPARENCE CORRECTION
-    this.githubLogo.material.depthTest = true;
-    this.githubLogo.material.depthWrite = true;
-    this.project1Image.material.depthTest = true;
-    this.project1Image.material.depthWrite = true;
-    this.project1ImageBis.material.depthTest = true;
-    this.project1ImageBis.material.depthWrite = true;
-    this.project2Image.material.depthTest = true;
-    this.project2Image.material.depthWrite = true;
-    this.project2ImageBis.material.depthTest = true;
-    this.project2ImageBis.material.depthWrite = true;
-    this.project3Image.material.depthTest = true;
-    this.project3Image.material.depthWrite = true;
-    this.project4Image.material.depthTest = true;
-    this.project4Image.material.depthWrite = true;
-    this.project4ImageBis.material.depthTest = true;
-    this.project4ImageBis.material.depthWrite = true;
-    this.project5Image.material.depthTest = true;
-    this.project5Image.material.depthWrite = true;
-
-    /**
-     * MATERIALS
-     */
-    this.projectTitleMaterial = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      emissiveIntensity: 1,
-      transparent: true,
-      opacity: 0,
-    });
-    this.projectParagraphMaterial = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      emissiveIntensity: 1,
-      transparent: true,
-      opacity: 0,
-    });
-
-    const titleArr = [
-      this.project1Title,
-      this.project2Title,
-      this.project3Title,
-      this.project4Title,
-      this.project5Title,
-      this.project6Title,
-      this.project7Title,
-    ];
-    const paragraphArr = [
-      this.project1Description,
-      this.project1Stack,
-      this.project2Description,
-      this.project2Stack,
-      this.project3Description,
-      this.project3Stack,
-      this.project4Description,
-      this.project4Stack,
-      this.project5Description,
-      this.project5Stack,
-      this.project6Description,
-      this.project6Stack,
-      this.project7Description,
-      this.project7Stack,
-    ];
-
-    for (var i = 0; i < titleArr.length; i++) {
-      titleArr[i].material = this.projectTitleMaterial;
+    for (var i = 0; i < this.titleArr.length; i++) {
+      this.titleArr[i].material = this.projectTitleMaterial;
     }
-    for (var i = 0; i < paragraphArr.length; i++) {
-      paragraphArr[i].material = this.projectParagraphMaterial;
+    for (var i = 0; i < this.paragraphArr.length; i++) {
+      this.paragraphArr[i].material = this.projectParagraphMaterial;
     }
 
     setTimeout(() => {

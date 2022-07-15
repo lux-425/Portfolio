@@ -36,9 +36,34 @@ export default class TextProfil {
 
     this.textModel.translateX(-4);
 
-    this.animateText();
+    this.setVariables();
 
     this.setAnimation();
+  }
+
+  setVariables() {
+    this.titleProfil = this.textModel.children[1];
+    this.titlePos = [-0.15, -0.2, -0.25, -0.35, 0.2, 0.2];
+    this.headersProfil = this.textModel.children[4];
+    this.paragraphsProfil = this.textModel.children[5];
+    this.arrowProfil = this.textModel.children[3];
+    this.arrowHitboxProfil = this.textModel.children[2];
+    this.arrowTextProfil = this.textModel.children[0];
+    this.homeArrowHitbox = this.textModel.children[7];
+    this.homeArrow = this.textModel.children[6];
+
+    this.titleProfil.children[0].material.emissive = new THREE.Color('white');
+    this.titleProfil.children[0].material.emissiveIntensity = 5;
+
+    /**
+     * OBJECT READY
+     */
+    this.experience.world.objectsReadyArr[0] = true;
+
+    /**
+     * ANIMATE
+     */
+    this.animateText();
   }
 
   animateText() {
@@ -47,13 +72,6 @@ export default class TextProfil {
     /**
      * TITLE
      */
-    this.titleProfil = this.textModel.children[1];
-
-    this.titleProfil.children[0].material.emissive = new THREE.Color('white');
-    this.titleProfil.children[0].material.emissiveIntensity = 5;
-
-    this.titlePos = [-0.15, -0.2, -0.25, -0.35, 0.2, 0.2];
-
     this.titleProfil.children[0].translateZ(this.titlePos[0]);
     this.titleProfil.children[1].translateZ(this.titlePos[1]);
     this.titleProfil.children[2].translateZ(this.titlePos[2]);
@@ -94,7 +112,6 @@ export default class TextProfil {
     /**
      * HEADERS
      */
-    this.headersProfil = this.textModel.children[4];
     this.headersProfil.material = new THREE.MeshStandardMaterial({
       emissive: 'white',
       emissiveIntensity: 5,
@@ -111,7 +128,6 @@ export default class TextProfil {
     /**
      * PARAGRAPHS
      */
-    this.paragraphsProfil = this.textModel.children[5];
     this.paragraphsProfil.material = new THREE.MeshStandardMaterial({
       emissive: 'white',
       emissiveIntensity: 5,
@@ -128,7 +144,6 @@ export default class TextProfil {
     /**
      * ARROW
      */
-    this.arrowProfil = this.textModel.children[3];
     this.arrowProfil.material = new THREE.MeshStandardMaterial({
       emissive: 'white',
       emissiveIntensity: 5,
@@ -136,10 +151,8 @@ export default class TextProfil {
       opacity: 0,
     });
 
-    this.arrowHitboxProfil = this.textModel.children[2];
     this.arrowHitboxProfil.visible = false;
 
-    this.arrowTextProfil = this.textModel.children[0];
     for (var i = 0; i < 5; i++) {
       this.arrowTextProfil.children[i].material =
         new THREE.MeshStandardMaterial({
@@ -150,9 +163,7 @@ export default class TextProfil {
         });
     }
 
-    this.homeArrowHitbox = this.textModel.children[7];
     this.homeArrowHitbox.visible = false;
-    this.homeArrow = this.textModel.children[6];
     this.homeArrow.visible = false;
 
     // ARROW APPEARANCE

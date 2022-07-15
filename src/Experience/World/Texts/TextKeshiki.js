@@ -45,7 +45,7 @@ export default class TextKeshiki {
 
     this.setVariables();
 
-    // this.setAnimation();
+    this.setAnimation();
   }
 
   setVariables() {
@@ -138,13 +138,21 @@ export default class TextKeshiki {
       this.youkoso[i].material = this.messageMaterial;
     }
 
+    /**
+     * OBJECT READY
+     */
+    this.experience.world.objectsReadyArr[7] = true;
+
+    /**
+     * ANIMATE
+     */
     this.animateText();
   }
 
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    console.log(this.textModel);
+    // console.log(this.textModel);
 
     this.nihongo.visible = false;
     this.francais.visible = false;

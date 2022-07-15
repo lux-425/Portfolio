@@ -42,7 +42,7 @@ export default class TextKyoumi {
 
     this.setVariables();
 
-    // this.setAnimation();
+    this.setAnimation();
   }
 
   setVariables() {
@@ -131,6 +131,11 @@ export default class TextKyoumi {
     this.escalade.material = this.textMaterial;
     this.mv.material = this.textMaterial;
     this.gaikoku.material = this.textMaterial;
+
+    /**
+     * OBJECT READY
+     */
+    this.experience.world.objectsReadyArr[6] = true;
 
     /**
      * ANIMATE

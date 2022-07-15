@@ -52,7 +52,7 @@ export default class TextGengo {
 
     this.setVariables();
 
-    // this.setAnimation();
+    this.setAnimation();
   }
 
   setVariables() {
@@ -135,22 +135,11 @@ export default class TextGengo {
 
     // 本
     this.honNames = this.textModelRight.children[0].children[8];
-    // this.rtk = this.textModelRight.children[0].children[17];
-    // this.mnn1 = this.textModelRight.children[0].children[20];
-    // this.mnn2 = this.textModelRight.children[0].children[21];
-    // this.tobira = this.textModelRight.children[0].children[16];
-    // this.kanzenN3 = this.textModelRight.children[0].children[19];
-    // this.kanzenN2 = this.textModelRight.children[0].children[18];
 
     // ソフトエア
     this.softwaresNames = this.textModelRight.children[0].children[10];
-    // this.anki = this.textModelRight.children[0].children[11];
-    // this.ankiStats = this.textModelRight.children[0].children[15];
-    // this.bunpro = this.textModelRight.children[0].children[13];
-    // this.bunproStats = this.textModelRight.children[0].children[12];
 
     // ＪＬＰＴ
-    // this.jlptPhoto = this.textModelRight.children[0].children[14];
     this.jlptWaiting = this.textModelRight.children[0].children[9];
 
     /**
@@ -246,6 +235,11 @@ export default class TextGengo {
       .onStart(() => {
         this.arrowTextRight.material.opacity = 0;
       });
+
+    /**
+     * OBJECT READY
+     */
+    this.experience.world.objectsReadyArr[5] = true;
 
     /**
      * ANIMATE

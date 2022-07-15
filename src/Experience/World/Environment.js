@@ -227,7 +227,7 @@ export default class Environment {
       this.elapsedTime = this.clock.getElapsedTime();
 
       // Update Lights
-      this.centerPointLightAngle = this.elapsedTime;
+      this.centerPointLightAngle = this.elapsedTime * 0.55;
 
       this.centerPointLight.position.x =
         Math.cos(this.centerPointLightAngle) * 5 + 1;

@@ -36,21 +36,27 @@ export default class TextShoukai {
 
     this.textModel.translateY(4);
 
-    this.animateText();
+    this.setVariables();
 
     this.setAnimation();
+  }
+
+  setVariables() {
+    /**
+     * OBJECT READY
+     */
+    this.experience.world.objectsReadyArr[1] = true;
+
+    /**
+     * ANIMATE
+     */
+    this.animateText();
   }
 
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
     // console.log(this.textModel);
-
-    /**
-     * ARROW
-     */
-    // this.arrowHitboxShoukai = this.textModel.children[1];
-    // this.arrowHitboxShoukai.visible = false;
   }
 
   setAnimation() {
