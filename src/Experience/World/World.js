@@ -62,7 +62,7 @@ export default class World {
     this.polygonCone = new Polygon('cone', -13, -8, 0.0001);
     this.polygonCone.mesh.position.set(-10, 2.01, -11);
 
-    this.polygonCircle = new Polygon('circle', 16, -11, -0.0005);
+    this.polygonCircle = new Polygon('circle', 16, -11, -0.0003);
     this.polygonCircle.mesh.position.set(-10, 4.01, -11);
 
     this.polygonCylinder = new Polygon('cylinder', 16, -11, 0.0001);
@@ -105,6 +105,7 @@ export default class World {
       false,
       false,
       false,
+      false
     ];
     this.waitObjectsReady();
 

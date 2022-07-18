@@ -5,7 +5,8 @@ import Experience from '../Experience.js';
 import keshikiVertexShader from '../../shaders/Keshiki/vertex.glsl';
 import keshikiFragmentShader from '../../shaders/Keshiki/fragment.glsl';
 
-// import TextKeshiki from './Texts/TextKeshiki.js';
+import flagVertexShader from '../../shaders/Keshiki/Flag/vertex.glsl';
+import flagFragmentShader from '../../shaders/Keshiki/Flag/fragment.glsl';
 
 export default class Keshiki {
   constructor() {
@@ -23,6 +24,14 @@ export default class Keshiki {
     this.area = 'gengoErabu';
 
     /**
+     * Textures
+     */
+    const textureLoader = new THREE.TextureLoader();
+    this.flagTextureFrance = textureLoader.load('/textures/flag-france.jpg');
+    this.flagTextureNippon = textureLoader.load('/textures/flag-nippon.jpg');
+    this.flagTextureKokusai = textureLoader.load('/textures/flag-kokusai.jpg');
+
+    /**
      *
      * CLICK EVENTS
      *
@@ -31,15 +40,15 @@ export default class Keshiki {
       if (this.currentIntersect) {
         switch (this.currentIntersect) {
           case 'francaisHitbox':
-            this.hideLanguages();
+            this.confirmLanguage();
             this.experience.world.textKeshiki.contact.material.opacity = 1;
             break;
           case 'nihongoHitbox':
-            this.hideLanguages();
+            this.confirmLanguage();
             this.experience.world.textKeshiki.contact.material.opacity = 1;
             break;
           case 'englishHitbox':
-            this.hideLanguages();
+            this.confirmLanguage();
             this.experience.world.textKeshiki.contact.material.opacity = 1;
             break;
           case 'contactHitbox':
@@ -52,8 +61,8 @@ export default class Keshiki {
     // Debug
     this.debug = this.experience.debug;
     this.debugObject = {};
-    this.debugObject.depthColor = '#b152ff';
-    this.debugObject.surfaceColor = '#6600ff';
+    this.debugObject.depthColor = '#000000';
+    this.debugObject.surfaceColor = '#ffffff';
 
     this.setKeshiki();
 
@@ -66,21 +75,40 @@ export default class Keshiki {
     }
   }
 
-  hideLanguages() {
+  confirmLanguage() {
     this.area = 'gamenErabu';
 
+    this.mesh.material = this.material;
+
+    this.experience.world.objectsReadyArr[8] = true;
     this.experience.world.textKeshiki.nihongo.visible = false;
     this.experience.world.textKeshiki.francais.visible = false;
+    this.experience.world.textKeshiki.english.visible = false;
+  }
+
+  hideLanguages() {
     this.experience.world.textKeshiki.nihongo.visible = false;
+    this.experience.world.textKeshiki.francais.visible = false;
+    this.experience.world.textKeshiki.english.visible = false;
+  }
+
+  showLanguages() {
+    this.experience.world.textKeshiki.nihongo.visible = true;
+    this.experience.world.textKeshiki.francais.visible = true;
+    this.experience.world.textKeshiki.english.visible = true;
   }
 
   setKeshiki() {
-    this.keshikiGeometry = new THREE.PlaneGeometry(15, 9, 128, 128);
-    this.keshikiMaterial = new THREE.ShaderMaterial({
+    /**
+     * MATERIALS
+     */
+    // DEFAULT
+    this.material = new THREE.ShaderMaterial({
       vertexShader: keshikiVertexShader,
       fragmentShader: keshikiFragmentShader,
       side: THREE.FrontSide,
       // transparent: true,
+      wireframe: true,
       uniforms: {
         uTime: { value: 0 },
 
@@ -102,15 +130,63 @@ export default class Keshiki {
       },
     });
 
+    // FRANCE
+    this.flagMaterialFrance = new THREE.ShaderMaterial({
+      vertexShader: flagVertexShader,
+      fragmentShader: flagFragmentShader,
+      wireframe: true,
+      // transparent: true,
+      uniforms: {
+        uFrequency: { value: new THREE.Vector2(2, 6) },
+        uTime: { value: 0 },
+        uColor: { value: new THREE.Color('white') },
+        uTexture: { value: this.flagTextureFrance },
+      },
+    });
+
+    // 日本
+    this.flagMaterialNippon = new THREE.ShaderMaterial({
+      vertexShader: flagVertexShader,
+      fragmentShader: flagFragmentShader,
+      wireframe: true,
+      // transparent: true,
+      uniforms: {
+        uFrequency: { value: new THREE.Vector2(2, 6) },
+        uTime: { value: 0 },
+        uColor: { value: new THREE.Color('white') },
+        uTexture: { value: this.flagTextureNippon },
+      },
+    });
+
+    // 国際
+    this.flagMaterialKokusai = new THREE.ShaderMaterial({
+      vertexShader: flagVertexShader,
+      fragmentShader: flagFragmentShader,
+      wireframe: true,
+      // transparent: true,
+      uniforms: {
+        uFrequency: { value: new THREE.Vector2(2, 6) },
+        uTime: { value: 0 },
+        uColor: { value: new THREE.Color('white') },
+        uTexture: { value: this.flagTextureKokusai },
+      },
+    });
+
+    /**
+     * GEOMETRY
+     */
+    this.keshikiGeometry = new THREE.PlaneGeometry(15, 9, 128, 128);
+    this.keshikiMaterial = this.material;
+
+    /**
+     * MESH
+     */
     this.mesh = new THREE.Mesh(this.keshikiGeometry, this.keshikiMaterial);
     this.mesh.name = 'keshiki';
-
     // this.mesh.rotation.x = -Math.PI * 0.25;
     this.mesh.position.set(0, 4.5, -18);
 
     this.scene.add(this.mesh);
-
-    this.mesh.material.wireframe = true;
   }
 
   setAnimation() {
@@ -128,7 +204,7 @@ export default class Keshiki {
       this.intersects = this.raycaster.intersectObjects(this.objectsToTest);
 
       // Update keshiki
-      this.keshikiMaterial.uniforms.uTime.value = elapsedTime;
+      this.mesh.material.uniforms.uTime.value = elapsedTime;
 
       if (this.intersects.length) {
         document.body.style.cursor = 'pointer';
@@ -137,14 +213,14 @@ export default class Keshiki {
         if (!this.currentIntersect) {
           if (this.area === 'gengoErabu') {
             if (this.intersects[0].object.name === 'francaisHitbox') {
-              this.experience.world.textKeshiki.nihongo.visible = false;
-              this.experience.world.textKeshiki.english.visible = false;
+              this.hideLanguages();
+              this.mesh.material = this.flagMaterialFrance;
             } else if (this.intersects[0].object.name === 'nihongoHitbox') {
-              this.experience.world.textKeshiki.francais.visible = false;
-              this.experience.world.textKeshiki.english.visible = false;
+              this.hideLanguages();
+              this.mesh.material = this.flagMaterialNippon;
             } else if (this.intersects[0].object.name === 'englishHitbox') {
-              this.experience.world.textKeshiki.nihongo.visible = false;
-              this.experience.world.textKeshiki.francais.visible = false;
+              this.hideLanguages();
+              this.mesh.material = this.flagMaterialKokusai;
             }
           } else if (this.area === 'gamenErabu') {
             if (this.intersects[0].object.name === 'contactHitbox') {
@@ -160,14 +236,14 @@ export default class Keshiki {
         if (this.currentIntersect) {
           if (this.area === 'gengoErabu') {
             if (this.currentIntersect === 'francaisHitbox') {
-              this.experience.world.textKeshiki.nihongo.visible = true;
-              this.experience.world.textKeshiki.english.visible = true;
+              this.showLanguages();
+              this.mesh.material = this.material;
             } else if (this.currentIntersect === 'nihongoHitbox') {
-              this.experience.world.textKeshiki.francais.visible = true;
-              this.experience.world.textKeshiki.english.visible = true;
+              this.showLanguages();
+              this.mesh.material = this.material;
             } else if (this.currentIntersect === 'englishHitbox') {
-              this.experience.world.textKeshiki.francais.visible = true;
-              this.experience.world.textKeshiki.nihongo.visible = true;
+              this.showLanguages();
+              this.mesh.material = this.material;
             }
           } else if (this.area === 'gamenErabu') {
             if (this.currentIntersect === 'contactHitbox') {

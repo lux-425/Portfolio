@@ -46,7 +46,7 @@ export default class Polygon {
         this.mesh.name = 'cone';
         break;
       case 'circle':
-        this.polygonGeometry = new THREE.CircleGeometry(3, 9);
+        this.polygonGeometry = new THREE.CircleGeometry(2.88, 18);
         this.polygonMaterial = new THREE.MeshBasicMaterial({
           color: 0xffffff,
           wireframe: true,
@@ -56,7 +56,7 @@ export default class Polygon {
         this.mesh.name = 'circle';
         break;
       case 'cylinder':
-        this.polygonGeometry = new THREE.CylinderGeometry(2, 2, 5, 8, 10, true);
+        this.polygonGeometry = new THREE.CylinderGeometry(2, 2, 5, 8, 5, true);
         this.polygonMaterial = new THREE.MeshBasicMaterial({
           color: 0xffffff,
           wireframe: true,
@@ -160,7 +160,7 @@ export default class Polygon {
         this.mesh.name = 'ball';
         break;
       case 'torus':
-        this.polygonGeometry = new THREE.TorusKnotGeometry(1, 0.2, 13, 13);
+        this.polygonGeometry = new THREE.TorusKnotGeometry(1, 0.2, 16, 8, 1, 1);
         this.polygonMaterial = new THREE.MeshBasicMaterial({
           color: 0xffffff,
           wireframe: true,
@@ -224,8 +224,15 @@ export default class Polygon {
           break;
         case 'torus':
           this.mesh.rotateX(-Math.sin(deltaTime * this.speed));
-          this.mesh.rotateY(Math.sin(deltaTime * this.speed * 0.8));
-          this.mesh.position.y = 2.6 + Math.sin(-elapsedTime * 0.3);
+          this.mesh.position.y = 2.6 + Math.sin(-elapsedTime * 0.155);
+          this.mesh.geometry = new THREE.TorusKnotGeometry(
+            1,
+            0.2,
+            10,
+            10,
+            elapsedTime * 0.15,
+            Math.sin(elapsedTime * 0.15)
+          );
           break;
       }
 

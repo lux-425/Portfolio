@@ -202,6 +202,7 @@ export default class Yubisashi {
 
       if (this.intersects.length) {
         document.body.style.cursor = 'pointer';
+        // this.experience.togglePointer(true);
 
         // MOUSE ENTER
         if (!this.currentIntersect) {
@@ -240,6 +241,7 @@ export default class Yubisashi {
         this.currentIntersect = this.intersects[0].object.name;
       } else {
         document.body.style.cursor = 'default';
+        // this.experience.togglePointer(false);
 
         // MOUSE LEAVE
         if (this.currentIntersect) {
