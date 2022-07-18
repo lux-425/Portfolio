@@ -105,15 +105,15 @@ export default class World {
       false,
       false,
       false,
-      false
+      false,
     ];
     this.waitObjectsReady();
 
-    this.setTexts();
+    this.textKeshiki = new TextKeshiki();
 
     // SHADER LECTURE
-    this.leftPanels.gamenOne.material.fragmentShader =
-      gamenFragmentShaderLecture;
+    // this.leftPanels.gamenOne.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
     // this.leftPanels.gamenThree.material.fragmentShader =
@@ -132,14 +132,13 @@ export default class World {
     //   gamenFragmentShaderLecture;
     // this.rightPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
-    this.rightPanels.gamenThree.material.fragmentShader =
-      gamenFragmentShaderLecture;
-    this.rightPanels.gamenFour.material.fragmentShader =
-      gamenFragmentShaderLecture;
+    // this.rightPanels.gamenThree.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.rightPanels.gamenFour.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
   }
 
   waitObjectsReady() {
-    // console.log(this.objectsReadyArr);
     if (!this.objectsReadyArr.every(Boolean)) {
       setTimeout(() => {
         this.waitObjectsReady();
@@ -204,8 +203,6 @@ export default class World {
   }
 
   setTexts() {
-    this.textKeshiki = new TextKeshiki();
-
     this.textProfil = new TextProfil();
     this.textShoukai = new TextShoukai();
 
@@ -218,7 +215,7 @@ export default class World {
   }
 
   setPanels() {
-    // Blender's model
+    // Panels' Blender model
     this.gltfLoader.load('../../models/frame.glb', (gltf) => {
       this.model = gltf.scene;
       // this.model.traverse((o) => {
@@ -234,6 +231,7 @@ export default class World {
 
       this.model.translateX(-4);
     });
+
     /**
      * 左
      */

@@ -32,7 +32,7 @@ export default class TextKyoumi {
   async setModel() {
     await this.model.waitForLoad();
     this.textModel = this.model.model.children[0];
-    this.scene.add(this.textModel);
+    // this.scene.add(this.textModel);
 
     this.textModel.position.set(
       this.experience.world.rightPanels.gamenThree.mesh.position.x,

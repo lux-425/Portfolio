@@ -73,7 +73,7 @@ export default class Particles {
     );
 
     this.smallParticlesGeometry = new THREE.BufferGeometry();
-    this.countBis = 1055;
+    this.countBis = 555;
 
     const positions = new Float32Array(this.count * 3);
     const colors = new Float32Array(this.count * 3);

@@ -33,11 +33,11 @@ export default class TextGengo {
   async setModel() {
     await this.modelRight.waitForLoad();
     this.textModelRight = this.modelRight.model.children[0];
-    this.scene.add(this.textModelRight);
+    // this.scene.add(this.textModelRight);
 
     await this.modelLeft.waitForLoad();
     this.textModelLeft = this.modelLeft.model.children[0];
-    this.scene.add(this.textModelLeft);
+    // this.scene.add(this.textModelLeft);
 
     this.textModelRight.position.set(
       this.experience.world.rightPanels.gamenFour.mesh.position.x,

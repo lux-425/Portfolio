@@ -41,7 +41,7 @@ export default class Panels {
           shitaBreathingSpeed: 0.2,
           shitaBreathingIterations: 1.0,
           color: '#0000ff',
-          opacity: 0.88,
+          opacity: 0,
           shader: 'left',
         };
 
@@ -76,7 +76,7 @@ export default class Panels {
           shitaBreathingSpeed: -0.4,
           shitaBreathingIterations: 2.0,
           color: '#ff0000',
-          opacity: 0.88,
+          opacity: 0,
           shader: 'center',
         };
 
@@ -114,7 +114,7 @@ export default class Panels {
           shitaBreathingSpeed: 1.55,
           shitaBreathingIterations: 1.0,
           color: '#00ff00',
-          opacity: 0.88,
+          opacity: 0,
           shader: 'right',
         };
 
@@ -135,7 +135,7 @@ export default class Panels {
 
         this.gamenFour = new Gamen(this.gamenParams);
         this.gamenFour.mesh.rotateY(-(11 * Math.PI) / 6 + 0.1725);
-        this.gamenFour.mesh.translateX(2.120);
+        this.gamenFour.mesh.translateX(2.12);
         this.gamenFour.mesh.translateZ(1.2255);
 
         this.gamens.push(this.gamenFour.mesh);
@@ -182,8 +182,6 @@ export default class Panels {
         gamen.material.uniforms.uOpacity.value = this.gamenParams.opacity;
 
         // テスト！！！
-
-
       }
 
       // Call tick again on the next frame

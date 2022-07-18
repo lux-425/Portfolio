@@ -49,24 +49,43 @@ export default class TextKeshiki {
   }
 
   setVariables() {
+    var TWEEN = require('@tweenjs/tween.js');
+
     /**
      * INIT
      */
-    this.select = this.textModel.children[10];
-    this.contact = this.textModel.children[2];
-    this.contactHitbox = this.textModel.children[3];
-    this.contactHitbox.visible = false;
-    this.nihongo = this.textModel.children[6];
-    this.nihongoHitbox = this.textModel.children[9];
-    this.nihongoHitbox.visible = false;
-    this.francais = this.textModel.children[7];
-    this.francaisHitbox = this.textModel.children[5];
-    this.francaisHitbox.visible = false;
-    this.english = this.textModel.children[8];
-    this.englishHitbox = this.textModel.children[4];
-    this.englishHitbox.visible = false;
+    this.select = this.textModel.children[2];
+    this.mouse = this.textModel.children[2].children[6];
+    this.select1a = this.textModel.children[2].children[0];
+    this.select1b = this.textModel.children[2].children[1];
+    this.select2a = this.textModel.children[2].children[2];
+    this.select2b = this.textModel.children[2].children[3];
+    this.select3a = this.textModel.children[2].children[4];
+    this.select3b = this.textModel.children[2].children[5];
+    this.selectArr = [
+      this.select1a,
+      this.select1b,
+      this.select2a,
+      this.select2b,
+      this.select3a,
+      this.select3b,
+      this.mouse,
+    ];
 
     this.select.translateY(0.01);
+
+    this.contact = this.textModel.children[3];
+    this.contactHitbox = this.textModel.children[4];
+    this.contactHitbox.visible = false;
+    this.nihongo = this.textModel.children[7];
+    this.nihongoHitbox = this.textModel.children[10];
+    this.nihongoHitbox.visible = false;
+    this.francais = this.textModel.children[8];
+    this.francaisHitbox = this.textModel.children[6];
+    this.francaisHitbox.visible = false;
+    this.english = this.textModel.children[9];
+    this.englishHitbox = this.textModel.children[5];
+    this.englishHitbox.visible = false;
 
     this.aboutNihongo1 = this.textModel.children[0].children[0];
     this.aboutNihongo2 = this.textModel.children[0].children[1];
@@ -112,7 +131,9 @@ export default class TextKeshiki {
       opacity: 0,
     });
     this.contact.material = this.contactSelectMaterial;
-    this.select.material = this.contactSelectMaterial;
+    for (var i = 0; i < this.selectArr.length; i++) {
+      this.selectArr[i].material = this.contactSelectMaterial;
+    }
 
     this.erabuMaterial = new THREE.MeshStandardMaterial({
       emissive: 'white',
@@ -139,6 +160,34 @@ export default class TextKeshiki {
       this.welcome[i].material = this.messageMaterial;
       this.youkoso[i].material = this.messageMaterial;
     }
+
+    /**
+     * TWEEN ANIMATIONS
+     */
+    this.select1a.position.set(-0.8, 0, -0.8);
+    this.select1b.position.set(0.8, 0, 0.8);
+    this.select2a.position.set(-0.5, 0, 0);
+    this.select2b.position.set(0.5, 0, 0);
+    this.select3a.position.set(-0.8, 0, -0.8);
+    this.select3b.position.set(0.8, 0, 0.8);
+    this.mouse.translateZ(0.8);
+
+    this.select1a.material.opacity = 0;
+
+    this.translateSelects = () => {
+      for (var i = 0; i < this.selectArr.length; i++) {
+        this.tweenTranslateSelects = new TWEEN.Tween(this.selectArr[i].position)
+          .to({ x: 0, y: 0, z: 0 }, 3333)
+          .easing(TWEEN.Easing.Cubic.Out);
+        this.tweenTranslateSelects.start();
+      }
+    };
+    this.tweenAppearSelects = new TWEEN.Tween(this.select1a.material)
+      .to({ opacity: 1 }, 5555)
+      .easing(TWEEN.Easing.Cubic.Out)
+      .onStart(() => {
+        this.translateSelects();
+      });
 
     /**
      * OBJECT READY

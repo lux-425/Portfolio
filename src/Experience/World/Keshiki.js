@@ -27,7 +27,7 @@ export default class Keshiki {
      * Textures
      */
     const textureLoader = new THREE.TextureLoader();
-    this.flagTextureFrance = textureLoader.load('/textures/flag-france.jpg');
+    this.flagTextureFrance = textureLoader.load('/textures/flag-france.png');
     this.flagTextureNippon = textureLoader.load('/textures/flag-nippon.jpg');
     this.flagTextureKokusai = textureLoader.load('/textures/flag-kokusai.jpg');
 
@@ -41,15 +41,12 @@ export default class Keshiki {
         switch (this.currentIntersect) {
           case 'francaisHitbox':
             this.confirmLanguage();
-            this.experience.world.textKeshiki.contact.material.opacity = 1;
             break;
           case 'nihongoHitbox':
             this.confirmLanguage();
-            this.experience.world.textKeshiki.contact.material.opacity = 1;
             break;
           case 'englishHitbox':
             this.confirmLanguage();
-            this.experience.world.textKeshiki.contact.material.opacity = 1;
             break;
           case 'contactHitbox':
             window.open('https://linktr.ee/garcialuc');
@@ -76,14 +73,33 @@ export default class Keshiki {
   }
 
   confirmLanguage() {
-    this.area = 'gamenErabu';
+    var TWEEN = require('@tweenjs/tween.js');
 
+    this.area = 'gamenErabu';
     this.mesh.material = this.material;
 
+    this.experience.world.setTexts();
     this.experience.world.objectsReadyArr[8] = true;
+
     this.experience.world.textKeshiki.nihongo.visible = false;
     this.experience.world.textKeshiki.francais.visible = false;
     this.experience.world.textKeshiki.english.visible = false;
+
+    this.gamensParamsArr = [
+      this.experience.world.leftPanels.gamenParams,
+      this.experience.world.centerPanels.gamenParams,
+      this.experience.world.rightPanels.gamenParams,
+    ];
+    for (var i = 0; i < this.gamensParamsArr.length; i++) {
+      this.tweenAppearGamens = new TWEEN.Tween(this.gamensParamsArr[i])
+        .to({ opacity: 0.88 }, 2555 + i * 1555)
+        .easing(TWEEN.Easing.Bounce.InOut);
+      this.tweenAppearGamens.start();
+    }
+
+    setTimeout(() => {
+      this.experience.world.textKeshiki.tweenAppearSelects.start();
+    }, 500);
   }
 
   hideLanguages() {
@@ -112,21 +128,21 @@ export default class Keshiki {
       uniforms: {
         uTime: { value: 0 },
 
-        uBigWavesElevation: { value: 0.02 },
-        uBigWavesFrequency: { value: new THREE.Vector2(0, 0.55) },
+        uBigWavesElevation: { value: -0.55 },
+        uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uBigWavesSpeed: { value: -0.55 },
 
-        uSmallWavesElevation: { value: 2.55 },
-        uSmallWavesFrequency: { value: 0.25 },
-        uSmallWavesSpeed: { value: 0.2 },
-        uSmallWavesIterations: { value: 3 },
+        uSmallWavesElevation: { value: 5.55 },
+        uSmallWavesFrequency: { value: 0.055 },
+        uSmallWavesSpeed: { value: 0.25 },
+        uSmallWavesIterations: { value: 1 },
 
         uDepthColor: { value: new THREE.Color(this.debugObject.depthColor) },
         uSurfaceColor: {
           value: new THREE.Color(this.debugObject.surfaceColor),
         },
-        uColorOffset: { value: 1 },
-        uColorMultiplier: { value: 1 },
+        uColorOffset: { value: 0 },
+        uColorMultiplier: { value: 5 },
       },
     });
 
@@ -138,6 +154,7 @@ export default class Keshiki {
       // transparent: true,
       uniforms: {
         uFrequency: { value: new THREE.Vector2(2, 6) },
+        uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
         uColor: { value: new THREE.Color('white') },
         uTexture: { value: this.flagTextureFrance },
@@ -152,6 +169,7 @@ export default class Keshiki {
       // transparent: true,
       uniforms: {
         uFrequency: { value: new THREE.Vector2(2, 6) },
+        uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
         uColor: { value: new THREE.Color('white') },
         uTexture: { value: this.flagTextureNippon },
@@ -166,6 +184,7 @@ export default class Keshiki {
       // transparent: true,
       uniforms: {
         uFrequency: { value: new THREE.Vector2(2, 6) },
+        uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
         uColor: { value: new THREE.Color('white') },
         uTexture: { value: this.flagTextureKokusai },
@@ -205,6 +224,12 @@ export default class Keshiki {
 
       // Update keshiki
       this.mesh.material.uniforms.uTime.value = elapsedTime;
+      this.mesh.material.uniforms.uBigWavesFrequency.value.x = Math.tan(
+        elapsedTime * 0.055
+      );
+      this.mesh.material.uniforms.uBigWavesFrequency.value.y = Math.tan(
+        elapsedTime * 0.055
+      );
 
       if (this.intersects.length) {
         document.body.style.cursor = 'pointer';

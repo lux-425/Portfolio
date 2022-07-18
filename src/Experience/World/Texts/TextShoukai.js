@@ -32,7 +32,7 @@ export default class TextShoukai {
   async setModel() {
     await this.model.waitForLoad();
     this.textModel = this.model.model.children[0];
-    this.scene.add(this.textModel);
+    // this.scene.add(this.textModel);
 
     this.textModel.translateY(4);
 
