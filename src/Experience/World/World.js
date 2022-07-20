@@ -6,7 +6,6 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import Experience from '../Experience.js';
 
 import Environment from './Environment.js';
-import Floor from './Floor.js';
 import Chikei from './Chikei.js';
 import Panels from './Panels.js';
 import Keshiki from './Keshiki.js';
@@ -63,6 +62,7 @@ export default class World {
      * ポリゴン~~~~
      */
     this.setPolygons();
+
     this.chikei = new Chikei();
 
     /**
@@ -95,10 +95,10 @@ export default class World {
     //   gamenFragmentShaderLecture;
     // this.centerPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
-    this.centerPanels.gamenThree.material.fragmentShader =
-      gamenFragmentShaderLecture;
-    this.centerPanels.gamenFour.material.fragmentShader =
-      gamenFragmentShaderLecture;
+    // this.centerPanels.gamenThree.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
+    // this.centerPanels.gamenFour.material.fragmentShader =
+    //   gamenFragmentShaderLecture;
 
     // this.rightPanels.gamenOne.material.fragmentShader =
     //   gamenFragmentShaderLecture;
@@ -212,12 +212,9 @@ export default class World {
     this.gltfLoader.load('../../models/halo.glb', (gltf) => {
       this.model = gltf.scene;
       this.model.traverse((o) => {
-        if (o.isMesh) o.scale.set(10, 10, 10);
-        o.rotation.set(0, -Math.PI * 0.3, Math.PI * 0.8);
-        o.position.set(-75, 333, 81);
+        if (o.isMesh) o.scale.set(80, 80, 80);
+        o.position.set(-750, 70, 69);
       });
-
-      // this.model.children[0].material.wireframe = true
 
       this.scene.add(this.model);
     });
@@ -239,14 +236,6 @@ export default class World {
     // Panels' Blender model
     this.gltfLoader.load('../../models/frame.glb', (gltf) => {
       this.model = gltf.scene;
-      // this.model.traverse((o) => {
-      //   if (o.isMesh)
-      //     o.material = new THREE.MeshPhysicalMaterial({
-      //       side: THREE.DoubleSide,
-      //       wireframe: true
-      //     });
-      // });
-      // this.model.children[0].material.wireframe = true
 
       this.scene.add(this.model);
 

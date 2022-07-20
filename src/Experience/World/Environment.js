@@ -18,11 +18,7 @@ export default class Environment {
 
     // this.setAmbientLight();
     this.setSunLight();
-    this.setSpotLight();
     this.setCenterPointLight();
-    // this.setTestLight();
-
-    this.setEnvironmentMap();
 
     this.setAnimation();
 
@@ -32,86 +28,65 @@ export default class Environment {
     // this.scene.fog = this.fog;
   }
 
-  setTestLight() {
-    this.centerPointLight1 = new THREE.PointLight('#ff0000', 5, 5);
-    this.centerPointLight1.position.set(0, 1.5, 7);
-    this.scene.add(this.centerPointLight1);
-
-    this.centerPointLight2 = new THREE.PointLight('#00ff00', 5, 5);
-    this.centerPointLight2.position.set(0, 1, 7.5);
-    this.scene.add(this.centerPointLight2);
-  }
-
   setCenterPointLight() {
-    this.centerPointLight = new THREE.PointLight('#ffffff', 1, 2);
-    this.centerPointLight.position.set(1, 1, 1);
+    this.centerPointLight = new THREE.PointLight('#ffffff', 4, 15);
     this.scene.add(this.centerPointLight);
 
-    this.centerPointLight.shadow.mapSize.width = 256;
-    this.centerPointLight.shadow.mapSize.height = 256;
-    this.centerPointLight.shadow.camera.far = 7;
+    this.centerPointLight.castShadow = false;
+
+    this.centerPointLight.position.set(0, 2, 0);
 
     // HELPER
-    const helper = new THREE.PointLightHelper(this.centerPointLight, 5);
+    // const helper = new THREE.PointLightHelper(this.centerPointLight, 0.5);
     // this.scene.add(helper);
-
-    // Debug
-    if (this.debug.active) {
-      this.debugFolder
-        .add(this.centerPointLight, 'intensity')
-        .min(0)
-        .max(100)
-        .step(0.1)
-        .name('centerPointLightIntensity');
-      this.debugFolder
-        .add(this.centerPointLight, 'distance')
-        .min(0)
-        .max(20)
-        .step(0.1)
-        .name('centerPointLightDistance');
-    }
   }
 
-  setAmbientLight() {
-    this.ambientLight = new THREE.AmbientLight();
-    this.ambientLight.color = new THREE.Color('white');
-    this.ambientLight.intensity = 0.4;
-    this.scene.add(this.ambientLight);
+  // setAmbientLight() {
+  //   this.ambientLight = new THREE.AmbientLight();
+  //   this.ambientLight.color = new THREE.Color('white');
+  //   this.ambientLight.intensity = 0.4;
+  //   this.scene.add(this.ambientLight);
 
-    this.ambientLight.castShadow = false;
+  //   this.ambientLight.castShadow = false;
 
-    // Debug
-    if (this.debug.active) {
-      this.debugFolder
-        .add(this.ambientLight, 'intensity')
-        .min(0)
-        .max(10)
-        .step(0.1)
-        .name('ambientLightIntensity');
-    }
-  }
+  //   // Debug
+  //   if (this.debug.active) {
+  //     this.debugFolder
+  //       .add(this.ambientLight, 'intensity')
+  //       .min(0)
+  //       .max(10)
+  //       .step(0.1)
+  //       .name('ambientLightIntensity');
+  //   }
+  // }
 
   setSunLight() {
-    this.sunLight = new THREE.DirectionalLight('#b9d8e3', 10);
-    this.sunLightBis = new THREE.DirectionalLight('#b9d8e3', 10);
+    this.sunLight = new THREE.DirectionalLight('#ffffff', 5.5);
+    this.sunLightBis = new THREE.DirectionalLight('#ffffff', 5.5);
+    this.sunLightEncore = new THREE.DirectionalLight('#ffffff', 5.5);
 
-    this.sunLight.shadow.camera.far = 15;
-    this.sunLight.shadow.mapSize.set(1024, 1024);
-    this.sunLight.shadow.normalBias = 0.05;
-
-    this.sunLight.position.set(-3, 5, 3);
-    this.sunLightBis.position.set(4, 5, -4);
+    this.sunLight.position.set(-15, 15, 15);
+    this.sunLightBis.position.set(13, 15, -7);
+    this.sunLightEncore.position.set(-5, 15, -7);
 
     this.sunLight.castShadow = false;
+    this.sunLightBis.castShadow = false;
+    this.sunLightEncore.castShadow = false;
 
     // HELPER
-    const helper = new THREE.DirectionalLightHelper(this.sunLight, 5);
+    // const helper = new THREE.DirectionalLightHelper(this.sunLight, 5);
     // this.scene.add(helper);
-    const helperBis = new THREE.DirectionalLightHelper(this.sunLightBis, 5);
+    // const helperBis = new THREE.DirectionalLightHelper(this.sunLightBis, 5);
     // this.scene.add(helperBis);
+    // const helperEncore = new THREE.DirectionalLightHelper(
+    //   this.sunLightEncore,
+    //   5
+    // );
+    // this.scene.add(helperEncore);
 
     this.scene.add(this.sunLight);
     this.scene.add(this.sunLightBis);
+    this.scene.add(this.sunLightEncore);
 
     // Debug
     if (this.debug.active) {
@@ -121,101 +96,80 @@ export default class Environment {
         .max(20)
         .step(0.1)
         .name('sunLightIntensity');
-
       this.debugFolder
         .add(this.sunLight.position, 'x')
-        .min(-5)
-        .max(5)
+        .min(-15)
+        .max(15)
         .step(0.001)
         .name('sunLightX');
-
       this.debugFolder
         .add(this.sunLight.position, 'y')
-        .min(-5)
-        .max(5)
+        .min(-15)
+        .max(15)
         .step(0.001)
         .name('sunLightY');
-
       this.debugFolder
         .add(this.sunLight.position, 'z')
-        .min(-5)
-        .max(5)
+        .min(-15)
+        .max(15)
         .step(0.001)
         .name('sunLightZ');
-    }
-  }
 
-  setSpotLight() {
-    this.spotLight = new THREE.SpotLight('#b4dbe4');
-    this.spotLight.intensity = 1;
-    this.spotLight.position.set(-4, 3.5, -5);
-
-    this.spotLight.shadow.mapSize.width = 1024 * 2;
-    this.spotLight.shadow.mapSize.height = 1024 * 2;
-    this.spotLight.shadow.focus = 1;
-
-    this.spotLight.shadow.camera.near = 0.1;
-    this.spotLight.shadow.camera.far = 10;
-    this.spotLight.shadow.camera.fov = 300;
-
-    // this.spotLight.angle = Math.PI / 2;
-
-    // HELPER
-    const helper = new THREE.DirectionalLightHelper(this.spotLight, 5);
-    // this.scene.add(helper);
-
-    this.scene.add(this.spotLight);
-
-    // Debug
-    if (this.debug.active) {
       this.debugFolder
-        .add(this.spotLight, 'intensity')
+        .add(this.sunLightBis, 'intensity')
         .min(0)
-        .max(100)
+        .max(20)
         .step(0.1)
-        .name('spotLightIntensity');
+        .name('sunLightBisIntensity');
       this.debugFolder
-        .add(this.spotLight.position, 'x')
-        .min(-10)
-        .max(20)
+        .add(this.sunLightBis.position, 'x')
+        .min(-15)
+        .max(15)
         .step(0.001)
-        .name('spotLightX');
+        .name('sunLightBisX');
       this.debugFolder
-        .add(this.spotLight.position, 'y')
+        .add(this.sunLightBis.position, 'y')
+        .min(-15)
+        .max(15)
+        .step(0.001)
+        .name('sunLightBisY');
+      this.debugFolder
+        .add(this.sunLightBis.position, 'z')
+        .min(-15)
+        .max(15)
+        .step(0.001)
+        .name('sunLightBisZ');
+
+      this.debugFolder
+        .add(this.sunLightEncore, 'intensity')
         .min(0)
         .max(20)
-        .step(0.001)
-        .name('spotLightY');
+        .step(0.1)
+        .name('sunLightEncoreIntensity');
       this.debugFolder
-        .add(this.spotLight.position, 'z')
-        .min(-20)
-        .max(40)
+        .add(this.sunLightEncore.position, 'x')
+        .min(-15)
+        .max(15)
         .step(0.001)
-        .name('spotLightZ');
+        .name('sunLightEncoreX');
       this.debugFolder
-        .add(this.spotLight, 'distance')
-        .min(0)
-        .max(100)
+        .add(this.sunLightEncore.position, 'y')
+        .min(-15)
+        .max(15)
         .step(0.001)
-        .name('spotLightDistance');
+        .name('sunLightEncoreY');
       this.debugFolder
-        .add(this.spotLight, 'angle')
-        .min(-1)
-        .max(1)
+        .add(this.sunLightEncore.position, 'z')
+        .min(-15)
+        .max(15)
         .step(0.001)
-        .name('spotLightAngle');
-      this.debugFolder
-        .add(this.spotLight, 'penumbra')
-        .min(0)
-        .max(1)
-        .step(0.001)
-        .name('spotPenumbra');
+        .name('sunLightEncoreZ');
     }
   }
 
-  setEnvironmentMap() {
-    this.environmentMap = {};
-  }
+  // setEnvironmentMap() {
+  //   this.environmentMap = {};
+  // }
 
   /**
    * Animate
@@ -227,22 +181,12 @@ export default class Environment {
       this.elapsedTime = this.clock.getElapsedTime();
 
       // Update Lights
-      this.centerPointLightAngle = this.elapsedTime * 0.55;
+      this.centerPointLightAngle = this.elapsedTime * 0.25;
 
       this.centerPointLight.position.x =
-        Math.cos(this.centerPointLightAngle) * 5 + 1;
+        Math.cos(this.centerPointLightAngle) * 10;
       this.centerPointLight.position.z =
-        Math.sin(this.centerPointLightAngle) * 5 + 2;
-
-      // this.centerPointLight1.position.x =
-      //   Math.cos(this.centerPointLightAngle) * 3;
-      // this.centerPointLight1.position.z =
-      //   Math.sin(this.centerPointLightAngle) * 3 + 1.5;
-
-      // this.centerPointLight2.position.x =
-      //   Math.cos(this.centerPointLightAngle) * 2 + 4.5;
-      // this.centerPointLight2.position.z =
-      //   Math.sin(this.centerPointLightAngle) * 2 + 1.5;
+        Math.sin(this.centerPointLightAngle) * 10;
 
       // Call tick again on the next frame
       window.requestAnimationFrame(this.tick);
