@@ -213,11 +213,11 @@ export default class Polygon {
           break;
         case 'globeTwo':
           this.mesh.rotateY(Math.sin(deltaTime * this.speed));
-          this.mesh.position.x = Math.cos(elapsedTime * 0.5) * 4 + 7;
-          this.mesh.position.z = Math.sin(elapsedTime * 0.5) * 4 + 16;
+          this.mesh.position.x = Math.cos(elapsedTime * 0.5) * 4 + 12;
+          this.mesh.position.z = Math.sin(elapsedTime * 0.5) * 4 + 30;
           break;
         case 'ball':
-          this.mesh.position.x = Math.cos(elapsedTime) * 1.5 - 10;
+          this.mesh.position.x = Math.cos(elapsedTime) * 1.5 - 12.5;
           this.mesh.position.z = Math.sin(elapsedTime) * 1.5 - 11;
           this.mesh.position.y = Math.abs(Math.sin(elapsedTime * 1.5) + 5.61);
           this.mesh.rotateZ(deltaTime * 0.001);

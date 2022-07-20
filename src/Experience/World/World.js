@@ -7,6 +7,7 @@ import Experience from '../Experience.js';
 
 import Environment from './Environment.js';
 import Floor from './Floor.js';
+import Chikei from './Chikei.js';
 import Panels from './Panels.js';
 import Keshiki from './Keshiki.js';
 import Polygon from './Polygon.js';
@@ -56,11 +57,13 @@ export default class World {
      */
     this.setPanels();
 
+    this.setHalo();
+
     /**
      * ポリゴン~~~~
      */
     this.setPolygons();
-    this.setHalo();
+    this.chikei = new Chikei();
 
     /**
      * SET TEXTS AND YUBISASHI'S PENDING
@@ -92,10 +95,10 @@ export default class World {
     //   gamenFragmentShaderLecture;
     // this.centerPanels.gamenTwo.material.fragmentShader =
     //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenThree.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenFour.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
+    this.centerPanels.gamenThree.material.fragmentShader =
+      gamenFragmentShaderLecture;
+    this.centerPanels.gamenFour.material.fragmentShader =
+      gamenFragmentShaderLecture;
 
     // this.rightPanels.gamenOne.material.fragmentShader =
     //   gamenFragmentShaderLecture;
@@ -173,27 +176,26 @@ export default class World {
 
   setPolygons() {
     this.polygonCone = new Polygon('cone', -13, -8, 0.0001);
-    this.polygonCone.mesh.position.set(-10, 2.01, -11);
+    this.polygonCone.mesh.position.set(-12.5, 2.01, -11);
 
     this.polygonCircle = new Polygon('circle', 16, -11, -0.0003);
-    this.polygonCircle.mesh.position.set(-10, 4.01, -11);
+    this.polygonCircle.mesh.position.set(-12.5, 4.01, -11);
+
+    this.polygonBall = new Polygon('ball', 0, 0, 0.001);
 
     this.polygonCylinder = new Polygon('cylinder', 16, -11, 0.0001);
-    this.polygonCylinder.mesh.position.set(10, 2.51, -14);
+    this.polygonCylinder.mesh.position.set(13, 2.51, -14);
 
     this.polygonTorus = new Polygon('torus', 0, 0, 0.0006);
-    this.polygonTorus.mesh.position.set(10, 2.51, -14);
-
-    this.polygonCube = new Polygon('cube', 0, 0, 0);
-    this.polygonCube.mesh.translateY(15);
+    this.polygonTorus.mesh.position.set(13, 2.51, -14);
 
     this.polygonGem = new Polygon('gem', 0, 0, 0.0005);
     this.polygonGem.mesh.position.set(-8.5, 2.01, 14);
 
     this.polygonGlobeOne = new Polygon('globeOne', 0, 0, 0.0001);
-    this.polygonGlobeOne.mesh.position.set(7, 5, 16);
+    this.polygonGlobeOne.mesh.position.set(12, 5, 30);
     this.polygonGlobeTwo = new Polygon('globeTwo', 0, 0, 0.001);
-    this.polygonGlobeTwo.mesh.position.set(3, 5.5, 16);
+    this.polygonGlobeTwo.mesh.position.set(0, 5, 0);
 
     this.polygonPyramidOne = new Polygon('pyramidOne', 0, 0, 0.0001);
     this.polygonPyramidOne.mesh.position.set(-4, 2.01, 14);
@@ -203,8 +205,6 @@ export default class World {
     this.polygonPyramidThree = new Polygon('pyramidThree', 0, 0, 0.0001);
     this.polygonPyramidThree.mesh.position.set(-10, 0.505, 11);
     this.polygonPyramidThree.mesh.rotateY(Math.PI / 3);
-
-    this.polygonBall = new Polygon('ball', 0, 0, 0.001);
   }
 
   setHalo() {

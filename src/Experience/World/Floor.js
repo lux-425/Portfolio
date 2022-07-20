@@ -2,8 +2,8 @@ import * as THREE from 'three';
 
 import Experience from '../Experience.js';
 
-import floorVertexShader from '../../Shaders/Floor/vertex.glsl';
-import floorFragmentShader from '../../Shaders/Floor/fragment.glsl';
+// import floorVertexShader from '../../Shaders/Floor/vertex.glsl';
+// import floorFragmentShader from '../../Shaders/Floor/fragment.glsl';
 
 export default class Floor {
   constructor() {
@@ -23,12 +23,12 @@ export default class Floor {
       this.debugFolder.close();
     }
 
-    this.setGeometry();
-    this.setTextures();
-    this.setMaterial();
-    this.setMesh();
+    // this.setGeometry();
+    // this.setTextures();
+    // this.setMaterial();
+    // this.setMesh();
 
-    this.setDebug();
+    // this.setDebug();
 
     this.setAnimation();
   }
@@ -84,7 +84,7 @@ export default class Floor {
       const elapsedTime = clock.getElapsedTime();
 
       // Update floor
-      this.material.uniforms.uTime.value = elapsedTime;
+      // this.material.uniforms.uTime.value = elapsedTime;
 
       // Call tick again on the next frame
       window.requestAnimationFrame(tick);
