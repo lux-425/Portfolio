@@ -57,41 +57,10 @@ export default class World {
     this.setPanels();
 
     /**
-     * SET ポリゴン~~~~
+     * ポリゴン~~~~
      */
-    this.polygonCone = new Polygon('cone', -13, -8, 0.0001);
-    this.polygonCone.mesh.position.set(-10, 2.01, -11);
-
-    this.polygonCircle = new Polygon('circle', 16, -11, -0.0003);
-    this.polygonCircle.mesh.position.set(-10, 4.01, -11);
-
-    this.polygonCylinder = new Polygon('cylinder', 16, -11, 0.0001);
-    this.polygonCylinder.mesh.position.set(10, 2.51, -14);
-
-    this.polygonTorus = new Polygon('torus', 0, 0, 0.0006);
-    this.polygonTorus.mesh.position.set(10, 2.51, -14);
-
-    this.polygonCube = new Polygon('cube', 0, 0, 0);
-    this.polygonCube.mesh.translateY(15);
-
-    this.polygonGem = new Polygon('gem', 0, 0, 0.0005);
-    this.polygonGem.mesh.position.set(-8.5, 2.01, 14);
-
-    this.polygonGlobeOne = new Polygon('globeOne', 0, 0, 0.0001);
-    this.polygonGlobeOne.mesh.position.set(7, 5, 16);
-    this.polygonGlobeTwo = new Polygon('globeTwo', 0, 0, 0.001);
-    this.polygonGlobeTwo.mesh.position.set(3, 5.5, 16);
-
-    this.polygonPyramidOne = new Polygon('pyramidOne', 0, 0, 0.0001);
-    this.polygonPyramidOne.mesh.position.set(-4, 2.01, 14);
-    this.polygonPyramidTwo = new Polygon('pyramidTwo', 0, 0, 0.0001);
-    this.polygonPyramidTwo.mesh.position.set(-12, 1.26, 19);
-    this.polygonPyramidTwo.mesh.rotateY(-Math.PI / 0.8);
-    this.polygonPyramidThree = new Polygon('pyramidThree', 0, 0, 0.0001);
-    this.polygonPyramidThree.mesh.position.set(-10, 0.505, 11);
-    this.polygonPyramidThree.mesh.rotateY(Math.PI / 3);
-
-    this.polygonBall = new Polygon('ball', 0, 0, 0.001);
+    this.setPolygons();
+    this.setHalo();
 
     /**
      * SET TEXTS AND YUBISASHI'S PENDING
@@ -200,6 +169,58 @@ export default class World {
 
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }
+  }
+
+  setPolygons() {
+    this.polygonCone = new Polygon('cone', -13, -8, 0.0001);
+    this.polygonCone.mesh.position.set(-10, 2.01, -11);
+
+    this.polygonCircle = new Polygon('circle', 16, -11, -0.0003);
+    this.polygonCircle.mesh.position.set(-10, 4.01, -11);
+
+    this.polygonCylinder = new Polygon('cylinder', 16, -11, 0.0001);
+    this.polygonCylinder.mesh.position.set(10, 2.51, -14);
+
+    this.polygonTorus = new Polygon('torus', 0, 0, 0.0006);
+    this.polygonTorus.mesh.position.set(10, 2.51, -14);
+
+    this.polygonCube = new Polygon('cube', 0, 0, 0);
+    this.polygonCube.mesh.translateY(15);
+
+    this.polygonGem = new Polygon('gem', 0, 0, 0.0005);
+    this.polygonGem.mesh.position.set(-8.5, 2.01, 14);
+
+    this.polygonGlobeOne = new Polygon('globeOne', 0, 0, 0.0001);
+    this.polygonGlobeOne.mesh.position.set(7, 5, 16);
+    this.polygonGlobeTwo = new Polygon('globeTwo', 0, 0, 0.001);
+    this.polygonGlobeTwo.mesh.position.set(3, 5.5, 16);
+
+    this.polygonPyramidOne = new Polygon('pyramidOne', 0, 0, 0.0001);
+    this.polygonPyramidOne.mesh.position.set(-4, 2.01, 14);
+    this.polygonPyramidTwo = new Polygon('pyramidTwo', 0, 0, 0.0001);
+    this.polygonPyramidTwo.mesh.position.set(-12, 1.26, 19);
+    this.polygonPyramidTwo.mesh.rotateY(-Math.PI / 0.8);
+    this.polygonPyramidThree = new Polygon('pyramidThree', 0, 0, 0.0001);
+    this.polygonPyramidThree.mesh.position.set(-10, 0.505, 11);
+    this.polygonPyramidThree.mesh.rotateY(Math.PI / 3);
+
+    this.polygonBall = new Polygon('ball', 0, 0, 0.001);
+  }
+
+  setHalo() {
+    // Halo' Blender model
+    this.gltfLoader.load('../../models/halo.glb', (gltf) => {
+      this.model = gltf.scene;
+      this.model.traverse((o) => {
+        if (o.isMesh) o.scale.set(10, 10, 10);
+        o.rotation.set(0, -Math.PI * 0.3, Math.PI * 0.8);
+        o.position.set(-75, 333, 81);
+      });
+
+      // this.model.children[0].material.wireframe = true
+
+      this.scene.add(this.model);
+    });
   }
 
   setTexts() {

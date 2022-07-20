@@ -170,7 +170,7 @@ export default class TextKeshiki {
     this.select2b.position.set(0.5, 0, 0);
     this.select3a.position.set(-0.8, 0, -0.8);
     this.select3b.position.set(0.8, 0, 0.8);
-    this.mouse.translateZ(0.8);
+    this.mouse.translateZ(0.55);
 
     this.select1a.material.opacity = 0;
 

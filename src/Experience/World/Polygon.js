@@ -198,7 +198,7 @@ export default class Polygon {
           this.mesh.rotateY(Math.sin(deltaTime * this.speed));
           break;
         case 'cylinder':
-          this.mesh.rotateY(Math.tan(deltaTime * this.speed));
+          this.mesh.rotateY(-Math.tan(deltaTime * this.speed));
           break;
         case 'cube':
           this.mesh.material.uniforms.uTime.value = elapsedTime;

@@ -24,13 +24,13 @@ export default class Particles {
     );
 
     this.particlesGeometry = new THREE.BufferGeometry();
-    this.count = 8055;
+    this.count = 5555;
 
     const positions = new Float32Array(this.count * 3);
     const colors = new Float32Array(this.count * 3);
 
     for (let i = 0; i < this.count * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 80;
+      positions[i] = (Math.random() - 0.5) * 155;
       colors[i] = 1;
     }
 
@@ -79,7 +79,7 @@ export default class Particles {
     const colors = new Float32Array(this.count * 3);
 
     for (let i = 0; i < this.countBis * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 20;
+      positions[i] = (Math.random() - 0.5) * 55;
       colors[i] = 1;
     }
 
@@ -117,7 +117,7 @@ export default class Particles {
       const elapsedTime = clock.getElapsedTime();
 
       // Update particles
-      this.particles.rotation.y = -elapsedTime * 0.008;
+      this.particles.rotation.y = -elapsedTime * 0.002;
       this.particles.position.y = Math.sin(elapsedTime * 0.1);
 
       this.smallParticles.rotation.y = elapsedTime * 0.1;

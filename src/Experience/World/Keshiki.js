@@ -123,7 +123,6 @@ export default class Keshiki {
       vertexShader: keshikiVertexShader,
       fragmentShader: keshikiFragmentShader,
       side: THREE.FrontSide,
-      // transparent: true,
       wireframe: true,
       uniforms: {
         uTime: { value: 0 },
@@ -151,12 +150,10 @@ export default class Keshiki {
       vertexShader: flagVertexShader,
       fragmentShader: flagFragmentShader,
       wireframe: true,
-      // transparent: true,
       uniforms: {
         uFrequency: { value: new THREE.Vector2(2, 6) },
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
-        uColor: { value: new THREE.Color('white') },
         uTexture: { value: this.flagTextureFrance },
       },
     });
@@ -166,12 +163,10 @@ export default class Keshiki {
       vertexShader: flagVertexShader,
       fragmentShader: flagFragmentShader,
       wireframe: true,
-      // transparent: true,
       uniforms: {
         uFrequency: { value: new THREE.Vector2(2, 6) },
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
-        uColor: { value: new THREE.Color('white') },
         uTexture: { value: this.flagTextureNippon },
       },
     });
@@ -181,12 +176,10 @@ export default class Keshiki {
       vertexShader: flagVertexShader,
       fragmentShader: flagFragmentShader,
       wireframe: true,
-      // transparent: true,
       uniforms: {
         uFrequency: { value: new THREE.Vector2(2, 6) },
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
-        uColor: { value: new THREE.Color('white') },
         uTexture: { value: this.flagTextureKokusai },
       },
     });
