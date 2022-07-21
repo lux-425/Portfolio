@@ -104,10 +104,10 @@ export default class TextKeshiki {
       this.textModel.children[1].children[3],
     ];
     this.welcome = [
+      this.textModel.children[1].children[11],
       this.textModel.children[1].children[4],
       this.textModel.children[1].children[5],
       this.textModel.children[1].children[6],
-      this.textModel.children[1].children[11],
     ];
     this.youkoso = [
       this.textModel.children[1].children[7],
@@ -137,28 +137,67 @@ export default class TextKeshiki {
 
     this.erabuMaterial = new THREE.MeshStandardMaterial({
       emissive: 'white',
-      transparent: true,
-      opacity: 0,
     });
-    this.aboutNihongo1.material = this.erabuMaterial;
-    this.aboutNihongo2.material = this.erabuMaterial;
-    this.aboutNihongo3.material = this.erabuMaterial;
-    this.aboutFrancais1.material = this.erabuMaterial;
-    this.aboutFrancais2.material = this.erabuMaterial;
-    this.aboutFrancais3.material = this.erabuMaterial;
-    this.aboutEnglish1.material = this.erabuMaterial;
-    this.aboutEnglish2.material = this.erabuMaterial;
-    this.aboutEnglish3.material = this.erabuMaterial;
+    this.aboutNihongoArr = [
+      this.aboutNihongo1,
+      this.aboutNihongo2,
+      this.aboutNihongo3,
+    ];
+    this.aboutFrancaisArr = [
+      this.aboutFrancais1,
+      this.aboutFrancais2,
+      this.aboutFrancais3,
+    ];
+    this.aboutEnglishArr = [
+      this.aboutEnglish1,
+      this.aboutEnglish2,
+      this.aboutEnglish3,
+    ];
+    for (var i = 0; i < this.aboutNihongoArr.length; i++) {
+      this.aboutNihongoArr[i].visible = false;
+      this.aboutFrancaisArr[i].visible = false;
+      this.aboutEnglishArr[i].visible = false;
+      this.aboutNihongoArr[i].material = this.erabuMaterial;
+      this.aboutFrancaisArr[i].material = this.erabuMaterial;
+      this.aboutEnglishArr[i].material = this.erabuMaterial;
+    }
 
-    this.messageMaterial = new THREE.MeshStandardMaterial({
+    this.messageMaterialOne = new THREE.MeshStandardMaterial({
       emissive: 'white',
       transparent: true,
       opacity: 0,
     });
+    this.messageMaterialTwo = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      transparent: true,
+      opacity: 0,
+    });
+    this.messageMaterialThree = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      transparent: true,
+      opacity: 0,
+    });
+    this.messageMaterialFour = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      transparent: true,
+      opacity: 0,
+    });
+    this.bienvenue[0].material = this.messageMaterialOne;
+    this.welcome[0].material = this.messageMaterialOne;
+    this.youkoso[0].material = this.messageMaterialOne;
+    this.bienvenue[1].material = this.messageMaterialTwo;
+    this.welcome[1].material = this.messageMaterialTwo;
+    this.youkoso[1].material = this.messageMaterialTwo;
+    this.bienvenue[2].material = this.messageMaterialThree;
+    this.welcome[2].material = this.messageMaterialThree;
+    this.youkoso[2].material = this.messageMaterialThree;
+    this.bienvenue[3].material = this.messageMaterialFour;
+    this.welcome[3].material = this.messageMaterialFour;
+    this.youkoso[3].material = this.messageMaterialFour;
     for (var i = 0; i < this.bienvenue.length; i++) {
-      this.bienvenue[i].material = this.messageMaterial;
-      this.welcome[i].material = this.messageMaterial;
-      this.youkoso[i].material = this.messageMaterial;
+      this.bienvenue[i].visible = false;
+      this.welcome[i].visible = false;
+      this.youkoso[i].visible = false;
     }
 
     /**
@@ -195,7 +234,6 @@ export default class TextKeshiki {
     this.experience.world.objectsReadyArr[7] = true;
 
     this.experience.world.keshiki.objectsToTest.push(
-      this.contactHitbox,
       this.englishHitbox,
       this.nihongoHitbox,
       this.francaisHitbox
@@ -210,7 +248,7 @@ export default class TextKeshiki {
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    // console.log(this.textModel);
+    console.log(this.textModel);
 
     this.nihongo.visible = false;
     this.francais.visible = false;
@@ -221,6 +259,93 @@ export default class TextKeshiki {
       this.francais.visible = true;
       this.english.visible = true;
     }, 1000);
+  }
+
+  about(toggle, area) {
+    if (toggle) {
+      switch (this.experience.world.language) {
+        case 'francais':
+          switch (area) {
+            case 'one':
+              this.aboutFrancaisArr[0].visible = true;
+              break;
+            case 'two':
+              this.aboutFrancaisArr[1].visible = true;
+              break;
+            case 'three':
+              this.aboutFrancaisArr[2].visible = true;
+              break;
+          }
+          break;
+        case 'nihongo':
+          switch (area) {
+            case 'one':
+              this.aboutNihongoArr[0].visible = true;
+              break;
+            case 'two':
+              this.aboutNihongoArr[1].visible = true;
+              break;
+            case 'three':
+              this.aboutNihongoArr[2].visible = true;
+              break;
+          }
+          break;
+        case 'english':
+          switch (area) {
+            case 'one':
+              this.aboutEnglishArr[0].visible = true;
+              break;
+            case 'two':
+              this.aboutEnglishArr[1].visible = true;
+              break;
+            case 'three':
+              this.aboutEnglishArr[2].visible = true;
+              break;
+          }
+          break;
+      }
+    } else {
+      this.aboutFrancaisArr.forEach((element) => (element.visible = false));
+      this.aboutNihongoArr.forEach((element) => (element.visible = false));
+      this.aboutEnglishArr.forEach((element) => (element.visible = false));
+    }
+  }
+
+  coucou(coucou) {
+    var TWEEN = require('@tweenjs/tween.js');
+
+    switch (coucou) {
+      case 'bienvenue':
+        this.bienvenue.forEach((element) => (element.visible = true));
+        break;
+      case 'youkoso':
+        this.youkoso.forEach((element) => (element.visible = true));
+        break;
+      case 'welcome':
+        this.welcome.forEach((element) => (element.visible = true));
+        break;
+    }
+
+    for (var i = 0; i < this.youkoso.length; i++) {
+      this.tweenCoucou = new TWEEN.Tween(this.youkoso[i].material)
+        .to({ opacity: 1 }, 500 + i * 1000)
+        .easing(TWEEN.Easing.Bounce.InOut);
+      this.tweenCoucou.start();
+    }
+
+    setTimeout(() => {
+      switch (coucou) {
+        case 'bienvenue':
+          this.bienvenue.forEach((element) => (element.visible = false));
+          break;
+        case 'youkoso':
+          this.youkoso.forEach((element) => (element.visible = false));
+          break;
+        case 'welcome':
+          this.welcome.forEach((element) => (element.visible = false));
+          break;
+      }
+    }, 3333);
   }
 
   setAnimation() {

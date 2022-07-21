@@ -40,17 +40,20 @@ export default class Keshiki {
       if (this.currentIntersect) {
         switch (this.currentIntersect) {
           case 'francaisHitbox':
-            this.confirmLanguage();
+            this.confirmLanguage('francais');
+            this.experience.world.textKeshiki.coucou('bienvenue');
             break;
           case 'nihongoHitbox':
-            this.confirmLanguage();
+            this.confirmLanguage('nihongo');
+            this.experience.world.textKeshiki.coucou('youkoso');
             break;
           case 'englishHitbox':
-            this.confirmLanguage();
+            this.confirmLanguage('english');
+            this.experience.world.textKeshiki.coucou('welcome');
             break;
-          case 'contactHitbox':
-            window.open('https://linktr.ee/garcialuc');
-            break;
+          // case 'contactHitbox':
+          //   window.open('https://linktr.ee/garcialuc');
+          //   break;
         }
       }
     });
@@ -72,8 +75,10 @@ export default class Keshiki {
     }
   }
 
-  confirmLanguage() {
+  confirmLanguage(language) {
     var TWEEN = require('@tweenjs/tween.js');
+
+    this.experience.world.language = language;
 
     this.area = 'gamenErabu';
     this.mesh.material = this.material;
@@ -241,9 +246,9 @@ export default class Keshiki {
               this.mesh.material = this.flagMaterialKokusai;
             }
           } else if (this.area === 'gamenErabu') {
-            if (this.intersects[0].object.name === 'contactHitbox') {
-              // enter contact hitbox
-            }
+            // if (this.intersects[0].object.name === 'contactHitbox') {
+            //   // enter contact hitbox
+            // }
           }
         }
         this.currentIntersect = this.intersects[0].object.name;
@@ -264,9 +269,9 @@ export default class Keshiki {
               this.mesh.material = this.material;
             }
           } else if (this.area === 'gamenErabu') {
-            if (this.currentIntersect === 'contactHitbox') {
-              // leave contact hitbox
-            }
+            // if (this.currentIntersect === 'contactHitbox') {
+            //   // leave contact hitbox
+            // }
           }
         }
         this.currentIntersect = null;

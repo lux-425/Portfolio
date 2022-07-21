@@ -27,11 +27,6 @@ export default class Chikei {
     this.debugObject.depthColor = '#000000';
     this.debugObject.surfaceColor = '#ffffff';
 
-    if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder('chikei');
-      this.debugFolder.close();
-    }
-
     // Set model
     this.model = new TextModel('../../models/chikei.glb');
     this.setChikei();
@@ -72,7 +67,11 @@ export default class Chikei {
 
     this.setAnimation();
 
-    this.setDebug();
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder('chikei');
+      this.setDebug();
+      this.debugFolder.close();
+    }
   }
 
   setAnimation() {

@@ -13,6 +13,14 @@ export default class Yubisashi {
      */
     this.yubisashiMono = yubisashiMono;
 
+    this.gamenNamesArr = [
+      'leftAreaGamen',
+      'centerAreaGamen',
+      'centerAreaGamenBis',
+      'rightAreaGamen',
+      'rightAreaGamenBis',
+    ];
+
     /**
      * Raycaster
      */
@@ -26,6 +34,10 @@ export default class Yubisashi {
     window.addEventListener('click', () => {
       if (this.currentIntersect) {
         switch (this.currentIntersect) {
+          case 'contactHitbox':
+            window.open('https://linktr.ee/garcialuc');
+            break;
+
           case 'buttonRefreshKeshiki':
             this.experience.world.textKeshiki.animateText();
             break;
@@ -189,6 +201,12 @@ export default class Yubisashi {
     this.setRaycasting();
   }
 
+  toggleGamenKeshiki() {
+    this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 1;
+    this.experience.world.textKeshiki.contact.visible = false;
+    this.experience.world.textKeshiki.select.visible = false;
+  }
+
   setRaycasting() {
     const tick = () => {
       // Raycasting
@@ -206,7 +224,40 @@ export default class Yubisashi {
 
         // MOUSE ENTER
         if (!this.currentIntersect) {
-          if (this.intersects[0].object.name === 'arrowHitboxProfil') {
+          if (this.intersects[0].object.name === 'contactHitbox') {
+            this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
+              new THREE.Color(
+                '#' + Math.floor(Math.random() * 16777215).toString(16)
+              );
+            this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 1;
+          } else if (this.intersects[0].object.name === 'leftAreaGamen') {
+            this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
+              new THREE.Color('#0000d1');
+            this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
+              new THREE.Color('#b56cfe');
+            this.toggleGamenKeshiki();
+            this.experience.world.textKeshiki.about(true, 'one');
+          } else if (
+            this.intersects[0].object.name === 'centerAreaGamen' ||
+            this.intersects[0].object.name === 'centerAreaGamenBis'
+          ) {
+            this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
+              new THREE.Color('#00ccff');
+            this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
+              new THREE.Color('#6b00b3');
+            this.toggleGamenKeshiki();
+            this.experience.world.textKeshiki.about(true, 'two');
+          } else if (
+            this.intersects[0].object.name === 'rightAreaGamen' ||
+            this.intersects[0].object.name === 'rightAreaGamenBis'
+          ) {
+            this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
+              new THREE.Color('#ff00ae');
+            this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
+              new THREE.Color('#4e447e');
+            this.toggleGamenKeshiki();
+            this.experience.world.textKeshiki.about(true, 'three');
+          } else if (this.intersects[0].object.name === 'arrowHitboxProfil') {
             this.experience.world.textProfil.tweenTranslateRightArrowProfil.start();
           } else if (this.intersects[0].object.name === 'arrowHitboxKeiken') {
             this.experience.world.textKeiken.tweenTranslateRightArrowKeiken.start();
@@ -245,7 +296,20 @@ export default class Yubisashi {
 
         // MOUSE LEAVE
         if (this.currentIntersect) {
-          if (this.currentIntersect === 'arrowHitboxProfil') {
+          if (this.currentIntersect === 'contactHitbox') {
+            this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
+              new THREE.Color('#ffffff');
+            this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 0;
+          } else if (this.gamenNamesArr.includes(this.currentIntersect)) {
+            this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
+              new THREE.Color('#ffffff');
+            this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
+              new THREE.Color('#000000');
+            this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 0;
+            this.experience.world.textKeshiki.contact.visible = true;
+            this.experience.world.textKeshiki.select.visible = true;
+            this.experience.world.textKeshiki.about(false, '');
+          } else if (this.currentIntersect === 'arrowHitboxProfil') {
             this.experience.world.textProfil.tweenTranslateLeftArrowProfil.start();
           } else if (this.currentIntersect === 'arrowHitboxKeiken') {
             this.experience.world.textKeiken.tweenTranslateLeftArrowKeiken.start();

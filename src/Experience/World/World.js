@@ -33,6 +33,8 @@ export default class World {
 
     this.scene = this.experience.scene;
 
+    this.language = "";
+
     // this.floor = new Floor();
     this.environment = new Environment();
     this.keshiki = new Keshiki();
@@ -117,7 +119,14 @@ export default class World {
       }, 100);
     } else {
       this.yubisashiMono = [
+        this.textKeshiki.contactHitbox,
         this.textKeshiki.buttonRefresh,
+
+        this.leftPanels.gamenOne.mesh,
+        this.centerPanels.gamenOne.mesh,
+        this.centerPanels.gamenTwo.mesh,
+        this.rightPanels.gamenOne.mesh,
+        this.rightPanels.gamenTwo.mesh,
 
         this.polygonBall.mesh,
         this.polygonTorus.mesh,
@@ -246,14 +255,22 @@ export default class World {
      * 左
      */
     this.leftPanels = new Panels('left');
+
+    this.leftPanels.gamenOne.mesh.name = 'leftAreaGamen';
     /**
      * 中心
      */
     this.centerPanels = new Panels('center');
+
+    this.centerPanels.gamenOne.mesh.name = 'centerAreaGamen';
+    this.centerPanels.gamenTwo.mesh.name = 'centerAreaGamenBis';
     /**
      * 右
      */
     this.rightPanels = new Panels('right');
+
+    this.rightPanels.gamenOne.mesh.name = 'rightAreaGamen';
+    this.rightPanels.gamenTwo.mesh.name = 'rightAreaGamenBis';
   }
 
   update() {}
