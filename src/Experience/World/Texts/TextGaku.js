@@ -173,7 +173,7 @@ export default class TextGaku {
     /**
      * ANIMATE
      */
-    this.animateText();
+    // this.animateText();
   }
 
   animateText() {
@@ -211,10 +211,8 @@ export default class TextGaku {
         this.arrowGakuLeft.visible = true;
       });
 
-    setTimeout(() => {
-      tweenTexts.start();
-      tweenTitlesDates.start();
-    }, 2000);
+    tweenTexts.start();
+    tweenTitlesDates.start();
   }
 
   setAnimation() {

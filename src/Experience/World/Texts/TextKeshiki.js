@@ -332,7 +332,7 @@ export default class TextKeshiki {
     for (var i = 0; i < this.youkoso.length; i++) {
       this.tweenCoucou = new TWEEN.Tween(this.youkoso[i].material)
         .to({ opacity: 1 }, 500 + i * 1000)
-        .easing(TWEEN.Easing.Bounce.InOut);
+        .easing(TWEEN.Easing.Cubic.InOut);
       this.tweenCoucou.start();
     }
 

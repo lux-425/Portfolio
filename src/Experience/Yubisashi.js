@@ -32,6 +32,8 @@ export default class Yubisashi {
      *
      */
     window.addEventListener('click', () => {
+      var index = null;
+
       if (this.currentIntersect) {
         switch (this.experience.world.area) {
           case 'home':
@@ -42,33 +44,54 @@ export default class Yubisashi {
               case 'leftAreaGamen':
                 this.experience.world.area = 'profil';
 
-                const index = this.yubisashiMono.indexOf(
+                index = this.yubisashiMono.indexOf(
                   this.experience.world.leftPanels.gamenOne.mesh
                 );
                 this.yubisashiMono.splice(index, 1);
 
                 this.experience.world.chikei.debugObject.surfaceColor =
                   '#0000ff';
-                this.experience.world.textKeshiki.contact.visible = false;
-                this.experience.world.textKeshiki.select.visible = false;
+                this.travelFromHome();
 
                 this.kameraTravelling();
                 break;
               case 'centerAreaGamen':
               case 'centerAreaGamenBis':
                 this.experience.world.area = 'keiken';
+
+                index = this.yubisashiMono.indexOf(
+                  this.experience.world.centerPanels.gamenOne.mesh
+                );
+                this.yubisashiMono.splice(index, 1);
+                index = this.yubisashiMono.indexOf(
+                  this.experience.world.centerPanels.gamenTwo.mesh
+                );
+                this.yubisashiMono.splice(index, 1);
+
                 this.experience.world.chikei.debugObject.surfaceColor =
                   '#ff0000';
-                this.experience.world.textKeshiki.contact.visible = false;
-                this.experience.world.textKeshiki.select.visible = false;
+                this.travelFromHome();
+
+                this.kameraTravelling();
                 break;
               case 'rightAreaGamen':
               case 'rightAreaGamenBis':
                 this.experience.world.area = 'gaku';
+
+                index = this.yubisashiMono.indexOf(
+                  this.experience.world.rightPanels.gamenOne.mesh
+                );
+                this.yubisashiMono.splice(index, 1);
+                index = this.yubisashiMono.indexOf(
+                  this.experience.world.rightPanels.gamenTwo.mesh
+                );
+                this.yubisashiMono.splice(index, 1);
+
                 this.experience.world.chikei.debugObject.surfaceColor =
                   '#00ff00';
-                this.experience.world.textKeshiki.contact.visible = false;
-                this.experience.world.textKeshiki.select.visible = false;
+                this.travelFromHome();
+
+                this.kameraTravelling();
                 break;
             }
             break;
@@ -239,10 +262,26 @@ export default class Yubisashi {
     this.setRaycasting();
   }
 
+  travelFromHome() {
+    this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
+      new THREE.Color('#ffffff');
+    this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
+      new THREE.Color('#000000');
+    this.experience.world.particles.toggleSpeed = 1;
+    this.experience.world.textKeshiki.contact.visible = false;
+    this.experience.world.textKeshiki.select.visible = false;
+  }
+
   kameraTravelling() {
     switch (this.experience.world.area) {
       case 'profil':
         this.experience.world.travellingManager.transitionInProfil();
+        break;
+      case 'keiken':
+        this.experience.world.travellingManager.transitionInKeiken();
+        break;
+      case 'gaku':
+        this.experience.world.travellingManager.transitionInGaku();
         break;
     }
   }

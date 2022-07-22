@@ -40,6 +40,7 @@ export default class TextKeiken {
     await this.modelIntro.waitForLoad();
     this.textModelIntro = this.modelIntro.model.children[0];
     this.scene.add(this.textModelIntro);
+    this.textModelIntro.visible = false;
 
     this.textModelIntro.position.set(
       this.experience.world.centerPanels.gamenOne.mesh.position.x,
@@ -315,18 +316,22 @@ export default class TextKeiken {
     /**
      * ANIMATE
      */
-    this.animate();
+    // this.animate();
   }
 
   animate() {
     this.scene.remove(this.textModel);
 
-    this.animateIntro();
-
-    setTimeout(() => {
+    if (this.experience.world.language === 'nihongo') {
+      this.animateIntro();
+      setTimeout(() => {
+        this.scene.add(this.textModel);
+        this.animateText();
+      }, 5250);
+    } else {
       this.scene.add(this.textModel);
       this.animateText();
-    }, 5250);
+    }
   }
 
   animateIntro() {
@@ -458,22 +463,22 @@ export default class TextKeiken {
     var TWEEN = require('@tweenjs/tween.js');
 
     //　一画
-    this.jitsuArr[0].translateZ(-0.15);
+    this.jitsuArr[0].translateZ(-0.045);
     // 二画
-    this.jitsuArr[1].translateX(-0.3);
+    this.jitsuArr[1].translateX(-0.115);
     this.jitsuArr[1].visible = false;
     // 三画
-    this.jitsuArr[2].translateX(-0.4);
+    this.jitsuArr[2].translateX(-0.125);
     this.jitsuArr[2].visible = false;
     // 四画
-    this.jitsuArr[3].translateX(-0.5);
+    this.jitsuArr[3].translateX(-0.135);
     this.jitsuArr[3].visible = false;
     // 五画
     this.jitsuArr[4].translateZ(0.2);
     this.jitsuArr[4].visible = false;
     // 六画
-    this.jitsuArr[5].translateZ(0.15);
-    this.jitsuArr[5].translateX(0.15);
+    this.jitsuArr[5].translateZ(0.035);
+    this.jitsuArr[5].translateX(0.035);
     this.jitsuArr[5].visible = false;
 
     var tweenJitsuTranslate = new TWEEN.Tween(this.jitsuArr[0].position)
@@ -512,14 +517,14 @@ export default class TextKeiken {
     var TWEEN = require('@tweenjs/tween.js');
 
     //　一画
-    this.muArr[0].translateZ(-0.2);
+    this.muArr[0].translateZ(-0.1);
     // 二画
-    this.muArr[1].translateZ(0.3);
+    this.muArr[1].translateZ(0.15);
     // 三画
-    this.muArr[2].translateX(0.4);
+    this.muArr[2].translateX(0.1);
     // 四画
-    this.muArr[3].translateX(0.25);
-    this.muArr[3].translateZ(0.25);
+    this.muArr[3].translateX(0.06);
+    this.muArr[3].translateZ(0.06);
 
     for (var i = 0; i < this.muArr.length; i++) {
       this.mu.visible = true;
@@ -534,31 +539,31 @@ export default class TextKeiken {
     var TWEEN = require('@tweenjs/tween.js');
 
     //　一画
-    this.keiArr[0].translateZ(-0.2);
-    this.keiArr[0].translateX(-0.2);
+    this.keiArr[0].translateZ(-0.05);
+    this.keiArr[0].translateX(-0.05);
     // 二画
-    this.keiArr[1].translateX(0.3);
+    this.keiArr[1].translateX(0.075);
     // 三画
-    this.keiArr[2].translateZ(0.35);
+    this.keiArr[2].translateZ(0.0875);
     // 四画
-    this.keiArr[3].translateX(-0.15);
-    this.keiArr[3].translateZ(0.25);
+    this.keiArr[3].translateX(-0.0375);
+    this.keiArr[3].translateZ(0.0625);
     this.keiArr[3].visible = false;
     // 五画
-    this.keiArr[4].translateX(0.15);
-    this.keiArr[4].translateZ(0.25);
+    this.keiArr[4].translateX(0.0375);
+    this.keiArr[4].translateZ(0.0625);
     this.keiArr[4].visible = false;
     // 六画
-    this.keiArr[5].translateZ(-0.5);
+    this.keiArr[5].translateZ(-0.125);
     this.keiArr[5].visible = false;
     // 七画
-    this.keiArr[6].translateX(0.2);
+    this.keiArr[6].translateX(0.05);
     this.keiArr[6].visible = false;
     // 八画
-    this.keiArr[7].translateZ(0.3);
+    this.keiArr[7].translateZ(0.075);
     this.keiArr[7].visible = false;
     // 九画
-    this.keiArr[8].translateX(0.2);
+    this.keiArr[8].translateX(0.05);
     this.keiArr[8].visible = false;
 
     for (var i = 0; i < 3; i++) {
@@ -625,23 +630,23 @@ export default class TextKeiken {
     var TWEEN = require('@tweenjs/tween.js');
 
     //　一画
-    this.kenArr[0].translateZ(-0.15);
-    this.kenArr[0].translateX(-0.15);
+    this.kenArr[0].translateZ(-0.0375);
+    this.kenArr[0].translateX(-0.0375);
     // 二画
-    this.kenArr[1].translateX(-0.06);
+    this.kenArr[1].translateX(-0.015);
     this.kenArr[1].visible = false;
     // 三画
-    this.kenArr[2].translateX(0.3);
+    this.kenArr[2].translateX(0.075);
     this.kenArr[2].visible = false;
     // 四画
-    this.kenArr[3].translateX(0.3);
+    this.kenArr[3].translateX(0.075);
     this.kenArr[3].visible = false;
     // 五画
-    this.kenArr[4].translateX(0.3);
+    this.kenArr[4].translateX(0.075);
     this.kenArr[4].visible = false;
     // 六画
-    this.kenArr[5].translateX(0.2);
-    this.kenArr[5].rotateY(-Math.PI * 1.5);
+    this.kenArr[5].translateX(-0.1);
+    this.kenArr[5].rotation.set(0, -Math.PI * 0.8, 0);
 
     this.kenArr[5].visible = false;
     // 七画
@@ -653,27 +658,27 @@ export default class TextKeiken {
     // 十画
     this.kenArr[9].visible = false;
     // 十一画
-    this.kenArr[10].translateZ(-0.1);
+    this.kenArr[10].translateZ(-0.025);
     this.kenArr[10].visible = false;
     // 十二画
-    this.kenArr[11].translateX(0.3);
+    this.kenArr[11].translateX(0.075);
     this.kenArr[11].visible = false;
     // 十三画
-    this.kenArr[12].translateZ(0.1);
+    this.kenArr[12].translateZ(0.025);
     this.kenArr[12].visible = false;
     // 十四画
-    this.kenArr[13].translateX(0.1);
+    this.kenArr[13].translateX(0.025);
     this.kenArr[13].visible = false;
     // 十五画
-    this.kenArr[14].translateZ(0.3);
+    this.kenArr[14].translateZ(0.075);
     this.kenArr[14].visible = false;
     // 十六画
-    this.kenArr[15].translateZ(0.4);
-    this.kenArr[15].translateX(-0.1);
+    this.kenArr[15].translateZ(0.07);
+    this.kenArr[15].translateX(-0.07);
     this.kenArr[15].visible = false;
     // 十七画
-    this.kenArr[16].translateZ(0.1);
-    this.kenArr[16].translateX(0.05);
+    this.kenArr[16].translateZ(0.025);
+    this.kenArr[16].translateX(0.0125);
     this.kenArr[16].visible = false;
 
     this.ken.visible = true;

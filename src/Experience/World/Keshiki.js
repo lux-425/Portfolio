@@ -107,7 +107,7 @@ export default class Keshiki {
       this.tweenAppearGamens = new TWEEN.Tween(
         this.gamensArr[i].mesh.material.uniforms.uOpacity
       )
-        .to({ value: 0.88 }, 555 + i * 555)
+        .to({ value: 0.88 }, 1111 + i * 555)
         .easing(TWEEN.Easing.Bounce.InOut);
       this.tweenAppearGamens.start();
     }

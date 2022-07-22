@@ -15,12 +15,18 @@ export default class TravellingManager {
     // Gamen on/off functions
     this.opacityUp = (gamen) => {
       var tweenGamenOpacityUp = new TWEEN.Tween(gamen)
-        .to({ value: 0.88 }, 2000)
-        .easing(TWEEN.Easing.Bounce.In)
+        .to({ value: 0.88 }, 1111)
+        .easing(TWEEN.Easing.Bounce.Out)
         .onComplete(() => {
           switch (this.experience.world.area) {
             case 'profil':
               this.experience.world.textProfil.animateText();
+              break;
+            case 'keiken':
+              this.experience.world.textKeiken.animate();
+              break;
+            case 'gaku':
+              this.experience.world.textGaku.animateText();
               break;
           }
         });
@@ -28,7 +34,7 @@ export default class TravellingManager {
     };
     this.opacityDown = (gamen) => {
       var tweenGamenOpacityDown = new TWEEN.Tween(gamen)
-        .to({ value: 0.0 }, 2000)
+        .to({ value: 0.18 }, 1111)
         .easing(TWEEN.Easing.Bounce.In)
         .onComplete(() => {
           switch (this.experience.world.area) {
@@ -37,6 +43,34 @@ export default class TravellingManager {
                 gamenFragmentShaderLecture;
               this.opacityUp(
                 this.experience.world.leftPanels.gamenOne.material.uniforms
+                  .uOpacity
+              );
+              break;
+            case 'keiken':
+              this.experience.world.centerPanels.gamenOne.material.fragmentShader =
+                gamenFragmentShaderLecture;
+              this.experience.world.centerPanels.gamenTwo.material.fragmentShader =
+                gamenFragmentShaderLecture;
+              this.opacityUp(
+                this.experience.world.centerPanels.gamenOne.material.uniforms
+                  .uOpacity
+              );
+              this.opacityUp(
+                this.experience.world.centerPanels.gamenTwo.material.uniforms
+                  .uOpacity
+              );
+              break;
+            case 'gaku':
+              this.experience.world.rightPanels.gamenOne.material.fragmentShader =
+                gamenFragmentShaderLecture;
+              this.experience.world.rightPanels.gamenTwo.material.fragmentShader =
+                gamenFragmentShaderLecture;
+              this.opacityUp(
+                this.experience.world.rightPanels.gamenOne.material.uniforms
+                  .uOpacity
+              );
+              this.opacityUp(
+                this.experience.world.rightPanels.gamenTwo.material.uniforms
                   .uOpacity
               );
               break;
@@ -51,6 +85,30 @@ export default class TravellingManager {
     this.transitionInProfil = () => {
       this.opacityDown(
         this.experience.world.leftPanels.gamenOne.material.uniforms.uOpacity
+      );
+    };
+
+    /**
+     * KEIKEN
+     */
+    this.transitionInKeiken = () => {
+      this.opacityDown(
+        this.experience.world.centerPanels.gamenOne.material.uniforms.uOpacity
+      );
+      this.opacityDown(
+        this.experience.world.centerPanels.gamenTwo.material.uniforms.uOpacity
+      );
+    };
+
+    /**
+     * GAKU
+     */
+    this.transitionInGaku = () => {
+      this.opacityDown(
+        this.experience.world.rightPanels.gamenOne.material.uniforms.uOpacity
+      );
+      this.opacityDown(
+        this.experience.world.rightPanels.gamenTwo.material.uniforms.uOpacity
       );
     };
   }
