@@ -179,9 +179,7 @@ export default class Panels {
         gamen.material.uniforms.uColor.value = new THREE.Color(
           this.gamenParams.color
         );
-        gamen.material.uniforms.uOpacity.value = this.gamenParams.opacity;
-
-        // テスト！！！
+        // gamen.material.uniforms.uOpacity.value = this.gamenParams.opacity;
       }
 
       // Call tick again on the next frame

@@ -42,6 +42,8 @@ export default class TextProfil {
   }
 
   setVariables() {
+    var TWEEN = require('@tweenjs/tween.js');
+
     this.titleProfil = this.textModel.children[1];
     this.titlePos = [-0.15, -0.2, -0.25, -0.35, 0.2, 0.2];
     this.headersProfil = this.textModel.children[4];
@@ -53,7 +55,6 @@ export default class TextProfil {
     this.homeArrow = this.textModel.children[6];
 
     this.titleProfil.children[0].material.emissive = new THREE.Color('white');
-    this.titleProfil.children[0].material.emissiveIntensity = 5;
 
     /**
      * OBJECT READY
@@ -63,11 +64,13 @@ export default class TextProfil {
     /**
      * ANIMATE
      */
-    this.animateText();
+    // this.animateText();
   }
 
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
+
+    this.scene.add(this.textModel);
 
     /**
      * TITLE

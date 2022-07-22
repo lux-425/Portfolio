@@ -23,7 +23,7 @@ import TextGaku from './Texts/TextGaku.js';
 import TextKyoumi from './Texts/TextKyoumi.js';
 import TextGengo from './Texts/TextGengo.js';
 
-import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
+import TravellingManager from '../TravellingManager.js';
 
 // import { gsap } from 'gsap';
 
@@ -34,6 +34,7 @@ export default class World {
     this.scene = this.experience.scene;
 
     this.language = '';
+    this.area = '';
 
     // this.floor = new Floor();
     this.environment = new Environment();
@@ -178,6 +179,8 @@ export default class World {
         this.textGengo.bunpro,
         this.textGengo.rtk,
       ];
+
+      this.travellingManager = new TravellingManager();
 
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }

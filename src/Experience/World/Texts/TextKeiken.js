@@ -39,7 +39,7 @@ export default class TextKeiken {
      */
     await this.modelIntro.waitForLoad();
     this.textModelIntro = this.modelIntro.model.children[0];
-    // this.scene.add(this.textModelIntro);
+    this.scene.add(this.textModelIntro);
 
     this.textModelIntro.position.set(
       this.experience.world.centerPanels.gamenOne.mesh.position.x,
@@ -324,7 +324,7 @@ export default class TextKeiken {
     this.animateIntro();
 
     setTimeout(() => {
-      // this.scene.add(this.textModel);
+      this.scene.add(this.textModel);
       this.animateText();
     }, 5250);
   }

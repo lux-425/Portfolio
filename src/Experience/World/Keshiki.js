@@ -38,22 +38,21 @@ export default class Keshiki {
      */
     window.addEventListener('click', () => {
       if (this.currentIntersect) {
-        switch (this.currentIntersect) {
-          case 'francaisHitbox':
-            this.confirmLanguage('francais');
-            this.experience.world.textKeshiki.coucou('bienvenue');
-            break;
-          case 'nihongoHitbox':
-            this.confirmLanguage('nihongo');
-            this.experience.world.textKeshiki.coucou('youkoso');
-            break;
-          case 'englishHitbox':
-            this.confirmLanguage('english');
-            this.experience.world.textKeshiki.coucou('welcome');
-            break;
-          // case 'contactHitbox':
-          //   window.open('https://linktr.ee/garcialuc');
-          //   break;
+        if (this.area === 'gengoErabu') {
+          switch (this.currentIntersect) {
+            case 'francaisHitbox':
+              this.confirmLanguage('francais');
+              this.experience.world.textKeshiki.coucou('bienvenue');
+              break;
+            case 'nihongoHitbox':
+              this.confirmLanguage('nihongo');
+              this.experience.world.textKeshiki.coucou('youkoso');
+              break;
+            case 'englishHitbox':
+              this.confirmLanguage('english');
+              this.experience.world.textKeshiki.coucou('welcome');
+              break;
+          }
         }
       }
     });
@@ -79,6 +78,7 @@ export default class Keshiki {
     var TWEEN = require('@tweenjs/tween.js');
 
     this.experience.world.language = language;
+    this.experience.world.area = 'home';
 
     this.area = 'gamenErabu';
     this.mesh.material = this.material;
@@ -90,14 +90,24 @@ export default class Keshiki {
     this.experience.world.textKeshiki.francais.visible = false;
     this.experience.world.textKeshiki.english.visible = false;
 
-    this.gamensParamsArr = [
-      this.experience.world.leftPanels.gamenParams,
-      this.experience.world.centerPanels.gamenParams,
-      this.experience.world.rightPanels.gamenParams,
+    this.gamensArr = [
+      this.experience.world.leftPanels.gamenOne,
+      this.experience.world.leftPanels.gamenTwo,
+      this.experience.world.leftPanels.gamenThree,
+      this.experience.world.centerPanels.gamenOne,
+      this.experience.world.centerPanels.gamenTwo,
+      this.experience.world.centerPanels.gamenThree,
+      this.experience.world.centerPanels.gamenFour,
+      this.experience.world.rightPanels.gamenOne,
+      this.experience.world.rightPanels.gamenTwo,
+      this.experience.world.rightPanels.gamenThree,
+      this.experience.world.rightPanels.gamenFour,
     ];
-    for (var i = 0; i < this.gamensParamsArr.length; i++) {
-      this.tweenAppearGamens = new TWEEN.Tween(this.gamensParamsArr[i])
-        .to({ opacity: 0.88 }, 2555 + i * 1555)
+    for (var i = 0; i < this.gamensArr.length; i++) {
+      this.tweenAppearGamens = new TWEEN.Tween(
+        this.gamensArr[i].mesh.material.uniforms.uOpacity
+      )
+        .to({ value: 0.88 }, 555 + i * 555)
         .easing(TWEEN.Easing.Bounce.InOut);
       this.tweenAppearGamens.start();
     }
@@ -245,10 +255,6 @@ export default class Keshiki {
               this.hideLanguages();
               this.mesh.material = this.flagMaterialKokusai;
             }
-          } else if (this.area === 'gamenErabu') {
-            // if (this.intersects[0].object.name === 'contactHitbox') {
-            //   // enter contact hitbox
-            // }
           }
         }
         this.currentIntersect = this.intersects[0].object.name;
@@ -268,10 +274,6 @@ export default class Keshiki {
               this.showLanguages();
               this.mesh.material = this.material;
             }
-          } else if (this.area === 'gamenErabu') {
-            // if (this.currentIntersect === 'contactHitbox') {
-            //   // leave contact hitbox
-            // }
           }
         }
         this.currentIntersect = null;

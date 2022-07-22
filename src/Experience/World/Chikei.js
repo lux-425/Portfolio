@@ -82,6 +82,9 @@ export default class Chikei {
 
       // Update chikei
       this.chikeiModel.material.uniforms.uTime.value = elapsedTime;
+      this.chikeiModel.material.uniforms.uSurfaceColor.value = new THREE.Color(
+        this.debugObject.surfaceColor
+      );
 
       // Call tick again on the next frame
       window.requestAnimationFrame(tick);

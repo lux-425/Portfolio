@@ -38,7 +38,7 @@ export default class TextProject {
     // INTRO
     await this.modelIntro.waitForLoad();
     this.textModelIntro = this.modelIntro.model.children[0];
-    // this.scene.add(this.textModelIntro);
+    this.scene.add(this.textModelIntro);
 
     this.textModelIntro.translateX(-4);
 
@@ -335,7 +335,7 @@ export default class TextProject {
     this.animateIntro();
 
     setTimeout(() => {
-      // this.scene.add(this.textModel);
+      this.scene.add(this.textModel);
       this.animateText();
     }, 3000);
   }

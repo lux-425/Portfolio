@@ -81,7 +81,7 @@ export default class Particles {
     const colors = new Float32Array(this.count * 3);
 
     for (let i = 0; i < this.countBis * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 55;
+      positions[i] = (Math.random() - 0.5) * 155;
       colors[i] = Math.random();
     }
 
