@@ -11,6 +11,8 @@ export default class Particles {
     this.setBigParticles();
     this.setSmallParticles();
 
+    this.toggleSpeed = 1;
+
     this.setAnimation();
   }
 
@@ -24,13 +26,13 @@ export default class Particles {
     );
 
     this.particlesGeometry = new THREE.BufferGeometry();
-    this.count = 5555;
+    this.count = 55555;
 
     const positions = new Float32Array(this.count * 3);
     const colors = new Float32Array(this.count * 3);
 
     for (let i = 0; i < this.count * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 1555;
+      positions[i] = (Math.random() - 0.5) * 5555;
       colors[i] = 1;
     }
 
@@ -119,7 +121,7 @@ export default class Particles {
       // Update particles
       this.particles.rotation.y = -elapsedTime * 0.002;
 
-      this.smallParticles.rotation.y = elapsedTime * 0.05;
+      this.smallParticles.rotation.y = elapsedTime * 0.05 * this.toggleSpeed;
       this.smallParticles.position.y = Math.cos(elapsedTime * 0.5);
 
       window.requestAnimationFrame(tick);

@@ -33,7 +33,7 @@ export default class World {
 
     this.scene = this.experience.scene;
 
-    this.language = "";
+    this.language = '';
 
     // this.floor = new Floor();
     this.environment = new Environment();

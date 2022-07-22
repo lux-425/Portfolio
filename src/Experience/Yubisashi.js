@@ -205,6 +205,7 @@ export default class Yubisashi {
     this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 1;
     this.experience.world.textKeshiki.contact.visible = false;
     this.experience.world.textKeshiki.select.visible = false;
+    this.experience.world.particles.toggleSpeed = 5;
   }
 
   setRaycasting() {
@@ -235,6 +236,8 @@ export default class Yubisashi {
               new THREE.Color('#0000d1');
             this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
               new THREE.Color('#b56cfe');
+            this.experience.world.chikei.chikeiModel.material.uniforms.uSurfaceColor.value =
+              new THREE.Color('#0000ff');
             this.toggleGamenKeshiki();
             this.experience.world.textKeshiki.about(true, 'one');
           } else if (
@@ -245,6 +248,8 @@ export default class Yubisashi {
               new THREE.Color('#00ccff');
             this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
               new THREE.Color('#6b00b3');
+            this.experience.world.chikei.chikeiModel.material.uniforms.uSurfaceColor.value =
+              new THREE.Color('#ff0000');
             this.toggleGamenKeshiki();
             this.experience.world.textKeshiki.about(true, 'two');
           } else if (
@@ -255,6 +260,8 @@ export default class Yubisashi {
               new THREE.Color('#ff00ae');
             this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
               new THREE.Color('#4e447e');
+            this.experience.world.chikei.chikeiModel.material.uniforms.uSurfaceColor.value =
+              new THREE.Color('#00ff00');
             this.toggleGamenKeshiki();
             this.experience.world.textKeshiki.about(true, 'three');
           } else if (this.intersects[0].object.name === 'arrowHitboxProfil') {
@@ -305,6 +312,9 @@ export default class Yubisashi {
               new THREE.Color('#ffffff');
             this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
               new THREE.Color('#000000');
+            this.experience.world.chikei.chikeiModel.material.uniforms.uSurfaceColor.value =
+              new THREE.Color('#ffffff');
+            this.experience.world.particles.toggleSpeed = 1;
             this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 0;
             this.experience.world.textKeshiki.contact.visible = true;
             this.experience.world.textKeshiki.select.visible = true;

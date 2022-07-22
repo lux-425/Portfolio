@@ -25,14 +25,13 @@ export default class Renderer {
     this.instance.toneMapping = THREE.CineonToneMapping;
     this.instance.toneMappingExposure = 1.75;
 
-    this.instance.shadowMap.enabled = true;
-    this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
-    
+    this.instance.shadowMap.enabled = false;
+    // this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
+
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(this.sizes.pixelRatio);
 
     this.instance.setClearColor(0x101010);
-    // this.instance.setClearColor(0x080808);
   }
 
   resize() {
