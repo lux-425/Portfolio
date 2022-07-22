@@ -41,10 +41,17 @@ export default class Yubisashi {
                 break;
               case 'leftAreaGamen':
                 this.experience.world.area = 'profil';
+
+                const index = this.yubisashiMono.indexOf(
+                  this.experience.world.leftPanels.gamenOne.mesh
+                );
+                this.yubisashiMono.splice(index, 1);
+
                 this.experience.world.chikei.debugObject.surfaceColor =
                   '#0000ff';
                 this.experience.world.textKeshiki.contact.visible = false;
                 this.experience.world.textKeshiki.select.visible = false;
+
                 this.kameraTravelling();
                 break;
               case 'centerAreaGamen':
@@ -278,8 +285,8 @@ export default class Yubisashi {
                   new THREE.Color('#0000d1');
                 this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
                   new THREE.Color('#b56cfe');
-                this.experience.world.chikei.chikeiModel.material.uniforms.uSurfaceColor.value =
-                  new THREE.Color('#0000ff');
+                this.experience.world.chikei.debugObject.surfaceColor =
+                  '#0000ff';
                 this.toggleGamenKeshiki();
                 this.experience.world.textKeshiki.about(true, 'one');
               } else if (
@@ -290,8 +297,8 @@ export default class Yubisashi {
                   new THREE.Color('#00ccff');
                 this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
                   new THREE.Color('#6b00b3');
-                this.experience.world.chikei.chikeiModel.material.uniforms.uSurfaceColor.value =
-                  new THREE.Color('#ff0000');
+                this.experience.world.chikei.debugObject.surfaceColor =
+                  '#ff0000';
                 this.toggleGamenKeshiki();
                 this.experience.world.textKeshiki.about(true, 'two');
               } else if (
@@ -302,18 +309,19 @@ export default class Yubisashi {
                   new THREE.Color('#ff00ae');
                 this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
                   new THREE.Color('#4e447e');
-                this.experience.world.chikei.chikeiModel.material.uniforms.uSurfaceColor.value =
-                  new THREE.Color('#00ff00');
+                this.experience.world.chikei.debugObject.surfaceColor =
+                  '#00ff00';
                 this.toggleGamenKeshiki();
                 this.experience.world.textKeshiki.about(true, 'three');
               }
               break;
-            default:
+            case 'profil':
               if (this.intersects[0].object.name === 'arrowHitboxProfil') {
                 this.experience.world.textProfil.tweenTranslateRightArrowProfil.start();
-              } else if (
-                this.intersects[0].object.name === 'arrowHitboxKeiken'
-              ) {
+              }
+              break;
+            default:
+              if (this.intersects[0].object.name === 'arrowHitboxKeiken') {
                 this.experience.world.textKeiken.tweenTranslateRightArrowKeiken.start();
               } else if (
                 this.intersects[0].object.name === 'arrowHitboxProject'
@@ -367,8 +375,8 @@ export default class Yubisashi {
                   new THREE.Color('#ffffff');
                 this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
                   new THREE.Color('#000000');
-                this.experience.world.chikei.chikeiModel.material.uniforms.uSurfaceColor.value =
-                  new THREE.Color('#ffffff');
+                this.experience.world.chikei.debugObject.surfaceColor =
+                  '#ffffff';
                 this.experience.world.particles.toggleSpeed = 1;
                 this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 0;
                 this.experience.world.textKeshiki.contact.visible = true;
@@ -376,10 +384,13 @@ export default class Yubisashi {
                 this.experience.world.textKeshiki.about(false, '');
               }
               break;
-            default:
+            case 'profil':
               if (this.currentIntersect === 'arrowHitboxProfil') {
                 this.experience.world.textProfil.tweenTranslateLeftArrowProfil.start();
-              } else if (this.currentIntersect === 'arrowHitboxKeiken') {
+              }
+              break;
+            default:
+              if (this.currentIntersect === 'arrowHitboxKeiken') {
                 this.experience.world.textKeiken.tweenTranslateLeftArrowKeiken.start();
               } else if (this.currentIntersect === 'arrowHitboxProject') {
                 this.experience.world.textProject.tweenTranslateRightArrow.start();

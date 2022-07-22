@@ -56,6 +56,46 @@ export default class TextProfil {
 
     this.titleProfil.children[0].material.emissive = new THREE.Color('white');
 
+    // ARROW TEXT APPEARANCE
+    this.tweenAppearTextProfil = () => {
+      for (var i = 0; i < 5; i++) {
+        var tweenAppearTextProfil = new TWEEN.Tween(
+          this.arrowTextProfil.children[i].material
+        )
+          .to({ opacity: 1 }, 400 + i * 150)
+          .easing(TWEEN.Easing.Exponential.In);
+        tweenAppearTextProfil.start();
+      }
+    };
+    this.tweenDisappearTextProfil = () => {
+      for (var i = 0; i < 5; i++) {
+        var tweenDisappearTextProfil = new TWEEN.Tween(
+          this.arrowTextProfil.children[i].material
+        )
+          .to({ opacity: 0 }, 500)
+          .easing(TWEEN.Easing.Exponential.Out);
+        tweenDisappearTextProfil.start();
+      }
+    };
+
+    // ARROW TRANSLATION
+    this.tweenTranslateRightArrowProfil = new TWEEN.Tween(
+      this.arrowProfil.position
+    )
+      .to({ x: -0.175 }, 500)
+      .easing(TWEEN.Easing.Exponential.In)
+      .onStart(() => {
+        this.tweenAppearTextProfil();
+      });
+    this.tweenTranslateLeftArrowProfil = new TWEEN.Tween(
+      this.arrowProfil.position
+    )
+      .to({ x: -0.4595 }, 1000)
+      .easing(TWEEN.Easing.Exponential.Out)
+      .onStart(() => {
+        this.tweenDisappearTextProfil();
+      });
+
     /**
      * OBJECT READY
      */
@@ -179,46 +219,6 @@ export default class TextProfil {
     setTimeout(() => {
       tweenAppearArrowProfil.start();
     }, 1000);
-
-    // ARROW TEXT APPEARANCE
-    this.tweenAppearTextProfil = () => {
-      for (var i = 0; i < 5; i++) {
-        var tweenAppearTextProfil = new TWEEN.Tween(
-          this.arrowTextProfil.children[i].material
-        )
-          .to({ opacity: 1 }, 400 + i * 150)
-          .easing(TWEEN.Easing.Exponential.In);
-        tweenAppearTextProfil.start();
-      }
-    };
-    this.tweenDisappearTextProfil = () => {
-      for (var i = 0; i < 5; i++) {
-        var tweenDisappearTextProfil = new TWEEN.Tween(
-          this.arrowTextProfil.children[i].material
-        )
-          .to({ opacity: 0 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenDisappearTextProfil.start();
-      }
-    };
-
-    // ARROW TRANSLATION
-    this.tweenTranslateRightArrowProfil = new TWEEN.Tween(
-      this.arrowProfil.position
-    )
-      .to({ x: -0.175 }, 500)
-      .easing(TWEEN.Easing.Exponential.In)
-      .onStart(() => {
-        this.tweenAppearTextProfil();
-      });
-    this.tweenTranslateLeftArrowProfil = new TWEEN.Tween(
-      this.arrowProfil.position
-    )
-      .to({ x: -0.4595 }, 1000)
-      .easing(TWEEN.Easing.Exponential.Out)
-      .onStart(() => {
-        this.tweenDisappearTextProfil();
-      });
   }
 
   setAnimation() {
