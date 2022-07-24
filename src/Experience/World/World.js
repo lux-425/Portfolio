@@ -120,8 +120,8 @@ export default class World {
       }, 100);
     } else {
       this.yubisashiMono = [
-        this.textKeshiki.contactHitbox,
         this.textKeshiki.buttonRefresh,
+        this.textKeshiki.contactHitbox,
 
         this.leftPanels.gamenOne.mesh,
         this.centerPanels.gamenOne.mesh,
@@ -134,18 +134,22 @@ export default class World {
         this.polygonGlobeTwo.mesh,
         this.polygonGem.mesh,
 
-        this.textProfil.arrowHitboxProfil,
         this.textProfil.buttonRefresh,
+        this.textProfil.arrowHitboxProfil,
         this.textProfil.homeArrowHitbox,
 
-        this.textKeiken.arrowHitboxKeiken,
+        this.textShoukai.buttonRefresh,
+        this.textShoukai.arrowHitbox,
+        this.textShoukai.homeHitbox,
+
         this.textKeiken.buttonRefresh,
+        this.textKeiken.arrowHitboxKeiken,
         this.textKeiken.arrowHomeHitbox,
         this.textKeiken.faureciaLogo,
         this.textKeiken.sterimedLogo,
 
-        this.textProject.arrowHitboxProject,
         this.textProject.buttonRefresh,
+        this.textProject.arrowHitboxProject,
         this.textProject.homeArrowHitbox,
         this.textProject.navbarIchi,
         this.textProject.navbarNi,
@@ -157,28 +161,35 @@ export default class World {
         this.textProject.visitButtonHitbox,
         this.textProject.githubLogoHitbox,
 
+        this.textGaku.buttonRefresh,
         this.textGaku.arrowHitboxGakuRight,
         this.textGaku.arrowHitboxGakuLeft,
         this.textGaku.arrowHomeHitboxGaku,
-        this.textGaku.buttonRefresh,
         this.textGaku.logoLeft,
         this.textGaku.logoRight,
 
         this.textKyoumi.buttonRefresh,
-        this.textKyoumi.arrowHomeHitbox,
-        this.textKyoumi.arrowLeftHitbox,
         this.textKyoumi.arrowRightHitbox,
+        this.textKyoumi.arrowLeftHitbox,
+        this.textKyoumi.arrowHomeHitbox,
 
         this.textGengo.buttonRefresh,
+        this.textGengo.hitboxRight,
+        this.textGengo.hitboxLeft,
+        this.textGengo.hitboxHome,
         this.textGengo.hitboxHon,
         this.textGengo.hitboxSoftwares,
         this.textGengo.hitboxJLPT,
-        this.textGengo.hitboxLeft,
-        this.textGengo.hitboxRight,
         this.textGengo.anki,
         this.textGengo.bunpro,
         this.textGengo.rtk,
       ];
+
+      console.log(
+        this.textGengo.hitboxHome,
+        this.textGengo.hitboxLeft,
+        this.textGengo.hitboxRight
+      );
 
       this.travellingManager = new TravellingManager();
 

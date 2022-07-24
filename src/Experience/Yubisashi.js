@@ -20,6 +20,15 @@ export default class Yubisashi {
       'rightAreaGamen',
       'rightAreaGamenBis',
     ];
+    this.homeHitboxNamesArr = [
+      'zarrowHomeHitboxProfil',
+      'hitboxHome',
+      'yarrowHomeHitbox',
+      'yhomeArrowHitbox',
+      'arrowHomeHitboxGaku001',
+      'arrowHitboxKyoumiHome',
+      'arrowHitboxGengoHome',
+    ];
 
     /**
      * Raycaster
@@ -35,7 +44,11 @@ export default class Yubisashi {
       var index = null;
 
       if (this.currentIntersect) {
+        // AREA CLICKABLE ATM
         switch (this.experience.world.area) {
+          /**
+           * HOME
+           */
           case 'home':
             switch (this.currentIntersect) {
               case 'contactHitbox':
@@ -95,53 +108,33 @@ export default class Yubisashi {
                 break;
             }
             break;
-          default:
+          /**
+           * PROFIL
+           */
+          case 'profil':
             switch (this.currentIntersect) {
-              case 'buttonRefreshKeshiki':
-                this.experience.world.textKeshiki.animateText();
-                break;
-
-              case 'ball':
-                this.experience.world.polygonBall.mesh.material.color =
-                  new THREE.Color(
-                    '#' + Math.floor(Math.random() * 16777215).toString(16)
-                  );
-                break;
-              case 'torus':
-                this.experience.world.polygonTorus.mesh.material.color =
-                  new THREE.Color(
-                    '#' + Math.floor(Math.random() * 16777215).toString(16)
-                  );
-                break;
-              case 'globeTwo':
-                this.experience.world.polygonGlobeTwo.mesh.material.color =
-                  new THREE.Color(
-                    '#' + Math.floor(Math.random() * 16777215).toString(16)
-                  );
-                break;
-              case 'gem':
-                this.experience.world.polygonGem.mesh.material.color =
-                  new THREE.Color(
-                    '#' + Math.floor(Math.random() * 16777215).toString(16)
-                  );
-                break;
-
-              case 'arrowHitboxProfil':
-                this.scene.remove(this.experience.world.textProfil.textModel);
-                break;
               case 'buttonRefreshProfil':
                 this.scene.add(this.experience.world.textProfil.textModel);
                 this.experience.world.textProfil.animateText();
                 break;
+              case 'arrowHitboxProfil':
+                this.scene.remove(this.experience.world.textProfil.textModel);
+                break;
               case 'zarrowHomeHitboxProfil':
                 console.log('go home from profil');
                 break;
-
-              case 'arrowHitboxKeiken':
-                this.scene.remove(this.experience.world.textKeiken.textModel);
-                break;
+            }
+            break;
+          /**
+           * KEIKEN
+           */
+          case 'keiken':
+            switch (this.currentIntersect) {
               case 'buttonRefreshKeiken':
                 this.experience.world.textKeiken.animate();
+                break;
+              case 'arrowHitboxKeiken':
+                this.scene.remove(this.experience.world.textKeiken.textModel);
                 break;
               case 'yarrowHomeHitbox':
                 console.log('go home from keiken');
@@ -152,11 +145,17 @@ export default class Yubisashi {
               case 'xlogo-sterimed':
                 window.open('https://www.sterimed.fr/');
                 break;
-
-              case 'arrowHitboxProject':
+            }
+            break;
+          /**
+           * PROJECTS
+           */
+          case 'projects':
+            switch (this.currentIntersect) {
+              case 'buttonRefreshProject':
                 this.experience.world.textProject.animate();
                 break;
-              case 'buttonRefreshProject':
+              case 'arrowHitboxProject':
                 this.experience.world.textProject.animate();
                 break;
               case 'yhomeArrowHitbox':
@@ -211,9 +210,24 @@ export default class Yubisashi {
               case 'visitHitbox':
                 console.log('visit live');
                 break;
-
+            }
+            break;
+          /**
+           * GAKU
+           */
+          case 'gaku':
+            switch (this.currentIntersect) {
               case 'buttonRefreshGaku':
                 this.experience.world.textGaku.animateText();
+                break;
+              case 'arrowHitboxGakuRight':
+                console.log('in kyoumi');
+                break;
+              case 'arrowHitboxGakuLeft001':
+                console.log('in gengo');
+                break;
+              case 'arrowHomeHitboxGaku001':
+                console.log('go home');
                 break;
               case 'Logo_UT3':
                 window.open(
@@ -225,13 +239,43 @@ export default class Yubisashi {
                   'https://en.wikipedia.org/wiki/University_of_Franche-Comt%C3%A9'
                 );
                 break;
-
+            }
+            break;
+          /**
+           * KYOUMI
+           */
+          case 'kyoumi':
+            switch (this.currentIntersect) {
               case 'buttonRefreshKyoumi':
                 this.experience.world.textKyoumi.animateText();
                 break;
-
+              case 'arrowHitboxKyoumiRight':
+                console.log('go gengo');
+                break;
+              case 'arrowHitboxKyoumiLeft':
+                console.log('go gaku');
+                break;
+              case 'arrowHitboxKyoumiHome':
+                console.log('go home');
+                break;
+            }
+            break;
+          /**
+           * GENGO
+           */
+          case 'gengo':
+            switch (this.currentIntersect) {
               case 'buttonRefreshGengo':
                 this.experience.world.textGengo.animateText();
+                break;
+              case 'arrowHitboxGengoRight':
+                console.log('go gaku');
+                break;
+              case 'arrowHitboxGengoLeft':
+                console.log('go kyoumi');
+                break;
+              case 'arrowHitboxGengoHome':
+                console.log('go home');
                 break;
               case 'buttonHitboxHon':
                 this.experience.world.textGengo.toggleHon();
@@ -252,6 +296,37 @@ export default class Yubisashi {
                 window.open(
                   'https://en.wikipedia.org/wiki/Remembering_the_Kanji_and_Remembering_the_Hanzi'
                 );
+                break;
+            }
+            break;
+          /**
+           * DEFAULT (POLYGONS)
+           */
+          default:
+            switch (this.currentIntersect) {
+              case 'ball':
+                this.experience.world.polygonBall.mesh.material.color =
+                  new THREE.Color(
+                    '#' + Math.floor(Math.random() * 16777215).toString(16)
+                  );
+                break;
+              case 'torus':
+                this.experience.world.polygonTorus.mesh.material.color =
+                  new THREE.Color(
+                    '#' + Math.floor(Math.random() * 16777215).toString(16)
+                  );
+                break;
+              case 'globeTwo':
+                this.experience.world.polygonGlobeTwo.mesh.material.color =
+                  new THREE.Color(
+                    '#' + Math.floor(Math.random() * 16777215).toString(16)
+                  );
+                break;
+              case 'gem':
+                this.experience.world.polygonGem.mesh.material.color =
+                  new THREE.Color(
+                    '#' + Math.floor(Math.random() * 16777215).toString(16)
+                  );
                 break;
             }
             break;
@@ -305,13 +380,19 @@ export default class Yubisashi {
       this.intersects = this.raycaster.intersectObjects(this.objectsToTest);
 
       /**
+       *
        * MOUSE ENTER
+       *
        */
       if (this.intersects.length) {
         document.body.style.cursor = 'pointer';
 
         if (!this.currentIntersect) {
+          // AREA HOVERABLE ATM
           switch (this.experience.world.area) {
+            /**
+             * HOME
+             */
             case 'home':
               if (this.intersects[0].object.name === 'contactHitbox') {
                 this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
@@ -354,11 +435,17 @@ export default class Yubisashi {
                 this.experience.world.textKeshiki.about(true, 'three');
               }
               break;
+            /**
+             * PROFIL
+             */
             case 'profil':
               if (this.intersects[0].object.name === 'arrowHitboxProfil') {
                 this.experience.world.textProfil.tweenTranslateRightArrowProfil.start();
               }
               break;
+            /**
+             * DEFAULT
+             */
             default:
               if (this.intersects[0].object.name === 'arrowHitboxKeiken') {
                 this.experience.world.textKeiken.tweenTranslateRightArrowKeiken.start();
@@ -398,12 +485,18 @@ export default class Yubisashi {
         this.currentIntersect = this.intersects[0].object.name;
       } else {
         /**
+         *
          * MOUSE LEAVE
+         *
          */
         document.body.style.cursor = 'default';
 
         if (this.currentIntersect) {
+          // AREA HOVERABLE ATM
           switch (this.experience.world.area) {
+            /**
+             * HOME
+             */
             case 'home':
               if (this.currentIntersect === 'contactHitbox') {
                 this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
@@ -423,11 +516,17 @@ export default class Yubisashi {
                 this.experience.world.textKeshiki.about(false, '');
               }
               break;
+            /**
+             * PROFIL
+             */
             case 'profil':
               if (this.currentIntersect === 'arrowHitboxProfil') {
                 this.experience.world.textProfil.tweenTranslateLeftArrowProfil.start();
               }
               break;
+            /**
+             * DEFAULT
+             */
             default:
               if (this.currentIntersect === 'arrowHitboxKeiken') {
                 this.experience.world.textKeiken.tweenTranslateLeftArrowKeiken.start();

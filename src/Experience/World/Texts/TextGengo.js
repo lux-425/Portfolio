@@ -250,6 +250,8 @@ export default class TextGengo {
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
+    this.tokoroDatta = true;
+
     /**
      * INIT
      */
@@ -326,9 +328,17 @@ export default class TextGengo {
     this.disappearPanel();
 
     this.jlptWaiting.visible = true;
-    this.jlptPhoto.visible = true;
 
-    this.jlptFrame.visible = true;
+    if (this.tokoroDatta) {
+      setTimeout(() => {
+        this.jlptFrame.visible = true;
+        this.jlptPhoto.visible = true;
+        this.tokoroDatta = false;
+      }, 333);
+    } else {
+      this.jlptFrame.visible = true;
+      this.jlptPhoto.visible = true;
+    }
 
     this.appearPanel();
   }

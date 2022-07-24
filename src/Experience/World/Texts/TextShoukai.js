@@ -32,7 +32,6 @@ export default class TextShoukai {
   async setModel() {
     await this.model.waitForLoad();
     this.textModel = this.model.model.children[0];
-    this.scene.add(this.textModel);
 
     this.textModel.translateY(4);
 
@@ -42,6 +41,11 @@ export default class TextShoukai {
   }
 
   setVariables() {
+    this.homeHitbox = this.textModel.children[1].children[1];
+    this.homeHitbox.visible = false;
+    this.arrowHitbox = this.textModel.children[0].children[1];
+    this.arrowHitbox.visible = false;
+
     /**
      * OBJECT READY
      */
@@ -57,6 +61,8 @@ export default class TextShoukai {
     var TWEEN = require('@tweenjs/tween.js');
 
     // console.log(this.textModel);
+
+    this.scene.add(this.textModel);
   }
 
   setAnimation() {

@@ -80,6 +80,10 @@ export default class TravellingManager {
     };
 
     /**
+     * GO HOME
+     */
+
+    /**
      * PROFIL
      */
     this.transitionInProfil = () => {
