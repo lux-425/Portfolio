@@ -8,6 +8,8 @@ export default class Particles {
 
     this.scene = this.experience.scene;
 
+    this.textureLoader = new THREE.TextureLoader();
+
     this.setBigParticles();
     this.setSmallParticles();
 
@@ -20,19 +22,18 @@ export default class Particles {
     /**
      * Textures
      */
-    const textureLoader = new THREE.TextureLoader();
-    const particleTexture = textureLoader.load(
-      '/textures/particles/hotaru.png'
+    const particleTexture = this.textureLoader.load(
+      '/textures/particles/hoshi.png'
     );
 
     this.particlesGeometry = new THREE.BufferGeometry();
-    this.count = 55555;
+    this.count = 5555;
 
     const positions = new Float32Array(this.count * 3);
     const colors = new Float32Array(this.count * 3);
 
     for (let i = 0; i < this.count * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 5555;
+      positions[i] = (Math.random() - 0.5) * 2555;
       colors[i] = 1;
     }
 
@@ -46,7 +47,7 @@ export default class Particles {
     );
 
     this.particlesMaterial = new THREE.PointsMaterial({
-      size: 0.08,
+      size: 1,
       sizeAttenuation: true,
     });
 
@@ -69,13 +70,12 @@ export default class Particles {
     /**
      * Textures
      */
-    const textureLoader = new THREE.TextureLoader();
-    const particleTexture = textureLoader.load(
+    const particleTexture = this.textureLoader.load(
       '/textures/particles/hotaru.png'
     );
 
     this.smallParticlesGeometry = new THREE.BufferGeometry();
-    this.countBis = 5555;
+    this.countBis = 555;
 
     const positions = new Float32Array(this.count * 3);
     const colors = new Float32Array(this.count * 3);
@@ -95,7 +95,7 @@ export default class Particles {
     );
 
     this.smallParticlesMaterial = new THREE.PointsMaterial({
-      size: 0.025,
+      size: 0.25,
       sizeAttenuation: true,
     });
 
@@ -110,6 +110,28 @@ export default class Particles {
       this.smallParticlesMaterial
     );
     this.scene.add(this.smallParticles);
+    console.log(this.smallParticles);
+  }
+
+  switchParticleTexture(area) {
+    switch (area) {
+      case 'left':
+        this.particleTexture = this.textureLoader.load(
+          '/textures/particles/awa.png'
+        );
+        break;
+      case 'center':
+        this.particleTexture = this.textureLoader.load(
+          '/textures/particles/honoo.png'
+        );
+        break;
+      case 'right':
+        this.particleTexture = this.textureLoader.load(
+          '/textures/particles/hotaru.png'
+        );
+        break;
+    }
+    this.smallParticles.material.alphaMap = this.particleTexture;
   }
 
   setAnimation() {

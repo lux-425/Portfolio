@@ -439,6 +439,7 @@ export default class Yubisashi {
                   '#0000ff';
                 this.toggleGamenKeshiki();
                 this.experience.world.textKeshiki.about(true, 'one');
+                this.experience.world.particles.switchParticleTexture('left');
               } else if (
                 this.intersects[0].object.name === 'centerAreaGamen' ||
                 this.intersects[0].object.name === 'centerAreaGamenBis'
@@ -451,6 +452,7 @@ export default class Yubisashi {
                   '#ff0000';
                 this.toggleGamenKeshiki();
                 this.experience.world.textKeshiki.about(true, 'two');
+                this.experience.world.particles.switchParticleTexture('center');
               } else if (
                 this.intersects[0].object.name === 'rightAreaGamen' ||
                 this.intersects[0].object.name === 'rightAreaGamenBis'
@@ -463,6 +465,7 @@ export default class Yubisashi {
                   '#00ff00';
                 this.toggleGamenKeshiki();
                 this.experience.world.textKeshiki.about(true, 'three');
+                this.experience.world.particles.switchParticleTexture('right');
               }
               break;
             /**

@@ -231,8 +231,10 @@ export default class World {
     this.gltfLoader.load('../../models/halo.glb', (gltf) => {
       this.model = gltf.scene;
       this.model.traverse((o) => {
-        if (o.isMesh) o.scale.set(80, 80, 80);
-        o.position.set(-750, 70, 69);
+        if (o.isMesh) {
+          o.scale.set(69, 69, 69);
+        }
+        o.position.set(-450, 55, 33);
       });
 
       this.scene.add(this.model);
