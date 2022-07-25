@@ -12,23 +12,33 @@ export default class TravellingManager {
 
     var TWEEN = require('@tweenjs/tween.js');
 
-    this.toggleReading = null;
-    this.toggledAlready = null;
-    this.toggledAlreadyBis = null;
+    this.travellingAlready = false;
 
-    // Gamen on/off functions
+    this.toggleReading = false;
+    this.toggledAlready = false;
+    this.toggledAlreadyBis = false;
+    this.toggledAlreadyTer = false;
+
+    /**
+     *
+     * OPACITY DOWN => OPACITY UP + SHADERS' SWITCH => ANIMATION
+     *
+     */
     this.opacityUp = (gamen) => {
       var tweenGamenOpacityUp = new TWEEN.Tween(gamen)
-        .to({ value: 0.88 }, 1111)
+        .to({ value: 0.88 }, 1000)
         .easing(TWEEN.Easing.Bounce.Out)
         .onComplete(() => {
-          if (!this.toggledAlreadyBis) {
-            this.toggledAlreadyBis = true;
+          if (!this.toggledAlreadyTer) {
+            this.toggledAlreadyTer = true;
 
             if (this.toggleReading) {
               switch (this.toggledArea) {
                 case 'profil':
                   this.experience.world.textProfil.animateText();
+                  break;
+                case 'shoukai':
+                  this.experience.world.textShoukai.animateText();
                   break;
                 case 'keiken':
                   this.experience.world.textKeiken.animate();
@@ -39,19 +49,25 @@ export default class TravellingManager {
               }
             }
           }
+          this.travellingAlready = false;
         });
       tweenGamenOpacityUp.start();
     };
     this.opacityDown = (gamen) => {
       var tweenGamenOpacityDown = new TWEEN.Tween(gamen)
-        .to({ value: 0.18 }, 1111)
+        .to({ value: 0.18 }, 1000)
         .easing(TWEEN.Easing.Bounce.In)
         .onStart(() => {
-          if (!this.toggledAlready) {
+          if (!this.toggledAlreadyBis) {
+            this.toggledAlreadyBis = true;
+
             if (this.toggleReading) {
               switch (this.toggledArea) {
                 case 'profil':
                   this.translationProfil();
+                  break;
+                case 'shoukai':
+                  this.translationShoukai();
                   break;
                 case 'keiken':
                   this.translationKeiken();
@@ -80,6 +96,32 @@ export default class TravellingManager {
                 }
                 this.opacityUp(
                   this.experience.world.leftPanels.gamenOne.material.uniforms
+                    .uOpacity
+                );
+                break;
+              case 'shoukai':
+                if (this.toggleReading) {
+                  this.experience.world.leftPanels.gamenTwo.material.fragmentShader =
+                    gamenFragmentShaderLecture;
+                  this.experience.world.leftPanels.gamenThree.material.fragmentShader =
+                    gamenFragmentShaderLecture;
+                } else {
+                  this.scene.remove(
+                    this.experience.world.textShoukai.textModel
+                  );
+                  this.experience.world.leftPanels.gamenTwo.resetShader(
+                    'shoukai'
+                  );
+                  this.experience.world.leftPanels.gamenThree.resetShader(
+                    'shoukai'
+                  );
+                }
+                this.opacityUp(
+                  this.experience.world.leftPanels.gamenTwo.material.uniforms
+                    .uOpacity
+                );
+                this.opacityUp(
+                  this.experience.world.leftPanels.gamenThree.material.uniforms
                     .uOpacity
                 );
                 break;
@@ -138,7 +180,12 @@ export default class TravellingManager {
     };
 
     /**
-     * GO HOME
+     *
+     * TRANSITIONS / TRANSLATIONS
+     *
+     */
+    /**
+     * HOME
      */
     this.transitionHome = (toggleReading) => {
       if (toggleReading) {
@@ -154,6 +201,7 @@ export default class TravellingManager {
         this.experience.world.textKeshiki.contact.visible = false;
         this.experience.world.textKeshiki.select.visible = false;
       }
+      this.travellingAlready = false;
     };
     this.translationHome = () => {
       // move kamera...
@@ -178,9 +226,31 @@ export default class TravellingManager {
     };
     this.translationProfil = () => {
       // move kamera
-
-      // oncomplete...
       this.experience.world.area = 'profil';
+    };
+
+    /**
+     * SHOUKAI
+     */
+    this.transitionShoukai = (toggleReading) => {
+      this.toggledArea = 'shoukai';
+
+      if (toggleReading) {
+        this.toggleReading = true;
+      } else {
+        this.toggleReading = false;
+      }
+
+      this.opacityDown(
+        this.experience.world.leftPanels.gamenTwo.material.uniforms.uOpacity
+      );
+      this.opacityDown(
+        this.experience.world.leftPanels.gamenThree.material.uniforms.uOpacity
+      );
+    };
+    this.translationShoukai = () => {
+      // move kamera
+      this.experience.world.area = 'shoukai';
     };
 
     /**

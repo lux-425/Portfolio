@@ -46,6 +46,8 @@ export default class TextShoukai {
     this.arrowHitbox = this.textModel.children[0].children[1];
     this.arrowHitbox.visible = false;
 
+    console.log(this.arrowHitbox);
+
     /**
      * OBJECT READY
      */
@@ -54,7 +56,7 @@ export default class TextShoukai {
     /**
      * ANIMATE
      */
-    this.animateText();
+    // this.animateText();
   }
 
   animateText() {

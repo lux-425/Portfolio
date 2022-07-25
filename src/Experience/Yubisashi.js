@@ -109,10 +109,26 @@ export default class Yubisashi {
                 this.experience.world.textProfil.animateText();
                 break;
               case 'arrowHitboxProfil':
-                this.scene.remove(this.experience.world.textProfil.textModel);
+                this.kameraTravelling('profil', 'shoukai');
                 break;
               case 'zarrowHomeHitboxProfil':
                 this.kameraTravelling('profil', 'home');
+                break;
+            }
+            break;
+          /**
+           * SHOUKAI
+           */
+          case 'shoukai':
+            switch (this.currentIntersect) {
+              case 'buttonRefreshShoukai':
+                this.experience.world.textShoukai.animateText();
+                break;
+              case 'arrowHitboxShoukai':
+                this.kameraTravelling('shoukai', 'profil');
+                break;
+              case 'zarrowHomeHitboxProfil':
+                this.kameraTravelling('shoukai', 'home');
                 break;
             }
             break;
@@ -328,10 +344,14 @@ export default class Yubisashi {
     this.setRaycasting();
   }
 
+  // KAMERA OUT
   kameraTravelling(origine, destination) {
+    this.experience.world.area = null;
+
+    this.experience.world.travellingManager.travellingAlready = true;
     this.experience.world.travellingManager.toggledAlready = false;
     this.experience.world.travellingManager.toggledAlreadyBis = false;
-    this.experience.world.area = null;
+    this.experience.world.travellingManager.toggledAlreadyTer = false;
 
     switch (origine) {
       case 'home':
@@ -340,54 +360,93 @@ export default class Yubisashi {
       case 'profil':
         this.experience.world.travellingManager.transitionProfil(false);
         break;
+      case 'shoukai':
+        this.experience.world.travellingManager.transitionShoukai(false);
+        break;
       case 'keiken':
         this.experience.world.travellingManager.transitionKeiken(false);
+        break;
+      case 'projects':
+        this.experience.world.travellingManager.transitionProjects(false);
         break;
       case 'gaku':
         this.experience.world.travellingManager.transitionGaku(false);
         break;
+      case 'kyoumi':
+        this.experience.world.travellingManager.transitionKyoumi(false);
+        break;
+      case 'gengo':
+        this.experience.world.travellingManager.transitionGengo(false);
+        break;
     }
 
-    switch (destination) {
-      case 'home':
-        switch (origine) {
-          case 'profil':
-          case 'shoukai':
-            this.yubisashiMono.push(
-              this.experience.world.leftPanels.gamenOne.mesh
-            );
-            this.experience.world.textKeshiki.about(false, 'one');
-            break;
-          case 'keiken':
-          case 'projects':
-            this.yubisashiMono.push(
-              this.experience.world.centerPanels.gamenOne.mesh,
-              this.experience.world.centerPanels.gamenTwo.mesh
-            );
-            this.experience.world.textKeshiki.about(false, 'two');
-            break;
-          case 'gaku':
-          case 'kyoumi':
-          case 'gengo':
-            this.yubisashiMono.push(
-              this.experience.world.rightPanels.gamenOne.mesh,
-              this.experience.world.rightPanels.gamenTwo.mesh
-            );
-            this.experience.world.textKeshiki.about(false, 'three');
-            break;
-        }
+    this.waitTravellingEnds(origine, destination);
+  }
 
-        this.experience.world.travellingManager.transitionHome(true);
-        break;
-      case 'profil':
-        this.experience.world.travellingManager.transitionProfil(true);
-        break;
-      case 'keiken':
-        this.experience.world.travellingManager.transitionKeiken(true);
-        break;
-      case 'gaku':
-        this.experience.world.travellingManager.transitionGaku(true);
-        break;
+  // KAMERA IN
+  waitTravellingEnds(origine, destination) {
+    if (this.experience.world.travellingManager.travellingAlready) {
+      setTimeout(() => {
+        this.waitTravellingEnds(origine, destination);
+      }, 100);
+    } else {
+      this.experience.world.travellingManager.toggledAlready = false;
+      this.experience.world.travellingManager.toggledAlreadyBis = false;
+      this.experience.world.travellingManager.toggledAlreadyTer = false;
+
+      switch (destination) {
+        case 'home':
+          switch (origine) {
+            case 'profil':
+            case 'shoukai':
+              this.yubisashiMono.push(
+                this.experience.world.leftPanels.gamenOne.mesh
+              );
+              this.experience.world.textKeshiki.about(false, 'one');
+              break;
+            case 'keiken':
+            case 'projects':
+              this.yubisashiMono.push(
+                this.experience.world.centerPanels.gamenOne.mesh,
+                this.experience.world.centerPanels.gamenTwo.mesh
+              );
+              this.experience.world.textKeshiki.about(false, 'two');
+              break;
+            case 'gaku':
+            case 'kyoumi':
+            case 'gengo':
+              this.yubisashiMono.push(
+                this.experience.world.rightPanels.gamenOne.mesh,
+                this.experience.world.rightPanels.gamenTwo.mesh
+              );
+              this.experience.world.textKeshiki.about(false, 'three');
+              break;
+          }
+
+          this.experience.world.travellingManager.transitionHome(true);
+          break;
+        case 'profil':
+          this.experience.world.travellingManager.transitionProfil(true);
+          break;
+        case 'shoukai':
+          this.experience.world.travellingManager.transitionShoukai(true);
+          break;
+        case 'keiken':
+          this.experience.world.travellingManager.transitionKeiken(true);
+          break;
+        case 'projects':
+          this.experience.world.travellingManager.transitionProjects(true);
+          break;
+        case 'gaku':
+          this.experience.world.travellingManager.transitionGaku(true);
+          break;
+        case 'kyoumi':
+          this.experience.world.travellingManager.transitionKyoumi(true);
+          break;
+        case 'gengo':
+          this.experience.world.travellingManager.transitionGengo(true);
+          break;
+      }
     }
   }
 
