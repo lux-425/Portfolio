@@ -55,8 +55,6 @@ export default class Yubisashi {
                 window.open('https://linktr.ee/garcialuc');
                 break;
               case 'leftAreaGamen':
-                this.experience.world.area = 'profil';
-
                 index = this.yubisashiMono.indexOf(
                   this.experience.world.leftPanels.gamenOne.mesh
                 );
@@ -64,14 +62,11 @@ export default class Yubisashi {
 
                 this.experience.world.chikei.debugObject.surfaceColor =
                   '#0000ff';
-                this.travelFromHome();
 
-                this.kameraTravelling();
+                this.kameraTravelling('home', 'profil');
                 break;
               case 'centerAreaGamen':
               case 'centerAreaGamenBis':
-                this.experience.world.area = 'keiken';
-
                 index = this.yubisashiMono.indexOf(
                   this.experience.world.centerPanels.gamenOne.mesh
                 );
@@ -83,14 +78,11 @@ export default class Yubisashi {
 
                 this.experience.world.chikei.debugObject.surfaceColor =
                   '#ff0000';
-                this.travelFromHome();
 
-                this.kameraTravelling();
+                this.kameraTravelling('home', 'keiken');
                 break;
               case 'rightAreaGamen':
               case 'rightAreaGamenBis':
-                this.experience.world.area = 'gaku';
-
                 index = this.yubisashiMono.indexOf(
                   this.experience.world.rightPanels.gamenOne.mesh
                 );
@@ -102,9 +94,8 @@ export default class Yubisashi {
 
                 this.experience.world.chikei.debugObject.surfaceColor =
                   '#00ff00';
-                this.travelFromHome();
 
-                this.kameraTravelling();
+                this.kameraTravelling('home', 'gaku');
                 break;
             }
             break;
@@ -121,7 +112,7 @@ export default class Yubisashi {
                 this.scene.remove(this.experience.world.textProfil.textModel);
                 break;
               case 'zarrowHomeHitboxProfil':
-                console.log('go home from profil');
+                this.kameraTravelling('profil', 'home');
                 break;
             }
             break;
@@ -137,7 +128,7 @@ export default class Yubisashi {
                 this.scene.remove(this.experience.world.textKeiken.textModel);
                 break;
               case 'yarrowHomeHitbox':
-                console.log('go home from keiken');
+                this.kameraTravelling('keiken', 'home');
                 break;
               case 'Faurecia_Logo':
                 window.open('https://www.faurecia.com/en');
@@ -227,7 +218,7 @@ export default class Yubisashi {
                 console.log('in gengo');
                 break;
               case 'arrowHomeHitboxGaku001':
-                console.log('go home');
+                this.kameraTravelling('gaku', 'home');
                 break;
               case 'Logo_UT3':
                 window.open(
@@ -337,26 +328,65 @@ export default class Yubisashi {
     this.setRaycasting();
   }
 
-  travelFromHome() {
-    this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
-      new THREE.Color('#ffffff');
-    this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
-      new THREE.Color('#000000');
-    this.experience.world.particles.toggleSpeed = 1;
-    this.experience.world.textKeshiki.contact.visible = false;
-    this.experience.world.textKeshiki.select.visible = false;
-  }
+  kameraTravelling(origine, destination) {
+    this.experience.world.travellingManager.toggledAlready = false;
+    this.experience.world.travellingManager.toggledAlreadyBis = false;
+    this.experience.world.area = null;
 
-  kameraTravelling() {
-    switch (this.experience.world.area) {
+    switch (origine) {
+      case 'home':
+        this.experience.world.travellingManager.transitionHome(false);
+        break;
       case 'profil':
-        this.experience.world.travellingManager.transitionInProfil();
+        this.experience.world.travellingManager.transitionProfil(false);
         break;
       case 'keiken':
-        this.experience.world.travellingManager.transitionInKeiken();
+        this.experience.world.travellingManager.transitionKeiken(false);
         break;
       case 'gaku':
-        this.experience.world.travellingManager.transitionInGaku();
+        this.experience.world.travellingManager.transitionGaku(false);
+        break;
+    }
+
+    switch (destination) {
+      case 'home':
+        switch (origine) {
+          case 'profil':
+          case 'shoukai':
+            this.yubisashiMono.push(
+              this.experience.world.leftPanels.gamenOne.mesh
+            );
+            this.experience.world.textKeshiki.about(false, 'one');
+            break;
+          case 'keiken':
+          case 'projects':
+            this.yubisashiMono.push(
+              this.experience.world.centerPanels.gamenOne.mesh,
+              this.experience.world.centerPanels.gamenTwo.mesh
+            );
+            this.experience.world.textKeshiki.about(false, 'two');
+            break;
+          case 'gaku':
+          case 'kyoumi':
+          case 'gengo':
+            this.yubisashiMono.push(
+              this.experience.world.rightPanels.gamenOne.mesh,
+              this.experience.world.rightPanels.gamenTwo.mesh
+            );
+            this.experience.world.textKeshiki.about(false, 'three');
+            break;
+        }
+
+        this.experience.world.travellingManager.transitionHome(true);
+        break;
+      case 'profil':
+        this.experience.world.travellingManager.transitionProfil(true);
+        break;
+      case 'keiken':
+        this.experience.world.travellingManager.transitionKeiken(true);
+        break;
+      case 'gaku':
+        this.experience.world.travellingManager.transitionGaku(true);
         break;
     }
   }
@@ -444,40 +474,70 @@ export default class Yubisashi {
               }
               break;
             /**
-             * DEFAULT
+             * SHOUKAI
              */
-            default:
+            case 'shoukai':
+              if (this.intersects[0].object.name === 'arrowHitboxShoukai') {
+                console.log('arrow translates left');
+              }
+              break;
+            /**
+             * KEIKEN
+             */
+            case 'keiken':
               if (this.intersects[0].object.name === 'arrowHitboxKeiken') {
                 this.experience.world.textKeiken.tweenTranslateRightArrowKeiken.start();
-              } else if (
-                this.intersects[0].object.name === 'arrowHitboxProject'
-              ) {
+              }
+              break;
+            /**
+             * PROJECTS
+             */
+            case 'projects':
+              if (this.intersects[0].object.name === 'arrowHitboxProject') {
                 this.experience.world.textProject.tweenTranslateLeftArrow.start();
-              } else if (
-                this.intersects[0].object.name === 'arrowHitboxGakuLeft001'
-              ) {
+              }
+              break;
+            /**
+             * GAKU
+             */
+            case 'gaku':
+              if (this.intersects[0].object.name === 'arrowHitboxGakuLeft001') {
                 this.experience.world.textGaku.tweenArrowLeftToggle.start();
               } else if (
                 this.intersects[0].object.name === 'arrowHitboxGakuRight'
               ) {
                 this.experience.world.textGaku.tweenArrowRightToggle.start();
-              } else if (
-                this.intersects[0].object.name === 'arrowHitboxKyoumiLeft'
-              ) {
+              }
+              break;
+            /**
+             * KYOUMI
+             */
+            case 'kyoumi':
+              if (this.intersects[0].object.name === 'arrowHitboxKyoumiLeft') {
                 this.experience.world.textKyoumi.tweenToggleArrowLeft.start();
               } else if (
                 this.intersects[0].object.name === 'arrowHitboxKyoumiRight'
               ) {
                 this.experience.world.textKyoumi.tweenToggleArrowRight.start();
-              } else if (
-                this.intersects[0].object.name === 'arrowHitboxGengoLeft'
-              ) {
+              }
+              break;
+            /**
+             * GENGO
+             */
+            case 'gengo':
+              if (this.intersects[0].object.name === 'arrowHitboxGengoLeft') {
                 this.experience.world.textGengo.tweenToggleArrowLeft.start();
               } else if (
                 this.intersects[0].object.name === 'arrowHitboxGengoRight'
               ) {
                 this.experience.world.textGengo.tweenToggleArrowRight.start();
               }
+              break;
+            /**
+             * DEFAULT
+             */
+            default:
+              console.log('entering hover outside area...');
               break;
           }
         }
@@ -525,26 +585,64 @@ export default class Yubisashi {
               }
               break;
             /**
-             * DEFAULT
+             * SHOUKAI
              */
-            default:
+            case 'shoukai':
+              if (this.currentIntersect === 'arrowHitboxShoukai') {
+                // arrow translates right
+              }
+              break;
+            /**
+             * KEIKEN
+             */
+            case 'keiken':
               if (this.currentIntersect === 'arrowHitboxKeiken') {
                 this.experience.world.textKeiken.tweenTranslateLeftArrowKeiken.start();
-              } else if (this.currentIntersect === 'arrowHitboxProject') {
+              }
+              break;
+            /**
+             * PROJECTS
+             */
+            case 'projects':
+              if (this.currentIntersect === 'arrowHitboxProject') {
                 this.experience.world.textProject.tweenTranslateRightArrow.start();
-              } else if (this.currentIntersect === 'arrowHitboxGakuLeft001') {
+              }
+              break;
+            /**
+             * GAKU
+             */
+            case 'gaku':
+              if (this.currentIntersect === 'arrowHitboxGakuLeft001') {
                 this.experience.world.textGaku.tweenArrowLeftOrigin.start();
               } else if (this.currentIntersect === 'arrowHitboxGakuRight') {
                 this.experience.world.textGaku.tweenArrowRightOrigin.start();
-              } else if (this.currentIntersect === 'arrowHitboxKyoumiLeft') {
+              }
+              break;
+            /**
+             * KYOUMI
+             */
+            case 'kyoumi':
+              if (this.currentIntersect === 'arrowHitboxKyoumiLeft') {
                 this.experience.world.textKyoumi.tweenOriginArrowLeft.start();
               } else if (this.currentIntersect === 'arrowHitboxKyoumiRight') {
                 this.experience.world.textKyoumi.tweenOriginArrowRight.start();
-              } else if (this.currentIntersect === 'arrowHitboxGengoLeft') {
+              }
+              break;
+            /**
+             * GENGO
+             */
+            case 'gengo':
+              if (this.currentIntersect === 'arrowHitboxGengoLeft') {
                 this.experience.world.textGengo.tweenOriginArrowLeft.start();
               } else if (this.currentIntersect === 'arrowHitboxGengoRight') {
                 this.experience.world.textGengo.tweenOriginArrowRight.start();
               }
+              break;
+            /**
+             * DEFAULT
+             */
+            default:
+              console.log('leaving hover outside area...');
               break;
           }
         }

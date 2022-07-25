@@ -185,11 +185,7 @@ export default class World {
         this.textGengo.rtk,
       ];
 
-      console.log(
-        this.textGengo.hitboxHome,
-        this.textGengo.hitboxLeft,
-        this.textGengo.hitboxRight
-      );
+      // console.log(this.textShoukai.arrowHitbox);
 
       this.travellingManager = new TravellingManager();
 
