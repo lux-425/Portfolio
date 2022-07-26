@@ -213,6 +213,25 @@ export default class Keshiki {
     // this.mesh.rotation.x = -Math.PI * 0.25;
     this.mesh.position.set(0, 4.5, -18);
 
+    /**
+     *  INIT KAMERA FOR HOME'S AREA
+     */
+    this.experience.camera.controls.target = new THREE.Vector3(
+      this.mesh.position.x,
+      this.mesh.position.y - 1,
+      this.mesh.position.z + 15
+    );
+    this.experience.camera.instance.rotation.set(-Math.PI * 0.5);
+
+    this.experience.camera.controls.minDistance = 11;
+    this.experience.camera.controls.maxDistance = 16;
+
+    this.experience.camera.controls.minPolarAngle = Math.PI * 0.4;
+    this.experience.camera.controls.maxPolarAngle = Math.PI * 0.5;
+
+    this.experience.camera.controls.minAzimuthAngle = -Math.PI * 0.1;
+    this.experience.camera.controls.maxAzimuthAngle = Math.PI * 0.1;
+
     this.scene.add(this.mesh);
   }
 

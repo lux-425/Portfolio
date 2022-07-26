@@ -20,6 +20,15 @@ export default class Experience {
 
     instance = this;
 
+    /**
+     * Mouse
+     */
+    this.mouse = new THREE.Vector2();
+    window.addEventListener('mousemove', (event) => {
+      this.mouse.x = (event.clientX / this.sizes.width) * 2 - 1;
+      this.mouse.y = -(event.clientY / this.sizes.height) * 2 + 1;
+    });
+
     // Global access for dev console usage
     window.experience = this;
 
@@ -36,7 +45,7 @@ export default class Experience {
     this.camera = new Camera();
     this.renderer = new Renderer();
 
-    const axesHelper = new THREE.AxesHelper(5);
+    // const axesHelper = new THREE.AxesHelper(5);
     // this.scene.add(axesHelper);
 
     // Sizes' resize event
@@ -47,15 +56,6 @@ export default class Experience {
     // Time's tick event
     this.time.on('tick', () => {
       this.update();
-    });
-
-    /**
-     * Mouse
-     */
-    this.mouse = new THREE.Vector2();
-    window.addEventListener('mousemove', (event) => {
-      this.mouse.x = (event.clientX / this.sizes.width) * 2 - 1;
-      this.mouse.y = -(event.clientY / this.sizes.height) * 2 + 1;
     });
 
     // 世界の始まり

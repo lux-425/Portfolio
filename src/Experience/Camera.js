@@ -18,28 +18,37 @@ export default class Camera {
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
 
+    this.updatingControlls = true;
+
     this.setInstance();
     this.setOrbitControls();
   }
 
   setInstance() {
     this.instance = new THREE.PerspectiveCamera(
-      40,
+      50,
       this.sizes.width / this.sizes.height,
       0.1,
       999
     );
 
-    this.instance.position.set(0, 2.2, 10);
+    // this.instance.position.set(0, 4, 13);
 
     this.scene.add(this.instance);
   }
 
   setOrbitControls() {
     this.controls = new OrbitControls(this.instance, this.canvas);
+    // this.controls.enabled = false;
+
+    this.controls.rotateSpeed = 0.25;
 
     // Make the animation smoother when dragging and dropping
     this.controls.enableDamping = true;
+
+    this.controls.enableZoom = true;
+    this.controls.enablePan = false;
+    // this.controls.enableRotate = false;
   }
 
   resize() {
@@ -48,6 +57,8 @@ export default class Camera {
   }
 
   update() {
-    this.controls.update();
+    if (this.updatingControlls) {
+      this.controls.update();
+    }
   }
 }

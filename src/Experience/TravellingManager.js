@@ -269,6 +269,104 @@ export default class TravellingManager {
 
     /**
      *
+     * KAMERA / CONTROLS MOVEMENT TWEENS
+     *
+     */
+    /**
+     * PROFIL
+     */
+    this.tweenKameraProfil = () => {
+      // TARGET POSITION
+      const tweenTargetProfilX = new TWEEN.Tween(
+        this.experience.camera.controls.target
+      )
+        .to(
+          { x: this.experience.world.leftPanels.gamenOne.mesh.position.x },
+          1000
+        )
+        .easing(TWEEN.Easing.Quadratic.Out);
+
+      const tweenTargetProfilY = new TWEEN.Tween(
+        this.experience.camera.controls.target
+      )
+        .to(
+          {
+            y: this.experience.world.leftPanels.gamenOne.mesh.position.y + 0.3,
+          },
+          1000
+        )
+        .easing(TWEEN.Easing.Quadratic.Out);
+
+      const tweenTargetProfilZ = new TWEEN.Tween(
+        this.experience.camera.controls.target
+      )
+        .to(
+          {
+            z: this.experience.world.leftPanels.gamenOne.mesh.position.z,
+          },
+          1000
+        )
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .onComplete(() => {
+          this.experience.camera.updatingControlls = true;
+        });
+
+      // INSTANCE POSITION
+      const tweenInstanceProfilX = new TWEEN.Tween(
+        this.experience.camera.instance.position
+      )
+        .to(
+          { x: this.experience.world.leftPanels.gamenOne.mesh.position.x },
+          1000
+        )
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .onStart(() => {
+          tweenTargetProfilX.start();
+        });
+
+      const tweenInstanceProfilY = new TWEEN.Tween(
+        this.experience.camera.instance.position
+      )
+        .to(
+          {
+            y: this.experience.world.leftPanels.gamenOne.mesh.position.y + 0.3,
+          },
+          1000
+        )
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .onStart(() => {
+          tweenTargetProfilY.start();
+        });
+
+      const tweenInstanceProfilZ = new TWEEN.Tween(
+        this.experience.camera.instance.position
+      )
+        .to(
+          {
+            z: this.experience.world.leftPanels.gamenOne.mesh.position.z + 2.5,
+          },
+          1000
+        )
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .onStart(() => {
+          tweenTargetProfilZ.start();
+        });
+
+      tweenInstanceProfilX.start();
+      tweenInstanceProfilY.start();
+      tweenInstanceProfilZ.start();
+
+      // tweenTargetProfilX.start();
+      // tweenTargetProfilY.start();
+      // tweenTargetProfilZ.start();
+    };
+
+    //
+
+    //
+
+    /**
+     *
      * TRANSITIONS / TRANSLATIONS
      *
      */
@@ -292,9 +390,26 @@ export default class TravellingManager {
       this.travellingAlready = false;
     };
     this.translationHome = () => {
-      // move kamera...
-      this.experience.world.chikei.debugObject.surfaceColor = '#ffffff';
-      this.experience.world.area = 'home';
+      this.experience.camera.controls.target = new THREE.Vector3(
+        this.experience.world.keshiki.mesh.position.x,
+        this.experience.world.keshiki.mesh.position.y - 1,
+        this.experience.world.keshiki.mesh.position.z + 14
+      );
+      this.experience.camera.instance.position.set(0, 4, 13);
+
+      this.experience.camera.controls.minDistance = 11;
+      this.experience.camera.controls.maxDistance = 14;
+
+      this.experience.camera.controls.minPolarAngle = Math.PI * 0.4;
+      this.experience.camera.controls.maxPolarAngle = Math.PI * 0.5;
+
+      this.experience.camera.controls.minAzimuthAngle = -Math.PI * 0.1;
+      this.experience.camera.controls.maxAzimuthAngle = Math.PI * 0.1;
+
+      setTimeout(() => {
+        this.experience.world.area = 'home';
+        this.experience.world.chikei.debugObject.surfaceColor = '#ffffff';
+      }, 2000);
     };
 
     /**
@@ -314,7 +429,15 @@ export default class TravellingManager {
       );
     };
     this.translationProfil = () => {
-      // move kamera
+      this.experience.camera.updatingControlls = false;
+
+      this.experience.camera.controls.minDistance = 0.5;
+      this.experience.camera.controls.maxDistance = 3;
+      this.experience.camera.controls.minAzimuthAngle = -Math.PI * 0.25;
+      this.experience.camera.controls.maxAzimuthAngle = Math.PI * 0.25;
+
+      this.tweenKameraProfil();
+
       setTimeout(() => {
         this.experience.world.area = 'profil';
       }, 2000);
@@ -341,6 +464,20 @@ export default class TravellingManager {
     };
     this.translationShoukai = () => {
       // move kamera
+      this.experience.camera.controls.target = new THREE.Vector3(
+        this.experience.world.leftPanels.gamenThree.mesh.position.x,
+        this.experience.world.leftPanels.gamenThree.mesh.position.y + 0.25,
+        this.experience.world.leftPanels.gamenThree.mesh.position.z - 0.5
+      );
+      this.experience.camera.instance.position.set(
+        this.experience.world.leftPanels.gamenThree.mesh.position.x - 3,
+        this.experience.world.leftPanels.gamenThree.mesh.position.y + 0.75,
+        this.experience.world.leftPanels.gamenThree.mesh.position.z
+      );
+
+      this.experience.camera.controls.minAzimuthAngle = -Math.PI * 0.75;
+      this.experience.camera.controls.maxAzimuthAngle = -Math.PI * 0.25;
+
       setTimeout(() => {
         this.experience.world.area = 'shoukai';
       }, 2000);
