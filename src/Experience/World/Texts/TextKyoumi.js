@@ -12,17 +12,17 @@ export default class TextKyoumi {
     /**
      * REFRESH ANIMATION BUTTON
      */
-    this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
-    this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
-      color: 'red',
-    });
-    this.buttonRefresh = new THREE.Mesh(
-      this.buttonRefreshGeometry,
-      this.buttonRefreshMaterial
-    );
-    this.buttonRefresh.position.set(4.5, 2.2, -0.5);
-    this.buttonRefresh.name = 'buttonRefreshKyoumi';
-    this.scene.add(this.buttonRefresh);
+    // this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    // this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
+    //   color: 'red',
+    // });
+    // this.buttonRefresh = new THREE.Mesh(
+    //   this.buttonRefreshGeometry,
+    //   this.buttonRefreshMaterial
+    // );
+    // this.buttonRefresh.position.set(4.5, 2.2, -0.5);
+    // this.buttonRefresh.name = 'buttonRefreshKyoumi';
+    // this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
     this.model = new TextModel('../../../models/Gamen/gamen_010.glb');
@@ -32,7 +32,6 @@ export default class TextKyoumi {
   async setModel() {
     await this.model.waitForLoad();
     this.textModel = this.model.model.children[0];
-    this.scene.add(this.textModel);
 
     this.textModel.position.set(
       this.experience.world.rightPanels.gamenThree.mesh.position.x,
@@ -140,11 +139,13 @@ export default class TextKyoumi {
     /**
      * ANIMATE
      */
-    this.animateText();
+    // this.animateText();
   }
 
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
+
+    this.scene.add(this.textModel);
 
     /**
      * INIT VARIABLES
@@ -166,7 +167,7 @@ export default class TextKyoumi {
      */
 
     var tweenTitleAppear = new TWEEN.Tween(this.title.material)
-      .to({ opacity: 1 }, 2000)
+      .to({ opacity: 1 }, 1000)
       .easing(TWEEN.Easing.Exponential.InOut);
 
     var tweenArrowsAppear = new TWEEN.Tween(this.arrowLeft.material)
@@ -179,7 +180,7 @@ export default class TextKyoumi {
     this.tweenTextTranslate = () => {
       for (var i = 0; i < this.textArr.length; i++) {
         var tweenTextTranslate = new TWEEN.Tween(this.textArr[i].position)
-          .to({ x: -0.38 }, 1500 + i * 200)
+          .to({ x: -0.38 }, 1000 + i * 200)
           .easing(TWEEN.Easing.Cubic.InOut)
           .onStart(() => {
             tweenTitleAppear.start();
@@ -192,7 +193,7 @@ export default class TextKyoumi {
     };
 
     var tweenTextAppear = new TWEEN.Tween(this.rekishi.material)
-      .to({ opacity: 1 }, 2000)
+      .to({ opacity: 1 }, 1555)
       .easing(TWEEN.Easing.Circular.InOut)
       .onStart(() => {
         this.tweenTextTranslate();

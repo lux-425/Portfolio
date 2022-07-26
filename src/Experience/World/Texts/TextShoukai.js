@@ -12,17 +12,17 @@ export default class TextShoukai {
     /**
      * REFRESH ANIMATION BUTTON
      */
-    this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
-    this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
-      color: 'red',
-    });
-    this.buttonRefresh = new THREE.Mesh(
-      this.buttonRefreshGeometry,
-      this.buttonRefreshMaterial
-    );
-    this.buttonRefresh.position.set(-4.5, 2.2, -1);
-    this.buttonRefresh.name = 'buttonRefreshShoukai';
-    this.scene.add(this.buttonRefresh);
+    // this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    // this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
+    //   color: 'red',
+    // });
+    // this.buttonRefresh = new THREE.Mesh(
+    //   this.buttonRefreshGeometry,
+    //   this.buttonRefreshMaterial
+    // );
+    // this.buttonRefresh.position.set(-4.5, 2.2, -1);
+    // this.buttonRefresh.name = 'buttonRefreshShoukai';
+    // this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
     this.model = new TextModel('../../../models/Gamen/gamen_001-2.glb');
@@ -45,8 +45,6 @@ export default class TextShoukai {
     this.homeHitbox.visible = false;
     this.arrowHitbox = this.textModel.children[0].children[1];
     this.arrowHitbox.visible = false;
-
-    console.log(this.arrowHitbox);
 
     /**
      * OBJECT READY

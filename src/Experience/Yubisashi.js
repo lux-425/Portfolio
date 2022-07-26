@@ -44,7 +44,6 @@ export default class Yubisashi {
       var index = null;
 
       if (this.currentIntersect) {
-        // AREA CLICKABLE ATM
         switch (this.experience.world.area) {
           /**
            * HOME
@@ -104,10 +103,6 @@ export default class Yubisashi {
            */
           case 'profil':
             switch (this.currentIntersect) {
-              case 'buttonRefreshProfil':
-                this.scene.add(this.experience.world.textProfil.textModel);
-                this.experience.world.textProfil.animateText();
-                break;
               case 'arrowHitboxProfil':
                 this.kameraTravelling('profil', 'shoukai');
                 break;
@@ -121,13 +116,10 @@ export default class Yubisashi {
            */
           case 'shoukai':
             switch (this.currentIntersect) {
-              case 'buttonRefreshShoukai':
-                this.experience.world.textShoukai.animateText();
-                break;
               case 'arrowHitboxShoukai':
                 this.kameraTravelling('shoukai', 'profil');
                 break;
-              case 'zarrowHomeHitboxProfil':
+              case 'hitboxHome':
                 this.kameraTravelling('shoukai', 'home');
                 break;
             }
@@ -137,11 +129,8 @@ export default class Yubisashi {
            */
           case 'keiken':
             switch (this.currentIntersect) {
-              case 'buttonRefreshKeiken':
-                this.experience.world.textKeiken.animate();
-                break;
               case 'arrowHitboxKeiken':
-                this.scene.remove(this.experience.world.textKeiken.textModel);
+                this.kameraTravelling('keiken', 'projects');
                 break;
               case 'yarrowHomeHitbox':
                 this.kameraTravelling('keiken', 'home');
@@ -159,38 +148,35 @@ export default class Yubisashi {
            */
           case 'projects':
             switch (this.currentIntersect) {
-              case 'buttonRefreshProject':
-                this.experience.world.textProject.animate();
-                break;
               case 'arrowHitboxProject':
-                this.experience.world.textProject.animate();
+                this.kameraTravelling('projects', 'keiken');
                 break;
               case 'yhomeArrowHitbox':
-                console.log('go home from project');
+                this.kameraTravelling('projects', 'home');
                 break;
               case 'navbarIchi':
-                this.experience.world.textProject.navigateIchi();
+                this.experience.world.textProjects.navigateIchi();
                 break;
               case 'navbarNi':
-                this.experience.world.textProject.navigateNi();
+                this.experience.world.textProjects.navigateNi();
                 break;
               case 'navbarSan':
-                this.experience.world.textProject.navigateSan();
+                this.experience.world.textProjects.navigateSan();
                 break;
               case 'navbarYon':
-                this.experience.world.textProject.navigateYon();
+                this.experience.world.textProjects.navigateYon();
                 break;
               case 'navbarGo':
-                this.experience.world.textProject.navigateGo();
+                this.experience.world.textProjects.navigateGo();
                 break;
               case 'navbarRoku':
-                this.experience.world.textProject.navigateRoku();
+                this.experience.world.textProjects.navigateRoku();
                 break;
               case 'navbarTsugi':
-                this.experience.world.textProject.navigateNana();
+                this.experience.world.textProjects.navigateNana();
                 break;
               case 'zgithubHitbox':
-                switch (this.experience.world.textProject.actualTab) {
+                switch (this.experience.world.textProjects.actualTab) {
                   case 'ichi':
                     window.open('https://github.com/Luke-425/Nomi-Uebu');
                     break;
@@ -209,13 +195,23 @@ export default class Yubisashi {
                   case 'roku':
                     window.open('https://github.com/Luke-425/Portfolio');
                     break;
-                  default:
-                    console.log('no github path');
-                    break;
                 }
                 break;
               case 'visitHitbox':
-                console.log('visit live');
+                switch (this.experience.world.textProjects.actualTab) {
+                  case 'ichi':
+                    console.log('open ichi');
+                    // window.open('');
+                    break;
+                  case 'ni':
+                    console.log('open ni');
+                    // window.open('');
+                    break;
+                  case 'san':
+                    console.log('open san');
+                    // window.open('');
+                    break;
+                }
                 break;
             }
             break;
@@ -224,14 +220,11 @@ export default class Yubisashi {
            */
           case 'gaku':
             switch (this.currentIntersect) {
-              case 'buttonRefreshGaku':
-                this.experience.world.textGaku.animateText();
-                break;
               case 'arrowHitboxGakuRight':
-                console.log('in kyoumi');
+                this.kameraTravelling('gaku', 'kyoumi');
                 break;
               case 'arrowHitboxGakuLeft001':
-                console.log('in gengo');
+                this.kameraTravelling('gaku', 'gengo');
                 break;
               case 'arrowHomeHitboxGaku001':
                 this.kameraTravelling('gaku', 'home');
@@ -253,17 +246,14 @@ export default class Yubisashi {
            */
           case 'kyoumi':
             switch (this.currentIntersect) {
-              case 'buttonRefreshKyoumi':
-                this.experience.world.textKyoumi.animateText();
-                break;
               case 'arrowHitboxKyoumiRight':
-                console.log('go gengo');
+                this.kameraTravelling('kyoumi', 'gengo');
                 break;
               case 'arrowHitboxKyoumiLeft':
-                console.log('go gaku');
+                this.kameraTravelling('kyoumi', 'gaku');
                 break;
               case 'arrowHitboxKyoumiHome':
-                console.log('go home');
+                this.kameraTravelling('kyoumi', 'home');
                 break;
             }
             break;
@@ -272,17 +262,14 @@ export default class Yubisashi {
            */
           case 'gengo':
             switch (this.currentIntersect) {
-              case 'buttonRefreshGengo':
-                this.experience.world.textGengo.animateText();
-                break;
               case 'arrowHitboxGengoRight':
-                console.log('go gaku');
+                this.kameraTravelling('gengo', 'gaku');
                 break;
               case 'arrowHitboxGengoLeft':
-                console.log('go kyoumi');
+                this.kameraTravelling('gengo', 'kyoumi');
                 break;
               case 'arrowHitboxGengoHome':
-                console.log('go home');
+                this.kameraTravelling('gengo', 'home');
                 break;
               case 'buttonHitboxHon':
                 this.experience.world.textGengo.toggleHon();
@@ -293,49 +280,56 @@ export default class Yubisashi {
               case 'buttonHitboxJLPT':
                 this.experience.world.textGengo.toggleJLPT();
                 break;
+              case 'rtk':
+                if (this.experience.world.textGengo.actualTab === 'hon') {
+                  window.open(
+                    'https://en.wikipedia.org/wiki/Remembering_the_Kanji_and_Remembering_the_Hanzi'
+                  );
+                }
+                break;
               case 'anki':
-                window.open('https://apps.ankiweb.net/');
+                if (this.experience.world.textGengo.actualTab === 'softwares') {
+                  window.open('https://apps.ankiweb.net/');
+                }
                 break;
               case 'bunpro':
-                window.open('https://bunpro.jp/');
+                if (this.experience.world.textGengo.actualTab === 'softwares') {
+                  window.open('https://bunpro.jp/');
+                }
                 break;
-              case 'rtk':
-                window.open(
-                  'https://en.wikipedia.org/wiki/Remembering_the_Kanji_and_Remembering_the_Hanzi'
-                );
+              case 'jlpt':
+                if (this.experience.world.textGengo.actualTab === 'jlpt') {
+                  // open jlpt .pdf
+                  // window.open('');
+                }
                 break;
             }
             break;
-          /**
-           * DEFAULT (POLYGONS)
-           */
-          default:
-            switch (this.currentIntersect) {
-              case 'ball':
-                this.experience.world.polygonBall.mesh.material.color =
-                  new THREE.Color(
-                    '#' + Math.floor(Math.random() * 16777215).toString(16)
-                  );
-                break;
-              case 'torus':
-                this.experience.world.polygonTorus.mesh.material.color =
-                  new THREE.Color(
-                    '#' + Math.floor(Math.random() * 16777215).toString(16)
-                  );
-                break;
-              case 'globeTwo':
-                this.experience.world.polygonGlobeTwo.mesh.material.color =
-                  new THREE.Color(
-                    '#' + Math.floor(Math.random() * 16777215).toString(16)
-                  );
-                break;
-              case 'gem':
-                this.experience.world.polygonGem.mesh.material.color =
-                  new THREE.Color(
-                    '#' + Math.floor(Math.random() * 16777215).toString(16)
-                  );
-                break;
-            }
+        }
+        switch (this.currentIntersect) {
+          case 'ball':
+            this.experience.world.polygonBall.mesh.material.color =
+              new THREE.Color(
+                '#' + Math.floor(Math.random() * 16777215).toString(16)
+              );
+            break;
+          case 'torus':
+            this.experience.world.polygonTorus.mesh.material.color =
+              new THREE.Color(
+                '#' + Math.floor(Math.random() * 16777215).toString(16)
+              );
+            break;
+          case 'globeTwo':
+            this.experience.world.polygonGlobeTwo.mesh.material.color =
+              new THREE.Color(
+                '#' + Math.floor(Math.random() * 16777215).toString(16)
+              );
+            break;
+          case 'gem':
+            this.experience.world.polygonGem.mesh.material.color =
+              new THREE.Color(
+                '#' + Math.floor(Math.random() * 16777215).toString(16)
+              );
             break;
         }
       }
@@ -477,7 +471,6 @@ export default class Yubisashi {
         document.body.style.cursor = 'pointer';
 
         if (!this.currentIntersect) {
-          // AREA HOVERABLE ATM
           switch (this.experience.world.area) {
             /**
              * HOME
@@ -556,7 +549,7 @@ export default class Yubisashi {
              */
             case 'projects':
               if (this.intersects[0].object.name === 'arrowHitboxProject') {
-                this.experience.world.textProject.tweenTranslateLeftArrow.start();
+                this.experience.world.textProjects.tweenTranslateLeftArrow.start();
               }
               break;
             /**
@@ -614,7 +607,6 @@ export default class Yubisashi {
         document.body.style.cursor = 'default';
 
         if (this.currentIntersect) {
-          // AREA HOVERABLE ATM
           switch (this.experience.world.area) {
             /**
              * HOME
@@ -667,7 +659,7 @@ export default class Yubisashi {
              */
             case 'projects':
               if (this.currentIntersect === 'arrowHitboxProject') {
-                this.experience.world.textProject.tweenTranslateRightArrow.start();
+                this.experience.world.textProjects.tweenTranslateRightArrow.start();
               }
               break;
             /**

@@ -26,7 +26,7 @@ export default class TravellingManager {
      */
     this.opacityUp = (gamen) => {
       var tweenGamenOpacityUp = new TWEEN.Tween(gamen)
-        .to({ value: 0.88 }, 1000)
+        .to({ value: 0.88 }, 555)
         .easing(TWEEN.Easing.Bounce.Out)
         .onComplete(() => {
           if (!this.toggledAlreadyTer) {
@@ -43,8 +43,17 @@ export default class TravellingManager {
                 case 'keiken':
                   this.experience.world.textKeiken.animate();
                   break;
+                case 'projects':
+                  this.experience.world.textProjects.animate();
+                  break;
                 case 'gaku':
                   this.experience.world.textGaku.animateText();
+                  break;
+                case 'kyoumi':
+                  this.experience.world.textKyoumi.animateText();
+                  break;
+                case 'gengo':
+                  this.experience.world.textGengo.animateText();
                   break;
               }
             }
@@ -55,7 +64,7 @@ export default class TravellingManager {
     };
     this.opacityDown = (gamen) => {
       var tweenGamenOpacityDown = new TWEEN.Tween(gamen)
-        .to({ value: 0.18 }, 1000)
+        .to({ value: 0.18 }, 555)
         .easing(TWEEN.Easing.Bounce.In)
         .onStart(() => {
           if (!this.toggledAlreadyBis) {
@@ -72,8 +81,17 @@ export default class TravellingManager {
                 case 'keiken':
                   this.translationKeiken();
                   break;
+                case 'projects':
+                  this.translationProjects();
+                  break;
                 case 'gaku':
                   this.translationGaku();
+                  break;
+                case 'kyoumi':
+                  this.translationKyoumi();
+                  break;
+                case 'gengo':
+                  this.translationGengo();
                   break;
               }
             }
@@ -149,6 +167,32 @@ export default class TravellingManager {
                     .uOpacity
                 );
                 break;
+              case 'projects':
+                if (this.toggleReading) {
+                  this.experience.world.centerPanels.gamenThree.material.fragmentShader =
+                    gamenFragmentShaderLecture;
+                  this.experience.world.centerPanels.gamenFour.material.fragmentShader =
+                    gamenFragmentShaderLecture;
+                } else {
+                  this.scene.remove(
+                    this.experience.world.textProjects.textModel
+                  );
+                  this.experience.world.centerPanels.gamenThree.resetShader(
+                    'projects'
+                  );
+                  this.experience.world.centerPanels.gamenFour.resetShader(
+                    'projects'
+                  );
+                }
+                this.opacityUp(
+                  this.experience.world.centerPanels.gamenThree.material
+                    .uniforms.uOpacity
+                );
+                this.opacityUp(
+                  this.experience.world.centerPanels.gamenFour.material.uniforms
+                    .uOpacity
+                );
+                break;
               case 'gaku':
                 if (this.toggleReading) {
                   this.experience.world.rightPanels.gamenOne.material.fragmentShader =
@@ -170,6 +214,50 @@ export default class TravellingManager {
                 );
                 this.opacityUp(
                   this.experience.world.rightPanels.gamenTwo.material.uniforms
+                    .uOpacity
+                );
+                break;
+              case 'kyoumi':
+                if (this.toggleReading) {
+                  this.experience.world.rightPanels.gamenThree.material.fragmentShader =
+                    gamenFragmentShaderLecture;
+                } else {
+                  this.scene.remove(this.experience.world.textKyoumi.textModel);
+                  this.experience.world.rightPanels.gamenThree.resetShader(
+                    'kyoumi'
+                  );
+                }
+                this.opacityUp(
+                  this.experience.world.rightPanels.gamenThree.material.uniforms
+                    .uOpacity
+                );
+                break;
+              case 'gengo':
+                if (this.toggleReading) {
+                  this.experience.world.rightPanels.gamenThree.material.fragmentShader =
+                    gamenFragmentShaderLecture;
+                  this.experience.world.rightPanels.gamenFour.material.fragmentShader =
+                    gamenFragmentShaderLecture;
+                } else {
+                  this.scene.remove(
+                    this.experience.world.textGengo.textModelRight
+                  );
+                  this.scene.remove(
+                    this.experience.world.textGengo.textModelLeft
+                  );
+                  this.experience.world.rightPanels.gamenThree.resetShader(
+                    'gengo'
+                  );
+                  this.experience.world.rightPanels.gamenFour.resetShader(
+                    'gengo'
+                  );
+                }
+                this.opacityUp(
+                  this.experience.world.rightPanels.gamenThree.material.uniforms
+                    .uOpacity
+                );
+                this.opacityUp(
+                  this.experience.world.rightPanels.gamenFour.material.uniforms
                     .uOpacity
                 );
                 break;
@@ -205,6 +293,7 @@ export default class TravellingManager {
     };
     this.translationHome = () => {
       // move kamera...
+      this.experience.world.chikei.debugObject.surfaceColor = '#ffffff';
       this.experience.world.area = 'home';
     };
 
@@ -226,7 +315,9 @@ export default class TravellingManager {
     };
     this.translationProfil = () => {
       // move kamera
-      this.experience.world.area = 'profil';
+      setTimeout(() => {
+        this.experience.world.area = 'profil';
+      }, 2000);
     };
 
     /**
@@ -250,7 +341,9 @@ export default class TravellingManager {
     };
     this.translationShoukai = () => {
       // move kamera
-      this.experience.world.area = 'shoukai';
+      setTimeout(() => {
+        this.experience.world.area = 'shoukai';
+      }, 2000);
     };
 
     /**
@@ -274,7 +367,35 @@ export default class TravellingManager {
     };
     this.translationKeiken = () => {
       // move kamera...
-      this.experience.world.area = 'keiken';
+      setTimeout(() => {
+        this.experience.world.area = 'keiken';
+      }, 2000);
+    };
+
+    /**
+     * PROJECTS
+     */
+    this.transitionProjects = (toggleReading) => {
+      this.toggledArea = 'projects';
+
+      if (toggleReading) {
+        this.toggleReading = true;
+      } else {
+        this.toggleReading = false;
+      }
+
+      this.opacityDown(
+        this.experience.world.centerPanels.gamenThree.material.uniforms.uOpacity
+      );
+      this.opacityDown(
+        this.experience.world.centerPanels.gamenFour.material.uniforms.uOpacity
+      );
+    };
+    this.translationProjects = () => {
+      // move kamera...
+      setTimeout(() => {
+        this.experience.world.area = 'projects';
+      }, 2000);
     };
 
     /**
@@ -298,7 +419,58 @@ export default class TravellingManager {
     };
     this.translationGaku = () => {
       // move kamera...
-      this.experience.world.area = 'gaku';
+      setTimeout(() => {
+        this.experience.world.area = 'gaku';
+      }, 2000);
+    };
+
+    /**
+     * KYOUMI
+     */
+    this.transitionKyoumi = (toggleReading) => {
+      this.toggledArea = 'kyoumi';
+
+      if (toggleReading) {
+        this.toggleReading = true;
+      } else {
+        this.toggleReading = false;
+      }
+
+      this.opacityDown(
+        this.experience.world.rightPanels.gamenThree.material.uniforms.uOpacity
+      );
+    };
+    this.translationKyoumi = () => {
+      // move kamera...
+      setTimeout(() => {
+        this.experience.world.area = 'kyoumi';
+      }, 2000);
+    };
+
+    /**
+     * GENGO
+     */
+    this.transitionGengo = (toggleReading) => {
+      this.toggledArea = 'gengo';
+
+      if (toggleReading) {
+        this.toggleReading = true;
+      } else {
+        this.toggleReading = false;
+      }
+
+      this.opacityDown(
+        this.experience.world.rightPanels.gamenThree.material.uniforms.uOpacity
+      );
+      this.opacityDown(
+        this.experience.world.rightPanels.gamenFour.material.uniforms.uOpacity
+      );
+    };
+    this.translationGengo = () => {
+      // move kamera...
+      setTimeout(() => {
+        this.experience.world.area = 'gengo';
+      }, 2000);
     };
   }
 }

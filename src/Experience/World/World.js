@@ -18,7 +18,7 @@ import TextKeshiki from './Texts/TextKeshiki.js';
 import TextProfil from './Texts/TextProfil.js';
 import TextShoukai from './Texts/TextShoukai.js';
 import TextKeiken from './Texts/TextKeiken.js';
-import TextProject from './Texts/TextProject.js';
+import TextProjects from './Texts/TextProjects.js';
 import TextGaku from './Texts/TextGaku.js';
 import TextKyoumi from './Texts/TextKyoumi.js';
 import TextGengo from './Texts/TextGengo.js';
@@ -120,7 +120,6 @@ export default class World {
       }, 100);
     } else {
       this.yubisashiMono = [
-        this.textKeshiki.buttonRefresh,
         this.textKeshiki.contactHitbox,
 
         this.leftPanels.gamenOne.mesh,
@@ -134,46 +133,39 @@ export default class World {
         this.polygonGlobeTwo.mesh,
         this.polygonGem.mesh,
 
-        this.textProfil.buttonRefresh,
         this.textProfil.arrowHitboxProfil,
         this.textProfil.homeArrowHitbox,
 
-        this.textShoukai.buttonRefresh,
         this.textShoukai.arrowHitbox,
         this.textShoukai.homeHitbox,
 
-        this.textKeiken.buttonRefresh,
         this.textKeiken.arrowHitboxKeiken,
         this.textKeiken.arrowHomeHitbox,
         this.textKeiken.faureciaLogo,
         this.textKeiken.sterimedLogo,
 
-        this.textProject.buttonRefresh,
-        this.textProject.arrowHitboxProject,
-        this.textProject.homeArrowHitbox,
-        this.textProject.navbarIchi,
-        this.textProject.navbarNi,
-        this.textProject.navbarSan,
-        this.textProject.navbarYon,
-        this.textProject.navbarGo,
-        this.textProject.navbarRoku,
-        this.textProject.navbarTsugi,
-        this.textProject.visitButtonHitbox,
-        this.textProject.githubLogoHitbox,
+        this.textProjects.arrowHitboxProject,
+        this.textProjects.homeArrowHitbox,
+        this.textProjects.navbarIchi,
+        this.textProjects.navbarNi,
+        this.textProjects.navbarSan,
+        this.textProjects.navbarYon,
+        this.textProjects.navbarGo,
+        this.textProjects.navbarRoku,
+        this.textProjects.navbarTsugi,
+        this.textProjects.visitButtonHitbox,
+        this.textProjects.githubLogoHitbox,
 
-        this.textGaku.buttonRefresh,
         this.textGaku.arrowHitboxGakuRight,
         this.textGaku.arrowHitboxGakuLeft,
         this.textGaku.arrowHomeHitboxGaku,
         this.textGaku.logoLeft,
         this.textGaku.logoRight,
 
-        this.textKyoumi.buttonRefresh,
         this.textKyoumi.arrowRightHitbox,
         this.textKyoumi.arrowLeftHitbox,
         this.textKyoumi.arrowHomeHitbox,
 
-        this.textGengo.buttonRefresh,
         this.textGengo.hitboxRight,
         this.textGengo.hitboxLeft,
         this.textGengo.hitboxHome,
@@ -231,12 +223,8 @@ export default class World {
     this.gltfLoader.load('../../models/halo.glb', (gltf) => {
       this.model = gltf.scene;
       this.model.traverse((o) => {
-        if (o.isMesh) {
-          o.scale.set(69, 69, 69);
-        }
-        o.position.set(-450, 55, 33);
+        o.position.set(-450, 50, 33);
       });
-
       this.scene.add(this.model);
     });
   }
@@ -246,7 +234,7 @@ export default class World {
     this.textShoukai = new TextShoukai();
 
     this.textKeiken = new TextKeiken();
-    this.textProject = new TextProject();
+    this.textProjects = new TextProjects();
 
     this.textGaku = new TextGaku();
     this.textKyoumi = new TextKyoumi();

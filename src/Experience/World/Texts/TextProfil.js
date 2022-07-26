@@ -12,17 +12,17 @@ export default class TextProfil {
     /**
      * REFRESH ANIMATION BUTTON
      */
-    this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
-    this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
-      color: 'red',
-    });
-    this.buttonRefresh = new THREE.Mesh(
-      this.buttonRefreshGeometry,
-      this.buttonRefreshMaterial
-    );
-    this.buttonRefresh.position.set(-3, 1.2, 0);
-    this.buttonRefresh.name = 'buttonRefreshProfil';
-    this.scene.add(this.buttonRefresh);
+    // this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    // this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
+    //   color: 'red',
+    // });
+    // this.buttonRefresh = new THREE.Mesh(
+    //   this.buttonRefreshGeometry,
+    //   this.buttonRefreshMaterial
+    // );
+    // this.buttonRefresh.position.set(-3, 1.2, 0);
+    // this.buttonRefresh.name = 'buttonRefreshProfil';
+    // this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
     this.model = new TextModel('../../../models/Gamen/gamen_000.glb');

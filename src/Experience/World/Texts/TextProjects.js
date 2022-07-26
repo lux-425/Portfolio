@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import Experience from '../../Experience.js';
 import TextModel from './TextModel.js';
 
-export default class TextProject {
+export default class TextProjects {
   constructor() {
     this.experience = new Experience();
 
@@ -12,17 +12,17 @@ export default class TextProject {
     /**
      * REFRESH ANIMATION BUTTON
      */
-    this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
-    this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
-      color: 'red',
-    });
-    this.buttonRefresh = new THREE.Mesh(
-      this.buttonRefreshGeometry,
-      this.buttonRefreshMaterial
-    );
-    this.buttonRefresh.position.set(-2, 1.7, -1);
-    this.buttonRefresh.name = 'buttonRefreshProject';
-    this.scene.add(this.buttonRefresh);
+    // this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    // this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
+    //   color: 'red',
+    // });
+    // this.buttonRefresh = new THREE.Mesh(
+    //   this.buttonRefreshGeometry,
+    //   this.buttonRefreshMaterial
+    // );
+    // this.buttonRefresh.position.set(-2, 1.7, -1);
+    // this.buttonRefresh.name = 'buttonRefreshProject';
+    // this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
     this.modelIntro = new TextModel(
@@ -38,7 +38,6 @@ export default class TextProject {
     // INTRO
     await this.modelIntro.waitForLoad();
     this.textModelIntro = this.modelIntro.model.children[0];
-    this.scene.add(this.textModelIntro);
 
     this.textModelIntro.translateX(-4);
 
@@ -163,10 +162,10 @@ export default class TextProject {
 
     /**
      *
-     * 
+     *
      * TEXT
      *
-     * 
+     *
      */
     this.githubLogo = this.textModel.children[2];
     this.githubLogoHitbox = this.textModel.children[0].children[1].children[17];
@@ -326,22 +325,29 @@ export default class TextProject {
     /**
      * ANIMATE
      */
-    this.animate();
+    // this.animate();
   }
 
   animate() {
     this.scene.remove(this.textModel);
+    this.scene.remove(this.textModelIntro);
 
-    this.animateIntro();
-
-    setTimeout(() => {
+    if (this.experience.world.language === 'nihongo') {
+      this.animateIntro();
+      setTimeout(() => {
+        this.scene.add(this.textModel);
+        this.animateText();
+      }, 3000);
+    } else {
       this.scene.add(this.textModel);
       this.animateText();
-    }, 3000);
+    }
   }
 
   animateIntro() {
     var TWEEN = require('@tweenjs/tween.js');
+
+    this.scene.add(this.textModelIntro);
 
     this.textModelIntro.visible = true;
 

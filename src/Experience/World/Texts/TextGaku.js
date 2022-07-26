@@ -12,17 +12,17 @@ export default class TextGaku {
     /**
      * REFRESH ANIMATION BUTTON
      */
-    this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
-    this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
-      color: 'red',
-    });
-    this.buttonRefresh = new THREE.Mesh(
-      this.buttonRefreshGeometry,
-      this.buttonRefreshMaterial
-    );
-    this.buttonRefresh.position.set(3.5, 2.2, 0);
-    this.buttonRefresh.name = 'buttonRefreshGaku';
-    this.scene.add(this.buttonRefresh);
+    // this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    // this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
+    //   color: 'red',
+    // });
+    // this.buttonRefresh = new THREE.Mesh(
+    //   this.buttonRefreshGeometry,
+    //   this.buttonRefreshMaterial
+    // );
+    // this.buttonRefresh.position.set(3.5, 2.2, 0);
+    // this.buttonRefresh.name = 'buttonRefreshGaku';
+    // this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
     this.model = new TextModel('../../../models/Gamen/gamen_007-8.glb');
@@ -32,7 +32,6 @@ export default class TextGaku {
   async setModel() {
     await this.model.waitForLoad();
     this.textModel = this.model.model.children[0];
-    this.scene.add(this.textModel);
 
     this.textModel.translateX(-4);
 
@@ -178,6 +177,8 @@ export default class TextGaku {
 
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
+
+    this.scene.add(this.textModel);
 
     // console.log(this.textModel);
 

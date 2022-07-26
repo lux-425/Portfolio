@@ -110,7 +110,6 @@ export default class Particles {
       this.smallParticlesMaterial
     );
     this.scene.add(this.smallParticles);
-    console.log(this.smallParticles);
   }
 
   switchParticleTexture(area) {

@@ -12,17 +12,17 @@ export default class TextGengo {
     /**
      * REFRESH ANIMATION BUTTON
      */
-    this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
-    this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
-      color: 'red',
-    });
-    this.buttonRefresh = new THREE.Mesh(
-      this.buttonRefreshGeometry,
-      this.buttonRefreshMaterial
-    );
-    this.buttonRefresh.position.set(3, 2.2, -0.5);
-    this.buttonRefresh.name = 'buttonRefreshGengo';
-    this.scene.add(this.buttonRefresh);
+    // this.buttonRefreshGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    // this.buttonRefreshMaterial = new THREE.MeshBasicMaterial({
+    //   color: 'red',
+    // });
+    // this.buttonRefresh = new THREE.Mesh(
+    //   this.buttonRefreshGeometry,
+    //   this.buttonRefreshMaterial
+    // );
+    // this.buttonRefresh.position.set(3, 2.2, -0.5);
+    // this.buttonRefresh.name = 'buttonRefreshGengo';
+    // this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
     this.modelRight = new TextModel('../../../models/Gamen/gamen_009.glb');
@@ -33,11 +33,9 @@ export default class TextGengo {
   async setModel() {
     await this.modelRight.waitForLoad();
     this.textModelRight = this.modelRight.model.children[0];
-    this.scene.add(this.textModelRight);
 
     await this.modelLeft.waitForLoad();
     this.textModelLeft = this.modelLeft.model.children[0];
-    this.scene.add(this.textModelLeft);
 
     this.textModelRight.position.set(
       this.experience.world.rightPanels.gamenFour.mesh.position.x,
@@ -241,14 +239,19 @@ export default class TextGengo {
      */
     this.experience.world.objectsReadyArr[5] = true;
 
+    this.actualTab = 'jlpt';
+
     /**
      * ANIMATE
      */
-    this.animateText();
+    // this.animateText();
   }
 
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
+
+    this.scene.add(this.textModelRight);
+    this.scene.add(this.textModelLeft);
 
     this.tokoroDatta = true;
 
@@ -313,6 +316,8 @@ export default class TextGengo {
   toggleHon() {
     this.disappearPanel();
 
+    this.actualTab = 'hon';
+
     this.honNames.visible = true;
 
     this.honFrame.visible = true;
@@ -326,6 +331,8 @@ export default class TextGengo {
 
   toggleJLPT() {
     this.disappearPanel();
+
+    this.actualTab = 'jlpt';
 
     this.jlptWaiting.visible = true;
 
@@ -345,6 +352,8 @@ export default class TextGengo {
 
   toggleSoftwares() {
     this.disappearPanel();
+
+    this.actualTab = 'softwares';
 
     this.softwaresNames.visible = true;
     this.anki.visible = true;
