@@ -61,6 +61,10 @@ export default class Yubisashi {
 
                 this.experience.world.chikei.debugObject.surfaceColor =
                   '#0000ff';
+                this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
+                  new THREE.Color('#b56cfe');
+                this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
+                  new THREE.Color('#0000d1');
 
                 this.kameraTravelling('home', 'profil');
                 break;

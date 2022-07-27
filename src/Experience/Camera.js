@@ -18,8 +18,6 @@ export default class Camera {
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
 
-    this.updatingControlls = true;
-
     this.setInstance();
     this.setOrbitControls();
   }
@@ -32,7 +30,7 @@ export default class Camera {
       999
     );
 
-    // this.instance.position.set(0, 4, 13);
+    this.instance.position.set(0, 4, 13);
 
     this.scene.add(this.instance);
   }
@@ -57,8 +55,10 @@ export default class Camera {
   }
 
   update() {
-    if (this.updatingControlls) {
-      this.controls.update();
-    }
+    var TWEEN = require('@tweenjs/tween.js');
+
+    TWEEN.update();
+
+    this.controls.update();
   }
 }

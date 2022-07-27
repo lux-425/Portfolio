@@ -85,32 +85,6 @@ export default class World {
     this.waitObjectsReady();
 
     this.textKeshiki = new TextKeshiki();
-
-    // SHADER LECTURE
-    // this.leftPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.leftPanels.gamenTwo.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.leftPanels.gamenThree.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-
-    // this.centerPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenTwo.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenThree.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.centerPanels.gamenFour.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-
-    // this.rightPanels.gamenOne.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.rightPanels.gamenTwo.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.rightPanels.gamenThree.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
-    // this.rightPanels.gamenFour.material.fragmentShader =
-    //   gamenFragmentShaderLecture;
   }
 
   waitObjectsReady() {

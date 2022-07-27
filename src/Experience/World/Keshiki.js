@@ -86,9 +86,9 @@ export default class Keshiki {
     this.experience.world.setTexts();
     this.experience.world.objectsReadyArr[8] = true;
 
-    this.experience.world.textKeshiki.nihongo.visible = false;
-    this.experience.world.textKeshiki.francais.visible = false;
-    this.experience.world.textKeshiki.english.visible = false;
+    // this.experience.world.textKeshiki.nihongo.visible = false;
+    // this.experience.world.textKeshiki.francais.visible = false;
+    // this.experience.world.textKeshiki.english.visible = false;
 
     this.gamensArr = [
       this.experience.world.leftPanels.gamenOne,
@@ -113,6 +113,10 @@ export default class Keshiki {
     }
 
     setTimeout(() => {
+      this.experience.world.textKeshiki.nihongo.visible = false;
+      this.experience.world.textKeshiki.francais.visible = false;
+      this.experience.world.textKeshiki.english.visible = false;
+
       this.experience.world.textKeshiki.tweenAppearSelects.start();
     }, 500);
   }
@@ -221,7 +225,7 @@ export default class Keshiki {
       this.mesh.position.y - 1,
       this.mesh.position.z + 15
     );
-    this.experience.camera.instance.rotation.set(-Math.PI * 0.5);
+    // this.experience.camera.instance.rotation.set(-Math.PI * 0.5);
 
     this.experience.camera.controls.minDistance = 11;
     this.experience.camera.controls.maxDistance = 16;
