@@ -228,6 +228,9 @@ export default class TextKeshiki {
       .to({ opacity: 1 }, 5555)
       .easing(TWEEN.Easing.Cubic.Out)
       .onStart(() => {
+        this.experience.world.textKeshiki.nihongo.visible = false;
+        this.experience.world.textKeshiki.francais.visible = false;
+        this.experience.world.textKeshiki.english.visible = false;
         this.translateSelects();
       });
 

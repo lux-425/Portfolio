@@ -86,9 +86,9 @@ export default class Keshiki {
     this.experience.world.setTexts();
     this.experience.world.objectsReadyArr[8] = true;
 
-    // this.experience.world.textKeshiki.nihongo.visible = false;
-    // this.experience.world.textKeshiki.francais.visible = false;
-    // this.experience.world.textKeshiki.english.visible = false;
+    this.experience.world.textKeshiki.nihongo.visible = false;
+    this.experience.world.textKeshiki.francais.visible = false;
+    this.experience.world.textKeshiki.english.visible = false;
 
     this.gamensArr = [
       this.experience.world.leftPanels.gamenOne,
@@ -113,10 +113,6 @@ export default class Keshiki {
     }
 
     setTimeout(() => {
-      this.experience.world.textKeshiki.nihongo.visible = false;
-      this.experience.world.textKeshiki.francais.visible = false;
-      this.experience.world.textKeshiki.english.visible = false;
-
       this.experience.world.textKeshiki.tweenAppearSelects.start();
     }, 500);
   }
@@ -220,21 +216,22 @@ export default class Keshiki {
     /**
      *  INIT KAMERA FOR HOME'S AREA
      */
+    this.experience.camera.instance.position.set(
+      this.mesh.position.x,
+      this.mesh.position.y + 2,
+      this.mesh.position.z + 30
+    );
     this.experience.camera.controls.target = new THREE.Vector3(
       this.mesh.position.x,
       this.mesh.position.y - 1,
       this.mesh.position.z + 15
     );
-    // this.experience.camera.instance.rotation.set(-Math.PI * 0.5);
 
-    this.experience.camera.controls.minDistance = 11;
-    this.experience.camera.controls.maxDistance = 16;
+    this.experience.camera.controls.minDistance = -55.425;
+    this.experience.camera.controls.maxDistance = 55.425;
 
-    this.experience.camera.controls.minPolarAngle = Math.PI * 0.4;
+    this.experience.camera.controls.minPolarAngle = -Math.PI * 0.5;
     this.experience.camera.controls.maxPolarAngle = Math.PI * 0.5;
-
-    this.experience.camera.controls.minAzimuthAngle = -Math.PI * 0.1;
-    this.experience.camera.controls.maxAzimuthAngle = Math.PI * 0.1;
 
     this.scene.add(this.mesh);
   }

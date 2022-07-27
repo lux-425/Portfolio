@@ -609,6 +609,7 @@ export default class Yubisashi {
          *
          */
         document.body.style.cursor = 'default';
+        // document.body.style.cursor = 'crosshair';
 
         if (this.currentIntersect) {
           switch (this.experience.world.area) {

@@ -29,6 +29,13 @@ export default class Experience {
       this.mouse.y = -(event.clientY / this.sizes.height) * 2 + 1;
     });
 
+    // window.addEventListener('mousedown', () => {
+    //   document.body.style.cursor = 'all-scroll';
+    // });
+    // window.addEventListener('mouseup', () => {
+    //   document.body.style.cursor = 'default';
+    // });
+
     // Global access for dev console usage
     window.experience = this;
 

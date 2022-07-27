@@ -198,7 +198,9 @@ export default class TextKyoumi {
       .onStart(() => {
         this.tweenTextTranslate();
       });
-    tweenTextAppear.start();
+    setTimeout(() => {
+      tweenTextAppear.start();
+    }, 555);
 
     /**
      * ARROWS' TRANSLATION

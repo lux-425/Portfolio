@@ -82,7 +82,7 @@ export default class TextProfil {
     this.tweenTranslateRightArrowProfil = new TWEEN.Tween(
       this.arrowProfil.position
     )
-      .to({ x: -0.175 }, 500)
+      .to({ x: -0.195 }, 500)
       .easing(TWEEN.Easing.Exponential.In)
       .onStart(() => {
         this.tweenAppearTextProfil();
@@ -95,6 +95,9 @@ export default class TextProfil {
       .onStart(() => {
         this.tweenDisappearTextProfil();
       });
+
+    // this.textModel.children[8].material.depthTest = true;
+    this.textModel.children[8].material.depthWrite = true;
 
     /**
      * OBJECT READY
@@ -109,6 +112,8 @@ export default class TextProfil {
 
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
+
+    console.log(this.textModel);
 
     this.arrowProfil.position.x = -0.4595;
     for (var i = 0; i < 5; i++) {

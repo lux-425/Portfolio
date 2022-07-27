@@ -134,6 +134,10 @@ export default class TextKeiken {
     this.faureciaLogo.material.depthTest = true;
     this.faureciaLogo.material.depthWrite = true;
 
+    this.sterimedLogo.material.side = THREE.FrontSide;
+    this.faureciaLogo.material.side = THREE.FrontSide;
+    this.textModel.children[1].children[9].material.side = THREE.FrontSide;
+
     /**
      *
      * INTRO

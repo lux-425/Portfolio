@@ -50,7 +50,7 @@ export default class TravellingManager {
                   this.experience.world.textGaku.animateText();
                   break;
                 case 'kyoumi':
-                  this.experience.world.textKyoumi.animateText();
+                  // this.experience.world.textKyoumi.animateText();
                   break;
                 case 'gengo':
                   this.experience.world.textGengo.animateText();
@@ -89,6 +89,7 @@ export default class TravellingManager {
                   break;
                 case 'kyoumi':
                   this.translationKyoumi();
+                  this.experience.world.textKyoumi.animateText();
                   break;
                 case 'gengo':
                   this.translationGengo();
@@ -290,53 +291,82 @@ export default class TravellingManager {
      *
      */
     /**
-     * PROFIL
+     * 画面
      */
-    this.tweenKameraProfil = () => {
-      let boxMaxY = new THREE.Box3().setFromObject(
-        this.experience.world.leftPanels.gamenOne.mesh
-      ).max.y;
+    this.tweenKameraGamen = (mesh, angle) => {
+      const areaMesh = mesh;
+      const angleGamen = angle;
 
-      let distance = boxMaxY + 1;
-      let angel = Math.PI / 2;
+      let boxMaxY = new THREE.Box3().setFromObject(areaMesh).max.y;
 
-      let position = {
-        x:
-          this.experience.world.leftPanels.gamenOne.mesh.position.x +
-          Math.cos(angel) * distance,
-        y: this.experience.world.leftPanels.gamenOne.mesh.position.y + 1,
-        z:
-          this.experience.world.leftPanels.gamenOne.mesh.position.z +
-          Math.sin(angel) * distance,
+      let distance = boxMaxY + 0.55;
+
+      let positionKamera = {
+        x: areaMesh.position.x + Math.cos(angleGamen) * distance,
+        y: areaMesh.position.y + 1,
+        z: areaMesh.position.z + Math.sin(angleGamen) * distance,
+      };
+      let positionTarget = {
+        x: areaMesh.position.x,
+        y: areaMesh.position.y + 0.25,
+        z: areaMesh.position.z,
       };
 
       let moveKamera = new TWEEN.Tween(this.experience.camera.instance.position)
-        .to(position, 1111)
+        .to(positionKamera, 1111)
         .easing(TWEEN.Easing.Quadratic.InOut)
         .onComplete(() => {
-          this.experience.camera.controls.minDistance = 1;
-          this.experience.camera.controls.maxDistance = 3;
-          this.experience.camera.controls.minAzimuthAngle = -Math.PI * 0.5;
-          this.experience.camera.controls.maxAzimuthAngle = Math.PI * 0.5;
-
           this.experience.camera.controls.enabled = true;
         });
       let moveTarget = new TWEEN.Tween(this.experience.camera.controls.target)
-        .to(this.experience.world.leftPanels.gamenOne.mesh.position, 1111)
+        .to(positionTarget, 1111)
         .easing(TWEEN.Easing.Quadratic.InOut);
 
       this.experience.camera.controls.enabled = false;
 
-      this.experience.camera.controls.minDistance = -42;
-      this.experience.camera.controls.maxDistance = 42;
+      moveKamera.start();
+      moveTarget.start();
+    };
+    // 受付
+    this.tweenKameraHome = () => {
+      const angle = Math.PI * 0.5;
+
+      let boxMaxY = new THREE.Box3().setFromObject(
+        this.experience.world.keshiki.mesh
+      ).max.y;
+
+      let distance = boxMaxY + 22;
+
+      let positionKamera = {
+        x:
+          this.experience.world.keshiki.mesh.position.x +
+          Math.cos(angle) * distance,
+        y: this.experience.world.keshiki.mesh.position.y + 2,
+        z:
+          this.experience.world.keshiki.mesh.position.z +
+          Math.sin(angle) * distance,
+      };
+      let positionTarget = {
+        x: this.experience.world.keshiki.mesh.position.x,
+        y: this.experience.world.keshiki.mesh.position.y - 1,
+        z: this.experience.world.keshiki.mesh.position.z,
+      };
+
+      let moveKamera = new TWEEN.Tween(this.experience.camera.instance.position)
+        .to(positionKamera, 1111)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onComplete(() => {
+          this.experience.camera.controls.enabled = true;
+        });
+      let moveTarget = new TWEEN.Tween(this.experience.camera.controls.target)
+        .to(positionTarget, 1111)
+        .easing(TWEEN.Easing.Quadratic.InOut);
+
+      this.experience.camera.controls.enabled = false;
 
       moveKamera.start();
       moveTarget.start();
     };
-
-    //
-
-    //
 
     /**
      *
@@ -357,10 +387,6 @@ export default class TravellingManager {
         this.translationHome();
       } else {
         this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 0;
-        // this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
-        //   new THREE.Color('#ffffff');
-        // this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
-        //   new THREE.Color('#000000');
         this.experience.world.particles.toggleSpeed = 1;
         this.experience.world.textKeshiki.contact.visible = false;
         this.experience.world.textKeshiki.select.visible = true;
@@ -368,26 +394,12 @@ export default class TravellingManager {
       this.travellingAlready = false;
     };
     this.translationHome = () => {
-      this.experience.camera.controls.target = new THREE.Vector3(
-        this.experience.world.keshiki.mesh.position.x,
-        this.experience.world.keshiki.mesh.position.y - 1,
-        this.experience.world.keshiki.mesh.position.z + 14
-      );
-      this.experience.camera.instance.position.set(0, 4, 13);
-
-      this.experience.camera.controls.minDistance = 11;
-      this.experience.camera.controls.maxDistance = 14;
-
-      this.experience.camera.controls.minPolarAngle = Math.PI * 0.4;
-      this.experience.camera.controls.maxPolarAngle = Math.PI * 0.5;
-
-      this.experience.camera.controls.minAzimuthAngle = -Math.PI * 0.1;
-      this.experience.camera.controls.maxAzimuthAngle = Math.PI * 0.1;
+      this.tweenKameraHome();
 
       setTimeout(() => {
         this.experience.world.area = 'home';
         this.experience.world.chikei.debugObject.surfaceColor = '#ffffff';
-      }, 2000);
+      }, 888);
     };
 
     /**
@@ -407,7 +419,10 @@ export default class TravellingManager {
       );
     };
     this.translationProfil = () => {
-      this.tweenKameraProfil();
+      this.tweenKameraGamen(
+        this.experience.world.leftPanels.gamenOne.mesh,
+        Math.PI * 0.5
+      );
 
       setTimeout(() => {
         this.experience.world.area = 'profil';
@@ -434,20 +449,10 @@ export default class TravellingManager {
       );
     };
     this.translationShoukai = () => {
-      // move kamera
-      this.experience.camera.controls.target = new THREE.Vector3(
-        this.experience.world.leftPanels.gamenThree.mesh.position.x,
-        this.experience.world.leftPanels.gamenThree.mesh.position.y + 0.25,
-        this.experience.world.leftPanels.gamenThree.mesh.position.z - 0.5
+      this.tweenKameraGamen(
+        this.experience.world.leftPanels.gamenTwo.mesh,
+        Math.PI * 1
       );
-      this.experience.camera.instance.position.set(
-        this.experience.world.leftPanels.gamenThree.mesh.position.x - 3,
-        this.experience.world.leftPanels.gamenThree.mesh.position.y + 0.75,
-        this.experience.world.leftPanels.gamenThree.mesh.position.z
-      );
-
-      this.experience.camera.controls.minAzimuthAngle = -Math.PI * 0.55;
-      this.experience.camera.controls.maxAzimuthAngle = Math.PI * 0.4;
 
       setTimeout(() => {
         this.experience.world.area = 'shoukai';
@@ -474,7 +479,11 @@ export default class TravellingManager {
       );
     };
     this.translationKeiken = () => {
-      // move kamera...
+      this.tweenKameraGamen(
+        this.experience.world.centerPanels.gamenTwo.mesh,
+        Math.PI * 0.65
+      );
+
       setTimeout(() => {
         this.experience.world.area = 'keiken';
       }, 2000);
@@ -500,7 +509,11 @@ export default class TravellingManager {
       );
     };
     this.translationProjects = () => {
-      // move kamera...
+      this.tweenKameraGamen(
+        this.experience.world.centerPanels.gamenThree.mesh,
+        Math.PI * 1.5
+      );
+
       setTimeout(() => {
         this.experience.world.area = 'projects';
       }, 2000);
@@ -526,7 +539,11 @@ export default class TravellingManager {
       );
     };
     this.translationGaku = () => {
-      // move kamera...
+      this.tweenKameraGamen(
+        this.experience.world.rightPanels.gamenTwo.mesh,
+        Math.PI * 0.5
+      );
+
       setTimeout(() => {
         this.experience.world.area = 'gaku';
       }, 2000);
@@ -549,7 +566,11 @@ export default class TravellingManager {
       );
     };
     this.translationKyoumi = () => {
-      // move kamera...
+      this.tweenKameraGamen(
+        this.experience.world.rightPanels.gamenThree.mesh,
+        Math.PI * 0.1
+      );
+
       setTimeout(() => {
         this.experience.world.area = 'kyoumi';
       }, 2000);
@@ -575,25 +596,14 @@ export default class TravellingManager {
       );
     };
     this.translationGengo = () => {
-      // move kamera...
+      this.tweenKameraGamen(
+        this.experience.world.rightPanels.gamenFour.mesh,
+        Math.PI * 1.2
+      );
+
       setTimeout(() => {
         this.experience.world.area = 'gengo';
       }, 2000);
     };
-
-    // this.setAnimation();
   }
-
-  // setAnimation() {
-  //   var TWEEN = require('@tweenjs/tween.js');
-
-  //   const tick = () => {
-  //     TWEEN.update();
-
-  //     // Call tick again on the next frame
-  //     window.requestAnimationFrame(tick);
-  //   };
-
-  //   tick();
-  // }
 }
