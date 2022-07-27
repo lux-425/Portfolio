@@ -113,8 +113,6 @@ export default class TextProfil {
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    console.log(this.textModel);
-
     this.arrowProfil.position.x = -0.4595;
     for (var i = 0; i < 5; i++) {
       this.arrowTextProfil.children[i].material.opacity = 0;

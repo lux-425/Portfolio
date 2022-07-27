@@ -230,7 +230,7 @@ export default class Keshiki {
     this.experience.camera.controls.minDistance = -55.425;
     this.experience.camera.controls.maxDistance = 55.425;
 
-    this.experience.camera.controls.minPolarAngle = -Math.PI * 0.5;
+    this.experience.camera.controls.minPolarAngle = Math.PI * 0.33;
     this.experience.camera.controls.maxPolarAngle = Math.PI * 0.5;
 
     this.scene.add(this.mesh);

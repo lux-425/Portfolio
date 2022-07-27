@@ -510,9 +510,15 @@ export default class TravellingManager {
     };
     this.translationProjects = () => {
       this.tweenKameraGamen(
-        this.experience.world.centerPanels.gamenThree.mesh,
-        Math.PI * 1.5
+        this.experience.world.centerPanels.gamenFour.mesh,
+        Math.PI * 1.1
       );
+      setTimeout(() => {
+        this.tweenKameraGamen(
+          this.experience.world.centerPanels.gamenThree.mesh,
+          Math.PI * 1.4
+        );
+      }, 555);
 
       setTimeout(() => {
         this.experience.world.area = 'projects';
