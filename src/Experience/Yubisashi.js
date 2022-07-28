@@ -139,10 +139,10 @@ export default class Yubisashi {
               case 'yarrowHomeHitbox':
                 this.kameraTravelling('keiken', 'home');
                 break;
-              case 'Faurecia_Logo':
+              case 'faurecia':
                 window.open('https://www.faurecia.com/en');
                 break;
-              case 'xlogo-sterimed':
+              case 'sterimed':
                 window.open('https://www.sterimed.fr/');
                 break;
             }
@@ -592,12 +592,6 @@ export default class Yubisashi {
                 this.experience.world.textGengo.tweenToggleArrowRight.start();
               }
               break;
-            /**
-             * DEFAULT
-             */
-            default:
-              console.log('entering hover outside area...');
-              break;
           }
         }
 
@@ -696,12 +690,6 @@ export default class Yubisashi {
               } else if (this.currentIntersect === 'arrowHitboxGengoRight') {
                 this.experience.world.textGengo.tweenOriginArrowRight.start();
               }
-              break;
-            /**
-             * DEFAULT
-             */
-            default:
-              console.log('leaving hover outside area...');
               break;
           }
         }

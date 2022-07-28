@@ -96,7 +96,7 @@ export default class TextProfil {
         this.tweenDisappearTextProfil();
       });
 
-    // this.textModel.children[8].material.depthTest = true;
+    this.textModel.children[8].material.depthTest = true;
     this.textModel.children[8].material.depthWrite = true;
 
     /**
