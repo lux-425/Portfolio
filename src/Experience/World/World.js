@@ -59,7 +59,7 @@ export default class World {
      */
     this.setPanels();
 
-    this.setHalo();
+    // this.setHalo();
 
     /**
      * ポリゴン~~~~
@@ -155,6 +155,10 @@ export default class World {
 
       this.travellingManager = new TravellingManager();
 
+      this.experience.world.textKeshiki.nihongo.visible = false;
+      this.experience.world.textKeshiki.francais.visible = false;
+      this.experience.world.textKeshiki.english.visible = false;
+
       this.yubisashi = new Yubisashi(this.yubisashiMono);
     }
   }
@@ -198,6 +202,10 @@ export default class World {
       this.model = gltf.scene;
       this.model.traverse((o) => {
         o.position.set(-450, 50, 33);
+        // if (o.isMesh) {
+        //   o.material.wireframe = true;
+        //   o.material.color = new THREE.Color("magenta")
+        // }
       });
       this.scene.add(this.model);
     });

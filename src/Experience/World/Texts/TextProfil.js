@@ -98,6 +98,7 @@ export default class TextProfil {
 
     this.textModel.children[8].material.depthTest = true;
     this.textModel.children[8].material.depthWrite = true;
+ this.textModel.children[8].translateY(-0.019);
 
     /**
      * OBJECT READY

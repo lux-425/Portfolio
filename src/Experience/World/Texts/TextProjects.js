@@ -268,10 +268,10 @@ export default class TextProjects {
     this.project2ImageBis.material.depthWrite = true;
     this.project3Image.material.depthTest = true;
     this.project3Image.material.depthWrite = true;
-    this.project4Image.material.depthTest = true;
-    this.project4Image.material.depthWrite = true;
-    this.project4ImageBis.material.depthTest = true;
-    this.project4ImageBis.material.depthWrite = true;
+    // this.project4Image.material.depthTest = true;
+    // this.project4Image.material.depthWrite = true;
+    // this.project4ImageBis.material.depthTest = true;
+    // this.project4ImageBis.material.depthWrite = true;
     this.project5Image.material.depthTest = true;
     this.project5Image.material.depthWrite = true;
 
