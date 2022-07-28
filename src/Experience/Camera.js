@@ -44,7 +44,7 @@ export default class Camera {
     // Make the animation smoother when dragging and dropping
     this.controls.enableDamping = true;
 
-    this.controls.enableZoom = true;
+    // this.controls.enableZoom = false;
     // this.controls.enablePan = false;
     // this.controls.enableRotate = false;
   }

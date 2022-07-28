@@ -317,6 +317,8 @@ export default class TextProjects {
       this.project7Stack,
     ];
 
+    this.navbarLanguette.material.emissive = new THREE.Color('white')
+
     /**
      * OBJECT READY
      */
@@ -1375,7 +1377,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0266, 0.0003, -0.0127);
+      this.navbarLanguette.position.set(-0.0442, 0.0043, -0.0127);
 
       this.appearProjectText();
     }, 700);
@@ -1399,7 +1401,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.06);
+      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.06);
 
       this.appearProjectText();
     }, 700);
@@ -1423,7 +1425,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.14);
+      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.14);
 
       this.appearProjectText();
     }, 700);
@@ -1447,7 +1449,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.22);
+      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.22);
 
       this.appearProjectText();
     }, 700);
@@ -1471,7 +1473,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.3);
+      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.3);
 
       this.appearProjectText();
     }, 700);
@@ -1495,7 +1497,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.38);
+      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.38);
 
       this.appearProjectText();
     }, 700);
@@ -1519,7 +1521,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = true;
       this.githubLogo.visible = false;
 
-      this.navbarLanguette.position.set(-0.0266, 0.0003, 0.46);
+      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.46);
 
       this.appearProjectText();
     }, 700);

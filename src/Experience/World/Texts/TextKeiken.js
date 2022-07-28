@@ -90,38 +90,16 @@ export default class TextKeiken {
       opacity: 0,
     });
 
-    this.headersTitlesKeiken = [
-      this.textModel.children[0].children[0].children[0],
-      this.textModel.children[0].children[0].children[1],
-      this.textModel.children[0].children[1],
-      this.textModel.children[0].children[4],
-      this.textModel.children[1].children[1].children[0],
-      this.textModel.children[1].children[1].children[1],
-      this.textModel.children[1].children[2].children[0],
-      this.textModel.children[1].children[2].children[1],
-      this.textModel.children[1].children[2].children[2],
-      this.textModel.children[1].children[8],
-      this.textModel.children[1].children[4],
-    ];
-    this.headersTitlesKeikenMaterial = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      emissiveIntensity: 1,
-      transparent: true,
-      opacity: 0,
-    });
+    // TEXTS
+    this.textModel.children[0].children[0].children[0].material.emissive =
+      new THREE.Color('white');
+    this.textModel.children[0].children[0].children[0].material.opacity = 0;
 
-    this.paragraphsKeiken = [
-      this.textModel.children[0].children[2],
-      this.textModel.children[0].children[3],
-      this.textModel.children[1].children[3],
-      this.textModel.children[1].children[7],
-    ];
-    this.paragraphsKeikenMaterial = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      emissiveIntensity: 1,
-      transparent: true,
-      opacity: 0,
-    });
+    this.tweenAppearTexts = new TWEEN.Tween(
+      this.textModel.children[0].children[0].children[0].material
+    )
+      .to({ opacity: 1 }, 1500)
+      .easing(TWEEN.Easing.Bounce.InOut);
 
     // LOGOS
     this.sterimedLogo = this.textModel.children[0].children[7];
@@ -399,9 +377,9 @@ export default class TextKeiken {
   animateText() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    this.headersTitlesKeikenMaterial.opacity = 0;
-    this.paragraphsKeikenMaterial.opacity = 0;
     this.arrowKeiken.material.opacity = 0;
+    this.arrowKeiken.position.x = -0.46;
+    this.textModel.children[0].children[0].children[0].material.opacity = 0;
 
     // LOGOS
     this.textModel.children[0].children[7].visible = false;
@@ -409,32 +387,9 @@ export default class TextKeiken {
     this.textModel.children[1].children[10].visible = false;
 
     /**
-     * HEADERS & TITLES
+     * TEXTS
      */
-    for (var i = 0; i < this.headersTitlesKeiken.length; i++) {
-      this.headersTitlesKeiken[i].material = this.headersTitlesKeikenMaterial;
-    }
-
-    var tweenAppearHeadersTitles = new TWEEN.Tween(
-      this.headersTitlesKeikenMaterial
-    )
-      .to({ opacity: 1 }, 1500)
-      .easing(TWEEN.Easing.Bounce.Out);
-    tweenAppearHeadersTitles.start();
-
-    /**
-     * PARAGRAPHS
-     */
-    for (var i = 0; i < this.paragraphsKeiken.length; i++) {
-      this.paragraphsKeiken[i].material = this.paragraphsKeikenMaterial;
-    }
-
-    var tweenAppearParagraphs = new TWEEN.Tween(this.paragraphsKeikenMaterial)
-      .to({ opacity: 1 }, 500)
-      .easing(TWEEN.Easing.Bounce.InOut);
-    setTimeout(() => {
-      tweenAppearParagraphs.start();
-    }, 500);
+    this.tweenAppearTexts.start();
 
     /**
      * ARROW

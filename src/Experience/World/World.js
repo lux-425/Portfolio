@@ -151,8 +151,6 @@ export default class World {
         this.textGengo.rtk,
       ];
 
-      // console.log(this.textShoukai.arrowHitbox);
-
       this.travellingManager = new TravellingManager();
 
       this.experience.world.textKeshiki.nihongo.visible = false;
