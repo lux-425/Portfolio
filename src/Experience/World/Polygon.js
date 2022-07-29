@@ -2,9 +2,6 @@ import * as THREE from 'three';
 
 import Experience from '../Experience.js';
 
-import cubeVertexShader from '../../Shaders/Polygon/Cube/vertex.glsl';
-import cubeFragmentShader from '../../Shaders/Polygon/Cube/fragment.glsl';
-
 export default class Polygon {
   constructor(type, posX, posZ, speed) {
     this.experience = new Experience();
@@ -55,6 +52,15 @@ export default class Polygon {
         this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
         this.mesh.name = 'circle';
         break;
+      case 'ball':
+        this.polygonGeometry = new THREE.SphereGeometry(0.6, 9, 9);
+        this.polygonMaterial = new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          wireframe: true,
+        });
+        this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
+        this.mesh.name = 'ball';
+        break;
       case 'cylinder':
         this.polygonGeometry = new THREE.CylinderGeometry(2, 2, 5, 8, 5, true);
         this.polygonMaterial = new THREE.MeshBasicMaterial({
@@ -64,37 +70,14 @@ export default class Polygon {
         this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
         this.mesh.name = 'cylinder';
         break;
-      case 'cube':
-        this.polygonGeometry = new THREE.BoxGeometry(35, 20, 50, 100, 0, 100);
-        this.polygonMaterial = new THREE.ShaderMaterial({
-          vertexShader: cubeVertexShader,
-          fragmentShader: cubeFragmentShader,
-          // side: THREE.DoubleSide,
+      case 'torus':
+        this.polygonGeometry = new THREE.TorusKnotGeometry(1, 0.2, 16, 8, 1, 1);
+        this.polygonMaterial = new THREE.MeshBasicMaterial({
+          color: 0xffffff,
           wireframe: true,
-          uniforms: {
-            uTime: { value: 0 },
-
-            uBigWavesElevation: { value: 0.55 },
-            uBigWavesFrequency: { value: new THREE.Vector2(0, 0.55) },
-            uBigWavesSpeed: { value: -0.05 },
-
-            uSmallWavesElevation: { value: 5.55 },
-            uSmallWavesFrequency: { value: 0.055 },
-            uSmallWavesSpeed: { value: 0.05 },
-            uSmallWavesIterations: { value: 2 },
-
-            uDepthColor: {
-              value: new THREE.Color(this.debugObject.depthColor),
-            },
-            uSurfaceColor: {
-              value: new THREE.Color(this.debugObject.surfaceColor),
-            },
-            uColorOffset: { value: 1 },
-            uColorMultiplier: { value: 2 },
-          },
         });
         this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
-        this.mesh.name = 'cube';
+        this.mesh.name = 'torus';
         break;
       case 'gem':
         this.polygonGeometry = new THREE.SphereGeometry(1, 1, 1);
@@ -150,26 +133,6 @@ export default class Polygon {
         this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
         this.mesh.name = 'pyramidThree';
         break;
-      case 'ball':
-        this.polygonGeometry = new THREE.SphereGeometry(0.6, 9, 9);
-        this.polygonMaterial = new THREE.MeshBasicMaterial({
-          color: 0xffffff,
-          wireframe: true,
-        });
-        this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
-        this.mesh.name = 'ball';
-        break;
-      case 'torus':
-        this.polygonGeometry = new THREE.TorusKnotGeometry(1, 0.2, 16, 8, 1, 1);
-        this.polygonMaterial = new THREE.MeshBasicMaterial({
-          color: 0xffffff,
-          wireframe: true,
-        });
-        this.mesh = new THREE.Mesh(this.polygonGeometry, this.polygonMaterial);
-        this.mesh.name = 'torus';
-        break;
-      default:
-        console.log('無');
     }
 
     this.scene.add(this.mesh);
@@ -178,61 +141,56 @@ export default class Polygon {
   }
 
   setAnimation() {
-    var lastUpdate = Date.now();
-
-    const clock = new THREE.Clock();
-
     const tick = () => {
-      var now = Date.now();
-      var deltaTime = now - lastUpdate;
-      lastUpdate = now;
-
-      const elapsedTime = clock.getElapsedTime();
-
-      // Update polygon
+      // Update polygons
       switch (this.type) {
         case 'cone':
-          this.mesh.rotateY(Math.sin(deltaTime * this.speed));
+          this.mesh.rotateY(Math.sin(this.experience.time.delta * this.speed));
           break;
         case 'circle':
-          this.mesh.rotateY(Math.sin(deltaTime * this.speed));
-          break;
-        case 'cylinder':
-          this.mesh.rotateY(-Math.tan(deltaTime * this.speed));
-          break;
-        case 'cube':
-          this.mesh.material.uniforms.uTime.value = elapsedTime;
-          break;
-        case 'gem':
-          this.mesh.rotateX(Math.sin(deltaTime * this.speed));
-          this.mesh.rotateY(Math.sin(deltaTime * this.speed));
-          this.mesh.position.y = 5.5 + Math.sin(elapsedTime * 0.5);
-          break;
-        case 'globeOne':
-          this.mesh.rotateY(Math.sin(deltaTime * this.speed));
-          break;
-        case 'globeTwo':
-          this.mesh.rotateY(Math.sin(deltaTime * this.speed));
-          this.mesh.position.x = Math.cos(elapsedTime * 0.5) * 4 + 12;
-          this.mesh.position.z = Math.sin(elapsedTime * 0.5) * 4 + 30;
+          this.mesh.rotateY(Math.sin(this.experience.time.delta * this.speed));
           break;
         case 'ball':
-          this.mesh.position.x = Math.cos(elapsedTime) * 1.5 - 12.5;
-          this.mesh.position.z = Math.sin(elapsedTime) * 1.5 - 11;
-          this.mesh.position.y = Math.abs(Math.sin(elapsedTime * 1.5) + 5.61);
-          this.mesh.rotateZ(deltaTime * 0.001);
+          this.mesh.position.x =
+            Math.cos(this.experience.time.elapsed * 0.001) * 1.5 - 12.5;
+          this.mesh.position.z =
+            Math.sin(this.experience.time.elapsed * 0.001) * 1.5 - 11;
+          this.mesh.position.y = Math.abs(
+            Math.sin(this.experience.time.elapsed * 0.001 * 1.5) + 5.61
+          );
+          this.mesh.rotateZ(this.experience.time.delta * 0.001);
+          break;
+        case 'cylinder':
+          this.mesh.rotateY(-Math.tan(this.experience.time.delta * this.speed));
           break;
         case 'torus':
-          this.mesh.rotateX(-Math.sin(deltaTime * this.speed));
-          this.mesh.position.y = 2.6 + Math.sin(-elapsedTime * 0.155);
+          this.mesh.rotateX(-Math.sin(this.experience.time.delta * this.speed));
+          this.mesh.position.y =
+            2.6 + Math.sin(-this.experience.time.elapsed * 0.001 * 0.155);
           this.mesh.geometry = new THREE.TorusKnotGeometry(
             1,
             0.2,
             10,
             10,
-            elapsedTime * 0.15,
-            Math.sin(elapsedTime * 0.15)
+            this.experience.time.elapsed * 0.001 * 0.15,
+            Math.sin(this.experience.time.elapsed * 0.001 * 0.15)
           );
+          break;
+        case 'gem':
+          this.mesh.rotateX(Math.sin(this.experience.time.delta * this.speed));
+          this.mesh.rotateY(Math.sin(this.experience.time.delta * this.speed));
+          this.mesh.position.y =
+            5.5 + Math.sin(this.experience.time.elapsed * 0.001 * 0.5);
+          break;
+        case 'globeOne':
+          this.mesh.rotateY(Math.sin(this.experience.time.delta * this.speed));
+          break;
+        case 'globeTwo':
+          this.mesh.rotateY(Math.sin(this.experience.time.delta * this.speed));
+          this.mesh.position.x =
+            Math.cos(this.experience.time.elapsed * 0.001 * 0.5) * 4 + 12;
+          this.mesh.position.z =
+            Math.sin(this.experience.time.elapsed * 0.001 * 0.5) * 4 + 30;
           break;
       }
 

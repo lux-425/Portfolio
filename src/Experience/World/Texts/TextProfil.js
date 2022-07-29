@@ -37,8 +37,6 @@ export default class TextProfil {
     this.textModel.translateX(-4);
 
     this.setVariables();
-
-    this.setAnimation();
   }
 
   setVariables() {
@@ -98,7 +96,7 @@ export default class TextProfil {
 
     this.textModel.children[8].material.depthTest = true;
     this.textModel.children[8].material.depthWrite = true;
- this.textModel.children[8].translateY(-0.019);
+    this.textModel.children[8].translateY(-0.019);
 
     /**
      * OBJECT READY
@@ -228,18 +226,5 @@ export default class TextProfil {
     setTimeout(() => {
       tweenAppearArrowProfil.start();
     }, 1000);
-  }
-
-  setAnimation() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    const tick = () => {
-      TWEEN.update();
-
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
-
-    tick();
   }
 }

@@ -36,8 +36,6 @@ export default class TextShoukai {
     this.textModel.translateY(4);
 
     this.setVariables();
-
-    this.setAnimation();
   }
 
   setVariables() {
@@ -63,18 +61,5 @@ export default class TextShoukai {
     // console.log(this.textModel);
 
     this.scene.add(this.textModel);
-  }
-
-  setAnimation() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    const tick = () => {
-      TWEEN.update();
-
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
-
-    tick();
   }
 }

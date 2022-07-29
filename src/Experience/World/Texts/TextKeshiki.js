@@ -44,8 +44,6 @@ export default class TextKeshiki {
     this.textModel.translateY(0.01);
 
     this.setVariables();
-
-    this.setAnimation();
   }
 
   setVariables() {
@@ -349,18 +347,5 @@ export default class TextKeshiki {
           break;
       }
     }, 3333);
-  }
-
-  setAnimation() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    const tick = () => {
-      TWEEN.update();
-
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
-
-    tick();
   }
 }

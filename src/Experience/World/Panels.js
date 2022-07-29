@@ -47,10 +47,6 @@ export default class Panels {
 
         this.gamenOne = new Gamen(this.gamenParams);
         this.gamenOne.mesh.translateX(-4);
-        //
-        // this.gamenOne.mesh.translateZ(5);
-        // this.gamenOne.mesh.translateX(4);
-        //
         this.gamenOne.mesh.rotateY(Math.PI);
         this.gamens.push(this.gamenOne.mesh);
 
@@ -140,22 +136,17 @@ export default class Panels {
 
         this.gamens.push(this.gamenFour.mesh);
         break;
-      default:
-        console.log('宇宙中');
     }
 
     this.scene.add(...this.gamens);
   }
 
   setAnimation() {
-    const clock = new THREE.Clock();
-
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
-
       // Update gamens
       for (let gamen of this.gamens) {
-        gamen.material.uniforms.uTime.value = elapsedTime;
+        gamen.material.uniforms.uTime.value =
+          this.experience.time.elapsed * 0.001;
 
         // TWEAKING
         gamen.material.uniforms.uUeBreathingElevation.value =
@@ -179,7 +170,6 @@ export default class Panels {
         gamen.material.uniforms.uColor.value = new THREE.Color(
           this.gamenParams.color
         );
-        // gamen.material.uniforms.uOpacity.value = this.gamenParams.opacity;
       }
 
       // Call tick again on the next frame
@@ -187,12 +177,6 @@ export default class Panels {
     };
 
     tick();
-  }
-
-  updateUniforms() {
-    // for (let gamen of this.gamens) {
-    //   console.log(gamen);
-    // }
   }
 
   setDebug() {

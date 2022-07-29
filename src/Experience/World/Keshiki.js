@@ -237,11 +237,7 @@ export default class Keshiki {
   }
 
   setAnimation() {
-    const clock = new THREE.Clock();
-
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
-
       // Raycasting
       this.raycaster.setFromCamera(
         this.experience.mouse,
@@ -251,12 +247,13 @@ export default class Keshiki {
       this.intersects = this.raycaster.intersectObjects(this.objectsToTest);
 
       // Update keshiki
-      this.mesh.material.uniforms.uTime.value = elapsedTime;
+      this.mesh.material.uniforms.uTime.value =
+        this.experience.time.elapsed * 0.001;
       this.mesh.material.uniforms.uBigWavesFrequency.value.x = Math.tan(
-        elapsedTime * 0.055
+        this.experience.time.elapsed * 0.00025
       );
       this.mesh.material.uniforms.uBigWavesFrequency.value.y = Math.tan(
-        elapsedTime * 0.055
+        this.experience.time.elapsed * 0.00025
       );
 
       if (this.intersects.length) {

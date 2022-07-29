@@ -55,10 +55,6 @@ export default class Camera {
   }
 
   update() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    TWEEN.update();
-
     this.controls.update();
   }
 }

@@ -1,5 +1,3 @@
-import * as THREE from 'three';
-
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
@@ -25,8 +23,6 @@ import TextGengo from './Texts/TextGengo.js';
 
 import TravellingManager from '../TravellingManager.js';
 
-// import { gsap } from 'gsap';
-
 export default class World {
   constructor() {
     this.experience = new Experience();
@@ -36,7 +32,6 @@ export default class World {
     this.language = '';
     this.area = '';
 
-    // this.floor = new Floor();
     this.environment = new Environment();
     this.keshiki = new Keshiki();
     this.particles = new Particles();
@@ -58,8 +53,6 @@ export default class World {
      *
      */
     this.setPanels();
-
-    // this.setHalo();
 
     /**
      * ポリゴン~~~~
@@ -194,21 +187,6 @@ export default class World {
     this.polygonPyramidThree.mesh.rotateY(Math.PI / 3);
   }
 
-  setHalo() {
-    // Halo' Blender model
-    this.gltfLoader.load('../../models/halo.glb', (gltf) => {
-      this.model = gltf.scene;
-      this.model.traverse((o) => {
-        o.position.set(-450, 50, 33);
-        // if (o.isMesh) {
-        //   o.material.wireframe = true;
-        //   o.material.color = new THREE.Color("magenta")
-        // }
-      });
-      this.scene.add(this.model);
-    });
-  }
-
   setTexts() {
     this.textProfil = new TextProfil();
     this.textShoukai = new TextShoukai();
@@ -253,18 +231,22 @@ export default class World {
     this.rightPanels.gamenTwo.mesh.name = 'rightAreaGamenBis';
   }
 
-  update() {}
+  // update() {
+  //   var TWEEN = require('@tweenjs/tween.js');
 
-  setAnimation() {
-    const clock = new THREE.Clock();
+  //   TWEEN.update();
+  // }
 
-    const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
+  // setAnimation() {
+  //   const clock = new THREE.Clock();
 
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
+  //   const tick = () => {
+  //     const elapsedTime = clock.getElapsedTime();
 
-    tick();
-  }
+  //     // Call tick again on the next frame
+  //     window.requestAnimationFrame(tick);
+  //   };
+
+  //   tick();
+  // }
 }

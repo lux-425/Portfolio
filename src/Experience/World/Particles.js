@@ -134,16 +134,15 @@ export default class Particles {
   }
 
   setAnimation() {
-    const clock = new THREE.Clock();
-
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
-
       // Update particles
-      this.particles.rotation.y = -elapsedTime * 0.002;
+      this.particles.rotation.y = -this.experience.time.elapsed * 0.000002;
 
-      this.smallParticles.rotation.y = elapsedTime * 0.05 * this.toggleSpeed;
-      this.smallParticles.position.y = Math.cos(elapsedTime * 0.5);
+      this.smallParticles.rotation.y =
+        this.experience.time.elapsed * 0.000025 * this.toggleSpeed;
+      this.smallParticles.position.y = Math.cos(
+        this.experience.time.elapsed * 0.00025
+      );
 
       window.requestAnimationFrame(tick);
     };

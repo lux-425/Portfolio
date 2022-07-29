@@ -218,17 +218,4 @@ export default class TextGaku {
     tweenTexts.start();
     tweenTitlesDates.start();
   }
-
-  setAnimation() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    const tick = () => {
-      TWEEN.update();
-
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
-
-    tick();
-  }
 }

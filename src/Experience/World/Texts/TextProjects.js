@@ -67,8 +67,6 @@ export default class TextProjects {
      * INIT
      */
     this.setVariables();
-
-    this.setAnimation();
   }
 
   setVariables() {
@@ -1520,18 +1518,5 @@ export default class TextProjects {
 
       this.appearProjectText();
     }, 700);
-  }
-
-  setAnimation() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    const tick = () => {
-      TWEEN.update();
-
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
-
-    tick();
   }
 }

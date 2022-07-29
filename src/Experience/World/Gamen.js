@@ -54,7 +54,7 @@ export default class Gamen {
   }
 
   setGeometry() {
-    this.geometry = new THREE.PlaneGeometry(0.9, 1.9, 32, 32);
+    this.geometry = new THREE.PlaneGeometry(0.9, 1.9, 1, 1);
   }
 
   // setTextures() {
@@ -66,6 +66,7 @@ export default class Gamen {
       vertexShader: this.shader.vertex,
       fragmentShader: this.shader.fragment,
       side: THREE.DoubleSide,
+      // wireframe: true,
       transparent: true,
       uniforms: {
         uTime: { value: 0 },

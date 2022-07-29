@@ -71,8 +71,6 @@ export default class TextKeiken {
     this.textModel.children[0].children[2].material.transparent = true;
 
     this.setVariables();
-
-    this.setAnimation();
   }
   setVariables() {
     var TWEEN = require('@tweenjs/tween.js');
@@ -763,18 +761,5 @@ export default class TextKeiken {
         .easing(TWEEN.Easing.Back.In);
       tweenKenTranslate.start();
     }, 1650);
-  }
-
-  setAnimation() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    const tick = () => {
-      TWEEN.update();
-
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
-
-    tick();
   }
 }

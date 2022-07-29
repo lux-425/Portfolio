@@ -49,8 +49,6 @@ export default class TextGengo {
     );
 
     this.setVariables();
-
-    this.setAnimation();
   }
 
   setVariables() {
@@ -367,18 +365,5 @@ export default class TextGengo {
     this.softwaresFrame.visible = true;
 
     this.appearPanel();
-  }
-
-  setAnimation() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    const tick = () => {
-      TWEEN.update();
-
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
-
-    tick();
   }
 }

@@ -75,13 +75,10 @@ export default class Chikei {
   }
 
   setAnimation() {
-    const clock = new THREE.Clock();
-
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
-
       // Update chikei
-      this.chikeiModel.material.uniforms.uTime.value = elapsedTime;
+      this.chikeiModel.material.uniforms.uTime.value =
+        this.experience.time.elapsed * 0.001;
       this.chikeiModel.material.uniforms.uSurfaceColor.value = new THREE.Color(
         this.debugObject.surfaceColor
       );

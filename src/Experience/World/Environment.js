@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js';
 
 import Experience from '../Experience.js';
 
@@ -175,13 +174,9 @@ export default class Environment {
    * Animate
    */
   setAnimation() {
-    this.clock = new THREE.Clock();
-
     this.tick = () => {
-      this.elapsedTime = this.clock.getElapsedTime();
-
       // Update Lights
-      this.centerPointLightAngle = this.elapsedTime * 0.25;
+      this.centerPointLightAngle = this.experience.time.elapsed * 0.0025;
 
       this.centerPointLight.position.x =
         Math.cos(this.centerPointLightAngle) * 10;

@@ -463,7 +463,7 @@ export default class Yubisashi {
     this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 1;
     this.experience.world.textKeshiki.contact.visible = false;
     this.experience.world.textKeshiki.select.visible = false;
-    this.experience.world.particles.toggleSpeed = 5;
+    this.experience.world.particles.toggleSpeed = 10;
   }
 
   setRaycasting() {

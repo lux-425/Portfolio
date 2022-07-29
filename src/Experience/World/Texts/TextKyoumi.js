@@ -40,8 +40,6 @@ export default class TextKyoumi {
     );
 
     this.setVariables();
-
-    this.setAnimation();
   }
 
   setVariables() {
@@ -234,18 +232,5 @@ export default class TextKyoumi {
       .onStart(() => {
         this.arrowTextRight.material.opacity = 0;
       });
-  }
-
-  setAnimation() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    const tick = () => {
-      TWEEN.update();
-
-      // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
-    };
-
-    tick();
   }
 }
