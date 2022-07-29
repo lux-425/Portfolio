@@ -19,6 +19,8 @@ export default class TravellingManager {
     this.toggledAlreadyBis = false;
     this.toggledAlreadyTer = false;
 
+    this.fixPath = false;
+
     /**
      *
      * OPACITY DOWN => OPACITY UP + SHADERS' SWITCH => ANIMATION
@@ -293,13 +295,13 @@ export default class TravellingManager {
     /**
      * 画面
      */
-    this.tweenKameraGamen = (mesh, angle) => {
+    this.tweenKameraGamen = (mesh, angle, boxOffset = 0.55) => {
       const areaMesh = mesh;
       const angleGamen = angle;
 
       let boxMaxY = new THREE.Box3().setFromObject(areaMesh).max.y;
 
-      let distance = boxMaxY + 0.55;
+      let distance = boxMaxY + boxOffset;
 
       let positionKamera = {
         x: areaMesh.position.x + Math.cos(angleGamen) * distance,
@@ -394,7 +396,18 @@ export default class TravellingManager {
       this.travellingAlready = false;
     };
     this.translationHome = () => {
-      this.tweenKameraHome();
+      if (this.fixPath) {
+        this.tweenKameraGamen(
+          this.experience.world.rightPanels.gamenFour.mesh,
+          -Math.PI * 2
+        );
+        setTimeout(() => {
+          this.tweenKameraHome();
+          this.fixPath = false;
+        }, 555);
+      } else {
+        this.tweenKameraHome();
+      }
 
       setTimeout(() => {
         this.experience.world.area = 'home';
@@ -479,10 +492,24 @@ export default class TravellingManager {
       );
     };
     this.translationKeiken = () => {
-      this.tweenKameraGamen(
-        this.experience.world.centerPanels.gamenTwo.mesh,
-        Math.PI * 0.65
-      );
+      if (this.fixPath) {
+        this.tweenKameraGamen(
+          this.experience.world.centerPanels.gamenFour.mesh,
+          Math.PI * 1.15
+        );
+        setTimeout(() => {
+          this.tweenKameraGamen(
+            this.experience.world.centerPanels.gamenTwo.mesh,
+            Math.PI * 0.65
+          );
+          this.fixPath = false;
+        }, 777);
+      } else {
+        this.tweenKameraGamen(
+          this.experience.world.centerPanels.gamenTwo.mesh,
+          Math.PI * 0.65
+        );
+      }
 
       setTimeout(() => {
         this.experience.world.area = 'keiken';
@@ -545,10 +572,25 @@ export default class TravellingManager {
       );
     };
     this.translationGaku = () => {
-      this.tweenKameraGamen(
-        this.experience.world.rightPanels.gamenTwo.mesh,
-        Math.PI * 0.5
-      );
+      if (this.fixPath) {
+        this.tweenKameraGamen(
+          this.experience.world.rightPanels.gamenFour.mesh,
+          -Math.PI * 1.5,
+          2.25
+        );
+        setTimeout(() => {
+          this.tweenKameraGamen(
+            this.experience.world.rightPanels.gamenTwo.mesh,
+            Math.PI * 0.5
+          );
+          this.fixPath = false;
+        }, 777);
+      } else {
+        this.tweenKameraGamen(
+          this.experience.world.rightPanels.gamenTwo.mesh,
+          Math.PI * 0.5
+        );
+      }
 
       setTimeout(() => {
         this.experience.world.area = 'gaku';
@@ -572,10 +614,25 @@ export default class TravellingManager {
       );
     };
     this.translationKyoumi = () => {
-      this.tweenKameraGamen(
-        this.experience.world.rightPanels.gamenThree.mesh,
-        Math.PI * 0.1
-      );
+      if (this.fixPath) {
+        this.tweenKameraGamen(
+          this.experience.world.rightPanels.gamenFour.mesh,
+          Math.PI * 1.5,
+          2.25
+        );
+        setTimeout(() => {
+          this.tweenKameraGamen(
+            this.experience.world.rightPanels.gamenThree.mesh,
+            Math.PI * 0.1
+          );
+          this.fixPath = false;
+        }, 777);
+      } else {
+        this.tweenKameraGamen(
+          this.experience.world.rightPanels.gamenThree.mesh,
+          Math.PI * 0.1
+        );
+      }
 
       setTimeout(() => {
         this.experience.world.area = 'kyoumi';
@@ -602,10 +659,33 @@ export default class TravellingManager {
       );
     };
     this.translationGengo = () => {
-      this.tweenKameraGamen(
-        this.experience.world.rightPanels.gamenFour.mesh,
-        Math.PI * 1.2
-      );
+      if (this.fixPath) {
+        this.tweenKameraGamen(
+          this.experience.world.rightPanels.gamenThree.mesh,
+          Math.PI * 1.6
+        );
+        setTimeout(() => {
+          this.tweenKameraGamen(
+            this.experience.world.rightPanels.gamenFour.mesh,
+            Math.PI * 1.2
+          );
+          this.fixPath = false;
+        }, 666);
+      } else {
+        this.tweenKameraGamen(
+          this.experience.world.rightPanels.gamenTwo.mesh,
+          Math.PI * 1.05,
+          0.55
+        );
+        setTimeout(() => {
+          this.tweenKameraGamen(
+            this.experience.world.rightPanels.gamenFour.mesh,
+            Math.PI * 1.25,
+            0.55,
+            0.35
+          );
+        }, 888);
+      }
 
       setTimeout(() => {
         this.experience.world.area = 'gengo';

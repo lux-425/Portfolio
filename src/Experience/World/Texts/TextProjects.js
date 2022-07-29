@@ -228,8 +228,6 @@ export default class TextProjects {
     this.project4Title = this.textModel.children[1].children[3].children[1];
     this.project4Description =
       this.textModel.children[1].children[3].children[0];
-    this.project4Image = this.textModel.children[1].children[3].children[3];
-    this.project4ImageBis = this.textModel.children[1].children[3].children[2];
     this.project4Stack = this.textModel.children[0].children[9];
 
     this.project5 = this.textModel.children[1].children[4];
@@ -268,10 +266,6 @@ export default class TextProjects {
     this.project2ImageBis.material.depthWrite = true;
     this.project3Image.material.depthTest = true;
     this.project3Image.material.depthWrite = true;
-    // this.project4Image.material.depthTest = true;
-    // this.project4Image.material.depthWrite = true;
-    // this.project4ImageBis.material.depthTest = true;
-    // this.project4ImageBis.material.depthWrite = true;
     this.project5Image.material.depthTest = true;
     this.project5Image.material.depthWrite = true;
 
@@ -317,7 +311,7 @@ export default class TextProjects {
       this.project7Stack,
     ];
 
-    this.navbarLanguette.material.emissive = new THREE.Color('white')
+    this.navbarLanguette.material.emissive = new THREE.Color('white');
 
     /**
      * OBJECT READY
@@ -1181,6 +1175,7 @@ export default class TextProjects {
     var TWEEN = require('@tweenjs/tween.js');
 
     // console.log(this.textModel);
+    this.arrowProject.position.x = -0.4712;
 
     /**
      * ARROW
@@ -1441,8 +1436,8 @@ export default class TextProjects {
       this.actualTitle = this.project4Title;
       this.actualDescription = this.project4Description;
       this.actualStack = this.project4Stack;
-      this.actualImage = this.project4Image;
-      this.actualImageBis = this.project4ImageBis;
+      this.actualImage = null;
+      this.actualImageBis = null;
 
       this.visitLiveFrame.visible = false;
       this.visitLiveButton.visible = false;

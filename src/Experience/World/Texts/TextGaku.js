@@ -182,6 +182,9 @@ export default class TextGaku {
 
     // console.log(this.textModel);
 
+    this.arrowGakuRight.position.x = -0.462;
+    this.arrowGakuLeft.position.x = -0.462;
+
     // INIT
     this.arrowGakuRight.visible = false;
     this.arrowGakuLeft.visible = false;
@@ -200,16 +203,16 @@ export default class TextGaku {
         this.logoRight.visible = true;
       })
       .onComplete(() => {
-        this.arrowHomeGakuLeft.visible = true;
-        this.arrowHomeGakuRight.visible = true;
+        this.arrowGakuRight.visible = true;
+        this.arrowGakuLeft.visible = true;
       });
 
     var tweenTexts = new TWEEN.Tween(this.textLeft.material)
       .to({ opacity: 1 }, 1500)
       .easing(TWEEN.Easing.Bounce.InOut)
       .onComplete(() => {
-        this.arrowGakuRight.visible = true;
-        this.arrowGakuLeft.visible = true;
+        this.arrowHomeGakuLeft.visible = true;
+        this.arrowHomeGakuRight.visible = true;
       });
 
     tweenTexts.start();

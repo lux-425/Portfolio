@@ -365,15 +365,26 @@ export default class Yubisashi {
         this.experience.world.travellingManager.transitionKeiken(false);
         break;
       case 'projects':
+        if (destination === 'keiken') {
+          this.experience.world.travellingManager.fixPath = true;
+        } else if (destination === 'home') {
+          this.experience.world.travellingManager.fixPath = true;
+        }
         this.experience.world.travellingManager.transitionProjects(false);
         break;
       case 'gaku':
         this.experience.world.travellingManager.transitionGaku(false);
         break;
       case 'kyoumi':
+        if (destination === 'gengo') {
+          this.experience.world.travellingManager.fixPath = true;
+        }
         this.experience.world.travellingManager.transitionKyoumi(false);
         break;
       case 'gengo':
+        if (destination === 'kyoumi' || destination === 'gaku') {
+          this.experience.world.travellingManager.fixPath = true;
+        }
         this.experience.world.travellingManager.transitionGengo(false);
         break;
     }

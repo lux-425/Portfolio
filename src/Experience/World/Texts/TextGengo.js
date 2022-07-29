@@ -253,6 +253,9 @@ export default class TextGengo {
     this.scene.add(this.textModelRight);
     this.scene.add(this.textModelLeft);
 
+    this.arrowRight.position.x = -0.4969;
+    this.arrowLeft.position.x = 0.4607;
+
     this.tokoroDatta = true;
 
     /**

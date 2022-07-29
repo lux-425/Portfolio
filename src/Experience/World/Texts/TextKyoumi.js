@@ -147,6 +147,9 @@ export default class TextKyoumi {
 
     this.scene.add(this.textModel);
 
+    this.arrowRight.position.x = 0.4648;
+    this.arrowLeft.position.x = -0.4747;
+
     /**
      * INIT VARIABLES
      */
@@ -165,20 +168,21 @@ export default class TextKyoumi {
     /**
      * APPEARANCE
      */
-
     var tweenTitleAppear = new TWEEN.Tween(this.title.material)
-      .to({ opacity: 1 }, 1000)
-      .easing(TWEEN.Easing.Exponential.InOut);
+      .to({ opacity: 1 }, 1555)
+      .easing(TWEEN.Easing.Circular.InOut);
 
     var tweenArrowsAppear = new TWEEN.Tween(this.arrowLeft.material)
-      .to({ opacity: 1 }, 1000)
+      .to({ opacity: 1 }, 2222)
       .easing(TWEEN.Easing.Bounce.InOut)
-      .onComplete(() => {
+      .onStart(() => {
         this.arrowHome.visible = true;
       });
 
     this.tweenTextTranslate = () => {
       for (var i = 0; i < this.textArr.length; i++) {
+        this.textArr[i].position.x = -0.25;
+
         var tweenTextTranslate = new TWEEN.Tween(this.textArr[i].position)
           .to({ x: -0.38 }, 1000 + i * 200)
           .easing(TWEEN.Easing.Cubic.InOut)

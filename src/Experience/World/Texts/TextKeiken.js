@@ -98,8 +98,8 @@ export default class TextKeiken {
     this.tweenAppearTexts = new TWEEN.Tween(
       this.textModel.children[0].children[0].children[0].material
     )
-      .to({ opacity: 1 }, 1500)
-      .easing(TWEEN.Easing.Bounce.InOut);
+      .to({ opacity: 1 }, 1111)
+      .easing(TWEEN.Easing.Bounce.Out);
 
     // LOGOS
     this.sterimedLogo = this.textModel.children[0].children[7];
