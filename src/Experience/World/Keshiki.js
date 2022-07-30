@@ -58,7 +58,7 @@ export default class Keshiki {
     });
 
     // Debug
-    this.debug = this.experience.debug;
+    // this.debug = this.experience.debug;
     this.debugObject = {};
     this.debugObject.depthColor = '#000000';
     this.debugObject.surfaceColor = '#ffffff';
@@ -67,11 +67,11 @@ export default class Keshiki {
 
     this.setAnimation();
 
-    if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder('keshiki');
-      this.setDebug();
-      this.debugFolder.close();
-    }
+    // if (this.debug.active) {
+    //   this.debugFolder = this.debug.ui.addFolder('keshiki');
+    //   this.setDebug();
+    //   this.debugFolder.close();
+    // }
   }
 
   confirmLanguage(language) {
@@ -142,21 +142,13 @@ export default class Keshiki {
       uniforms: {
         uTime: { value: 0 },
 
-        uBigWavesElevation: { value: -0.55 },
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
-        uBigWavesSpeed: { value: -0.55 },
-
-        uSmallWavesElevation: { value: 5.55 },
-        uSmallWavesFrequency: { value: 0.055 },
-        uSmallWavesSpeed: { value: 0.25 },
-        uSmallWavesIterations: { value: 1 },
 
         uDepthColor: { value: new THREE.Color(this.debugObject.depthColor) },
         uSurfaceColor: {
           value: new THREE.Color(this.debugObject.surfaceColor),
         },
         uColorOffset: { value: 0 },
-        uColorMultiplier: { value: 5 },
       },
     });
 
@@ -166,7 +158,6 @@ export default class Keshiki {
       fragmentShader: flagFragmentShader,
       wireframe: true,
       uniforms: {
-        uFrequency: { value: new THREE.Vector2(2, 6) },
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
         uTexture: { value: this.flagTextureFrance },
@@ -179,7 +170,6 @@ export default class Keshiki {
       fragmentShader: flagFragmentShader,
       wireframe: true,
       uniforms: {
-        uFrequency: { value: new THREE.Vector2(2, 6) },
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
         uTexture: { value: this.flagTextureNippon },
@@ -192,7 +182,6 @@ export default class Keshiki {
       fragmentShader: flagFragmentShader,
       wireframe: true,
       uniforms: {
-        uFrequency: { value: new THREE.Vector2(2, 6) },
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
         uTexture: { value: this.flagTextureKokusai },
@@ -303,82 +292,82 @@ export default class Keshiki {
     tick();
   }
 
-  setDebug() {
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uBigWavesElevation, 'value')
-      .min(-5)
-      .max(10)
-      .step(0.001)
-      .name('uBigWavesElevation');
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uSmallWavesElevation, 'value')
-      .min(-5)
-      .max(20)
-      .step(0.001)
-      .name('uSmallWavesElevation');
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uBigWavesFrequency.value, 'x')
-      .min(0)
-      .max(30)
-      .step(0.001)
-      .name('uBigWavesFrequencyX');
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uBigWavesFrequency.value, 'y')
-      .min(0)
-      .max(30)
-      .step(0.001)
-      .name('uBigWavesFrequencyY');
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uSmallWavesFrequency, 'value')
-      .min(0)
-      .max(5)
-      .step(0.001)
-      .name('uSmallWavesFrequency');
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uBigWavesSpeed, 'value')
-      .min(-5)
-      .max(5)
-      .step(0.001)
-      .name('uBigWavesSpeed');
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uSmallWavesSpeed, 'value')
-      .min(-5)
-      .max(5)
-      .step(0.001)
-      .name('uSmallWavesSpeed');
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uSmallWavesIterations, 'value')
-      .min(0)
-      .max(4)
-      .step(1)
-      .name('uSmallWavesIterations');
-    this.debugFolder
-      .addColor(this.debugObject, 'depthColor')
-      .name('depthColor')
-      .onChange(() => {
-        this.keshikiMaterial.uniforms.uDepthColor.value.set(
-          this.debugObject.depthColor
-        );
-      });
-    this.debugFolder
-      .addColor(this.debugObject, 'surfaceColor')
-      .name('surfaceColor')
-      .onChange(() => {
-        this.keshikiMaterial.uniforms.uSurfaceColor.value.set(
-          this.debugObject.surfaceColor
-        );
-      });
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uColorOffset, 'value')
-      .min(0)
-      .max(1)
-      .step(0.001)
-      .name('uColorOffset');
-    this.debugFolder
-      .add(this.keshikiMaterial.uniforms.uColorMultiplier, 'value')
-      .min(0)
-      .max(5)
-      .step(0.001)
-      .name('uColorMultiplier');
-  }
+  // setDebug() {
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uBigWavesElevation, 'value')
+  //     .min(-5)
+  //     .max(10)
+  //     .step(0.001)
+  //     .name('uBigWavesElevation');
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uSmallWavesElevation, 'value')
+  //     .min(-5)
+  //     .max(20)
+  //     .step(0.001)
+  //     .name('uSmallWavesElevation');
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uBigWavesFrequency.value, 'x')
+  //     .min(0)
+  //     .max(30)
+  //     .step(0.001)
+  //     .name('uBigWavesFrequencyX');
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uBigWavesFrequency.value, 'y')
+  //     .min(0)
+  //     .max(30)
+  //     .step(0.001)
+  //     .name('uBigWavesFrequencyY');
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uSmallWavesFrequency, 'value')
+  //     .min(0)
+  //     .max(5)
+  //     .step(0.001)
+  //     .name('uSmallWavesFrequency');
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uBigWavesSpeed, 'value')
+  //     .min(-5)
+  //     .max(5)
+  //     .step(0.001)
+  //     .name('uBigWavesSpeed');
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uSmallWavesSpeed, 'value')
+  //     .min(-5)
+  //     .max(5)
+  //     .step(0.001)
+  //     .name('uSmallWavesSpeed');
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uSmallWavesIterations, 'value')
+  //     .min(0)
+  //     .max(4)
+  //     .step(1)
+  //     .name('uSmallWavesIterations');
+  //   this.debugFolder
+  //     .addColor(this.debugObject, 'depthColor')
+  //     .name('depthColor')
+  //     .onChange(() => {
+  //       this.keshikiMaterial.uniforms.uDepthColor.value.set(
+  //         this.debugObject.depthColor
+  //       );
+  //     });
+  //   this.debugFolder
+  //     .addColor(this.debugObject, 'surfaceColor')
+  //     .name('surfaceColor')
+  //     .onChange(() => {
+  //       this.keshikiMaterial.uniforms.uSurfaceColor.value.set(
+  //         this.debugObject.surfaceColor
+  //       );
+  //     });
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uColorOffset, 'value')
+  //     .min(0)
+  //     .max(1)
+  //     .step(0.001)
+  //     .name('uColorOffset');
+  //   this.debugFolder
+  //     .add(this.keshikiMaterial.uniforms.uColorMultiplier, 'value')
+  //     .min(0)
+  //     .max(5)
+  //     .step(0.001)
+  //     .name('uColorMultiplier');
+  // }
 }

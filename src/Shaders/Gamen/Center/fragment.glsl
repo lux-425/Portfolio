@@ -1,13 +1,8 @@
 uniform float uTime;
 
-uniform float uUeBreathingElevation;
-uniform vec2 uUeBreathingFrequency;
 uniform float uUeBreathingSpeed;
 
-uniform float uShitaBreathingElevation;
-uniform float uShitaBreathingFrequency;
 uniform float uShitaBreathingSpeed;
-uniform float uShitaBreathingIterations;
 
 uniform vec3 uColor;
 uniform float uOpacity;
@@ -16,9 +11,6 @@ uniform float uOpacity;
 
 varying vec2 vUv;
 
-float rand(vec2 c) {
-  return fract(sin(dot(c.xy, vec2(12.9898, 78.233))) * 43758.5453);
-}
 vec4 permute(vec4 x) {
   return mod(((x * 34.0) + 1.0) * x, 289.0);
 }
@@ -164,17 +156,15 @@ float cnoise(vec4 P, vec4 rep) {
 void main() {
   vec3 uvColor = vec3(vUv, 1.0);
 
-  float breathing = sin(-uvColor.x * uUeBreathingFrequency.x + uTime * uUeBreathingSpeed) * sin(-uvColor.x * uUeBreathingFrequency.y + uTime * uUeBreathingSpeed) * uUeBreathingElevation;
+  float breathing = sin(-uvColor.x * 5.0 + uTime * uUeBreathingSpeed) * sin(-uvColor.x * 5.0 + uTime * uUeBreathingSpeed) * 10.0;
 
   vec4 rep = vec4(5, 2, 2, 5);
 
-  for(float i = 1.0; i <= uShitaBreathingIterations; i++) {
-    breathing *= abs(cnoise(vec4(uvColor.xy * (uShitaBreathingFrequency * (sin(uTime * 0.1) * sin(uTime * 0.1))) * i + uTime * uShitaBreathingSpeed, uvColor), rep) * uShitaBreathingElevation / i);
+  for(float i = 1.0; i <= 2.0; i++) {
+    breathing *= abs(cnoise(vec4(uvColor.xy * (5.0 * (sin(uTime * 0.1) * sin(uTime * 0.1))) * i + uTime * uShitaBreathingSpeed, uvColor), rep) * 8.0 / i);
   }
 
   float strength = 1.0 - abs(cnoise(vec4(vUv - breathing, vUv + breathing), rep));
-
-  // Clamp the strength
   strength = clamp(strength, 0.0, 1.0);
 
   vec3 mixedColor = mix(uColor, uvColor, (strength / breathing));

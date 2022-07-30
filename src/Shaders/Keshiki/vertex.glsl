@@ -1,12 +1,5 @@
 uniform float uTime;
-uniform float uBigWavesElevation;
 uniform vec2 uBigWavesFrequency;
-uniform float uBigWavesSpeed;
-
-uniform float uSmallWavesElevation;
-uniform float uSmallWavesFrequency;
-uniform float uSmallWavesSpeed;
-uniform float uSmallWavesIterations;
 
 varying float vElevation;
 varying vec2 vUv;
@@ -95,18 +88,11 @@ float cnoise(vec3 P) {
 void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
-  float elevation = sin(modelPosition.x * uBigWavesFrequency.y + uTime * uBigWavesSpeed) * sin(modelPosition.y * uBigWavesFrequency.x + uTime * uBigWavesSpeed) * uBigWavesElevation;
-
-  for(float i = 1.0; i <= uSmallWavesIterations; i++) {
-    elevation -= abs(cnoise(vec3(modelPosition.xy * uSmallWavesFrequency * i, uTime * uSmallWavesSpeed)) * uSmallWavesElevation / i);
-  }
+  float elevation = (sin(modelPosition.x * uBigWavesFrequency.y + uTime * -0.55) * sin(modelPosition.y * uBigWavesFrequency.x + uTime * -0.55) * -0.55) - abs(cnoise(vec3(modelPosition.xy * 0.055, uTime * 0.25)) * 5.55);
 
   modelPosition.z += elevation;
 
-  vec4 viewPosition = viewMatrix * modelPosition;
-  vec4 projectedPosition = projectionMatrix * viewPosition;
-
-  gl_Position = projectedPosition;
+  gl_Position = projectionMatrix * (viewMatrix * modelPosition);
 
   // Varyings
   vElevation = elevation;

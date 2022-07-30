@@ -15,13 +15,8 @@ export default class Gamen {
 
     this.scene = this.experience.scene;
 
-    this.ueBreathingElevation = gamenParams.ueBreathingElevation;
-    this.shitaBreathingElevation = gamenParams.shitaBreathingElevation;
-    this.ueBreathingFrequency = gamenParams.ueBreathingFrequency;
-    this.shitaBreathingFrequency = gamenParams.shitaBreathingFrequency;
     this.ueBreathingSpeed = gamenParams.ueBreathingSpeed;
     this.shitaBreathingSpeed = gamenParams.shitaBreathingSpeed;
-    this.shitaBreathingIterations = gamenParams.shitaBreathingIterations;
     this.color = gamenParams.color;
     this.opacity = gamenParams.opacity;
 
@@ -71,19 +66,8 @@ export default class Gamen {
       uniforms: {
         uTime: { value: 0 },
 
-        uUeBreathingElevation: { value: this.ueBreathingElevation },
-        uUeBreathingFrequency: {
-          value: new THREE.Vector2(
-            Object.values(this.ueBreathingFrequency)[0],
-            Object.values(this.ueBreathingFrequency)[1]
-          ),
-        },
         uUeBreathingSpeed: { value: this.ueBreathingSpeed },
-
-        uShitaBreathingElevation: { value: this.shitaBreathingElevation },
-        uShitaBreathingFrequency: { value: this.shitaBreathingFrequency },
         uShitaBreathingSpeed: { value: this.shitaBreathingSpeed },
-        uShitaBreathingIterations: { value: this.shitaBreathingIterations },
 
         uColor: { value: new THREE.Color(this.color) },
         uOpacity: { value: this.opacity },

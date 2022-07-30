@@ -33,13 +33,8 @@ export default class Panels {
     switch (this.pos) {
       case 'left':
         this.gamenParams = {
-          ueBreathingElevation: 5.0,
-          shitaBreathingElevation: 10.0,
-          ueBreathingFrequency: { x: 0.8, y: 0.8 },
-          shitaBreathingFrequency: -5.0,
           ueBreathingSpeed: -0.4,
           shitaBreathingSpeed: 0.2,
-          shitaBreathingIterations: 1.0,
           color: '#0000ff',
           opacity: 0,
           shader: 'left',
@@ -64,13 +59,8 @@ export default class Panels {
         break;
       case 'center':
         this.gamenParams = {
-          ueBreathingElevation: 10.0,
-          shitaBreathingElevation: 8.0,
-          ueBreathingFrequency: { x: 5.0, y: 5.0 },
-          shitaBreathingFrequency: 5.0,
           ueBreathingSpeed: 0.5,
           shitaBreathingSpeed: -0.4,
-          shitaBreathingIterations: 2.0,
           color: '#ff0000',
           opacity: 0,
           shader: 'center',
@@ -102,13 +92,8 @@ export default class Panels {
         break;
       case 'right':
         this.gamenParams = {
-          ueBreathingElevation: 10.0,
-          shitaBreathingElevation: 10.0,
-          ueBreathingFrequency: { x: 5.0, y: 5.0 },
-          shitaBreathingFrequency: 1.55,
           ueBreathingSpeed: 0.055,
           shitaBreathingSpeed: 1.55,
-          shitaBreathingIterations: 1.0,
           color: '#00ff00',
           opacity: 0,
           shader: 'right',
@@ -148,24 +133,10 @@ export default class Panels {
         gamen.material.uniforms.uTime.value =
           this.experience.time.elapsed * 0.001;
 
-        // TWEAKING
-        gamen.material.uniforms.uUeBreathingElevation.value =
-          this.gamenParams.ueBreathingElevation;
-        gamen.material.uniforms.uUeBreathingFrequency.value.x =
-          this.gamenParams.ueBreathingFrequency.x;
-        gamen.material.uniforms.uUeBreathingFrequency.value.y =
-          this.gamenParams.ueBreathingFrequency.y;
         gamen.material.uniforms.uUeBreathingSpeed.value =
           this.gamenParams.ueBreathingSpeed;
-
-        gamen.material.uniforms.uShitaBreathingElevation.value =
-          this.gamenParams.shitaBreathingElevation;
-        gamen.material.uniforms.uShitaBreathingFrequency.value =
-          this.gamenParams.shitaBreathingFrequency;
         gamen.material.uniforms.uShitaBreathingSpeed.value =
           this.gamenParams.shitaBreathingSpeed;
-        gamen.material.uniforms.uShitaBreathingIterations.value =
-          this.gamenParams.shitaBreathingIterations;
 
         gamen.material.uniforms.uColor.value = new THREE.Color(
           this.gamenParams.color
@@ -181,36 +152,6 @@ export default class Panels {
 
   setDebug() {
     this.debugFolder
-      .add(this.gamenParams, 'ueBreathingElevation')
-      .min(-5)
-      .max(10)
-      .step(0.001)
-      .name('ueBreathingElevation');
-    this.debugFolder
-      .add(this.gamenParams, 'shitaBreathingElevation')
-      .min(-5)
-      .max(10)
-      .step(0.001)
-      .name('shitaBreathingElevation');
-    this.debugFolder
-      .add(this.gamenParams.ueBreathingFrequency, 'x')
-      .min(0)
-      .max(5)
-      .step(0.001)
-      .name('ueBreathingFrequencyX');
-    this.debugFolder
-      .add(this.gamenParams.ueBreathingFrequency, 'y')
-      .min(0)
-      .max(5)
-      .step(0.001)
-      .name('ueBreathingFrequencyY');
-    this.debugFolder
-      .add(this.gamenParams, 'shitaBreathingFrequency')
-      .min(-5)
-      .max(5)
-      .step(0.001)
-      .name('shitaBreathingFrequency');
-    this.debugFolder
       .add(this.gamenParams, 'ueBreathingSpeed')
       .min(-5)
       .max(5)
@@ -222,18 +163,6 @@ export default class Panels {
       .max(5)
       .step(0.001)
       .name('shitaBreathingSpeed');
-    this.debugFolder
-      .add(this.gamenParams, 'shitaBreathingIterations')
-      .min(0)
-      .max(4)
-      .step(1)
-      .name('shitaBreathingIterations');
     this.debugFolder.addColor(this.gamenParams, 'color').name('color');
-    this.debugFolder
-      .add(this.gamenParams, 'opacity')
-      .min(0)
-      .max(2)
-      .step(0.05)
-      .name('opacity');
   }
 }

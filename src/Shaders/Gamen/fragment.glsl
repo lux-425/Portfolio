@@ -3,7 +3,6 @@
 
 uniform float uTime;
 
-uniform vec3 uColor;
 uniform float uOpacity;
 
 varying vec2 vUv;
@@ -184,8 +183,7 @@ vec2 cellular(vec3 P) {
 }
 
 void main(void) {
-  vec2 st = vUv;
-  st *= 5.;
+  vec2 st = vUv * 5.0;
 
   vec2 F = cellular(vec3(st, uTime * 0.2));
   // float dots = smoothstep(0.05, 0.1, F.x);

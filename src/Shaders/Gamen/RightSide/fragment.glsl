@@ -1,13 +1,8 @@
 uniform float uTime;
 
-uniform float uUeBreathingElevation;
-uniform vec2 uUeBreathingFrequency;
 uniform float uUeBreathingSpeed;
 
-uniform float uShitaBreathingElevation;
-uniform float uShitaBreathingFrequency;
 uniform float uShitaBreathingSpeed;
-uniform float uShitaBreathingIterations;
 
 uniform vec3 uColor;
 uniform float uOpacity;
@@ -60,15 +55,9 @@ float pNoise(vec2 p, int res) {
 void main() {
   vec3 uvColor = vec3(vUv, 1.0);
 
-  int res = 3;
+  float breathing = (sin(uvColor.y * 5.0 + uTime * 0.055) * sin(uvColor.y * 5.0 + uTime * 0.055) * 10.0) * abs(pNoise(vec2(-uvColor.xy * (2.4)), 3) * 10.0);
 
-  float breathing = sin(uvColor.y * uUeBreathingFrequency.x + uTime * uUeBreathingSpeed) * sin(uvColor.y * uUeBreathingFrequency.y + uTime * uUeBreathingSpeed) * uUeBreathingElevation;
-  for(float i = 1.0; i <= uShitaBreathingIterations; i++) {
-    breathing *= abs(pNoise(vec2(-uvColor.xy * (uShitaBreathingFrequency * i * uShitaBreathingSpeed)), res) * uShitaBreathingElevation);
-  }
-  float strength = 1.0 - abs(pNoise(breathing / uvColor.xy, res));
-
-  // Clamp the strength
+  float strength = 1.0 - abs(pNoise(breathing / uvColor.xy, 3));
   strength = clamp(strength, 0.0, 1.0);
 
   vec3 mixedColor = mix(uColor, uvColor, strength / breathing);
