@@ -164,6 +164,26 @@ export default class TextGaku {
         this.tweenArrowTextAppear(this.arrowTextGakuLeft);
       });
 
+    this.tweenTitlesDates = new TWEEN.Tween(this.titleLeft.material)
+      .to({ opacity: 1 }, 1000)
+      .easing(TWEEN.Easing.Circular.InOut)
+      .onStart(() => {
+        this.logoLeft.visible = true;
+        this.logoRight.visible = true;
+      })
+      .onComplete(() => {
+        this.arrowGakuRight.visible = true;
+        this.arrowGakuLeft.visible = true;
+      });
+
+    this.tweenTexts = new TWEEN.Tween(this.textLeft.material)
+      .to({ opacity: 1 }, 1500)
+      .easing(TWEEN.Easing.Bounce.InOut)
+      .onComplete(() => {
+        this.arrowHomeGakuLeft.visible = true;
+        this.arrowHomeGakuRight.visible = true;
+      });
+
     /**
      * OBJECT READY
      */
@@ -176,8 +196,6 @@ export default class TextGaku {
   }
 
   animateText() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     this.scene.add(this.textModel);
 
     // console.log(this.textModel);
@@ -195,27 +213,7 @@ export default class TextGaku {
     this.titleLeft.material.opacity = 0;
     this.textLeft.material.opacity = 0;
 
-    var tweenTitlesDates = new TWEEN.Tween(this.titleLeft.material)
-      .to({ opacity: 1 }, 1000)
-      .easing(TWEEN.Easing.Circular.InOut)
-      .onStart(() => {
-        this.logoLeft.visible = true;
-        this.logoRight.visible = true;
-      })
-      .onComplete(() => {
-        this.arrowGakuRight.visible = true;
-        this.arrowGakuLeft.visible = true;
-      });
-
-    var tweenTexts = new TWEEN.Tween(this.textLeft.material)
-      .to({ opacity: 1 }, 1500)
-      .easing(TWEEN.Easing.Bounce.InOut)
-      .onComplete(() => {
-        this.arrowHomeGakuLeft.visible = true;
-        this.arrowHomeGakuRight.visible = true;
-      });
-
-    tweenTexts.start();
-    tweenTitlesDates.start();
+    this.tweenTexts.start();
+    this.tweenTitlesDates.start();
   }
 }

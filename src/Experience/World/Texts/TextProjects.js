@@ -70,6 +70,8 @@ export default class TextProjects {
   }
 
   setVariables() {
+    var TWEEN = require('@tweenjs/tween.js');
+
     this.actualTab = 'ichi';
 
     /**
@@ -109,12 +111,195 @@ export default class TextProjects {
     ];
     this.jiLosange = this.ji.children[4];
 
+    // ANIMATIONS
+    this.animateJi = () => {
+      this.tweenSymbolJi = () => {
+        var tweenRotationSymbolJi = new TWEEN.Tween(this.jiLosange.rotation)
+          .to({ x: 0, y: -Math.PI * 2, z: 0 }, 200)
+          .easing(TWEEN.Easing.Circular.InOut)
+          .onComplete(() => {
+            this.jiLosange.visible = false;
+            setTimeout(() => {
+              this.ji.translateX(-0.75);
+            }, 50);
+          });
+        var tweenScaleSymbolJi = new TWEEN.Tween(this.jiLosange.scale)
+          .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
+          .easing(TWEEN.Easing.Exponential.In)
+          .onStart(() => {
+            setTimeout(() => {
+              tweenRotationSymbolJi.start();
+            }, 200);
+          });
+        tweenScaleSymbolJi.start();
+      };
+
+      this.tweenSenJi = () => {
+        this.tweenSenTranslateJi = () => {
+          for (var i = 0; i < 3; i++) {
+            var tweenSenTranslate = new TWEEN.Tween(this.jiSen[i].position)
+              .to({ x: -2 }, 100)
+              .easing(TWEEN.Easing.Cubic.In)
+              .onComplete(() => {
+                this.jiLosange.visible = true;
+                this.jiSen[0].visible = false;
+                this.jiSen[1].visible = false;
+                this.jiSen[2].visible = false;
+                this.tweenSymbolJi();
+              });
+            tweenSenTranslate.start();
+          }
+        };
+        var tweenSenThird = new TWEEN.Tween(this.jiSen[2].position)
+          .to({ x: -0.8 }, 50)
+          .easing(TWEEN.Easing.Linear.None)
+          .onStart(() => {
+            this.jiSen[2].visible = true;
+          })
+          .onComplete(() => {
+            this.tweenSenTranslateJi();
+          });
+        var tweenSen = new TWEEN.Tween(this.jiSen[1].position)
+          .to({ x: -0.6 }, 50)
+          .easing(TWEEN.Easing.Linear.None)
+          .onStart(() => {
+            this.jiSen[0].visible = true;
+            this.jiSen[1].visible = true;
+          })
+          .onComplete(() => {
+            tweenSenThird.start();
+          });
+        tweenSen.start();
+      };
+
+      this.tweenJiKosame = () => {
+        this.jiTsubu1.visible = true;
+        this.jiTsubu2.visible = true;
+        this.jiTsubu3.visible = true;
+        var tweenJiTsubu1 = new TWEEN.Tween(this.jiTsubu1.position)
+          .to({ x: -0.5, z: 0.65 }, 800)
+          .easing(TWEEN.Easing.Back.In);
+        tweenJiTsubu1.start();
+        var tweenJiTsubu2 = new TWEEN.Tween(this.jiTsubu2.position)
+          .to({ x: -0.35, z: 0.65 }, 600)
+          .easing(TWEEN.Easing.Back.In);
+        tweenJiTsubu2.start();
+        var tweenJiTsubu3 = new TWEEN.Tween(this.jiTsubu3.position)
+          .to({ x: 0.5, z: 0.65 }, 800)
+          .easing(TWEEN.Easing.Back.In)
+          .onComplete(() => {
+            this.jiTsubu1.visible = false;
+            this.jiTsubu2.visible = false;
+            this.jiTsubu3.visible = false;
+          });
+        tweenJiTsubu3.start();
+      };
+
+      var tweenAppearDot = new TWEEN.Tween(this.jiDot.material)
+        .to({ opacity: 1 }, 100)
+        .easing(TWEEN.Easing.Linear.None)
+        .onStart(() => {
+          this.tweenJiKosame();
+        })
+        .onComplete(() => {
+          tweenScaleDot.start();
+        });
+      var tweenScaleDot = new TWEEN.Tween(this.jiDot.scale)
+        .to({ x: 0, y: 0, z: 0 }, 300)
+        .easing(TWEEN.Easing.Linear.None)
+        .onComplete(() => {
+          this.tweenSenJi();
+        });
+
+      this.ji.visible = true;
+      tweenAppearDot.start();
+    };
+
     /**
      * プ
      */
     this.puDot = this.pu.children[0];
     this.puArrows = [this.pu.children[1], this.pu.children[2]];
     this.puPoints = this.pu.children[3];
+    this.puSen = [
+      this.pu.children[4],
+      this.pu.children[5],
+      this.pu.children[6],
+    ];
+
+    this.tweenSymbolPu = () => {
+      var tweenRotationSymbol = new TWEEN.Tween(this.puPoints.rotation)
+        .to({ x: 0, y: Math.PI * 2, z: 0 }, 200)
+        .easing(TWEEN.Easing.Circular.InOut)
+        .onComplete(() => {
+          this.puPoints.visible = false;
+          setTimeout(() => {
+            this.pu.translateX(-0.75);
+          }, 50);
+        });
+      var tweenScaleSymbol = new TWEEN.Tween(this.puPoints.scale)
+        .to({ x: 1, y: 1, z: 1 }, 200)
+        .easing(TWEEN.Easing.Exponential.In)
+        .onStart(() => {
+          setTimeout(() => {
+            this.puArrows[0].visible = false;
+            this.puArrows[1].visible = false;
+            tweenRotationSymbol.start();
+          }, 200);
+        });
+      tweenScaleSymbol.start();
+    };
+
+    this.tweenSenPu = () => {
+      this.tweenSenTranslatePu = () => {
+        for (var i = 0; i < 3; i++) {
+          var tweenSenTranslate = new TWEEN.Tween(this.puSen[i].position)
+            .to({ x: -2 }, 100)
+            .easing(TWEEN.Easing.Cubic.In)
+            .onComplete(() => {
+              this.puPoints.visible = true;
+              this.puSen[0].visible = false;
+              this.puSen[1].visible = false;
+              this.puSen[2].visible = false;
+              this.tweenSymbolPu();
+            });
+          tweenSenTranslate.start();
+        }
+      };
+      var tweenSenThird = new TWEEN.Tween(this.puSen[2].position)
+        .to({ x: -0.8 }, 50)
+        .easing(TWEEN.Easing.Linear.None)
+        .onStart(() => {
+          this.puSen[2].visible = true;
+        })
+        .onComplete(() => {
+          this.tweenSenTranslatePu();
+        });
+      var tweenSen = new TWEEN.Tween(this.puSen[1].position)
+        .to({ x: -0.6 }, 50)
+        .easing(TWEEN.Easing.Linear.None)
+        .onStart(() => {
+          this.puSen[0].visible = true;
+          this.puSen[1].visible = true;
+        })
+        .onComplete(() => {
+          tweenSenThird.start();
+        });
+      tweenSen.start();
+    };
+
+    this.tweenPuArrows = () => {
+      var tweenPuArrows = new TWEEN.Tween(this.puArrows[0].position)
+        .to({ x: -0.1, z: -0.485 }, 200)
+        .easing(TWEEN.Easing.Back.Out)
+        .onComplete(() => {});
+      tweenPuArrows.start();
+      var tweenPuArrows = new TWEEN.Tween(this.puArrows[1].position)
+        .to({ x: 0.35, z: -0.32 }, 200)
+        .easing(TWEEN.Easing.Back.Out)
+        .onComplete(() => {});
+      tweenPuArrows.start();
+    };
 
     /**
      * ト
@@ -129,6 +314,105 @@ export default class TextProjects {
       this.to.children[6],
     ];
 
+    this.animateTo = () => {
+      this.tweenSymbolTo = () => {
+        var tweenRotationSymbolTo = new TWEEN.Tween(this.toCircle.rotation)
+          .to({ x: 0, y: Math.PI * 2, z: 0 }, 200)
+          .easing(TWEEN.Easing.Circular.InOut)
+          .onComplete(() => {
+            this.toCircle.visible = false;
+
+            setTimeout(() => {
+              this.to.translateX(-0.75);
+            }, 50);
+            setTimeout(() => {
+              this.textModelIntro.visible = false;
+            }, 300);
+          });
+        var tweenScaleSymbolTo = new TWEEN.Tween(this.toCircle.scale)
+          .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
+          .easing(TWEEN.Easing.Exponential.In)
+          .onStart(() => {
+            setTimeout(() => {
+              tweenRotationSymbolTo.start();
+            }, 200);
+          });
+        tweenScaleSymbolTo.start();
+      };
+
+      this.tweenSenTo = () => {
+        this.tweenSenTranslateTo = () => {
+          for (var i = 0; i < 3; i++) {
+            var tweenSenTranslateTo = new TWEEN.Tween(this.toSen[i].position)
+              .to({ x: -2 }, 100)
+              .easing(TWEEN.Easing.Cubic.In)
+              .onComplete(() => {
+                this.toCircle.visible = true;
+                this.toSen[0].visible = false;
+                this.toSen[1].visible = false;
+                this.toSen[2].visible = false;
+                this.tweenSymbolTo();
+              });
+            tweenSenTranslateTo.start();
+          }
+        };
+        var tweenSenThirdTo = new TWEEN.Tween(this.toSen[2].position)
+          .to({ x: -0.8 }, 50)
+          .easing(TWEEN.Easing.Linear.None)
+          .onStart(() => {
+            this.toSen[2].visible = true;
+          })
+          .onComplete(() => {
+            this.tweenSenTranslateTo();
+          });
+        var tweenSenTo = new TWEEN.Tween(this.toSen[1].position)
+          .to({ x: -0.6 }, 50)
+          .easing(TWEEN.Easing.Linear.None)
+          .onStart(() => {
+            this.toSen[0].visible = true;
+            this.toSen[1].visible = true;
+          })
+          .onComplete(() => {
+            tweenSenThirdTo.start();
+          });
+        tweenSenTo.start();
+      };
+
+      this.tweenToArrows = () => {
+        this.toArrowLeft.visible = true;
+        this.toArrowRight.visible = true;
+        var tweenToArrowLeft = new TWEEN.Tween(this.toArrowLeft.position)
+          .to({ x: -0.2, z: 0.2 }, 500)
+          .easing(TWEEN.Easing.Exponential.Out);
+        tweenToArrowLeft.start();
+        var tweenToArrowRight = new TWEEN.Tween(this.toArrowRight.position)
+          .to({ x: 0.2, z: 0.2 }, 500)
+          .easing(TWEEN.Easing.Exponential.Out);
+        tweenToArrowRight.start();
+        setTimeout(() => {
+          this.toArrowLeft.visible = false;
+          this.toArrowRight.visible = false;
+        }, 500);
+      };
+
+      var tweenAppearDotTo = new TWEEN.Tween(this.toDot.material)
+        .to({ opacity: 1 }, 100)
+        .easing(TWEEN.Easing.Linear.None)
+        .onComplete(() => {
+          tweenScaleDotTo.start();
+        });
+      var tweenScaleDotTo = new TWEEN.Tween(this.toDot.scale)
+        .to({ x: 0, y: 0, z: 0 }, 300)
+        .easing(TWEEN.Easing.Linear.None)
+        .onComplete(() => {
+          this.tweenToArrows();
+          this.tweenSenTo();
+        });
+
+      this.to.visible = true;
+      tweenAppearDotTo.start();
+    };
+
     /**
      * ロ
      */
@@ -136,6 +420,83 @@ export default class TextProjects {
     this.roKakkoLeft = this.ro.children[1];
     this.roKakkoRight = this.ro.children[2];
     this.roTriangle = this.ro.children[6];
+
+    this.tweenSymbolRo = () => {
+      var tweenRotationSymbol = new TWEEN.Tween(this.roTriangle.rotation)
+        .to({ x: 0, y: -Math.PI * 2, z: 0 }, 200)
+        .easing(TWEEN.Easing.Circular.InOut)
+        .onComplete(() => {
+          this.roTriangle.visible = false;
+          setTimeout(() => {
+            this.ro.translateX(-0.75);
+          }, 50);
+        });
+      var tweenScaleSymbol = new TWEEN.Tween(this.roTriangle.scale)
+        .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
+        .easing(TWEEN.Easing.Exponential.In)
+        .onStart(() => {
+          setTimeout(() => {
+            this.roKakkoLeft.visible = false;
+            this.roKakkoRight.visible = false;
+            tweenRotationSymbol.start();
+          }, 200);
+        });
+      tweenScaleSymbol.start();
+    };
+
+    this.tweenSenRo = () => {
+      this.tweenSenTranslateRo = () => {
+        for (var i = 0; i < 3; i++) {
+          var tweenSenTranslate = new TWEEN.Tween(this.roSen[i].position)
+            .to({ x: -2 }, 100)
+            .easing(TWEEN.Easing.Cubic.In)
+            .onComplete(() => {
+              this.roTriangle.visible = true;
+              this.roSen[0].visible = false;
+              this.roSen[1].visible = false;
+              this.roSen[2].visible = false;
+              this.tweenSymbolRo();
+            });
+          tweenSenTranslate.start();
+        }
+      };
+      var tweenSenThird = new TWEEN.Tween(this.roSen[2].position)
+        .to({ x: -0.8 }, 50)
+        .easing(TWEEN.Easing.Linear.None)
+        .onStart(() => {
+          this.roSen[2].visible = true;
+        })
+        .onComplete(() => {
+          this.tweenSenTranslateRo();
+        });
+      var tweenSen = new TWEEN.Tween(this.roSen[1].position)
+        .to({ x: -0.6 }, 50)
+        .easing(TWEEN.Easing.Linear.None)
+        .onStart(() => {
+          this.roSen[0].visible = true;
+          this.roSen[1].visible = true;
+        })
+        .onComplete(() => {
+          tweenSenThird.start();
+        });
+      tweenSen.start();
+    };
+
+    this.tweenRoKakko = () => {
+      this.roKakkoLeft.visible = true;
+      this.roKakkoRight.visible = true;
+      var tweenRoKakkoLeft = new TWEEN.Tween(this.roKakkoLeft.position)
+        .to({ x: -0.8 }, 200)
+        .easing(TWEEN.Easing.Back.Out);
+      tweenRoKakkoLeft.start();
+      var tweenRoKakkoRight = new TWEEN.Tween(this.roKakkoRight.position)
+        .to({ x: 0.8 }, 200)
+        .easing(TWEEN.Easing.Back.Out)
+        .onComplete(() => {
+          this.animateJi();
+        });
+      tweenRoKakkoRight.start();
+    };
 
     /**
      * ク
@@ -148,6 +509,84 @@ export default class TextProjects {
     ];
     this.kuSquare = this.ku.children[4];
 
+    this.animateKu = () => {
+      this.tweenSymbolKu = () => {
+        var tweenRotationSymbolKu = new TWEEN.Tween(this.kuSquare.rotation)
+          .to({ x: 0, y: -Math.PI * 2, z: 0 }, 200)
+          .easing(TWEEN.Easing.Circular.InOut)
+          .onComplete(() => {
+            this.kuSquare.visible = false;
+
+            setTimeout(() => {
+              this.ku.translateX(-0.75);
+            }, 50);
+          });
+        var tweenScaleSymbolKu = new TWEEN.Tween(this.kuSquare.scale)
+          .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
+          .easing(TWEEN.Easing.Exponential.In)
+          .onStart(() => {
+            setTimeout(() => {
+              tweenRotationSymbolKu.start();
+            }, 200);
+          });
+        tweenScaleSymbolKu.start();
+      };
+
+      this.tweenSenKu = () => {
+        this.tweenSenTranslateKu = () => {
+          for (var i = 0; i < 3; i++) {
+            var tweenSenTranslate = new TWEEN.Tween(this.kuSen[i].position)
+              .to({ x: -2 }, 100)
+              .easing(TWEEN.Easing.Cubic.In)
+              .onComplete(() => {
+                this.kuSquare.visible = true;
+                this.kuSen[0].visible = false;
+                this.kuSen[1].visible = false;
+                this.kuSen[2].visible = false;
+                this.tweenSymbolKu();
+              });
+            tweenSenTranslate.start();
+          }
+        };
+        var tweenSenThird = new TWEEN.Tween(this.kuSen[2].position)
+          .to({ x: -0.8 }, 50)
+          .easing(TWEEN.Easing.Linear.None)
+          .onStart(() => {
+            this.kuSen[2].visible = true;
+          })
+          .onComplete(() => {
+            this.tweenSenTranslateKu();
+          });
+        var tweenSen = new TWEEN.Tween(this.kuSen[1].position)
+          .to({ x: -0.6 }, 50)
+          .easing(TWEEN.Easing.Linear.None)
+          .onStart(() => {
+            this.kuSen[0].visible = true;
+            this.kuSen[1].visible = true;
+          })
+          .onComplete(() => {
+            tweenSenThird.start();
+          });
+        tweenSen.start();
+      };
+
+      var tweenAppearDotKu = new TWEEN.Tween(this.kuDot.material)
+        .to({ opacity: 1 }, 100)
+        .easing(TWEEN.Easing.Linear.None)
+        .onComplete(() => {
+          tweenScaleDotKu.start();
+        });
+      var tweenScaleDotKu = new TWEEN.Tween(this.kuDot.scale)
+        .to({ x: 0, y: 0, z: 0 }, 300)
+        .easing(TWEEN.Easing.Linear.None)
+        .onComplete(() => {
+          this.tweenSenKu();
+        });
+
+      this.ku.visible = true;
+      tweenAppearDotKu.start();
+    };
+
     /**
      * ェ
      */
@@ -157,6 +596,104 @@ export default class TextProjects {
     this.eWaveLeft = this.e.children[3];
     this.eWaveRight = this.e.children[4];
     this.eTriangle = this.e.children[8];
+
+    this.tweenSymbolE = () => {
+      var tweenRotationSymbol = new TWEEN.Tween(this.eTriangle.rotation)
+        .to({ x: 0, y: Math.PI * 2, z: 0 }, 200)
+        .easing(TWEEN.Easing.Circular.InOut)
+        .onComplete(() => {
+          this.eTriangle.visible = false;
+
+          setTimeout(() => {
+            this.e.translateX(-0.75);
+          }, 50);
+        });
+      var tweenScaleSymbol = new TWEEN.Tween(this.eTriangle.scale)
+        .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
+        .easing(TWEEN.Easing.Exponential.In)
+        .onStart(() => {
+          setTimeout(() => {
+            tweenRotationSymbol.start();
+          }, 200);
+        });
+      tweenScaleSymbol.start();
+    };
+
+    this.tweenSenE = () => {
+      this.tweenSenTranslate = () => {
+        for (var i = 0; i < 3; i++) {
+          var tweenSenTranslate = new TWEEN.Tween(this.eSen[i].position)
+            .to({ x: -2 }, 100)
+            .easing(TWEEN.Easing.Cubic.In)
+            .onComplete(() => {
+              this.eTriangle.visible = true;
+              this.eSen[0].visible = false;
+              this.eSen[1].visible = false;
+              this.eSen[2].visible = false;
+              this.tweenSymbolE();
+            });
+          tweenSenTranslate.start();
+        }
+      };
+      var tweenSenThird = new TWEEN.Tween(this.eSen[2].position)
+        .to({ x: -0.8 }, 50)
+        .easing(TWEEN.Easing.Linear.None)
+        .onStart(() => {
+          this.eSen[2].visible = true;
+        })
+        .onComplete(() => {
+          this.tweenSenTranslate();
+        });
+      var tweenSen = new TWEEN.Tween(this.eSen[1].position)
+        .to({ x: -0.6 }, 50)
+        .easing(TWEEN.Easing.Linear.None)
+        .onStart(() => {
+          this.eSen[0].visible = true;
+          this.eSen[1].visible = true;
+        })
+        .onComplete(() => {
+          tweenSenThird.start();
+        });
+      tweenSen.start();
+    };
+
+    this.tweenEWaves = () => {
+      this.eWaveLeft.visible = true;
+      this.eWaveRight.visible = true;
+      var tweenEWaveLeft = new TWEEN.Tween(this.eWaveLeft.position)
+        .to({ z: 0.3 }, 500)
+        .easing(TWEEN.Easing.Exponential.Out);
+      tweenEWaveLeft.start();
+      var tweenEWaveRight = new TWEEN.Tween(this.eWaveRight.position)
+        .to({ z: -0.3 }, 500)
+        .easing(TWEEN.Easing.Exponential.Out);
+      tweenEWaveRight.start();
+      setTimeout(() => {
+        this.eWaveLeft.visible = false;
+        this.eWaveRight.visible = false;
+      }, 500);
+    };
+
+    this.tweenEDashes = () => {
+      this.eDashLeft.visible = true;
+      this.eDashRight.visible = true;
+      var tweenEDashLeft = new TWEEN.Tween(this.eDashLeft.position)
+        .to({ z: -0.3 }, 500)
+        .easing(TWEEN.Easing.Exponential.Out);
+      tweenEDashLeft.start();
+      var tweenEDashRight = new TWEEN.Tween(this.eDashRight.position)
+        .to({ z: 0.3 }, 500)
+        .easing(TWEEN.Easing.Exponential.Out)
+        .onStart(() => {
+          this.tweenEWaves();
+          this.animateTo();
+        });
+      tweenEDashRight.start();
+      setTimeout(() => {
+        this.eDashLeft.visible = false;
+        this.eDashRight.visible = false;
+      }, 500);
+    };
 
     /**
      *
@@ -309,7 +846,62 @@ export default class TextProjects {
       this.project7Stack,
     ];
 
+    for (var i = 0; i < 3; i++) {
+      this.arrowTextProject.children[i].material =
+        new THREE.MeshStandardMaterial({
+          emissive: 'white',
+          transparent: true,
+          opacity: 0,
+        });
+    }
+
+    for (var i = 0; i < this.titleArr.length; i++) {
+      this.titleArr[i].material = this.projectTitleMaterial;
+    }
+    for (var i = 0; i < this.paragraphArr.length; i++) {
+      this.paragraphArr[i].material = this.projectParagraphMaterial;
+    }
+
     this.navbarLanguette.material.emissive = new THREE.Color('white');
+
+    /**
+     * ANIMATIONS
+     */
+    // ARROW TEXT APPEARANCE
+    this.tweenAppearTextArrow = () => {
+      for (var i = 0; i < 3; i++) {
+        var tweenAppearText = new TWEEN.Tween(
+          this.arrowTextProject.children[i].material
+        )
+          .to({ opacity: 1 }, 400 + i * 150)
+          .easing(TWEEN.Easing.Exponential.In);
+        tweenAppearText.start();
+      }
+    };
+    this.tweenDisappearTextArrow = () => {
+      for (var i = 0; i < 3; i++) {
+        var tweenDisappearText = new TWEEN.Tween(
+          this.arrowTextProject.children[i].material
+        )
+          .to({ opacity: 0 }, 500)
+          .easing(TWEEN.Easing.Exponential.Out);
+        tweenDisappearText.start();
+      }
+    };
+
+    // ARROW TRANSLATION
+    this.tweenTranslateLeftArrow = new TWEEN.Tween(this.arrowProject.position)
+      .to({ x: -0.24 }, 500)
+      .easing(TWEEN.Easing.Exponential.In)
+      .onStart(() => {
+        this.tweenAppearTextArrow();
+      });
+    this.tweenTranslateRightArrow = new TWEEN.Tween(this.arrowProject.position)
+      .to({ x: -0.4712 }, 1000)
+      .easing(TWEEN.Easing.Exponential.Out)
+      .onStart(() => {
+        this.tweenDisappearTextArrow();
+      });
 
     /**
      * OBJECT READY
@@ -384,116 +976,6 @@ export default class TextProjects {
     this.jiLosange.rotation.set(0, 0, 0);
     this.jiLosange.visible = false;
 
-    // ANIMATIONS
-    this.animateJi = () => {
-      this.tweenSymbolJi = () => {
-        var tweenRotationSymbolJi = new TWEEN.Tween(this.jiLosange.rotation)
-          .to({ x: 0, y: -Math.PI * 2, z: 0 }, 200)
-          .easing(TWEEN.Easing.Circular.InOut)
-          .onComplete(() => {
-            this.jiLosange.visible = false;
-            setTimeout(() => {
-              this.ji.translateX(-0.75);
-            }, 50);
-          });
-        var tweenScaleSymbolJi = new TWEEN.Tween(this.jiLosange.scale)
-          .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
-          .easing(TWEEN.Easing.Exponential.In)
-          .onStart(() => {
-            setTimeout(() => {
-              tweenRotationSymbolJi.start();
-            }, 200);
-          });
-        tweenScaleSymbolJi.start();
-      };
-
-      //
-
-      this.tweenSen = () => {
-        this.tweenSenTranslate = () => {
-          for (var i = 0; i < 3; i++) {
-            var tweenSenTranslate = new TWEEN.Tween(this.jiSen[i].position)
-              .to({ x: -2 }, 100)
-              .easing(TWEEN.Easing.Cubic.In)
-              .onComplete(() => {
-                this.jiLosange.visible = true;
-                this.jiSen[0].visible = false;
-                this.jiSen[1].visible = false;
-                this.jiSen[2].visible = false;
-                this.tweenSymbolJi();
-              });
-            tweenSenTranslate.start();
-          }
-        };
-        var tweenSenThird = new TWEEN.Tween(this.jiSen[2].position)
-          .to({ x: -0.8 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.jiSen[2].visible = true;
-          })
-          .onComplete(() => {
-            this.tweenSenTranslate();
-          });
-        var tweenSen = new TWEEN.Tween(this.jiSen[1].position)
-          .to({ x: -0.6 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.jiSen[0].visible = true;
-            this.jiSen[1].visible = true;
-          })
-          .onComplete(() => {
-            tweenSenThird.start();
-          });
-        tweenSen.start();
-      };
-
-      //
-
-      this.tweenJiKosame = () => {
-        this.jiTsubu1.visible = true;
-        this.jiTsubu2.visible = true;
-        this.jiTsubu3.visible = true;
-        var tweenJiTsubu1 = new TWEEN.Tween(this.jiTsubu1.position)
-          .to({ x: -0.5, z: 0.65 }, 800)
-          .easing(TWEEN.Easing.Back.In);
-        tweenJiTsubu1.start();
-        var tweenJiTsubu2 = new TWEEN.Tween(this.jiTsubu2.position)
-          .to({ x: -0.35, z: 0.65 }, 600)
-          .easing(TWEEN.Easing.Back.In);
-        tweenJiTsubu2.start();
-        var tweenJiTsubu3 = new TWEEN.Tween(this.jiTsubu3.position)
-          .to({ x: 0.5, z: 0.65 }, 800)
-          .easing(TWEEN.Easing.Back.In)
-          .onComplete(() => {
-            this.jiTsubu1.visible = false;
-            this.jiTsubu2.visible = false;
-            this.jiTsubu3.visible = false;
-          });
-        tweenJiTsubu3.start();
-      };
-
-      //
-
-      var tweenAppearDot = new TWEEN.Tween(this.jiDot.material)
-        .to({ opacity: 1 }, 100)
-        .easing(TWEEN.Easing.Linear.None)
-        .onStart(() => {
-          this.tweenJiKosame();
-        })
-        .onComplete(() => {
-          tweenScaleDot.start();
-        });
-      var tweenScaleDot = new TWEEN.Tween(this.jiDot.scale)
-        .to({ x: 0, y: 0, z: 0 }, 300)
-        .easing(TWEEN.Easing.Linear.None)
-        .onComplete(() => {
-          this.tweenSen();
-        });
-
-      this.ji.visible = true;
-      tweenAppearDot.start();
-    };
-
     /**
      * プ
      */
@@ -512,13 +994,12 @@ export default class TextProjects {
     this.puArrows[1].visible = false;
 
     // 線
-    this.sen = [this.pu.children[4], this.pu.children[5], this.pu.children[6]];
-    this.sen[0].position.set(-0.3722, 0.0003, -0.1071);
-    this.sen[1].position.set(-0.3722, 0.0003, -0.1071);
-    this.sen[2].position.set(-0.3722, 0.0003, -0.1071);
-    this.sen[0].visible = false;
-    this.sen[1].visible = false;
-    this.sen[2].visible = false;
+    this.puSen[0].position.set(-0.3722, 0.0003, -0.1071);
+    this.puSen[1].position.set(-0.3722, 0.0003, -0.1071);
+    this.puSen[2].position.set(-0.3722, 0.0003, -0.1071);
+    this.puSen[0].visible = false;
+    this.puSen[1].visible = false;
+    this.puSen[2].visible = false;
 
     // Points
     this.puPoints.scale.set(0.077, 0.077, 0.077);
@@ -526,86 +1007,6 @@ export default class TextProjects {
     this.puPoints.visible = false;
 
     // ANIMATIONS
-    this.tweenSymbol = () => {
-      var tweenRotationSymbol = new TWEEN.Tween(this.puPoints.rotation)
-        .to({ x: 0, y: Math.PI * 2, z: 0 }, 200)
-        .easing(TWEEN.Easing.Circular.InOut)
-        .onComplete(() => {
-          this.puPoints.visible = false;
-          setTimeout(() => {
-            this.pu.translateX(-0.75);
-          }, 50);
-        });
-      var tweenScaleSymbol = new TWEEN.Tween(this.puPoints.scale)
-        .to({ x: 1, y: 1, z: 1 }, 200)
-        .easing(TWEEN.Easing.Exponential.In)
-        .onStart(() => {
-          setTimeout(() => {
-            this.puArrows[0].visible = false;
-            this.puArrows[1].visible = false;
-            tweenRotationSymbol.start();
-          }, 200);
-        });
-      tweenScaleSymbol.start();
-    };
-
-    //
-
-    this.tweenSen = () => {
-      this.tweenSenTranslate = () => {
-        for (var i = 0; i < 3; i++) {
-          var tweenSenTranslate = new TWEEN.Tween(this.sen[i].position)
-            .to({ x: -2 }, 100)
-            .easing(TWEEN.Easing.Cubic.In)
-            .onComplete(() => {
-              this.puPoints.visible = true;
-              this.sen[0].visible = false;
-              this.sen[1].visible = false;
-              this.sen[2].visible = false;
-              this.tweenSymbol();
-            });
-          tweenSenTranslate.start();
-        }
-      };
-      var tweenSenThird = new TWEEN.Tween(this.sen[2].position)
-        .to({ x: -0.8 }, 50)
-        .easing(TWEEN.Easing.Linear.None)
-        .onStart(() => {
-          this.sen[2].visible = true;
-        })
-        .onComplete(() => {
-          this.tweenSenTranslate();
-        });
-      var tweenSen = new TWEEN.Tween(this.sen[1].position)
-        .to({ x: -0.6 }, 50)
-        .easing(TWEEN.Easing.Linear.None)
-        .onStart(() => {
-          this.sen[0].visible = true;
-          this.sen[1].visible = true;
-        })
-        .onComplete(() => {
-          tweenSenThird.start();
-        });
-      tweenSen.start();
-    };
-
-    //
-
-    this.tweenPuArrows = () => {
-      var tweenPuArrows = new TWEEN.Tween(this.puArrows[0].position)
-        .to({ x: -0.1, z: -0.485 }, 200)
-        .easing(TWEEN.Easing.Back.Out)
-        .onComplete(() => {});
-      tweenPuArrows.start();
-      var tweenPuArrows = new TWEEN.Tween(this.puArrows[1].position)
-        .to({ x: 0.35, z: -0.32 }, 200)
-        .easing(TWEEN.Easing.Back.Out)
-        .onComplete(() => {});
-      tweenPuArrows.start();
-    };
-
-    //
-
     var tweenAppearDot = new TWEEN.Tween(this.puDot.material)
       .to({ opacity: 1 }, 100)
       .easing(TWEEN.Easing.Linear.None)
@@ -619,7 +1020,7 @@ export default class TextProjects {
         this.puArrows[0].visible = true;
         this.puArrows[1].visible = true;
         this.tweenPuArrows();
-        this.tweenSen();
+        this.tweenSenPu();
       });
     tweenAppearDot.start();
 
@@ -655,110 +1056,6 @@ export default class TextProjects {
     this.toSen[2].visible = false;
 
     // ANIMATIONS
-    this.animateTo = () => {
-      this.tweenSymbolTo = () => {
-        var tweenRotationSymbolTo = new TWEEN.Tween(this.toCircle.rotation)
-          .to({ x: 0, y: Math.PI * 2, z: 0 }, 200)
-          .easing(TWEEN.Easing.Circular.InOut)
-          .onComplete(() => {
-            this.toCircle.visible = false;
-
-            setTimeout(() => {
-              this.to.translateX(-0.75);
-            }, 50);
-            setTimeout(() => {
-              this.textModelIntro.visible = false;
-            }, 300);
-          });
-        var tweenScaleSymbolTo = new TWEEN.Tween(this.toCircle.scale)
-          .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
-          .easing(TWEEN.Easing.Exponential.In)
-          .onStart(() => {
-            setTimeout(() => {
-              tweenRotationSymbolTo.start();
-            }, 200);
-          });
-        tweenScaleSymbolTo.start();
-      };
-
-      //
-
-      this.tweenSenTo = () => {
-        this.tweenSenTranslateTo = () => {
-          for (var i = 0; i < 3; i++) {
-            var tweenSenTranslateTo = new TWEEN.Tween(this.toSen[i].position)
-              .to({ x: -2 }, 100)
-              .easing(TWEEN.Easing.Cubic.In)
-              .onComplete(() => {
-                this.toCircle.visible = true;
-                this.toSen[0].visible = false;
-                this.toSen[1].visible = false;
-                this.toSen[2].visible = false;
-                this.tweenSymbolTo();
-              });
-            tweenSenTranslateTo.start();
-          }
-        };
-        var tweenSenThirdTo = new TWEEN.Tween(this.toSen[2].position)
-          .to({ x: -0.8 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.toSen[2].visible = true;
-          })
-          .onComplete(() => {
-            this.tweenSenTranslateTo();
-          });
-        var tweenSenTo = new TWEEN.Tween(this.toSen[1].position)
-          .to({ x: -0.6 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.toSen[0].visible = true;
-            this.toSen[1].visible = true;
-          })
-          .onComplete(() => {
-            tweenSenThirdTo.start();
-          });
-        tweenSenTo.start();
-      };
-
-      //
-
-      this.tweenToArrows = () => {
-        this.toArrowLeft.visible = true;
-        this.toArrowRight.visible = true;
-        var tweenToArrowLeft = new TWEEN.Tween(this.toArrowLeft.position)
-          .to({ x: -0.2, z: 0.2 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenToArrowLeft.start();
-        var tweenToArrowRight = new TWEEN.Tween(this.toArrowRight.position)
-          .to({ x: 0.2, z: 0.2 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenToArrowRight.start();
-        setTimeout(() => {
-          this.toArrowLeft.visible = false;
-          this.toArrowRight.visible = false;
-        }, 500);
-      };
-
-      //
-
-      var tweenAppearDotTo = new TWEEN.Tween(this.toDot.material)
-        .to({ opacity: 1 }, 100)
-        .easing(TWEEN.Easing.Linear.None)
-        .onComplete(() => {
-          tweenScaleDotTo.start();
-        });
-      var tweenScaleDotTo = new TWEEN.Tween(this.toDot.scale)
-        .to({ x: 0, y: 0, z: 0 }, 300)
-        .easing(TWEEN.Easing.Linear.None)
-        .onComplete(() => {
-          this.tweenToArrows();
-          this.tweenSenTo();
-        });
-
-      this.to.visible = true;
-      tweenAppearDotTo.start();
-    };
 
     /**
      * ロ
@@ -780,17 +1077,17 @@ export default class TextProjects {
       this.roKakkoRight.visible = false;
 
       // 線
-      this.sen = [
+      this.roSen = [
         this.ro.children[3],
         this.ro.children[4],
         this.ro.children[5],
       ];
-      this.sen[0].position.set(-0.3722, 0.0003, -0.1071);
-      this.sen[1].position.set(-0.3722, 0.0003, -0.1071);
-      this.sen[2].position.set(-0.3722, 0.0003, -0.1071);
-      this.sen[0].visible = false;
-      this.sen[1].visible = false;
-      this.sen[2].visible = false;
+      this.roSen[0].position.set(-0.3722, 0.0003, -0.1071);
+      this.roSen[1].position.set(-0.3722, 0.0003, -0.1071);
+      this.roSen[2].position.set(-0.3722, 0.0003, -0.1071);
+      this.roSen[0].visible = false;
+      this.roSen[1].visible = false;
+      this.roSen[2].visible = false;
 
       // ▽
       this.roTriangle.scale.set(0.077, 0.077, 0.077);
@@ -798,89 +1095,6 @@ export default class TextProjects {
       this.roTriangle.visible = false;
 
       // ANIMATIONS
-      this.tweenSymbol = () => {
-        var tweenRotationSymbol = new TWEEN.Tween(this.roTriangle.rotation)
-          .to({ x: 0, y: -Math.PI * 2, z: 0 }, 200)
-          .easing(TWEEN.Easing.Circular.InOut)
-          .onComplete(() => {
-            this.roTriangle.visible = false;
-            setTimeout(() => {
-              this.ro.translateX(-0.75);
-            }, 50);
-          });
-        var tweenScaleSymbol = new TWEEN.Tween(this.roTriangle.scale)
-          .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
-          .easing(TWEEN.Easing.Exponential.In)
-          .onStart(() => {
-            setTimeout(() => {
-              this.roKakkoLeft.visible = false;
-              this.roKakkoRight.visible = false;
-              tweenRotationSymbol.start();
-            }, 200);
-          });
-        tweenScaleSymbol.start();
-      };
-
-      //
-
-      this.tweenSen = () => {
-        this.tweenSenTranslate = () => {
-          for (var i = 0; i < 3; i++) {
-            var tweenSenTranslate = new TWEEN.Tween(this.sen[i].position)
-              .to({ x: -2 }, 100)
-              .easing(TWEEN.Easing.Cubic.In)
-              .onComplete(() => {
-                this.roTriangle.visible = true;
-                this.sen[0].visible = false;
-                this.sen[1].visible = false;
-                this.sen[2].visible = false;
-                this.tweenSymbol();
-              });
-            tweenSenTranslate.start();
-          }
-        };
-        var tweenSenThird = new TWEEN.Tween(this.sen[2].position)
-          .to({ x: -0.8 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.sen[2].visible = true;
-          })
-          .onComplete(() => {
-            this.tweenSenTranslate();
-          });
-        var tweenSen = new TWEEN.Tween(this.sen[1].position)
-          .to({ x: -0.6 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.sen[0].visible = true;
-            this.sen[1].visible = true;
-          })
-          .onComplete(() => {
-            tweenSenThird.start();
-          });
-        tweenSen.start();
-      };
-
-      //
-
-      this.tweenRoKakko = () => {
-        this.roKakkoLeft.visible = true;
-        this.roKakkoRight.visible = true;
-        var tweenRoKakkoLeft = new TWEEN.Tween(this.roKakkoLeft.position)
-          .to({ x: -0.8 }, 200)
-          .easing(TWEEN.Easing.Back.Out);
-        tweenRoKakkoLeft.start();
-        var tweenRoKakkoRight = new TWEEN.Tween(this.roKakkoRight.position)
-          .to({ x: 0.8 }, 200)
-          .easing(TWEEN.Easing.Back.Out)
-          .onComplete(() => {
-            this.animateJi();
-          });
-        tweenRoKakkoRight.start();
-      };
-
-      //
-
       var tweenAppearDot = new TWEEN.Tween(this.roDot.material)
         .to({ opacity: 1 }, 100)
         .easing(TWEEN.Easing.Linear.None)
@@ -892,7 +1106,7 @@ export default class TextProjects {
         .easing(TWEEN.Easing.Linear.None)
         .onComplete(() => {
           this.tweenRoKakko();
-          this.tweenSen();
+          this.tweenSenRo();
         });
 
       this.ro.visible = true;
@@ -925,87 +1139,6 @@ export default class TextProjects {
     this.kuSquare.visible = false;
 
     // ANIMATIONS
-    this.animateKu = () => {
-      this.tweenSymbolKu = () => {
-        var tweenRotationSymbolKu = new TWEEN.Tween(this.kuSquare.rotation)
-          .to({ x: 0, y: -Math.PI * 2, z: 0 }, 200)
-          .easing(TWEEN.Easing.Circular.InOut)
-          .onComplete(() => {
-            this.kuSquare.visible = false;
-
-            setTimeout(() => {
-              this.ku.translateX(-0.75);
-            }, 50);
-          });
-        var tweenScaleSymbolKu = new TWEEN.Tween(this.kuSquare.scale)
-          .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
-          .easing(TWEEN.Easing.Exponential.In)
-          .onStart(() => {
-            setTimeout(() => {
-              tweenRotationSymbolKu.start();
-            }, 200);
-          });
-        tweenScaleSymbolKu.start();
-      };
-
-      //
-
-      this.tweenSenKu = () => {
-        this.tweenSenTranslateKu = () => {
-          for (var i = 0; i < 3; i++) {
-            var tweenSenTranslate = new TWEEN.Tween(this.kuSen[i].position)
-              .to({ x: -2 }, 100)
-              .easing(TWEEN.Easing.Cubic.In)
-              .onComplete(() => {
-                this.kuSquare.visible = true;
-                this.kuSen[0].visible = false;
-                this.kuSen[1].visible = false;
-                this.kuSen[2].visible = false;
-                this.tweenSymbolKu();
-              });
-            tweenSenTranslate.start();
-          }
-        };
-        var tweenSenThird = new TWEEN.Tween(this.kuSen[2].position)
-          .to({ x: -0.8 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.kuSen[2].visible = true;
-          })
-          .onComplete(() => {
-            this.tweenSenTranslateKu();
-          });
-        var tweenSen = new TWEEN.Tween(this.kuSen[1].position)
-          .to({ x: -0.6 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.kuSen[0].visible = true;
-            this.kuSen[1].visible = true;
-          })
-          .onComplete(() => {
-            tweenSenThird.start();
-          });
-        tweenSen.start();
-      };
-
-      //
-
-      var tweenAppearDotKu = new TWEEN.Tween(this.kuDot.material)
-        .to({ opacity: 1 }, 100)
-        .easing(TWEEN.Easing.Linear.None)
-        .onComplete(() => {
-          tweenScaleDotKu.start();
-        });
-      var tweenScaleDotKu = new TWEEN.Tween(this.kuDot.scale)
-        .to({ x: 0, y: 0, z: 0 }, 300)
-        .easing(TWEEN.Easing.Linear.None)
-        .onComplete(() => {
-          this.tweenSenKu();
-        });
-
-      this.ku.visible = true;
-      tweenAppearDotKu.start();
-    };
 
     /**
      * ェ
@@ -1036,119 +1169,15 @@ export default class TextProjects {
 
     setTimeout(() => {
       // 線
-      this.sen = [this.e.children[5], this.e.children[6], this.e.children[7]];
-      this.sen[0].position.set(-0.3722, 0.0003, -0.0841);
-      this.sen[1].position.set(-0.6134, 0.0003, -0.0841);
-      this.sen[2].position.set(-0.8537, 0.0003, -0.0841);
-      this.sen[0].visible = false;
-      this.sen[1].visible = false;
-      this.sen[2].visible = false;
+      this.eSen = [this.e.children[5], this.e.children[6], this.e.children[7]];
+      this.eSen[0].position.set(-0.3722, 0.0003, -0.0841);
+      this.eSen[1].position.set(-0.6134, 0.0003, -0.0841);
+      this.eSen[2].position.set(-0.8537, 0.0003, -0.0841);
+      this.eSen[0].visible = false;
+      this.eSen[1].visible = false;
+      this.eSen[2].visible = false;
 
       // ANIMATIONS
-      this.tweenSymbol = () => {
-        var tweenRotationSymbol = new TWEEN.Tween(this.eTriangle.rotation)
-          .to({ x: 0, y: Math.PI * 2, z: 0 }, 200)
-          .easing(TWEEN.Easing.Circular.InOut)
-          .onComplete(() => {
-            this.eTriangle.visible = false;
-
-            setTimeout(() => {
-              this.e.translateX(-0.75);
-            }, 50);
-          });
-        var tweenScaleSymbol = new TWEEN.Tween(this.eTriangle.scale)
-          .to({ x: 0.8, y: 0.8, z: 0.8 }, 200)
-          .easing(TWEEN.Easing.Exponential.In)
-          .onStart(() => {
-            setTimeout(() => {
-              tweenRotationSymbol.start();
-            }, 200);
-          });
-        tweenScaleSymbol.start();
-      };
-
-      //
-
-      this.tweenSen = () => {
-        this.tweenSenTranslate = () => {
-          for (var i = 0; i < 3; i++) {
-            var tweenSenTranslate = new TWEEN.Tween(this.sen[i].position)
-              .to({ x: -2 }, 100)
-              .easing(TWEEN.Easing.Cubic.In)
-              .onComplete(() => {
-                this.eTriangle.visible = true;
-                this.sen[0].visible = false;
-                this.sen[1].visible = false;
-                this.sen[2].visible = false;
-                this.tweenSymbol();
-              });
-            tweenSenTranslate.start();
-          }
-        };
-        var tweenSenThird = new TWEEN.Tween(this.sen[2].position)
-          .to({ x: -0.8 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.sen[2].visible = true;
-          })
-          .onComplete(() => {
-            this.tweenSenTranslate();
-          });
-        var tweenSen = new TWEEN.Tween(this.sen[1].position)
-          .to({ x: -0.6 }, 50)
-          .easing(TWEEN.Easing.Linear.None)
-          .onStart(() => {
-            this.sen[0].visible = true;
-            this.sen[1].visible = true;
-          })
-          .onComplete(() => {
-            tweenSenThird.start();
-          });
-        tweenSen.start();
-      };
-
-      //
-
-      this.tweenEWaves = () => {
-        this.eWaveLeft.visible = true;
-        this.eWaveRight.visible = true;
-        var tweenEWaveLeft = new TWEEN.Tween(this.eWaveLeft.position)
-          .to({ z: 0.3 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenEWaveLeft.start();
-        var tweenEWaveRight = new TWEEN.Tween(this.eWaveRight.position)
-          .to({ z: -0.3 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenEWaveRight.start();
-        setTimeout(() => {
-          this.eWaveLeft.visible = false;
-          this.eWaveRight.visible = false;
-        }, 500);
-      };
-
-      this.tweenEDashes = () => {
-        this.eDashLeft.visible = true;
-        this.eDashRight.visible = true;
-        var tweenEDashLeft = new TWEEN.Tween(this.eDashLeft.position)
-          .to({ z: -0.3 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenEDashLeft.start();
-        var tweenEDashRight = new TWEEN.Tween(this.eDashRight.position)
-          .to({ z: 0.3 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out)
-          .onStart(() => {
-            this.tweenEWaves();
-            this.animateTo();
-          });
-        tweenEDashRight.start();
-        setTimeout(() => {
-          this.eDashLeft.visible = false;
-          this.eDashRight.visible = false;
-        }, 500);
-      };
-
-      //
-
       var tweenAppearDot = new TWEEN.Tween(this.eDot.material)
         .to({ opacity: 1 }, 100)
         .easing(TWEEN.Easing.Linear.None)
@@ -1161,7 +1190,7 @@ export default class TextProjects {
         .to({ x: 0, y: 0, z: 0 }, 300)
         .easing(TWEEN.Easing.Linear.None)
         .onComplete(() => {
-          this.tweenSen();
+          this.tweenSenE();
         });
 
       this.e.visible = true;
@@ -1170,9 +1199,8 @@ export default class TextProjects {
   }
 
   animateText() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     // console.log(this.textModel);
+
     this.arrowProject.position.x = -0.4712;
 
     /**
@@ -1184,52 +1212,11 @@ export default class TextProjects {
     this.arrowHitboxProject.visible = false;
 
     for (var i = 0; i < 3; i++) {
-      this.arrowTextProject.children[i].material =
-        new THREE.MeshStandardMaterial({
-          emissive: 'white',
-          transparent: true,
-          opacity: 0,
-        });
+      this.arrowTextProject.children[i].material.opacity = 0;
     }
 
     this.homeArrow.visible = false;
     this.homeArrowHitbox.visible = false;
-
-    // ARROW TEXT APPEARANCE
-    this.tweenAppearTextArrow = () => {
-      for (var i = 0; i < 3; i++) {
-        var tweenAppearText = new TWEEN.Tween(
-          this.arrowTextProject.children[i].material
-        )
-          .to({ opacity: 1 }, 400 + i * 150)
-          .easing(TWEEN.Easing.Exponential.In);
-        tweenAppearText.start();
-      }
-    };
-    this.tweenDisappearTextArrow = () => {
-      for (var i = 0; i < 3; i++) {
-        var tweenDisappearText = new TWEEN.Tween(
-          this.arrowTextProject.children[i].material
-        )
-          .to({ opacity: 0 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenDisappearText.start();
-      }
-    };
-
-    // ARROW TRANSLATION
-    this.tweenTranslateLeftArrow = new TWEEN.Tween(this.arrowProject.position)
-      .to({ x: -0.24 }, 500)
-      .easing(TWEEN.Easing.Exponential.In)
-      .onStart(() => {
-        this.tweenAppearTextArrow();
-      });
-    this.tweenTranslateRightArrow = new TWEEN.Tween(this.arrowProject.position)
-      .to({ x: -0.4712 }, 1000)
-      .easing(TWEEN.Easing.Exponential.Out)
-      .onStart(() => {
-        this.tweenDisappearTextArrow();
-      });
 
     /**
      * REFERENCES
@@ -1288,13 +1275,6 @@ export default class TextProjects {
 
     this.actualImage.visible = false;
     this.actualImageBis.visible = false;
-
-    for (var i = 0; i < this.titleArr.length; i++) {
-      this.titleArr[i].material = this.projectTitleMaterial;
-    }
-    for (var i = 0; i < this.paragraphArr.length; i++) {
-      this.paragraphArr[i].material = this.projectParagraphMaterial;
-    }
 
     setTimeout(() => {
       this.navigateIchi();

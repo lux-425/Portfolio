@@ -130,47 +130,13 @@ export default class TextKyoumi {
     this.gaikoku.material = this.textMaterial;
 
     /**
-     * OBJECT READY
+     * ANIMATIONS
      */
-    this.experience.world.objectsReadyArr[6] = true;
-
-    /**
-     * ANIMATE
-     */
-    // this.animateText();
-  }
-
-  animateText() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    this.scene.add(this.textModel);
-
-    this.arrowRight.position.x = 0.4648;
-    this.arrowLeft.position.x = -0.4747;
-
-    /**
-     * INIT VARIABLES
-     */
-    this.arrowHome.visible = false;
-    this.arrowLeft.material.opacity = 0;
-    this.arrowRight.material.opacity = 0;
-    this.title.material.opacity = 0;
-    this.arrowLeft.position.x = -0.4747;
-    this.arrowRight.position.x = 0.4648;
-
-    for (var i = 0; i < this.textArr.length; i++) {
-      this.textArr[i].material.opacity = 0;
-      this.textArr[i].translateX(-0.25);
-    }
-
-    /**
-     * APPEARANCE
-     */
-    var tweenTitleAppear = new TWEEN.Tween(this.title.material)
+    this.tweenTitleAppear = new TWEEN.Tween(this.title.material)
       .to({ opacity: 1 }, 1555)
       .easing(TWEEN.Easing.Circular.InOut);
 
-    var tweenArrowsAppear = new TWEEN.Tween(this.arrowLeft.material)
+    this.tweenArrowsAppear = new TWEEN.Tween(this.arrowLeft.material)
       .to({ opacity: 1 }, 2222)
       .easing(TWEEN.Easing.Bounce.InOut)
       .onStart(() => {
@@ -185,24 +151,21 @@ export default class TextKyoumi {
           .to({ x: -0.38 }, 1000 + i * 200)
           .easing(TWEEN.Easing.Cubic.InOut)
           .onStart(() => {
-            tweenTitleAppear.start();
+            this.tweenTitleAppear.start();
           })
           .onComplete(() => {
-            tweenArrowsAppear.start();
+            this.tweenArrowsAppear.start();
           });
         tweenTextTranslate.start();
       }
     };
 
-    var tweenTextAppear = new TWEEN.Tween(this.rekishi.material)
+    this.tweenTextAppear = new TWEEN.Tween(this.rekishi.material)
       .to({ opacity: 1 }, 1555)
       .easing(TWEEN.Easing.Circular.InOut)
       .onStart(() => {
         this.tweenTextTranslate();
       });
-    setTimeout(() => {
-      tweenTextAppear.start();
-    }, 555);
 
     /**
      * ARROWS' TRANSLATION
@@ -232,5 +195,44 @@ export default class TextKyoumi {
       .onStart(() => {
         this.arrowTextRight.material.opacity = 0;
       });
+
+    /**
+     * OBJECT READY
+     */
+    this.experience.world.objectsReadyArr[6] = true;
+
+    /**
+     * ANIMATE
+     */
+    // this.animateText();
+  }
+
+  animateText() {
+    this.scene.add(this.textModel);
+
+    this.arrowRight.position.x = 0.4648;
+    this.arrowLeft.position.x = -0.4747;
+
+    /**
+     * INIT VARIABLES
+     */
+    this.arrowHome.visible = false;
+    this.arrowLeft.material.opacity = 0;
+    this.arrowRight.material.opacity = 0;
+    this.title.material.opacity = 0;
+    this.arrowLeft.position.x = -0.4747;
+    this.arrowRight.position.x = 0.4648;
+
+    for (var i = 0; i < this.textArr.length; i++) {
+      this.textArr[i].material.opacity = 0;
+      this.textArr[i].translateX(-0.25);
+    }
+
+    /**
+     * APPEARANCE
+     */
+    setTimeout(() => {
+      this.tweenTextAppear.start();
+    }, 555);
   }
 }

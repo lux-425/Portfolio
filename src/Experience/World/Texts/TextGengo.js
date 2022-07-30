@@ -232,6 +232,20 @@ export default class TextGengo {
         this.arrowTextRight.material.opacity = 0;
       });
 
+    this.tweenAppearLeftPanel = new TWEEN.Tween(this.jlpt.material)
+      .to({ opacity: 1 }, 1000)
+      .easing(TWEEN.Easing.Bounce.InOut);
+    this.tweenAppearArrows = new TWEEN.Tween(this.arrowLeft.material)
+      .to({ opacity: 1 }, 1000)
+      .easing(TWEEN.Easing.Bounce.InOut)
+      .onComplete(() => {
+        this.arrowHome.visible = true;
+      });
+
+    this.appearPanel = new TWEEN.Tween(this.jlptWaiting.material)
+      .to({ opacity: 1 }, 500)
+      .easing(TWEEN.Easing.Cubic.InOut);
+
     /**
      * OBJECT READY
      */
@@ -246,8 +260,6 @@ export default class TextGengo {
   }
 
   animateText() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     this.scene.add(this.textModelRight);
     this.scene.add(this.textModelLeft);
 
@@ -274,29 +286,11 @@ export default class TextGengo {
       this.imagesArr[i].visible = false;
     }
 
-    var tweenAppearLeftPanel = new TWEEN.Tween(this.jlpt.material)
-      .to({ opacity: 1 }, 1000)
-      .easing(TWEEN.Easing.Bounce.InOut);
-    tweenAppearLeftPanel.start();
+    this.tweenAppearLeftPanel.start();
 
-    var tweenAppearArrows = new TWEEN.Tween(this.arrowLeft.material)
-      .to({ opacity: 1 }, 1000)
-      .easing(TWEEN.Easing.Bounce.InOut)
-      .onComplete(() => {
-        this.arrowHome.visible = true;
-      });
-    tweenAppearArrows.start();
+    this.tweenAppearArrows.start();
 
     this.toggleJLPT();
-  }
-
-  appearPanel() {
-    var TWEEN = require('@tweenjs/tween.js');
-
-    var tweenAppear = new TWEEN.Tween(this.jlptWaiting.material)
-      .to({ opacity: 1 }, 500)
-      .easing(TWEEN.Easing.Cubic.InOut);
-    tweenAppear.start();
   }
 
   disappearPanel() {
@@ -327,7 +321,7 @@ export default class TextGengo {
       this.imagesArr[i].visible = true;
     }
 
-    this.appearPanel();
+    this.appearPanel.start();
   }
 
   toggleJLPT() {
@@ -348,7 +342,7 @@ export default class TextGengo {
       this.jlptPhoto.visible = true;
     }
 
-    this.appearPanel();
+    this.appearPanel.start();
   }
 
   toggleSoftwares() {
@@ -364,6 +358,6 @@ export default class TextGengo {
 
     this.softwaresFrame.visible = true;
 
-    this.appearPanel();
+    this.appearPanel.start();
   }
 }

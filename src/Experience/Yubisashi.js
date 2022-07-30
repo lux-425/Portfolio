@@ -301,12 +301,6 @@ export default class Yubisashi {
                   window.open('https://bunpro.jp/');
                 }
                 break;
-              case 'jlpt':
-                if (this.experience.world.textGengo.actualTab === 'jlpt') {
-                  // open jlpt .pdf
-                  // window.open('');
-                }
-                break;
             }
             break;
         }

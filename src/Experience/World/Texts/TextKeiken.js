@@ -294,6 +294,116 @@ export default class TextKeiken {
         this.tweenDisappearTextKeiken();
       });
 
+    // ARROW APPEARANCE
+    this.tweenAppearArrowKeiken = new TWEEN.Tween(this.arrowKeiken.material)
+      .to({ opacity: 1 }, 2500)
+      .easing(TWEEN.Easing.Bounce.In);
+
+    /**
+     * INTRO
+     */
+    // JITSU
+    this.tweenJitsuTranslate = new TWEEN.Tween(this.jitsuArr[0].position)
+      .to(this.jitsuPos[0], 400)
+      .easing(TWEEN.Easing.Cubic.Out);
+    this.tweenJitsuTranslateBis = () => {
+      for (var i = 1; i < 4; i++) {
+        var tweenJitsuTranslateBis = new TWEEN.Tween(this.jitsuArr[i].position)
+          .to(this.jitsuPos[i], 50 + 100 * i)
+          .easing(TWEEN.Easing.Exponential.In);
+        tweenJitsuTranslateBis.start();
+      }
+    };
+    this.tweenJitsuTranslateTer = new TWEEN.Tween(this.jitsuArr[4].position)
+      .to(this.jitsuPos[4], 150)
+      .easing(TWEEN.Easing.Back.In);
+    this.tweenJitsuTranslateQuater = new TWEEN.Tween(this.jitsuArr[5].position)
+      .to(this.jitsuPos[5], 150)
+      .easing(TWEEN.Easing.Back.Out);
+
+    // MU
+    this.tweenMuTranslate = () => {
+      this.mu.visible = true;
+      for (var i = 0; i < this.muArr.length; i++) {
+        var tweenMuTranslate = new TWEEN.Tween(this.muArr[i].position)
+          .to(this.muPos[i], 150 + 100 * i)
+          .easing(TWEEN.Easing.Quintic.In);
+        tweenMuTranslate.start();
+      }
+    };
+
+    // KEI
+    this.tweenKeiTranslate = () => {
+      this.kei.visible = true;
+      for (var i = 0; i < 3; i++) {
+        var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[i].position).to(
+          this.keiPos[i],
+          300 + 100 * i
+        );
+        tweenKeiTranslate.start();
+      }
+    };
+    this.tweenKeiTranslateBis = () => {
+      this.keiArr[3].visible = true;
+      var tweenKeiTranslateBis = new TWEEN.Tween(this.keiArr[3].position)
+        .to(this.keiPos[3], 800)
+        .easing(TWEEN.Easing.Exponential.InOut);
+      tweenKeiTranslateBis.start();
+    };
+    this.tweenKeiTranslateTer = () => {
+      this.keiArr[4].visible = true;
+      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[4].position)
+        .to(this.keiPos[4], 700)
+        .easing(TWEEN.Easing.Exponential.InOut);
+      tweenKeiTranslate.start();
+    };
+    this.tweenKeiTranslateQuater = () => {
+      this.keiArr[5].visible = true;
+      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[5].position)
+        .to(this.keiPos[5], 1000)
+        .easing(TWEEN.Easing.Exponential.Out);
+      tweenKeiTranslate.start();
+    };
+    this.tweenKeiTranslateQuinquies = () => {
+      this.keiArr[6].visible = true;
+      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[6].position)
+        .to(this.keiPos[6], 600)
+        .easing(TWEEN.Easing.Exponential.Out);
+      tweenKeiTranslate.start();
+    };
+    this.tweenKeiTranslateSexies = () => {
+      this.keiArr[7].visible = true;
+      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[7].position)
+        .to(this.keiPos[7], 400)
+        .easing(TWEEN.Easing.Exponential.Out);
+      tweenKeiTranslate.start();
+    };
+    this.tweenKeiTranslateSepties = () => {
+      this.keiArr[8].visible = true;
+      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[8].position)
+        .to(this.keiPos[8], 800)
+        .easing(TWEEN.Easing.Cubic.Out);
+      tweenKeiTranslate.start();
+    };
+
+    // TEXT
+    for (var i = 0; i < this.arrowTextKeiken.children.length; i++) {
+      this.arrowTextKeiken.children[i].material =
+        new THREE.MeshStandardMaterial({
+          emissive: 'white',
+          emissiveIntensity: 1,
+          transparent: true,
+          opacity: 0,
+        });
+    }
+
+    // DISAPPEAR
+    this.tweenJitsumukeikenDisappear = new TWEEN.Tween(
+      this.textModelIntro.children[0].children[0].children[0].material
+    )
+      .to({ opacity: 0 }, 400)
+      .easing(TWEEN.Easing.Cubic.Out);
+
     /**
      * OBJECT READY
      */
@@ -321,8 +431,6 @@ export default class TextKeiken {
   }
 
   animateIntro() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     this.textModelIntro.visible = true;
     this.textModelIntro.children[0].children[0].children[0].material.opacity = 1;
 
@@ -359,12 +467,7 @@ export default class TextKeiken {
     }, 2950);
 
     setTimeout(() => {
-      var tweenJitsumukeikenDisappear = new TWEEN.Tween(
-        this.textModelIntro.children[0].children[0].children[0].material
-      )
-        .to({ opacity: 0 }, 400)
-        .easing(TWEEN.Easing.Cubic.Out);
-      tweenJitsumukeikenDisappear.start();
+      this.tweenJitsumukeikenDisappear.start();
     }, 5000);
 
     setTimeout(() => {
@@ -373,8 +476,6 @@ export default class TextKeiken {
   }
 
   animateText() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     this.arrowKeiken.material.opacity = 0;
     this.arrowKeiken.position.x = -0.46;
     this.textModel.children[0].children[0].children[0].material.opacity = 0;
@@ -395,24 +496,14 @@ export default class TextKeiken {
     this.arrowHitboxKeiken.visible = false;
 
     for (var i = 0; i < this.arrowTextKeiken.children.length; i++) {
-      this.arrowTextKeiken.children[i].material =
-        new THREE.MeshStandardMaterial({
-          emissive: 'white',
-          emissiveIntensity: 1,
-          transparent: true,
-          opacity: 0,
-        });
+      this.arrowTextKeiken.children[i].material.opacity = 0;
     }
 
     this.arrowHomeHitbox.visible = false;
 
     // ARROW APPEARANCE
-    var tweenAppearArrowKeiken = new TWEEN.Tween(this.arrowKeiken.material)
-      .to({ opacity: 1 }, 2500)
-      .easing(TWEEN.Easing.Bounce.In)
-      .onComplete(() => {});
     setTimeout(() => {
-      tweenAppearArrowKeiken.start();
+      this.tweenAppearArrowKeiken.start();
     }, 1000);
 
     setTimeout(() => {
@@ -423,8 +514,6 @@ export default class TextKeiken {
   }
 
   animateIntroJitsu() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     //　一画
     this.jitsuArr[0].translateZ(-0.15);
     // 二画
@@ -444,41 +533,27 @@ export default class TextKeiken {
     this.jitsuArr[5].translateX(0.15);
     this.jitsuArr[5].visible = false;
 
-    var tweenJitsuTranslate = new TWEEN.Tween(this.jitsuArr[0].position)
-      .to(this.jitsuPos[0], 400)
-      .easing(TWEEN.Easing.Cubic.Out);
-    tweenJitsuTranslate.start();
+    this.tweenJitsuTranslate.start();
 
     setTimeout(() => {
       for (var i = 1; i < 4; i++) {
         this.jitsuArr[i].visible = true;
-        var tweenJitsuTranslate = new TWEEN.Tween(this.jitsuArr[i].position)
-          .to(this.jitsuPos[i], 50 + 100 * i)
-          .easing(TWEEN.Easing.Exponential.In);
-        tweenJitsuTranslate.start();
+        this.tweenJitsuTranslateBis();
       }
     }, 200);
 
     setTimeout(() => {
       this.jitsuArr[4].visible = true;
-      var tweenJitsuTranslate = new TWEEN.Tween(this.jitsuArr[4].position)
-        .to(this.jitsuPos[4], 150)
-        .easing(TWEEN.Easing.Back.In);
-      tweenJitsuTranslate.start();
+      this.tweenJitsuTranslateTer.start();
     }, 600);
 
     setTimeout(() => {
       this.jitsuArr[5].visible = true;
-      var tweenJitsuTranslate = new TWEEN.Tween(this.jitsuArr[5].position)
-        .to(this.jitsuPos[5], 150)
-        .easing(TWEEN.Easing.Back.Out);
-      tweenJitsuTranslate.start();
+      this.tweenJitsuTranslateQuater.start();
     }, 800);
   }
 
   animateIntroMu() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     //　一画
     this.muArr[0].translateZ(-0.2);
     // 二画
@@ -489,18 +564,10 @@ export default class TextKeiken {
     this.muArr[3].translateX(0.25);
     this.muArr[3].translateZ(0.25);
 
-    for (var i = 0; i < this.muArr.length; i++) {
-      this.mu.visible = true;
-      var tweenMuTranslate = new TWEEN.Tween(this.muArr[i].position)
-        .to(this.muPos[i], 150 + 100 * i)
-        .easing(TWEEN.Easing.Quintic.In);
-      tweenMuTranslate.start();
-    }
+    this.tweenMuTranslate();
   }
 
   animateIntroKei() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     //　一画
     this.keiArr[0].translateZ(-0.2);
     this.keiArr[0].translateX(-0.2);
@@ -529,63 +596,30 @@ export default class TextKeiken {
     this.keiArr[8].translateX(0.2);
     this.keiArr[8].visible = false;
 
-    for (var i = 0; i < 3; i++) {
-      this.kei.visible = true;
-      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[i].position).to(
-        this.keiPos[i],
-        300 + 100 * i
-      );
-      tweenKeiTranslate.start();
-    }
+    this.tweenKeiTranslate();
 
     setTimeout(() => {
-      this.keiArr[3].visible = true;
-
-      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[3].position)
-        .to(this.keiPos[3], 800)
-        .easing(TWEEN.Easing.Exponential.InOut);
-      tweenKeiTranslate.start();
+      this.tweenKeiTranslateBis();
     }, 150);
 
     setTimeout(() => {
-      this.keiArr[4].visible = true;
-
-      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[4].position)
-        .to(this.keiPos[4], 700)
-        .easing(TWEEN.Easing.Exponential.InOut);
-      tweenKeiTranslate.start();
+      this.tweenKeiTranslateTer();
     }, 300);
 
     setTimeout(() => {
-      this.keiArr[5].visible = true;
-      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[5].position)
-        .to(this.keiPos[5], 1000)
-        .easing(TWEEN.Easing.Exponential.Out);
-      tweenKeiTranslate.start();
+      this.tweenKeiTranslateQuater();
     }, 700);
 
     setTimeout(() => {
-      this.keiArr[6].visible = true;
-      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[6].position)
-        .to(this.keiPos[6], 600)
-        .easing(TWEEN.Easing.Exponential.Out);
-      tweenKeiTranslate.start();
+      this.tweenKeiTranslateQuinquies();
     }, 1000);
 
     setTimeout(() => {
-      this.keiArr[7].visible = true;
-      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[7].position)
-        .to(this.keiPos[7], 400)
-        .easing(TWEEN.Easing.Exponential.Out);
-      tweenKeiTranslate.start();
+      this.tweenKeiTranslateSexies();
     }, 1200);
 
     setTimeout(() => {
-      this.keiArr[8].visible = true;
-      var tweenKeiTranslate = new TWEEN.Tween(this.keiArr[8].position)
-        .to(this.keiPos[8], 800)
-        .easing(TWEEN.Easing.Cubic.Out);
-      tweenKeiTranslate.start();
+      this.tweenKeiTranslateSepties();
     }, 1300);
   }
 

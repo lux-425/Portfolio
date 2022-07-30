@@ -247,8 +247,6 @@ export default class TextKeshiki {
   }
 
   animateText() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     // console.log(this.textModel);
 
     this.nihongo.visible = false;

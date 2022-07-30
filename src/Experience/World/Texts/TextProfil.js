@@ -57,6 +57,7 @@ export default class TextProfil {
     // ARROW TEXT APPEARANCE
     this.tweenAppearTextProfil = () => {
       for (var i = 0; i < 5; i++) {
+        this.arrowTextProfil.children[i].visible = true;
         var tweenAppearTextProfil = new TWEEN.Tween(
           this.arrowTextProfil.children[i].material
         )
@@ -67,12 +68,8 @@ export default class TextProfil {
     };
     this.tweenDisappearTextProfil = () => {
       for (var i = 0; i < 5; i++) {
-        var tweenDisappearTextProfil = new TWEEN.Tween(
-          this.arrowTextProfil.children[i].material
-        )
-          .to({ opacity: 0 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenDisappearTextProfil.start();
+        this.arrowTextProfil.children[i].visible = false;
+        this.arrowTextProfil.children[i].material.opacity = 0;
       }
     };
 
@@ -98,6 +95,90 @@ export default class TextProfil {
     this.textModel.children[8].material.depthWrite = true;
     this.textModel.children[8].translateY(-0.019);
 
+    // TITLE
+    this.tweenAppearTitle = () => {
+      for (var i = 0; i < 6; i++) {
+        var tweenTranslateTitleProfil = new TWEEN.Tween(
+          this.titleProfil.children[i].position
+        )
+          .to(
+            {
+              x: this.titleProfil.children[i].position.x,
+              y: this.titleProfil.children[i].position.y,
+              z: this.titleProfil.children[i].position.z - this.titlePos[i],
+            },
+            1000 + i * -100
+          )
+          .easing(TWEEN.Easing.Cubic.Out);
+        var tweenInflateTitleProfil = new TWEEN.Tween(
+          this.titleProfil.children[i].scale
+        ).to(
+          {
+            x: 1.1,
+            y: 1.1,
+            z: 1.1,
+          },
+          100
+        );
+        tweenTranslateTitleProfil.chain(tweenInflateTitleProfil);
+        tweenTranslateTitleProfil.start();
+      }
+    };
+
+    // PARAGRAPHS
+    this.paragraphsProfil.material = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 5,
+      transparent: true,
+      opacity: 0,
+    });
+    this.tweenAppearParagraphs = new TWEEN.Tween(this.paragraphsProfil.material)
+      .to({ opacity: 1 }, 1500)
+      .easing(TWEEN.Easing.Bounce.Out);
+
+    // HEADERS
+    this.headersProfil.material = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 5,
+      transparent: true,
+      opacity: 0,
+    });
+    this.tweenAppearHeaders = new TWEEN.Tween(this.headersProfil.material)
+      .to({ opacity: 1 }, 1500)
+      .easing(TWEEN.Easing.Bounce.Out)
+      .onStart(() => {
+        setTimeout(() => {
+          this.tweenAppearParagraphs.start();
+        }, 500);
+      });
+
+    // ARROWS
+    this.arrowProfil.material = new THREE.MeshStandardMaterial({
+      emissive: 'white',
+      emissiveIntensity: 5,
+      transparent: true,
+      opacity: 0,
+    });
+    for (var i = 0; i < 5; i++) {
+      this.arrowTextProfil.children[i].material =
+        new THREE.MeshStandardMaterial({
+          emissive: 'white',
+          emissiveIntensity: 5,
+          transparent: true,
+          opacity: 0,
+        });
+    }
+    this.arrowHitboxProfil.visible = false;
+    this.homeArrowHitbox.visible = false;
+
+    // ARROW APPEARANCE
+    this.tweenAppearArrowProfil = new TWEEN.Tween(this.arrowProfil.material)
+      .to({ opacity: 1 }, 1500)
+      .easing(TWEEN.Easing.Bounce.In)
+      .onComplete(() => {
+        this.homeArrow.visible = true;
+      });
+
     /**
      * OBJECT READY
      */
@@ -110,8 +191,6 @@ export default class TextProfil {
   }
 
   animateText() {
-    var TWEEN = require('@tweenjs/tween.js');
-
     this.arrowProfil.position.x = -0.4595;
     for (var i = 0; i < 5; i++) {
       this.arrowTextProfil.children[i].material.opacity = 0;
@@ -132,99 +211,30 @@ export default class TextProfil {
       this.titleProfil.children[i].scale.set(1, 1, 1);
     }
 
-    for (var i = 0; i < 6; i++) {
-      var tweenTranslateTitleProfil = new TWEEN.Tween(
-        this.titleProfil.children[i].position
-      )
-        .to(
-          {
-            x: this.titleProfil.children[i].position.x,
-            y: this.titleProfil.children[i].position.y,
-            z: this.titleProfil.children[i].position.z - this.titlePos[i],
-          },
-          1000 + i * -100
-        )
-        .easing(TWEEN.Easing.Cubic.Out);
-      var tweenInflateTitleProfil = new TWEEN.Tween(
-        this.titleProfil.children[i].scale
-      ).to(
-        {
-          x: 1.1,
-          y: 1.1,
-          z: 1.1,
-        },
-        100
-      );
-      tweenTranslateTitleProfil.chain(tweenInflateTitleProfil);
-      tweenTranslateTitleProfil.start();
-    }
-
     /**
-     * HEADERS
+     * ARROW
      */
-    this.headersProfil.material = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      emissiveIntensity: 5,
-      transparent: true,
-      opacity: 0,
-    });
-    var tweenAppearHeaders = new TWEEN.Tween(this.headersProfil.material)
-      .to({ opacity: 1 }, 1500)
-      .easing(TWEEN.Easing.Bounce.Out);
-    setTimeout(() => {
-      tweenAppearHeaders.start();
-    }, 200);
+    this.arrowProfil.material.opacity = 0;
+    this.homeArrow.visible = false;
 
     /**
      * PARAGRAPHS
      */
-    this.paragraphsProfil.material = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      emissiveIntensity: 5,
-      transparent: true,
-      opacity: 0,
-    });
-    var tweenAppearParagraphs = new TWEEN.Tween(this.paragraphsProfil.material)
-      .to({ opacity: 1 }, 1500)
-      .easing(TWEEN.Easing.Bounce.Out);
-    setTimeout(() => {
-      tweenAppearParagraphs.start();
-    }, 600);
+    this.paragraphsProfil.material.opacity = 0;
 
     /**
-     * ARROW
+     * HEADERS
      */
-    this.arrowProfil.material = new THREE.MeshStandardMaterial({
-      emissive: 'white',
-      emissiveIntensity: 5,
-      transparent: true,
-      opacity: 0,
-    });
+    this.headersProfil.material.opacity = 0;
 
-    this.arrowHitboxProfil.visible = false;
+    this.tweenAppearTitle();
 
-    for (var i = 0; i < 5; i++) {
-      this.arrowTextProfil.children[i].material =
-        new THREE.MeshStandardMaterial({
-          emissive: 'white',
-          emissiveIntensity: 5,
-          transparent: true,
-          opacity: 0,
-        });
-    }
-
-    this.homeArrowHitbox.visible = false;
-    this.homeArrow.visible = false;
-
-    // ARROW APPEARANCE
-    var tweenAppearArrowProfil = new TWEEN.Tween(this.arrowProfil.material)
-      .to({ opacity: 1 }, 1500)
-      .easing(TWEEN.Easing.Bounce.In)
-      .onComplete(() => {
-        this.homeArrow.visible = true;
-      });
     setTimeout(() => {
-      tweenAppearArrowProfil.start();
+      this.tweenAppearHeaders.start();
+    }, 200);
+
+    setTimeout(() => {
+      this.tweenAppearArrowProfil.start();
     }, 1000);
   }
 }
