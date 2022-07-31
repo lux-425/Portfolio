@@ -51,9 +51,6 @@ export default class TravellingManager {
                 case 'gaku':
                   this.experience.world.textGaku.animateText();
                   break;
-                case 'kyoumi':
-                  // this.experience.world.textKyoumi.animateText();
-                  break;
                 case 'gengo':
                   this.experience.world.textGengo.animateText();
                   break;
