@@ -4,6 +4,8 @@ import Experience from '../Experience.js';
 
 import Gamen from './Gamen.js';
 
+import gamenFragmentShaderLecture from '../../Shaders/Gamen/fragment.glsl';
+
 export default class Panels {
   constructor(position) {
     this.experience = new Experience();
@@ -113,6 +115,13 @@ export default class Panels {
         this.gamenThree.mesh.translateZ(-0.5);
         this.gamenThree.mesh.rotateY(Math.PI * 0.35 + 0.135);
         this.gamens.push(this.gamenThree.mesh);
+
+        setTimeout(() => {
+          this.gamenThree.material.fragmentShader = gamenFragmentShaderLecture;
+          setTimeout(() => {
+            this.gamenThree.resetShader('gengo');
+          }, 420);
+        }, 101);
 
         this.gamenFour = new Gamen(this.gamenParams);
         this.gamenFour.mesh.rotateY(-(11 * Math.PI) / 6 + 0.1725);

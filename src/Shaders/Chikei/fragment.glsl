@@ -4,7 +4,7 @@ uniform vec3 uSurfaceColor;
 varying float vElevation;
 
 void main() {
-  float mixStrength = (vElevation + 1.55) * 0.55;
+  float mixStrength = (vElevation + 0.55);
 
   gl_FragColor = vec4(mix(uDepthColor, uSurfaceColor, mixStrength), 1.0);
 }

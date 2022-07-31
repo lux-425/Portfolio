@@ -42,10 +42,10 @@ export default class World {
 
     // Debug
     // this.debugParams = {};
-    this.debug = this.experience.debug;
-    if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder('world');
-    }
+    // this.debug = this.experience.debug;
+    // if (this.debug.active) {
+    //   this.debugFolder = this.debug.ui.addFolder('world');
+    // }
 
     /**
      * Landscapes
@@ -231,23 +231,4 @@ export default class World {
     this.rightPanels.gamenOne.mesh.name = 'rightAreaGamen';
     this.rightPanels.gamenTwo.mesh.name = 'rightAreaGamenBis';
   }
-
-  // update() {
-  //   var TWEEN = require('@tweenjs/tween.js');
-
-  //   TWEEN.update();
-  // }
-
-  // setAnimation() {
-  //   const clock = new THREE.Clock();
-
-  //   const tick = () => {
-  //     const elapsedTime = clock.getElapsedTime();
-
-  //     // Call tick again on the next frame
-  //     window.requestAnimationFrame(tick);
-  //   };
-
-  //   tick();
-  // }
 }

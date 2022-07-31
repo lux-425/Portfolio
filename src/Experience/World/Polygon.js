@@ -9,7 +9,7 @@ export default class Polygon {
     this.scene = this.experience.scene;
 
     // Debug
-    this.debug = this.experience.debug;
+    // this.debug = this.experience.debug;
     this.debugObject = {};
     this.debugObject.depthColor = '#000000';
     this.debugObject.surfaceColor = '#ffffff';
@@ -22,13 +22,8 @@ export default class Polygon {
     this.type = type;
 
     this.setPolygon();
-    this.setAnimation();
 
-    if (this.debug.active && type === 'cube') {
-      this.debugFolder = this.debug.ui.addFolder('polygon');
-      this.setDebug();
-      this.debugFolder.close();
-    }
+    this.setAnimation();
   }
 
   setPolygon() {
@@ -199,84 +194,5 @@ export default class Polygon {
     };
 
     tick();
-  }
-
-  setDebug() {
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uBigWavesElevation, 'value')
-      .min(-5)
-      .max(10)
-      .step(0.001)
-      .name('uBigWavesElevation');
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uSmallWavesElevation, 'value')
-      .min(-5)
-      .max(20)
-      .step(0.001)
-      .name('uSmallWavesElevation');
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uBigWavesFrequency.value, 'x')
-      .min(0)
-      .max(30)
-      .step(0.001)
-      .name('uBigWavesFrequencyX');
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uBigWavesFrequency.value, 'y')
-      .min(0)
-      .max(30)
-      .step(0.001)
-      .name('uBigWavesFrequencyY');
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uSmallWavesFrequency, 'value')
-      .min(0)
-      .max(5)
-      .step(0.001)
-      .name('uSmallWavesFrequency');
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uBigWavesSpeed, 'value')
-      .min(-5)
-      .max(5)
-      .step(0.001)
-      .name('uBigWavesSpeed');
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uSmallWavesSpeed, 'value')
-      .min(-5)
-      .max(5)
-      .step(0.001)
-      .name('uSmallWavesSpeed');
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uSmallWavesIterations, 'value')
-      .min(0)
-      .max(4)
-      .step(1)
-      .name('uSmallWavesIterations');
-    this.debugFolder
-      .addColor(this.debugObject, 'depthColor')
-      .name('depthColor')
-      .onChange(() => {
-        this.mesh.material.uniforms.uDepthColor.value.set(
-          this.debugObject.depthColor
-        );
-      });
-    this.debugFolder
-      .addColor(this.debugObject, 'surfaceColor')
-      .name('surfaceColor')
-      .onChange(() => {
-        this.mesh.material.uniforms.uSurfaceColor.value.set(
-          this.debugObject.surfaceColor
-        );
-      });
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uColorOffset, 'value')
-      .min(0)
-      .max(1)
-      .step(0.001)
-      .name('uColorOffset');
-    this.debugFolder
-      .add(this.mesh.material.uniforms.uColorMultiplier, 'value')
-      .min(0)
-      .max(5)
-      .step(0.001)
-      .name('uColorMultiplier');
   }
 }
