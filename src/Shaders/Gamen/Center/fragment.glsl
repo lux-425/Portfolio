@@ -158,13 +158,11 @@ void main() {
 
   float breathing = sin(-uvColor.x * 5.0 + uTime * uUeBreathingSpeed) * sin(-uvColor.x * 5.0 + uTime * uUeBreathingSpeed) * 10.0;
 
-  vec4 rep = vec4(5, 2, 2, 5);
-
   for(float i = 1.0; i <= 2.0; i++) {
-    breathing *= abs(cnoise(vec4(uvColor.xy * (5.0 * (sin(uTime * 0.1) * sin(uTime * 0.1))) * i + uTime * uShitaBreathingSpeed, uvColor), rep) * 8.0 / i);
+    breathing *= abs(cnoise(vec4(uvColor.xy * (5.0 * (sin(uTime * 0.1) * sin(uTime * 0.1))) * i + uTime * uShitaBreathingSpeed, uvColor), vec4(5, 2, 2, 5)) * 8.0 / i);
   }
 
-  float strength = 1.0 - abs(cnoise(vec4(vUv - breathing, vUv + breathing), rep));
+  float strength = 1.0 - abs(cnoise(vec4(vUv - breathing, vUv + breathing), vec4(5, 2, 2, 5)));
   strength = clamp(strength, 0.0, 1.0);
 
   vec3 mixedColor = mix(uColor, uvColor, (strength / breathing));

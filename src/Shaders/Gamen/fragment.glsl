@@ -183,12 +183,11 @@ vec2 cellular(vec3 P) {
 }
 
 void main(void) {
-  vec2 st = vUv * 5.0;
+  vec2 F = cellular(vec3(vUv * 5.0, uTime * 0.2));
 
-  vec2 F = cellular(vec3(st, uTime * 0.2));
-  // float dots = smoothstep(0.05, 0.1, F.x);
   float n = F.y - F.x;
 
-  // n *= dots;
+  n *= smoothstep(0.01, 1.0, F.x);
+
   gl_FragColor = vec4(n, n, n, uOpacity * 0.66);
 }

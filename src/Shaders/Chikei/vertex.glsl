@@ -87,17 +87,11 @@ float cnoise(vec3 P) {
 void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
-  float elevation = sin(modelPosition.x * 0.55 + uTime * -0.05) * sin(modelPosition.y * 0.0 + uTime * -0.05) * 0.55;
-
-  for(float i = 1.0; i <= 2.0; i++) {
-    elevation -= abs(cnoise(vec3(modelPosition.xy * 0.055 * i, uTime * 0.05)) * 5.55 / i);
-  }
+  float elevation = (cos(modelPosition.x + uTime * -0.05) * sin(modelPosition.y + uTime * -0.05) * 0.55) - abs(cnoise(vec3(modelPosition.xy * 0.055, uTime * 0.05)) * 5.55);
 
   modelPosition.z += elevation;
 
-  vec4 projectedPosition = projectionMatrix * (viewMatrix * modelPosition);
-
-  gl_Position = projectedPosition;
+  gl_Position = projectionMatrix * (viewMatrix * modelPosition);
 
   // Varyings
   vElevation = elevation;

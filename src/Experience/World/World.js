@@ -48,9 +48,12 @@ export default class World {
     }
 
     /**
-     *
+     * Landscapes
+     */
+    this.chikei = new Chikei();
+
+    /**
      * 画面
-     *
      */
     this.setPanels();
 
@@ -58,8 +61,6 @@ export default class World {
      * ポリゴン~~~~
      */
     this.setPolygons();
-
-    this.chikei = new Chikei();
 
     /**
      * SET TEXTS AND YUBISASHI'S PENDING

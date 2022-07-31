@@ -207,7 +207,7 @@ export default class TextGengo {
      * ARROWS' TRANSLATION
      */
     this.tweenToggleArrowLeft = new TWEEN.Tween(this.arrowLeft.position)
-      .to({ x: 0.3507 }, 500)
+      .to({ x: 0.31 }, 500)
       .easing(TWEEN.Easing.Cubic.Out)
       .onComplete(() => {
         this.arrowTextLeft.material.opacity = 1;
@@ -220,7 +220,7 @@ export default class TextGengo {
       });
 
     this.tweenToggleArrowRight = new TWEEN.Tween(this.arrowRight.position)
-      .to({ x: -0.3769 }, 500)
+      .to({ x: -0.35 }, 500)
       .easing(TWEEN.Easing.Cubic.Out)
       .onComplete(() => {
         this.arrowTextRight.material.opacity = 1;
@@ -265,6 +265,9 @@ export default class TextGengo {
 
     this.arrowRight.position.x = -0.4969;
     this.arrowLeft.position.x = 0.4607;
+
+    this.arrowTextRight.material.opacity = 0;
+    this.arrowTextLeft.material.opacity = 0;
 
     this.tokoroDatta = true;
 

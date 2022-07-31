@@ -171,7 +171,7 @@ export default class TextKyoumi {
      * ARROWS' TRANSLATION
      */
     this.tweenToggleArrowLeft = new TWEEN.Tween(this.arrowLeft.position)
-      .to({ x: -0.35 }, 500)
+      .to({ x: -0.34 }, 500)
       .easing(TWEEN.Easing.Cubic.Out)
       .onComplete(() => {
         this.arrowTextLeft.material.opacity = 1;
@@ -184,7 +184,7 @@ export default class TextKyoumi {
       });
 
     this.tweenToggleArrowRight = new TWEEN.Tween(this.arrowRight.position)
-      .to({ x: 0.295 }, 500)
+      .to({ x: 0.275 }, 500)
       .easing(TWEEN.Easing.Cubic.Out)
       .onComplete(() => {
         this.arrowTextRight.material.opacity = 1;
@@ -212,6 +212,9 @@ export default class TextKyoumi {
 
     this.arrowRight.position.x = 0.4648;
     this.arrowLeft.position.x = -0.4747;
+
+    this.arrowTextRight.material.opacity = 0;
+    this.arrowTextLeft.material.opacity = 0;
 
     /**
      * INIT VARIABLES

@@ -58,6 +58,7 @@ export default class TextProfil {
     this.tweenAppearTextProfil = () => {
       for (var i = 0; i < 5; i++) {
         this.arrowTextProfil.children[i].visible = true;
+        this.arrowTextProfil.children[i].material.opacity = 0;
         var tweenAppearTextProfil = new TWEEN.Tween(
           this.arrowTextProfil.children[i].material
         )

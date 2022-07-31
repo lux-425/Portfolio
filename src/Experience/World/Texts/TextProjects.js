@@ -870,6 +870,8 @@ export default class TextProjects {
     // ARROW TEXT APPEARANCE
     this.tweenAppearTextArrow = () => {
       for (var i = 0; i < 3; i++) {
+        this.arrowTextProject.children[i].visible = true;
+        this.arrowTextProject.children[i].material.opacity = 0;
         var tweenAppearText = new TWEEN.Tween(
           this.arrowTextProject.children[i].material
         )
@@ -880,12 +882,8 @@ export default class TextProjects {
     };
     this.tweenDisappearTextArrow = () => {
       for (var i = 0; i < 3; i++) {
-        var tweenDisappearText = new TWEEN.Tween(
-          this.arrowTextProject.children[i].material
-        )
-          .to({ opacity: 0 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenDisappearText.start();
+        this.arrowTextProject.children[i].visible = false;
+        this.arrowTextProject.children[i].material.opacity = 0;
       }
     };
 

@@ -257,6 +257,8 @@ export default class TextKeiken {
     // ARROW TEXT APPEARANCE
     this.tweenAppearTextKeiken = () => {
       for (var i = 0; i < this.arrowTextKeiken.children.length; i++) {
+        this.arrowTextKeiken.children[i].visible = true;
+        this.arrowTextKeiken.children[i].material.opacity = 0;
         var tweenAppearTextKeiken = new TWEEN.Tween(
           this.arrowTextKeiken.children[i].material
         )
@@ -267,12 +269,8 @@ export default class TextKeiken {
     };
     this.tweenDisappearTextKeiken = () => {
       for (var i = 0; i < this.arrowTextKeiken.children.length; i++) {
-        var tweenDisappearTextKeiken = new TWEEN.Tween(
-          this.arrowTextKeiken.children[i].material
-        )
-          .to({ opacity: 0 }, 500)
-          .easing(TWEEN.Easing.Exponential.Out);
-        tweenDisappearTextKeiken.start();
+        this.arrowTextKeiken.children[i].visible = false;
+        this.arrowTextKeiken.children[i].material.opacity = 0;
       }
     };
 

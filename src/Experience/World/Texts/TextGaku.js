@@ -127,16 +127,16 @@ export default class TextGaku {
      * ANIMATIONS
      */
     this.tweenArrowTextAppear = (text) => {
+      text.visible = true;
+      text.material.opacity = 0;
       var tweenArrowTextAppear = new TWEEN.Tween(text.material)
         .to({ opacity: 1 }, 1000)
         .easing(TWEEN.Easing.Cubic.InOut);
       tweenArrowTextAppear.start();
     };
     this.tweenArrowTextDisappear = (text) => {
-      var tweenArrowTextAppear = new TWEEN.Tween(text.material)
-        .to({ opacity: 0 }, 100)
-        .easing(TWEEN.Easing.Exponential.Out);
-      tweenArrowTextAppear.start();
+      text.visible = false;
+      text.material.opacity = 0;
     };
 
     this.tweenArrowRightOrigin = new TWEEN.Tween(this.arrowGakuRight.position)
@@ -146,7 +146,7 @@ export default class TextGaku {
         this.tweenArrowTextDisappear(this.arrowTextGakuRight);
       });
     this.tweenArrowRightToggle = new TWEEN.Tween(this.arrowGakuRight.position)
-      .to({ x: -0.33 }, 500)
+      .to({ x: -0.34 }, 500)
       .easing(TWEEN.Easing.Exponential.InOut)
       .onStart(() => {
         this.tweenArrowTextAppear(this.arrowTextGakuRight);
@@ -158,7 +158,7 @@ export default class TextGaku {
         this.tweenArrowTextDisappear(this.arrowTextGakuLeft);
       });
     this.tweenArrowLeftToggle = new TWEEN.Tween(this.arrowGakuLeft.position)
-      .to({ x: -0.3 }, 500)
+      .to({ x: -0.29 }, 500)
       .easing(TWEEN.Easing.Exponential.InOut)
       .onStart(() => {
         this.tweenArrowTextAppear(this.arrowTextGakuLeft);
@@ -202,6 +202,9 @@ export default class TextGaku {
 
     this.arrowGakuRight.position.x = -0.462;
     this.arrowGakuLeft.position.x = -0.462;
+
+    this.arrowTextGakuRight.material.opacity = 0;
+    this.arrowTextGakuLeft.material.opacity = 0;
 
     // INIT
     this.arrowGakuRight.visible = false;
