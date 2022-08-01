@@ -200,7 +200,7 @@ export default class Keshiki {
     this.mesh = new THREE.Mesh(this.keshikiGeometry, this.keshikiMaterial);
     this.mesh.name = 'keshiki';
     // this.mesh.rotation.x = -Math.PI * 0.25;
-    this.mesh.position.set(0, 4.5, -18);
+    this.mesh.position.set(0, 4.525, -18);
 
     /**
      *  INIT KAMERA FOR HOME'S AREA
@@ -208,7 +208,7 @@ export default class Keshiki {
     this.experience.camera.instance.position.set(
       this.mesh.position.x,
       this.mesh.position.y + 2,
-      this.mesh.position.z + 30
+      this.mesh.position.z + 29
     );
     this.experience.camera.controls.target = new THREE.Vector3(
       this.mesh.position.x,

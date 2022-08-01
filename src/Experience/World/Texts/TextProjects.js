@@ -720,13 +720,13 @@ export default class TextProjects {
     this.navbarSep = this.textModel.children[0].children[14];
     this.navbarLanguette = this.textModel.children[0].children[1].children[15];
 
-    this.navbarIchi = this.textModel.children[0].children[1].children[1];
-    this.navbarNi = this.textModel.children[0].children[1].children[2];
-    this.navbarSan = this.textModel.children[0].children[1].children[3];
-    this.navbarYon = this.textModel.children[0].children[1].children[4];
-    this.navbarGo = this.textModel.children[0].children[1].children[5];
-    this.navbarRoku = this.textModel.children[0].children[1].children[6];
-    this.navbarTsugi = this.textModel.children[0].children[1].children[7];
+    this.navbarIchi = this.textModel.children[0].children[1].children[7];
+    this.navbarNi = this.textModel.children[0].children[1].children[8];
+    this.navbarSan = this.textModel.children[0].children[1].children[9];
+    this.navbarYon = this.textModel.children[0].children[1].children[10];
+    this.navbarGo = this.textModel.children[0].children[1].children[11];
+    this.navbarRoku = this.textModel.children[0].children[1].children[12];
+    this.navbarTsugi = this.textModel.children[0].children[1].children[13];
 
     this.navbarIchi.name = 'navbarIchi';
     this.navbarNi.name = 'navbarNi';
@@ -1348,7 +1348,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0442, 0.0043, -0.0127);
+      this.navbarLanguette.position.set(-0.0442, 0.001, -0.0127);
 
       this.appearProjectText();
     }, 700);
@@ -1372,7 +1372,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.06);
+      this.navbarLanguette.position.set(-0.0442, 0.001, 0.06);
 
       this.appearProjectText();
     }, 700);
@@ -1396,7 +1396,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.14);
+      this.navbarLanguette.position.set(-0.0442, 0.001, 0.14);
 
       this.appearProjectText();
     }, 700);
@@ -1420,7 +1420,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.22);
+      this.navbarLanguette.position.set(-0.0442, 0.001, 0.22);
 
       this.appearProjectText();
     }, 700);
@@ -1444,7 +1444,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.3);
+      this.navbarLanguette.position.set(-0.0442, 0.001, 0.3);
 
       this.appearProjectText();
     }, 700);
@@ -1468,7 +1468,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = false;
       this.githubLogo.visible = true;
 
-      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.38);
+      this.navbarLanguette.position.set(-0.0442, 0.001, 0.38);
 
       this.appearProjectText();
     }, 700);
@@ -1492,7 +1492,7 @@ export default class TextProjects {
       this.visitSoonButton.visible = true;
       this.githubLogo.visible = false;
 
-      this.navbarLanguette.position.set(-0.0442, 0.0043, 0.46);
+      this.navbarLanguette.position.set(-0.0442, 0.001, 0.46);
 
       this.appearProjectText();
     }, 700);
