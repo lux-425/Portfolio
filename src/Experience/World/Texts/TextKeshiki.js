@@ -152,9 +152,9 @@ export default class TextKeshiki {
       this.aboutEnglish3,
     ];
     for (var i = 0; i < this.aboutNihongoArr.length; i++) {
-      this.aboutNihongoArr[i].translateY(0.3);
-      this.aboutFrancaisArr[i].translateY(0.3);
-      this.aboutEnglishArr[i].translateY(0.3);
+      // this.aboutNihongoArr[i].translateY(0.3);
+      // this.aboutFrancaisArr[i].translateY(0.3);
+      // this.aboutEnglishArr[i].translateY(0.3);
       this.aboutNihongoArr[i].visible = false;
       this.aboutFrancaisArr[i].visible = false;
       this.aboutEnglishArr[i].visible = false;

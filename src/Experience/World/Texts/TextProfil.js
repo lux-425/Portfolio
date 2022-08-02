@@ -92,10 +92,6 @@ export default class TextProfil {
         this.tweenDisappearTextProfil();
       });
 
-    this.textModel.children[8].material.depthTest = true;
-    this.textModel.children[8].material.depthWrite = true;
-    this.textModel.children[8].translateY(-0.019);
-
     // TITLE
     this.tweenAppearTitle = () => {
       for (var i = 0; i < 6; i++) {

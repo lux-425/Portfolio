@@ -8,6 +8,8 @@ export default class Yubisashi {
 
     this.scene = this.experience.scene;
 
+    var color = 0;
+
     /**
      * 指差し物
      */
@@ -306,28 +308,43 @@ export default class Yubisashi {
         }
         switch (this.currentIntersect) {
           case 'ball':
-            this.experience.world.polygonBall.mesh.material.color =
-              new THREE.Color(
-                '#' + Math.floor(Math.random() * 16777215).toString(16)
-              );
+            color = new THREE.Color(
+              '#' + Math.floor(Math.random() * 16777215).toString(16)
+            );
+            this.experience.world.polygonBall.mesh.material.color = color;
+            this.experience.world.chikei.debugObject.surfaceColor = color;
             break;
           case 'torus':
-            this.experience.world.polygonTorus.mesh.material.color =
-              new THREE.Color(
-                '#' + Math.floor(Math.random() * 16777215).toString(16)
-              );
+            color = new THREE.Color(
+              '#' + Math.floor(Math.random() * 16777215).toString(16)
+            );
+            this.experience.world.polygonTorus.mesh.material.color = color;
+            this.experience.world.chikei.debugObject.surfaceColor = color;
             break;
           case 'globeTwo':
-            this.experience.world.polygonGlobeTwo.mesh.material.color =
-              new THREE.Color(
-                '#' + Math.floor(Math.random() * 16777215).toString(16)
-              );
+            color = new THREE.Color(
+              '#' + Math.floor(Math.random() * 16777215).toString(16)
+            );
+            this.experience.world.polygonGlobeTwo.mesh.material.color = color;
+            this.experience.world.chikei.debugObject.surfaceColor = color;
             break;
           case 'gem':
-            this.experience.world.polygonGem.mesh.material.color =
+            color = new THREE.Color(
+              '#' + Math.floor(Math.random() * 16777215).toString(16)
+            );
+            this.experience.world.polygonGem.mesh.material.color = color;
+            this.experience.world.chikei.debugObject.surfaceColor = color;
+            break;
+          case 'saru':
+            color = new THREE.Color(
+              '#' + Math.floor(Math.random() * 16777215).toString(16)
+            );
+            this.experience.renderer.instance.setClearColor(
               new THREE.Color(
                 '#' + Math.floor(Math.random() * 16777215).toString(16)
-              );
+              )
+            );
+            this.experience.world.chikei.debugObject.surfaceColor = color;
             break;
         }
       }
@@ -542,7 +559,7 @@ export default class Yubisashi {
              */
             case 'shoukai':
               if (this.intersects[0].object.name === 'arrowHitboxShoukai') {
-                console.log('arrow translates left');
+                this.experience.world.textShoukai.tweenArrowToggle.start();
               }
               break;
             /**
@@ -647,7 +664,7 @@ export default class Yubisashi {
              */
             case 'shoukai':
               if (this.currentIntersect === 'arrowHitboxShoukai') {
-                // arrow translates right
+                this.experience.world.textShoukai.tweenArrowOrigin.start();
               }
               break;
             /**

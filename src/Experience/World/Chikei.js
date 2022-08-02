@@ -35,6 +35,9 @@ export default class Chikei {
     await this.model.waitForLoad();
     this.chikeiModel = this.model.model.children[0];
 
+    // Œuf de Pâques
+    this.saru = this.chikeiModel.children[0];
+
     this.chikeiModel.material = new THREE.ShaderMaterial({
       vertexShader: chikeiVertexShader,
       fragmentShader: chikeiFragmentShader,

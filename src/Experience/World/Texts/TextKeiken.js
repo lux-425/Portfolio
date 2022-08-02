@@ -101,13 +101,15 @@ export default class TextKeiken {
 
     // LOGOS
     this.sterimedLogo = this.textModel.children[0].children[7];
-    if (this.textModel.children[1].children[10].name === 'faurecia') {
-      this.faureciaLogo = this.textModel.children[1].children[10];
-      this.adoniaLogo = this.textModel.children[1].children[9];
-    } else {
-      this.faureciaLogo = this.textModel.children[1].children[9];
-      this.adoniaLogo = this.textModel.children[1].children[10];
-    }
+    // if (this.textModel.children[1].children[10].name === 'faurecia') {
+    //   this.faureciaLogo = this.textModel.children[1].children[10];
+    //   this.adoniaLogo = this.textModel.children[1].children[9];
+    // } else {
+    //   this.faureciaLogo = this.textModel.children[1].children[9];
+    //   this.adoniaLogo = this.textModel.children[1].children[10];
+    // }
+    this.faureciaLogo = this.textModel.children[1].children[16];
+    this.adoniaLogo = this.textModel.children[1].children[17];
 
     this.sterimedLogo.material.depthTest = true;
     this.sterimedLogo.material.depthWrite = true;

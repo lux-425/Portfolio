@@ -90,6 +90,8 @@ export default class World {
       this.yubisashiMono = [
         this.textKeshiki.contactHitbox,
 
+        this.chikei.saru,
+
         this.leftPanels.gamenOne.mesh,
         this.centerPanels.gamenOne.mesh,
         this.centerPanels.gamenTwo.mesh,
