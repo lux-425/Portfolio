@@ -1,7 +1,7 @@
 import Experience from '../../Experience.js';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-// import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 export default class TextModel {
   constructor(url) {
@@ -13,7 +13,9 @@ export default class TextModel {
 
     // Loaders
     this.gltfLoader = new GLTFLoader();
-    // this.gltfLoader.setDRACOLoader(this.dracoLoader);
+    this.dracoLoader = new DRACOLoader();
+    this.dracoLoader.setDecoderPath('/draco/');
+    this.gltfLoader.setDRACOLoader(this.dracoLoader);
 
     // Blender's model
     this._loadingPromise = this.loadModel(this.gltfLoader, this.url).then(

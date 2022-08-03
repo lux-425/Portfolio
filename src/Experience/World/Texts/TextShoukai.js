@@ -24,14 +24,21 @@ export default class TextShoukai {
     // this.buttonRefresh.name = 'buttonRefreshShoukai';
     // this.scene.add(this.buttonRefresh);
 
-    // LOAD MODEL
-    this.model = new TextModel('../../../models/Gamen/gamen_001-2.glb');
     this.setModel();
   }
 
   async setModel() {
-    await this.model.waitForLoad();
-    this.textModel = this.model.model.children[0];
+    switch (this.experience.world.language) {
+      case 'francais':
+        this.textModel = this.experience.world.texts.textModelShoukaiFrancais;
+        break;
+      case 'nihongo':
+        this.textModel = this.experience.world.texts.textModelShoukaiNihongo;
+        break;
+      case 'english':
+        this.textModel = this.experience.world.texts.textModelShoukaiEnglish;
+        break;
+    }
 
     this.textModel.translateY(4);
 

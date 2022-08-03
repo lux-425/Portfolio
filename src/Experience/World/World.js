@@ -12,6 +12,7 @@ import Particles from './Particles.js';
 
 import Yubisashi from '../Yubisashi.js';
 
+import Texts from './Texts/Texts.js';
 import TextKeshiki from './Texts/TextKeshiki.js';
 import TextProfil from './Texts/TextProfil.js';
 import TextShoukai from './Texts/TextShoukai.js';
@@ -38,7 +39,9 @@ export default class World {
 
     // Loaders
     this.gltfLoader = new GLTFLoader();
-    // this.gltfLoader.setDRACOLoader(this.dracoLoader);
+    this.dracoLoader = new DRACOLoader();
+    this.dracoLoader.setDecoderPath('/draco/');
+    this.gltfLoader.setDRACOLoader(this.dracoLoader);
 
     // Debug
     // this.debugParams = {};
@@ -77,6 +80,8 @@ export default class World {
       false,
     ];
     this.waitObjectsReady();
+
+    this.texts = new Texts();
 
     this.textKeshiki = new TextKeshiki();
   }

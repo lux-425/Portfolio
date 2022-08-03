@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 import Experience from '../../Experience.js';
-import TextModel from './TextModel.js';
 
 export default class TextProfil {
   constructor() {
@@ -24,15 +23,21 @@ export default class TextProfil {
     // this.buttonRefresh.name = 'buttonRefreshProfil';
     // this.scene.add(this.buttonRefresh);
 
-    // LOAD MODEL
-    this.model = new TextModel('../../../models/Gamen/gamen_000.glb');
     this.setModel();
   }
 
   async setModel() {
-    await this.model.waitForLoad();
-    this.textModel = this.model.model.children[0];
-    // this.scene.add(this.textModel);
+    switch (this.experience.world.language) {
+      case 'francais':
+        this.textModel = this.experience.world.texts.textModelProfilFrancais;
+        break;
+      case 'nihongo':
+        this.textModel = this.experience.world.texts.textModelProfilNihongo;
+        break;
+      case 'english':
+        this.textModel = this.experience.world.texts.textModelProfilEnglish;
+        break;
+    }
 
     this.textModel.translateX(-4);
 

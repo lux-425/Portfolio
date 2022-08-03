@@ -15,6 +15,8 @@ export default class Yubisashi {
      */
     this.yubisashiMono = yubisashiMono;
 
+    console.log(yubisashiMono);
+
     this.gamenNamesArr = [
       'leftAreaGamen',
       'centerAreaGamen',

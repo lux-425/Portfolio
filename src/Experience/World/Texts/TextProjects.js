@@ -25,19 +25,19 @@ export default class TextProjects {
     // this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
-    this.modelIntro = new TextModel(
-      '../../../models/Gamen/gamen_005-6_intro.glb'
-    );
+    // this.modelIntro = new TextModel(
+    //   '../../../models/Gamen/Nihongo/gamen_005-6_intro.glb'
+    // );
 
-    this.model = new TextModel('../../../models/Gamen/gamen_005-6.glb');
+    // this.model = new TextModel('../../../models/Gamen/gamen_005-6.glb');
 
     this.setModel();
   }
 
   async setModel() {
     // INTRO
-    await this.modelIntro.waitForLoad();
-    this.textModelIntro = this.modelIntro.model.children[0];
+    // await this.modelIntro.waitForLoad();
+    this.textModelIntro = this.experience.world.texts.textModelProjectsIntro;
 
     this.textModelIntro.translateX(-4);
 
@@ -48,8 +48,9 @@ export default class TextProjects {
     /**
      * TEXT
      */
-    await this.model.waitForLoad();
-    this.textModel = this.model.model.children[0];
+    // await this.model.waitForLoad();
+    // this.textModel = this.model.model.children[0];
+    this.textModel = this.experience.world.texts.textModelProjects;
 
     this.textModel.position.set(
       this.experience.world.centerPanels.gamenFour.mesh.position.x,

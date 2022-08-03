@@ -2,9 +2,6 @@ import * as THREE from 'three';
 
 import Experience from '../Experience.js';
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
-
 import chikeiVertexShader from '../../Shaders/Chikei/vertex.glsl';
 import chikeiFragmentShader from '../../Shaders/Chikei/fragment.glsl';
 
@@ -15,10 +12,6 @@ export default class Chikei {
     this.experience = new Experience();
 
     this.scene = this.experience.scene;
-
-    // Loaders
-    this.gltfLoader = new GLTFLoader();
-    // this.gltfLoader.setDRACOLoader(this.dracoLoader);
 
     // Debug
     // this.debug = this.experience.debug;

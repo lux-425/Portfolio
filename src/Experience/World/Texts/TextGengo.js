@@ -25,14 +25,14 @@ export default class TextGengo {
     // this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
-    this.modelRight = new TextModel('../../../models/Gamen/gamen_009.glb');
+    // this.modelRight = new TextModel('../../../models/Gamen/gamen_009.glb');
     this.modelLeft = new TextModel('../../../models/Gamen/gamen_009bis.glb');
     this.setModel();
   }
 
   async setModel() {
-    await this.modelRight.waitForLoad();
-    this.textModelRight = this.modelRight.model.children[0];
+    // await this.modelRight.waitForLoad();
+    this.textModelRight = this.experience.world.texts.textModelGengo;
 
     await this.modelLeft.waitForLoad();
     this.textModelLeft = this.modelLeft.model.children[0];

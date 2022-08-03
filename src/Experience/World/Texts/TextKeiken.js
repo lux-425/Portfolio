@@ -25,9 +25,9 @@ export default class TextKeiken {
     // this.scene.add(this.buttonRefresh);
 
     // LOAD MODEL
-    this.modelIntro = new TextModel(
-      '../../../models/Gamen/gamen_003-4_intro.glb'
-    );
+    // this.modelIntro = new TextModel(
+    //   '../../../models/Gamen/gamen_003-4_intro.glb'
+    // );
     this.model = new TextModel('../../../models/Gamen/gamen_003-4.glb');
 
     this.setModel();
@@ -37,9 +37,10 @@ export default class TextKeiken {
     /**
      * INTRO
      */
-    await this.modelIntro.waitForLoad();
-    this.textModelIntro = this.modelIntro.model.children[0];
+    // await this.modelIntro.waitForLoad();
+    this.textModelIntro = this.experience.world.texts.textModelKeikenIntro;
     this.scene.add(this.textModelIntro);
+
     this.textModelIntro.visible = false;
 
     this.textModelIntro.position.set(
