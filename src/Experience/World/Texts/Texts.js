@@ -21,6 +21,7 @@ export default class Texts {
      */
     this.loadModelProfilFrancais();
     this.loadModelShoukaiFrancais();
+    this.loadModelKeikenFrancais();
 
     /**
      * 日本語
@@ -30,12 +31,14 @@ export default class Texts {
 
     this.loadModelProfilNihongo();
     this.loadModelShoukaiNihongo();
+    this.loadModelKeikenNihongo();
 
     /**
      * ENGLISH
      */
     this.loadModelProfilEnglish();
     this.loadModelShoukaiEnglish();
+    this.loadModelKeikenEnglish();
   }
 
   async loadModelProjects() {
@@ -71,9 +74,33 @@ export default class Texts {
     this.textModelShoukaiFrancais = modelShoukaiFrancais.model.children[0];
   }
 
+  async loadModelKeikenFrancais() {
+    const modelKeikenFrancais = new TextModel(
+      '../../../models/Gamen/Francais/gamen_003-4.glb'
+    );
+    await modelKeikenFrancais.waitForLoad();
+    this.textModelKeikenFrancais = modelKeikenFrancais.model.children[0];
+  }
+
   /**
    * 日本語
    */
+  async loadModelKeikenIntro() {
+    const modelKeikenIntro = new TextModel(
+      '../../../models/Gamen/Nihongo/gamen_003-4_intro.glb'
+    );
+    await modelKeikenIntro.waitForLoad();
+    this.textModelKeikenIntro = modelKeikenIntro.model.children[0];
+  }
+
+  async loadModelProjectsIntro() {
+    const modelProjectsIntro = new TextModel(
+      '../../../models/Gamen/Nihongo/gamen_005-6_intro.glb'
+    );
+    await modelProjectsIntro.waitForLoad();
+    this.textModelProjectsIntro = modelProjectsIntro.model.children[0];
+  }
+
   async loadModelProfilNihongo() {
     const modelProfilNihongo = new TextModel(
       '../../../models/Gamen/Nihongo/gamen_000.glb'
@@ -90,20 +117,12 @@ export default class Texts {
     this.textModelShoukaiNihongo = modelShoukaiNihongo.model.children[0];
   }
 
-  async loadModelKeikenIntro() {
-    const modelKeikenIntro = new TextModel(
-      '../../../models/Gamen/Nihongo/gamen_003-4_intro.glb'
+  async loadModelKeikenNihongo() {
+    const modelKeikenNihongo = new TextModel(
+      '../../../models/Gamen/Nihongo/gamen_003-4.glb'
     );
-    await modelKeikenIntro.waitForLoad();
-    this.textModelKeikenIntro = modelKeikenIntro.model.children[0];
-  }
-
-  async loadModelProjectsIntro() {
-    const modelProjectsIntro = new TextModel(
-      '../../../models/Gamen/Nihongo/gamen_005-6_intro.glb'
-    );
-    await modelProjectsIntro.waitForLoad();
-    this.textModelProjectsIntro = modelProjectsIntro.model.children[0];
+    await modelKeikenNihongo.waitForLoad();
+    this.textModelKeikenNihongo = modelKeikenNihongo.model.children[0];
   }
 
   /**
@@ -123,5 +142,13 @@ export default class Texts {
     );
     await modelShoukaiEnglish.waitForLoad();
     this.textModelShoukaiEnglish = modelShoukaiEnglish.model.children[0];
+  }
+
+  async loadModelKeikenEnglish() {
+    const modelKeikenEnglish = new TextModel(
+      '../../../models/Gamen/English/gamen_003-4.glb'
+    );
+    await modelKeikenEnglish.waitForLoad();
+    this.textModelKeikenEnglish = modelKeikenEnglish.model.children[0];
   }
 }

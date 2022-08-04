@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 import Experience from '../../Experience.js';
-import TextModel from './TextModel.js';
 
 export default class TextKeiken {
   constructor() {
@@ -24,12 +23,6 @@ export default class TextKeiken {
     // this.buttonRefresh.name = 'buttonRefreshKeiken';
     // this.scene.add(this.buttonRefresh);
 
-    // LOAD MODEL
-    // this.modelIntro = new TextModel(
-    //   '../../../models/Gamen/gamen_003-4_intro.glb'
-    // );
-    this.model = new TextModel('../../../models/Gamen/gamen_003-4.glb');
-
     this.setModel();
   }
 
@@ -37,18 +30,15 @@ export default class TextKeiken {
     /**
      * INTRO
      */
-    // await this.modelIntro.waitForLoad();
     this.textModelIntro = this.experience.world.texts.textModelKeikenIntro;
     this.scene.add(this.textModelIntro);
 
     this.textModelIntro.visible = false;
-
     this.textModelIntro.position.set(
       this.experience.world.centerPanels.gamenOne.mesh.position.x,
       1,
       this.experience.world.centerPanels.gamenOne.mesh.position.z
     );
-
     this.textModelIntro.children[0].children[0].children[0].material.emissive =
       new THREE.Color('white');
     this.textModelIntro.children[0].children[0].children[0].material.transparent = true;
@@ -56,16 +46,23 @@ export default class TextKeiken {
     /**
      * TEXT
      */
-    await this.model.waitForLoad();
-    this.textModel = this.model.model.children[0];
+    switch (this.experience.world.language) {
+      case 'francais':
+        this.textModel = this.experience.world.texts.textModelKeikenFrancais;
+        break;
+      case 'nihongo':
+        this.textModel = this.experience.world.texts.textModelKeikenNihongo;
+        break;
+      case 'english':
+        this.textModel = this.experience.world.texts.textModelKeikenEnglish;
+        break;
+    }
 
     this.textModel.position.set(
       this.experience.world.centerPanels.gamenOne.mesh.position.x,
       1,
       this.experience.world.centerPanels.gamenOne.mesh.position.z
     );
-
-    // CONTENT
     this.textModel.children[0].children[2].material.emissive = new THREE.Color(
       'white'
     );

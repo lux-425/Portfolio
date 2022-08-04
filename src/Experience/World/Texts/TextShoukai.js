@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 import Experience from '../../Experience.js';
-import TextModel from './TextModel.js';
 
 export default class TextShoukai {
   constructor() {
