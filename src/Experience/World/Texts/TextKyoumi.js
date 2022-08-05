@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 import Experience from '../../Experience.js';
-import TextModel from './TextModel.js';
 
 export default class TextKyoumi {
   constructor() {
@@ -24,14 +23,21 @@ export default class TextKyoumi {
     // this.buttonRefresh.name = 'buttonRefreshKyoumi';
     // this.scene.add(this.buttonRefresh);
 
-    // LOAD MODEL
-    this.model = new TextModel('../../../models/Gamen/gamen_010.glb');
     this.setModel();
   }
 
   async setModel() {
-    await this.model.waitForLoad();
-    this.textModel = this.model.model.children[0];
+    switch (this.experience.world.language) {
+      case 'francais':
+        this.textModel = this.experience.world.texts.textModelKyoumiFrancais;
+        break;
+      case 'nihongo':
+        this.textModel = this.experience.world.texts.textModelKyoumiNihongo;
+        break;
+      case 'english':
+        this.textModel = this.experience.world.texts.textModelKyoumiEnglish;
+        break;
+    }
 
     this.textModel.position.set(
       this.experience.world.rightPanels.gamenThree.mesh.position.x,

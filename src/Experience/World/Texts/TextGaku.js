@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 import Experience from '../../Experience.js';
-import TextModel from './TextModel.js';
 
 export default class TextGaku {
   constructor() {
@@ -24,14 +23,21 @@ export default class TextGaku {
     // this.buttonRefresh.name = 'buttonRefreshGaku';
     // this.scene.add(this.buttonRefresh);
 
-    // LOAD MODEL
-    this.model = new TextModel('../../../models/Gamen/gamen_007-8.glb');
     this.setModel();
   }
 
   async setModel() {
-    await this.model.waitForLoad();
-    this.textModel = this.model.model.children[0];
+    switch (this.experience.world.language) {
+      case 'francais':
+        this.textModel = this.experience.world.texts.textModelGakuFrancais;
+        break;
+      case 'nihongo':
+        this.textModel = this.experience.world.texts.textModelGakuNihongo;
+        break;
+      case 'english':
+        this.textModel = this.experience.world.texts.textModelGakuEnglish;
+        break;
+    }
 
     this.textModel.translateX(-4);
 
@@ -146,7 +152,7 @@ export default class TextGaku {
         this.tweenArrowTextDisappear(this.arrowTextGakuRight);
       });
     this.tweenArrowRightToggle = new TWEEN.Tween(this.arrowGakuRight.position)
-      .to({ x: -0.34 }, 500)
+      .to({ x: -0.27 }, 500)
       .easing(TWEEN.Easing.Exponential.InOut)
       .onStart(() => {
         this.tweenArrowTextAppear(this.arrowTextGakuRight);

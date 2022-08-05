@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 import Experience from '../../Experience.js';
-import TextModel from './TextModel.js';
 
 export default class TextProjects {
   constructor() {
@@ -24,23 +23,14 @@ export default class TextProjects {
     // this.buttonRefresh.name = 'buttonRefreshProject';
     // this.scene.add(this.buttonRefresh);
 
-    // LOAD MODEL
-    // this.modelIntro = new TextModel(
-    //   '../../../models/Gamen/Nihongo/gamen_005-6_intro.glb'
-    // );
-
-    // this.model = new TextModel('../../../models/Gamen/gamen_005-6.glb');
-
     this.setModel();
   }
 
   async setModel() {
     // INTRO
-    // await this.modelIntro.waitForLoad();
     this.textModelIntro = this.experience.world.texts.textModelProjectsIntro;
 
     this.textModelIntro.translateX(-4);
-
     this.textModelIntro.children[0].children[0].children[0].material.emissive =
       new THREE.Color('white');
     this.textModelIntro.children[0].children[0].children[0].material.transparent = true;
@@ -48,8 +38,6 @@ export default class TextProjects {
     /**
      * TEXT
      */
-    // await this.model.waitForLoad();
-    // this.textModel = this.model.model.children[0];
     this.textModel = this.experience.world.texts.textModelProjects;
 
     this.textModel.position.set(
@@ -57,8 +45,6 @@ export default class TextProjects {
       1,
       this.experience.world.centerPanels.gamenFour.mesh.position.z
     );
-
-    // CONTENT
     this.textModel.children[0].children[3].material.emissive = new THREE.Color(
       'white'
     );

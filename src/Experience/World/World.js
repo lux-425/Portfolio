@@ -72,11 +72,11 @@ export default class World {
       false,
       false,
       false,
-      true,
-      true,
-      true,
-      true,
       false,
+      false,
+      true,
+      true,
+      true,
       false,
     ];
     this.waitObjectsReady();
@@ -119,27 +119,27 @@ export default class World {
         this.textKeiken.faureciaLogo,
         this.textKeiken.sterimedLogo,
 
-        // this.textProjects.arrowHitboxProject,
-        // this.textProjects.homeArrowHitbox,
-        // this.textProjects.navbarIchi,
-        // this.textProjects.navbarNi,
-        // this.textProjects.navbarSan,
-        // this.textProjects.navbarYon,
-        // this.textProjects.navbarGo,
-        // this.textProjects.navbarRoku,
-        // this.textProjects.navbarTsugi,
-        // this.textProjects.visitButtonHitbox,
-        // this.textProjects.githubLogoHitbox,
+        this.textProjects.arrowHitboxProject,
+        this.textProjects.homeArrowHitbox,
+        this.textProjects.navbarIchi,
+        this.textProjects.navbarNi,
+        this.textProjects.navbarSan,
+        this.textProjects.navbarYon,
+        this.textProjects.navbarGo,
+        this.textProjects.navbarRoku,
+        this.textProjects.navbarTsugi,
+        this.textProjects.visitButtonHitbox,
+        this.textProjects.githubLogoHitbox,
 
-        // this.textGaku.arrowHitboxGakuRight,
-        // this.textGaku.arrowHitboxGakuLeft,
-        // this.textGaku.arrowHomeHitboxGaku,
-        // this.textGaku.logoLeft,
-        // this.textGaku.logoRight,
+        this.textGaku.arrowHitboxGakuRight,
+        this.textGaku.arrowHitboxGakuLeft,
+        this.textGaku.arrowHomeHitboxGaku,
+        this.textGaku.logoLeft,
+        this.textGaku.logoRight,
 
-        // this.textKyoumi.arrowRightHitbox,
-        // this.textKyoumi.arrowLeftHitbox,
-        // this.textKyoumi.arrowHomeHitbox,
+        this.textKyoumi.arrowRightHitbox,
+        this.textKyoumi.arrowLeftHitbox,
+        this.textKyoumi.arrowHomeHitbox,
 
         // this.textGengo.hitboxRight,
         // this.textGengo.hitboxLeft,
@@ -201,10 +201,10 @@ export default class World {
     this.textShoukai = new TextShoukai();
 
     this.textKeiken = new TextKeiken();
-    // this.textProjects = new TextProjects();
+    this.textProjects = new TextProjects();
 
-    // this.textGaku = new TextGaku();
-    // this.textKyoumi = new TextKyoumi();
+    this.textGaku = new TextGaku();
+    this.textKyoumi = new TextKyoumi();
     // this.textGengo = new TextGengo();
   }
 

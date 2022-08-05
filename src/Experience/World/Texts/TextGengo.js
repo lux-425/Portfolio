@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 import Experience from '../../Experience.js';
-import TextModel from './TextModel.js';
 
 export default class TextGengo {
   constructor() {
@@ -24,18 +23,26 @@ export default class TextGengo {
     // this.buttonRefresh.name = 'buttonRefreshGengo';
     // this.scene.add(this.buttonRefresh);
 
-    // LOAD MODEL
-    // this.modelRight = new TextModel('../../../models/Gamen/gamen_009.glb');
-    this.modelLeft = new TextModel('../../../models/Gamen/gamen_009bis.glb');
     this.setModel();
   }
 
   async setModel() {
-    // await this.modelRight.waitForLoad();
     this.textModelRight = this.experience.world.texts.textModelGengo;
 
-    await this.modelLeft.waitForLoad();
-    this.textModelLeft = this.modelLeft.model.children[0];
+    switch (this.experience.world.language) {
+      case 'francais':
+        this.textModelLeft =
+          this.experience.world.texts.textModelGengoBisFrancais;
+        break;
+      case 'nihongo':
+        this.textModelLeft =
+          this.experience.world.texts.textModelGengoBisNihongo;
+        break;
+      case 'english':
+        this.textModelLeft =
+          this.experience.world.texts.textModelGengoBisEnglish;
+        break;
+    }
 
     this.textModelRight.position.set(
       this.experience.world.rightPanels.gamenFour.mesh.position.x,
