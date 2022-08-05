@@ -74,9 +74,9 @@ export default class World {
       false,
       false,
       false,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
       false,
     ];
     this.waitObjectsReady();
@@ -141,16 +141,16 @@ export default class World {
         this.textKyoumi.arrowLeftHitbox,
         this.textKyoumi.arrowHomeHitbox,
 
-        // this.textGengo.hitboxRight,
-        // this.textGengo.hitboxLeft,
-        // this.textGengo.hitboxHome,
-        // this.textGengo.hitboxHon,
-        // this.textGengo.hitboxSoftwares,
-        // this.textGengo.hitboxJLPT,
-        // this.textGengo.anki,
-        // this.textGengo.bunpro,
-        // this.textGengo.rtk,
-        // this.textGengo.jlpt,
+        this.textGengo.hitboxRight,
+        this.textGengo.hitboxLeft,
+        this.textGengo.hitboxHome,
+        this.textGengo.hitboxHon,
+        this.textGengo.hitboxSoftwares,
+        this.textGengo.hitboxJLPT,
+        this.textGengo.anki,
+        this.textGengo.bunpro,
+        this.textGengo.rtk,
+        this.textGengo.jlptPhoto,
       ];
 
       this.travellingManager = new TravellingManager();
@@ -205,7 +205,7 @@ export default class World {
 
     this.textGaku = new TextGaku();
     this.textKyoumi = new TextKyoumi();
-    // this.textGengo = new TextGengo();
+    this.textGengo = new TextGengo();
   }
 
   setPanels() {

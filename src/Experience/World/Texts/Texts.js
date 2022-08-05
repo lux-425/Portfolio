@@ -24,7 +24,7 @@ export default class Texts {
     this.loadModelKeikenFrancais();
     this.loadModelGakuFrancais();
     this.loadModelKyoumiFrancais();
-    // this.loadModelGengoBisFrancais();
+    this.loadModelGengoBisFrancais();
 
     /**
      * 日本語
@@ -37,7 +37,7 @@ export default class Texts {
     this.loadModelKeikenNihongo();
     this.loadModelGakuNihongo();
     this.loadModelKyoumiNihongo();
-    // this.loadModelGengoBisNihongo();
+    this.loadModelGengoBisNihongo();
 
     /**
      * ENGLISH
@@ -47,7 +47,7 @@ export default class Texts {
     this.loadModelKeikenEnglish();
     this.loadModelGakuEnglish();
     this.loadModelKyoumiEnglish();
-    // this.loadModelGengoBisEnglish();
+    this.loadModelGengoBisEnglish();
   }
 
   async loadModelProjects() {
@@ -107,13 +107,13 @@ export default class Texts {
     this.textModelKyoumiFrancais = modelKyoumiFrancais.model.children[0];
   }
 
-  // async loadModelGengoBisFrancais() {
-  //   const modelGengoBisFrancais = new TextModel(
-  //     '../../../models/Gamen/Francais/gamen_010.glb'
-  //   );
-  //   await modelGengoBisFrancais.waitForLoad();
-  //   this.textModelGengoBisFrancais = modelGengoBisFrancais.model.children[0];
-  // }
+  async loadModelGengoBisFrancais() {
+    const modelGengoBisFrancais = new TextModel(
+      '../../../models/Gamen/Francais/gamen_009_bis.glb'
+    );
+    await modelGengoBisFrancais.waitForLoad();
+    this.textModelGengoBisFrancais = modelGengoBisFrancais.model.children[0];
+  }
 
   /**
    * 日本語
@@ -174,13 +174,13 @@ export default class Texts {
     this.textModelKyoumiNihongo = modelKyoumiNihongo.model.children[0];
   }
 
-  // async loadModelGengoBisNihongo() {
-  //   const modelGengoBisNihongo = new TextModel(
-  //     '../../../models/Gamen/Nihongo/gamen_010.glb'
-  //   );
-  //   await modelGengoBisNihongo.waitForLoad();
-  //   this.textModelGengoBisNihongo = modelGengoBisNihongo.model.children[0];
-  // }
+  async loadModelGengoBisNihongo() {
+    const modelGengoBisNihongo = new TextModel(
+      '../../../models/Gamen/Nihongo/gamen_009_bis.glb'
+    );
+    await modelGengoBisNihongo.waitForLoad();
+    this.textModelGengoBisNihongo = modelGengoBisNihongo.model.children[0];
+  }
 
   /**
    * ENGLISH
@@ -225,11 +225,11 @@ export default class Texts {
     this.textModelKyoumiEnglish = modelKyoumiEnglish.model.children[0];
   }
 
-  // async loadModelGengoBisEnglish() {
-  //   const modelGengoBisEnglish = new TextModel(
-  //     '../../../models/Gamen/English/gamen_010.glb'
-  //   );
-  //   await modelGengoBisEnglish.waitForLoad();
-  //   this.textModelGengoBisEnglish = modelGengoBisEnglish.model.children[0];
-  // }
+  async loadModelGengoBisEnglish() {
+    const modelGengoBisEnglish = new TextModel(
+      '../../../models/Gamen/English/gamen_009_bis.glb'
+    );
+    await modelGengoBisEnglish.waitForLoad();
+    this.textModelGengoBisEnglish = modelGengoBisEnglish.model.children[0];
+  }
 }
