@@ -90,7 +90,7 @@ export default class World {
     if (!this.objectsReadyArr.every(Boolean)) {
       setTimeout(() => {
         this.waitObjectsReady();
-      }, 100);
+      }, 255);
     } else {
       this.yubisashiMono = [
         this.textKeshiki.contactHitbox,

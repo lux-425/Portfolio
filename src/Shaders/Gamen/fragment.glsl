@@ -189,5 +189,5 @@ void main(void) {
 
   n *= smoothstep(0.01, 1.0, F.x);
 
-  gl_FragColor = vec4(n, n, n, uOpacity * 0.75);
+  gl_FragColor = vec4(n, n, n, uOpacity * 0.66);
 }

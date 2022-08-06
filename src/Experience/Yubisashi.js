@@ -318,6 +318,11 @@ export default class Yubisashi {
             color = new THREE.Color(
               '#' + Math.floor(Math.random() * 16777215).toString(16)
             );
+            this.experience.renderer.instance.setClearColor(
+              new THREE.Color(
+                '#' + Math.floor(Math.random() * 16777215).toString(16)
+              )
+            );
             this.experience.world.polygonBall.mesh.material.color = color;
             this.experience.world.chikei.debugObject.surfaceColor = color;
             break;

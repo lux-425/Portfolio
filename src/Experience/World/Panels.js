@@ -121,7 +121,7 @@ export default class Panels {
           setTimeout(() => {
             this.gamenThree.resetShader('gengo');
           }, 420);
-        }, 101);
+        }, 420);
 
         this.gamenFour = new Gamen(this.gamenParams);
         this.gamenFour.mesh.rotateY(-(11 * Math.PI) / 6 + 0.1725);

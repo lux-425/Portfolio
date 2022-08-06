@@ -23,7 +23,7 @@ export default class TravellingManager {
 
     /**
      *
-     * OPACITY DOWN => OPACITY UP + SHADERS' SWITCH => ANIMATION
+     * OPACITY DOWN => OPACITY UP then SHADERS' SWITCH => ANIMATION
      *
      */
     this.opacityUp = (gamen) => {
@@ -286,7 +286,7 @@ export default class TravellingManager {
 
     /**
      *
-     * KAMERA / TARGET MOVEMENT TWEENS
+     * KAMERA / TARGET'S POSITION MOVEMENT TWEENS
      *
      */
     /**

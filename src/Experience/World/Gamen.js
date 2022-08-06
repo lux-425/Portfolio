@@ -39,8 +39,6 @@ export default class Gamen {
           fragment: gamenFragmentShaderRight,
         };
         break;
-      default:
-        '透明';
     }
 
     this.setGeometry();

@@ -67,7 +67,6 @@ export default class Experience {
       this.update();
     });
 
-    // 世界の始まり
     this.world = new World();
   }
 

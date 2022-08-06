@@ -15,29 +15,27 @@ body {
   outline: none;
 }
 
-.paragraph
-{
+.paragraph {
   position: absolute;
   top: 50%;
   left: 50%;
 }
 
 .paragraph .text,
-.paragraph .label
-{
-    position: absolute;
-    top: 30px;
-    left: -120px;
-    width: 200px;
-    padding: 20px;
-    border-radius: 4px;
-    /* background: #00000077; */
-    /* border: 1px solid #ffffff77; */
-    color: #ffffff;
-    line-height: 1.3em;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 24px;
-    transition: opacity 0.5s;
-    pointer-events: none;
+.paragraph .label {
+  position: absolute;
+  top: 30px;
+  left: -120px;
+  width: 200px;
+  padding: 20px;
+  border-radius: 4px;
+  /* background: #00000077; */
+  /* border: 1px solid #ffffff77; */
+  color: #ffffff;
+  line-height: 1.3em;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 24px;
+  transition: opacity 0.5s;
+  pointer-events: none;
 }
