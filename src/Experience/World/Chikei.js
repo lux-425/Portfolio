@@ -34,6 +34,7 @@ export default class Chikei {
     this.chikeiModel.material = new THREE.ShaderMaterial({
       vertexShader: chikeiVertexShader,
       fragmentShader: chikeiFragmentShader,
+      precision: 'lowp',
       wireframe: true,
       uniforms: {
         uTime: { value: 0 },

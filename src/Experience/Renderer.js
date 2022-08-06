@@ -18,6 +18,7 @@ export default class Renderer {
     this.instance = new THREE.WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
+      powerPreference: 'high-performance',
     });
     this.instance.physicallyCorrectLights = true;
     this.instance.outputEncoding = THREE.sRGBEncoding;
@@ -27,6 +28,8 @@ export default class Renderer {
 
     this.instance.shadowMap.enabled = false;
     // this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.instance.shadowMap.autoUpdate = false;
+    this.instance.shadowMap.needsUpdate = true;
 
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(this.sizes.pixelRatio);
