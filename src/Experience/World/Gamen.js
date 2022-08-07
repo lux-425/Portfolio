@@ -59,7 +59,7 @@ export default class Gamen {
       vertexShader: this.shader.vertex,
       fragmentShader: this.shader.fragment,
       side: THREE.DoubleSide,
-      precision: 'lowp',
+      // precision: 'lowp',
       // wireframe: true,
       transparent: true,
       uniforms: {

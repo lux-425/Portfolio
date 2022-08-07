@@ -14,10 +14,15 @@ export default class Chikei {
     this.scene = this.experience.scene;
 
     // Debug
-    // this.debug = this.experience.debug;
+    this.debug = this.experience.debug;
     this.debugObject = {};
     this.debugObject.depthColor = '#000000';
     this.debugObject.surfaceColor = '#ffffff';
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder('landscapes');
+      this.setDebug();
+      this.debugFolder.close();
+    }
 
     // Set model
     this.model = new TextModel('../../models/chikei.glb');
@@ -34,7 +39,7 @@ export default class Chikei {
     this.chikeiModel.material = new THREE.ShaderMaterial({
       vertexShader: chikeiVertexShader,
       fragmentShader: chikeiFragmentShader,
-      precision: 'lowp',
+      // precision: 'lowp',
       wireframe: true,
       uniforms: {
         uTime: { value: 0 },
@@ -58,8 +63,12 @@ export default class Chikei {
       // Update chikei
       this.chikeiModel.material.uniforms.uTime.value =
         this.experience.time.elapsed * 0.001;
+
       this.chikeiModel.material.uniforms.uSurfaceColor.value = new THREE.Color(
         this.debugObject.surfaceColor
+      );
+      this.chikeiModel.material.uniforms.uDepthColor.value = new THREE.Color(
+        this.debugObject.depthColor
       );
 
       // Call tick again on the next frame
@@ -67,5 +76,14 @@ export default class Chikei {
     };
 
     tick();
+  }
+
+  setDebug() {
+    this.debugFolder
+      .addColor(this.debugObject, 'surfaceColor')
+      .name('surfaceColor');
+    this.debugFolder
+      .addColor(this.debugObject, 'depthColor')
+      .name('depthColor');
   }
 }

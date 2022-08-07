@@ -34,7 +34,7 @@ export default class Particles {
 
     for (let i = 0; i < this.count * 3; i++) {
       positions[i] = (Math.random() - 0.5) * 1555;
-      colors[i] = 1;
+      colors[i] = Math.random();
     }
 
     this.particlesGeometry.setAttribute(

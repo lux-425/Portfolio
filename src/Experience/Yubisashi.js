@@ -15,7 +15,7 @@ export default class Yubisashi {
      */
     this.yubisashiMono = yubisashiMono;
 
-    console.log(yubisashiMono);
+    // console.log(yubisashiMono);
 
     this.gamenNamesArr = [
       'leftAreaGamen',
@@ -63,13 +63,6 @@ export default class Yubisashi {
                 );
                 this.yubisashiMono.splice(index, 1);
 
-                this.experience.world.chikei.debugObject.surfaceColor =
-                  '#0000ff';
-                this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
-                  new THREE.Color('#b56cfe');
-                this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
-                  new THREE.Color('#0000d1');
-
                 this.kameraTravelling('home', 'profil');
                 break;
               case 'centerAreaGamen':
@@ -83,9 +76,6 @@ export default class Yubisashi {
                 );
                 this.yubisashiMono.splice(index, 1);
 
-                this.experience.world.chikei.debugObject.surfaceColor =
-                  '#ff0000';
-
                 this.kameraTravelling('home', 'keiken');
                 break;
               case 'rightAreaGamen':
@@ -98,9 +88,6 @@ export default class Yubisashi {
                   this.experience.world.rightPanels.gamenTwo.mesh
                 );
                 this.yubisashiMono.splice(index, 1);
-
-                this.experience.world.chikei.debugObject.surfaceColor =
-                  '#00ff00';
 
                 this.kameraTravelling('home', 'gaku');
                 break;
@@ -318,11 +305,6 @@ export default class Yubisashi {
             color = new THREE.Color(
               '#' + Math.floor(Math.random() * 16777215).toString(16)
             );
-            this.experience.renderer.instance.setClearColor(
-              new THREE.Color(
-                '#' + Math.floor(Math.random() * 16777215).toString(16)
-              )
-            );
             this.experience.world.polygonBall.mesh.material.color = color;
             this.experience.world.chikei.debugObject.surfaceColor = color;
             break;
@@ -331,7 +313,7 @@ export default class Yubisashi {
               '#' + Math.floor(Math.random() * 16777215).toString(16)
             );
             this.experience.world.polygonTorus.mesh.material.color = color;
-            this.experience.world.chikei.debugObject.surfaceColor = color;
+            this.experience.world.chikei.debugObject.depthColor = color;
             break;
           case 'globeTwo':
             color = new THREE.Color(
@@ -339,13 +321,21 @@ export default class Yubisashi {
             );
             this.experience.world.polygonGlobeTwo.mesh.material.color = color;
             this.experience.world.chikei.debugObject.surfaceColor = color;
+            this.experience.world.chikei.debugObject.depthColor =
+              new THREE.Color(
+                '#' + Math.floor(Math.random() * 16777215).toString(16)
+              );
             break;
           case 'gem':
             color = new THREE.Color(
               '#' + Math.floor(Math.random() * 16777215).toString(16)
             );
             this.experience.world.polygonGem.mesh.material.color = color;
-            this.experience.world.chikei.debugObject.surfaceColor = color;
+            this.experience.renderer.instance.setClearColor(
+              new THREE.Color(
+                '#' + Math.floor(Math.random() * 16777215).toString(16)
+              )
+            );
             break;
           case 'saru':
             color = new THREE.Color(
@@ -357,6 +347,10 @@ export default class Yubisashi {
               )
             );
             this.experience.world.chikei.debugObject.surfaceColor = color;
+            this.experience.world.chikei.debugObject.depthColor =
+              new THREE.Color(
+                '#' + Math.floor(Math.random() * 16777215).toString(16)
+              );
             break;
         }
       }
@@ -373,6 +367,11 @@ export default class Yubisashi {
     this.experience.world.travellingManager.toggledAlready = false;
     this.experience.world.travellingManager.toggledAlreadyBis = false;
     this.experience.world.travellingManager.toggledAlreadyTer = false;
+
+    this.experience.world.keshiki.mesh.material.uniforms.uSurfaceColor.value =
+      new THREE.Color('#ffffff');
+    this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
+      new THREE.Color('#000000');
 
     switch (origine) {
       case 'home':
@@ -526,10 +525,16 @@ export default class Yubisashi {
                 this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
                   new THREE.Color('#b56cfe');
                 this.experience.world.chikei.debugObject.surfaceColor =
-                  '#0000ff';
+                  '#fc38ff';
+                this.experience.world.chikei.debugObject.depthColor = '#000e75';
+                this.experience.world.leftPanels.gamenParams.color = '#0000ff';
+                this.experience.world.centerPanels.gamenParams.color =
+                  '#000000';
+                this.experience.world.rightPanels.gamenParams.color = '#000000';
                 this.toggleGamenKeshiki();
                 this.experience.world.textKeshiki.about(true, 'one');
                 this.experience.world.particles.switchParticleTexture('left');
+                this.experience.world.textKeshiki.textModel.children[1].visible = false;
               } else if (
                 this.intersects[0].object.name === 'centerAreaGamen' ||
                 this.intersects[0].object.name === 'centerAreaGamenBis'
@@ -539,10 +544,16 @@ export default class Yubisashi {
                 this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
                   new THREE.Color('#6b00b3');
                 this.experience.world.chikei.debugObject.surfaceColor =
+                  '#00eeff';
+                this.experience.world.chikei.debugObject.depthColor = '#3d0000';
+                this.experience.world.leftPanels.gamenParams.color = '#000000';
+                this.experience.world.centerPanels.gamenParams.color =
                   '#ff0000';
+                this.experience.world.rightPanels.gamenParams.color = '#000000';
                 this.toggleGamenKeshiki();
                 this.experience.world.textKeshiki.about(true, 'two');
                 this.experience.world.particles.switchParticleTexture('center');
+                this.experience.world.textKeshiki.textModel.children[1].visible = false;
               } else if (
                 this.intersects[0].object.name === 'rightAreaGamen' ||
                 this.intersects[0].object.name === 'rightAreaGamenBis'
@@ -552,10 +563,16 @@ export default class Yubisashi {
                 this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
                   new THREE.Color('#4e447e');
                 this.experience.world.chikei.debugObject.surfaceColor =
-                  '#00ff00';
+                  '#d6009d';
+                this.experience.world.chikei.debugObject.depthColor = '#173117';
+                this.experience.world.leftPanels.gamenParams.color = '#000000';
+                this.experience.world.centerPanels.gamenParams.color =
+                  '#000000';
+                this.experience.world.rightPanels.gamenParams.color = '#00ff00';
                 this.toggleGamenKeshiki();
                 this.experience.world.textKeshiki.about(true, 'three');
                 this.experience.world.particles.switchParticleTexture('right');
+                this.experience.world.textKeshiki.textModel.children[1].visible = false;
               }
               break;
             /**
@@ -656,6 +673,11 @@ export default class Yubisashi {
                   new THREE.Color('#000000');
                 this.experience.world.chikei.debugObject.surfaceColor =
                   '#ffffff';
+                this.experience.world.chikei.debugObject.depthColor = '#000000';
+                this.experience.world.leftPanels.gamenParams.color = '#0000ff';
+                this.experience.world.centerPanels.gamenParams.color =
+                  '#ff0000';
+                this.experience.world.rightPanels.gamenParams.color = '#00ff00';
                 this.experience.world.particles.toggleSpeed = 1;
                 this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 0;
                 this.experience.world.textKeshiki.contact.visible = true;

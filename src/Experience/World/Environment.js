@@ -176,7 +176,7 @@ export default class Environment {
   setAnimation() {
     this.tick = () => {
       // Update Lights
-      this.centerPointLightAngle = this.experience.time.elapsed * 0.00025;
+      this.centerPointLightAngle = this.experience.time.elapsed * 0.001;
 
       this.centerPointLight.position.x =
         Math.cos(this.centerPointLightAngle) * 10;

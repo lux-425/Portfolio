@@ -139,7 +139,7 @@ export default class Keshiki {
       fragmentShader: keshikiFragmentShader,
       side: THREE.FrontSide,
       wireframe: true,
-      precision: 'lowp',
+      // precision: 'lowp',
       uniforms: {
         uTime: { value: 0 },
 
@@ -158,7 +158,7 @@ export default class Keshiki {
       vertexShader: flagVertexShader,
       fragmentShader: flagFragmentShader,
       wireframe: true,
-      precision: 'lowp',
+      // precision: 'lowp',
       uniforms: {
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
@@ -171,7 +171,7 @@ export default class Keshiki {
       vertexShader: flagVertexShader,
       fragmentShader: flagFragmentShader,
       wireframe: true,
-      precision: 'lowp',
+      // precision: 'lowp',
       uniforms: {
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },
@@ -184,7 +184,7 @@ export default class Keshiki {
       vertexShader: flagVertexShader,
       fragmentShader: flagFragmentShader,
       wireframe: true,
-      precision: 'lowp',
+      // precision: 'lowp',
       uniforms: {
         uBigWavesFrequency: { value: new THREE.Vector2(12, 3) },
         uTime: { value: 0 },

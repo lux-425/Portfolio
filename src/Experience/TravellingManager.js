@@ -383,12 +383,13 @@ export default class TravellingManager {
           new THREE.Color('#000000');
         this.experience.world.textKeshiki.contact.visible = true;
         this.experience.world.textKeshiki.select.visible = true;
+        this.experience.renderer.instance.setClearColor('#101010');
         this.translationHome();
       } else {
         this.experience.world.keshiki.mesh.material.uniforms.uColorOffset.value = 0;
         this.experience.world.particles.toggleSpeed = 1;
         this.experience.world.textKeshiki.contact.visible = false;
-        this.experience.world.textKeshiki.select.visible = true;
+        this.experience.world.textKeshiki.select.visible = false;
       }
       this.travellingAlready = false;
     };
@@ -409,6 +410,10 @@ export default class TravellingManager {
       setTimeout(() => {
         this.experience.world.area = 'home';
         this.experience.world.chikei.debugObject.surfaceColor = '#ffffff';
+        this.experience.world.chikei.debugObject.depthColor = '#000000';
+        this.experience.world.leftPanels.gamenParams.color = '#0000ff';
+        this.experience.world.centerPanels.gamenParams.color = '#ff0000';
+        this.experience.world.rightPanels.gamenParams.color = '#00ff00';
       }, 888);
     };
 

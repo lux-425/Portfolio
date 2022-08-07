@@ -172,6 +172,7 @@ export default class Panels {
       .max(5)
       .step(0.001)
       .name('shitaBreathingSpeed');
+
     this.debugFolder.addColor(this.gamenParams, 'color').name('color');
   }
 }
