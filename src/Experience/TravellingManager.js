@@ -390,6 +390,7 @@ export default class TravellingManager {
         this.experience.world.particles.toggleSpeed = 1;
         this.experience.world.textKeshiki.contact.visible = false;
         this.experience.world.textKeshiki.select.visible = false;
+        this.experience.renderer.instance.setClearColor('#101010');
       }
       this.travellingAlready = false;
     };

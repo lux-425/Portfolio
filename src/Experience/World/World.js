@@ -47,11 +47,17 @@ export default class World {
     const progressBarContainer = document.querySelector(
       '.progress-bar-container'
     );
+    const startButton = document.getElementById('startButton');
+    startButton.addEventListener('click', () => {
+      progressBarContainer.style.display = 'none';
+    });
 
     this.loadingManager.onLoad = function () {
       console.log(`Finished loading.`);
 
-      progressBarContainer.style.display = 'none';
+      loadingAsset.innerHTML = `READY`;
+
+      startButton.style.visibility = 'visible';
     };
 
     this.gltfLoader = new GLTFLoader(this.loadingManager);

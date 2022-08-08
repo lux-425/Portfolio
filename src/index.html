@@ -40,24 +40,47 @@
     }
 
     progress::-webkit-progress-bar {
-      background-color: black;
+      background-color: white;
       width: 100%;
     }
 
     progress {
-      background-color: black;
+      background-color: white;
+      color: white;
     }
 
     progress::-webkit-progress-value {
-      background-color: white !important;
+      background-color: blueviolet !important;
     }
 
     progress::-moz-progress-bar {
-      background-color: white !important;
+      background-color: blueviolet !important;
     }
 
-    progress {
+    button {
+      margin: 2rem 1rem;
+      background-color: transparent;
+      border: 2px solid blueviolet;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.4s;
+      cursor: pointer;
       color: white;
+      visibility: hidden;
+    }
+
+    button:hover {
+      background-color: rgb(95, 13, 172);
+      border: 2px solid white;
+    }
+
+    img {
+      width: 18rem;
+      margin-top: 2rem;
+      height: auto;
     }
   </style>
 
@@ -70,6 +93,8 @@
     <label for="progress-bar">Loading...</label>
     <progress id="progress-bar" value="0" max="100"></progress>
     <label for="progress-bar" id='loading-asset'>___</label>
+    <img src="/static/tips_loading.png" alt="">
+    <button id="startButton">START</button>
   </div>
 
 </body>
