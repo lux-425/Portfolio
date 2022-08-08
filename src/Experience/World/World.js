@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
@@ -30,18 +32,38 @@ export default class World {
 
     this.scene = this.experience.scene;
 
+    // LOADERS
+    this.loadingManager = new THREE.LoadingManager();
+
+    const progressBar = document.getElementById('progress-bar');
+
+    this.loadingManager.onProgress = function (url, loaded, total) {
+      console.log(`Loading: ${url}`);
+
+      progressBar.value = (loaded / total) * 100;
+    };
+
+    const progressBarContainer = document.querySelector(
+      '.progress-bar-container'
+    );
+
+    this.loadingManager.onLoad = function () {
+      console.log(`Finished loading.`);
+
+      progressBarContainer.style.display = 'none';
+    };
+
+    this.gltfLoader = new GLTFLoader(this.loadingManager);
+    this.dracoLoader = new DRACOLoader();
+    this.dracoLoader.setDecoderPath('/draco/');
+    this.gltfLoader.setDRACOLoader(this.dracoLoader);
+
     this.language = '';
     this.area = '';
 
     this.environment = new Environment();
     this.keshiki = new Keshiki();
     this.particles = new Particles();
-
-    // Loaders
-    this.gltfLoader = new GLTFLoader();
-    this.dracoLoader = new DRACOLoader();
-    this.dracoLoader.setDecoderPath('/draco/');
-    this.gltfLoader.setDRACOLoader(this.dracoLoader);
 
     // Debug
     // this.debugParams = {};
