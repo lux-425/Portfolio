@@ -2,11 +2,11 @@ import * as THREE from 'three';
 
 import Experience from '../Experience.js';
 
-import keshikiVertexShader from '../../shaders/Keshiki/vertex.glsl';
-import keshikiFragmentShader from '../../shaders/Keshiki/fragment.glsl';
+import keshikiVertexShader from '../../Shaders/Keshiki/vertex.glsl';
+import keshikiFragmentShader from '../../Shaders/Keshiki/fragment.glsl';
 
-import flagVertexShader from '../../shaders/Keshiki/Flag/vertex.glsl';
-import flagFragmentShader from '../../shaders/Keshiki/Flag/fragment.glsl';
+import flagVertexShader from '../../Shaders/Keshiki/Flag/vertex.glsl';
+import flagFragmentShader from '../../Shaders/Keshiki/Flag/fragment.glsl';
 
 export default class Keshiki {
   constructor() {
