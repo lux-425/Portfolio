@@ -1,5 +1,3 @@
-import * as THREE from 'three';
-
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
@@ -33,12 +31,15 @@ export default class World {
     this.scene = this.experience.scene;
 
     // LOADERS
-    this.loadingManager = new THREE.LoadingManager();
+    this.loadingManager = this.experience.loadingManager;
 
     const progressBar = document.getElementById('progress-bar');
+    const loadingAsset = document.getElementById('loading-asset');
 
     this.loadingManager.onProgress = function (url, loaded, total) {
       console.log(`Loading: ${url}`);
+
+      loadingAsset.innerHTML = `[${url}]`;
 
       progressBar.value = (loaded / total) * 100;
     };
@@ -58,11 +59,17 @@ export default class World {
     this.dracoLoader.setDecoderPath('/draco/');
     this.gltfLoader.setDRACOLoader(this.dracoLoader);
 
+    // Local variables for managers' classes
     this.language = '';
     this.area = '';
 
+    // Lights
     this.environment = new Environment();
+
+    // Main front screen
     this.keshiki = new Keshiki();
+
+    // Big and small particles
     this.particles = new Particles();
 
     // Debug
@@ -103,8 +110,10 @@ export default class World {
     ];
     this.waitObjectsReady();
 
+    // Initialize three languages' loaded models
     this.texts = new Texts();
 
+    // Initialize text on main screen for user's selection
     this.textKeshiki = new TextKeshiki();
   }
 

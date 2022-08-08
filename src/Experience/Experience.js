@@ -21,6 +21,12 @@ export default class Experience {
     instance = this;
 
     /**
+     * LOADING PROGRESS MANAGER
+     * for World's panels, Chikei's landscape and TextModel's texts models
+     */
+    this.loadingManager = new THREE.LoadingManager();
+
+    /**
      * Mouse
      */
     this.mouse = new THREE.Vector2();

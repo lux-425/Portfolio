@@ -12,7 +12,7 @@ export default class TextModel {
     this.url = url;
 
     // Loaders
-    this.gltfLoader = new GLTFLoader();
+    this.gltfLoader = new GLTFLoader(this.experience.loadingManager);
     this.dracoLoader = new DRACOLoader();
     this.dracoLoader.setDecoderPath('/draco/');
     this.gltfLoader.setDRACOLoader(this.dracoLoader);
