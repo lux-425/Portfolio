@@ -421,7 +421,7 @@ export default class TextKeiken {
       setTimeout(() => {
         this.scene.add(this.textModel);
         this.animateText();
-      }, 5250);
+      }, 3333);
     } else {
       this.scene.add(this.textModel);
       this.animateText();
@@ -444,7 +444,7 @@ export default class TextKeiken {
 
     setTimeout(() => {
       this.animateIntroMu();
-    }, 950);
+    }, 50);
 
     /**
      * 経
@@ -453,7 +453,7 @@ export default class TextKeiken {
 
     setTimeout(() => {
       this.animateIntroKei();
-    }, 1450);
+    }, 550);
 
     /**
      * 験
@@ -462,15 +462,15 @@ export default class TextKeiken {
 
     setTimeout(() => {
       this.animateIntroKen();
-    }, 2950);
+    }, 1050);
 
     setTimeout(() => {
       this.tweenJitsumukeikenDisappear.start();
-    }, 5000);
+    }, 3050);
 
     setTimeout(() => {
       this.textModelIntro.visible = false;
-    }, 5200);
+    }, 3250);
   }
 
   animateText() {

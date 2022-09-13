@@ -410,8 +410,8 @@ export default class TravellingManager {
 
       setTimeout(() => {
         this.experience.world.area = 'home';
-        this.experience.world.chikei.debugObject.surfaceColor = '#ffffff';
-        this.experience.world.chikei.debugObject.depthColor = '#000000';
+        this.experience.world.chikei.debugObject.surfaceColor = '#fc38ff';
+        this.experience.world.chikei.debugObject.depthColor = '#000e75';
         this.experience.world.leftPanels.gamenParams.color = '#0000ff';
         this.experience.world.centerPanels.gamenParams.color = '#ff0000';
         this.experience.world.rightPanels.gamenParams.color = '#00ff00';
@@ -510,7 +510,8 @@ export default class TravellingManager {
       } else {
         this.tweenKameraGamen(
           this.experience.world.centerPanels.gamenTwo.mesh,
-          Math.PI * 0.65
+          Math.PI * 0.65,
+          1.1
         );
       }
 
@@ -541,14 +542,16 @@ export default class TravellingManager {
     this.translationProjects = () => {
       this.tweenKameraGamen(
         this.experience.world.centerPanels.gamenFour.mesh,
-        Math.PI * 1.3
+        Math.PI * 1.3,
+        1.1
       );
       setTimeout(() => {
         this.tweenKameraGamen(
-          this.experience.world.centerPanels.gamenThree.mesh,
-          Math.PI * 1.5
+          this.experience.world.centerPanels.gamenOne.mesh,
+          Math.PI * 1.5,
+          2.15
         );
-      }, 999);
+      }, 888);
 
       setTimeout(() => {
         this.experience.world.area = 'projects';

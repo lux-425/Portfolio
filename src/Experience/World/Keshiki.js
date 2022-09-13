@@ -209,15 +209,11 @@ export default class Keshiki {
     /**
      *  INIT KAMERA FOR HOME'S AREA
      */
-    this.experience.camera.instance.position.set(
-      this.mesh.position.x,
-      this.mesh.position.y + 2,
-      this.mesh.position.z + 29
-    );
+    this.experience.camera.instance.position.set(-25, 35, 100);
     this.experience.camera.controls.target = new THREE.Vector3(
       this.mesh.position.x,
       this.mesh.position.y - 1,
-      this.mesh.position.z + 15
+      this.mesh.position.z + 25
     );
 
     this.experience.camera.controls.minDistance = -55.425;

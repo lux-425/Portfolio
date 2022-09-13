@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
@@ -44,12 +46,55 @@ export default class World {
       progressBar.value = (loaded / total) * 100;
     };
 
+    // START's kamera travelling
+    var TWEEN = require('@tweenjs/tween.js');
+    this.tweenKameraHome = () => {
+      const angle = Math.PI * 0.5;
+
+      let boxMaxY = new THREE.Box3().setFromObject(
+        this.experience.world.keshiki.mesh
+      ).max.y;
+
+      let distance = boxMaxY + 22;
+
+      let positionKamera = {
+        x:
+          this.experience.world.keshiki.mesh.position.x +
+          Math.cos(angle) * distance,
+        y: this.experience.world.keshiki.mesh.position.y + 2,
+        z:
+          this.experience.world.keshiki.mesh.position.z +
+          Math.sin(angle) * distance,
+      };
+      let positionTarget = {
+        x: this.experience.world.keshiki.mesh.position.x,
+        y: this.experience.world.keshiki.mesh.position.y - 1,
+        z: this.experience.world.keshiki.mesh.position.z,
+      };
+
+      let moveKamera = new TWEEN.Tween(this.experience.camera.instance.position)
+        .to(positionKamera, 2222)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onComplete(() => {
+          this.experience.camera.controls.enabled = true;
+        });
+      let moveTarget = new TWEEN.Tween(this.experience.camera.controls.target)
+        .to(positionTarget, 2222)
+        .easing(TWEEN.Easing.Quadratic.InOut);
+
+      this.experience.camera.controls.enabled = false;
+
+      moveKamera.start();
+      moveTarget.start();
+    };
+
     const progressBarContainer = document.querySelector(
       '.progress-bar-container'
     );
     const startButton = document.getElementById('startButton');
     startButton.addEventListener('click', () => {
       progressBarContainer.style.display = 'none';
+      this.tweenKameraHome();
     });
 
     this.loadingManager.onLoad = function () {

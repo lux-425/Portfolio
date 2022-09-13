@@ -103,11 +103,12 @@ export default class Panels {
 
         this.gamenOne = new Gamen(this.gamenParams);
         this.gamenOne.mesh.translateX(2.54);
-        this.gamenOne.mesh.rotateY(Math.PI);
+        // this.gamenOne.mesh.rotateY(Math.PI);
         this.gamens.push(this.gamenOne.mesh);
 
         this.gamenTwo = new Gamen(this.gamenParams);
         this.gamenTwo.mesh.translateX(3.54);
+        this.gamenTwo.mesh.rotateY(Math.PI);
         this.gamens.push(this.gamenTwo.mesh);
 
         this.gamenThree = new Gamen(this.gamenParams);

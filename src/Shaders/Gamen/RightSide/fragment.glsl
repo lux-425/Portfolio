@@ -55,9 +55,9 @@ float pNoise(vec2 p, int res) {
 void main() {
   vec3 uvColor = vec3(vUv, 1.0);
 
-  float breathing = (sin(uvColor.y * 5.0 + uTime * 0.055) * sin(uvColor.y * 5.0 + uTime * 0.055) * 10.0) * abs(pNoise(vec2(-uvColor.xy * (2.4)), 3) * 10.0);
+  float breathing = (cos(uvColor.y * 5.0 + uTime * 0.055) * cos(uvColor.y * 5.0 + uTime * 0.055) * 10.0) * abs(pNoise(vec2(uvColor.xy * (1.55)), 2) * 10.0);
 
-  float strength = 1.0 - abs(pNoise(breathing / uvColor.xy, 3));
+  float strength = 1.0 - abs(pNoise(breathing * uvColor.xy, 3));
   strength = clamp(strength, 0.0, 1.0);
 
   vec3 mixedColor = mix(uColor, uvColor, strength / breathing);

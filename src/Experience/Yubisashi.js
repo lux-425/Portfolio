@@ -173,22 +173,22 @@ export default class Yubisashi {
               case 'zgithubHitbox':
                 switch (this.experience.world.textProjects.actualTab) {
                   case 'ichi':
-                    window.open('https://github.com/Luke-425/Nomi-Uebu');
+                    window.open('https://github.com/lux-425/Nomi-Uebu');
                     break;
                   case 'ni':
-                    window.open('https://github.com/Luke-425/KyouKyoku');
+                    window.open('https://github.com/lux-425/KyouKyoku');
                     break;
                   case 'san':
-                    window.open('https://github.com/Luke-425/KimiKan');
+                    window.open('https://github.com/lux-425/KimiKan');
                     break;
                   case 'yon':
-                    window.open('https://github.com/Luke-425/HonMen');
+                    window.open('https://github.com/lux-425/HonMen');
                     break;
                   case 'go':
-                    window.open('https://github.com/Luke-425/Byuffet');
+                    window.open('https://github.com/lux-425/Byuffet');
                     break;
                   case 'roku':
-                    window.open('https://github.com/Luke-425/Portfolio');
+                    window.open('https://github.com/lux-425/Portfolio');
                     break;
                 }
                 break;
@@ -200,7 +200,9 @@ export default class Yubisashi {
                     break;
                   case 'ni':
                     console.log('open ni');
-                    // window.open('');
+                    window.open(
+                      'https://kyoukyoku-garcialuc66-gmailcom.vercel.app/'
+                    );
                     break;
                   case 'san':
                     console.log('open san');
@@ -525,8 +527,8 @@ export default class Yubisashi {
                 this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
                   new THREE.Color('#b56cfe');
                 this.experience.world.chikei.debugObject.surfaceColor =
-                  '#fc38ff';
-                this.experience.world.chikei.debugObject.depthColor = '#000e75';
+                  '#ffffff';
+                this.experience.world.chikei.debugObject.depthColor = '#0e3ea0';
                 this.experience.world.leftPanels.gamenParams.color = '#0000ff';
                 this.experience.world.centerPanels.gamenParams.color =
                   '#000000';
@@ -672,8 +674,8 @@ export default class Yubisashi {
                 this.experience.world.keshiki.mesh.material.uniforms.uDepthColor.value =
                   new THREE.Color('#000000');
                 this.experience.world.chikei.debugObject.surfaceColor =
-                  '#ffffff';
-                this.experience.world.chikei.debugObject.depthColor = '#000000';
+                  '#fc38ff';
+                this.experience.world.chikei.debugObject.depthColor = '#000e75';
                 this.experience.world.leftPanels.gamenParams.color = '#0000ff';
                 this.experience.world.centerPanels.gamenParams.color =
                   '#ff0000';

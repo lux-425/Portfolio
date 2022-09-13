@@ -75,25 +75,25 @@ export default class TextKeshiki {
     this.contact = this.textModel.children[3];
     this.contactHitbox = this.textModel.children[4];
     this.contactHitbox.visible = false;
-    this.nihongo = this.textModel.children[7];
+    this.nihongo = this.textModel.children[9];
     this.nihongoHitbox = this.textModel.children[10];
     this.nihongoHitbox.visible = false;
-    this.francais = this.textModel.children[8];
-    this.francaisHitbox = this.textModel.children[6];
+    this.francais = this.textModel.children[7];
+    this.francaisHitbox = this.textModel.children[8];
     this.francaisHitbox.visible = false;
-    this.english = this.textModel.children[9];
-    this.englishHitbox = this.textModel.children[5];
+    this.english = this.textModel.children[5];
+    this.englishHitbox = this.textModel.children[6];
     this.englishHitbox.visible = false;
 
-    this.aboutNihongo1 = this.textModel.children[0].children[0];
-    this.aboutNihongo2 = this.textModel.children[0].children[1];
-    this.aboutNihongo3 = this.textModel.children[0].children[2];
+    this.aboutNihongo1 = this.textModel.children[0].children[6];
+    this.aboutNihongo2 = this.textModel.children[0].children[7];
+    this.aboutNihongo3 = this.textModel.children[0].children[8];
     this.aboutFrancais1 = this.textModel.children[0].children[3];
     this.aboutFrancais2 = this.textModel.children[0].children[4];
     this.aboutFrancais3 = this.textModel.children[0].children[5];
-    this.aboutEnglish1 = this.textModel.children[0].children[6];
-    this.aboutEnglish2 = this.textModel.children[0].children[7];
-    this.aboutEnglish3 = this.textModel.children[0].children[8];
+    this.aboutEnglish1 = this.textModel.children[0].children[0];
+    this.aboutEnglish2 = this.textModel.children[0].children[1];
+    this.aboutEnglish3 = this.textModel.children[0].children[2];
 
     this.bienvenue = [
       this.textModel.children[1].children[0],
@@ -102,16 +102,16 @@ export default class TextKeshiki {
       this.textModel.children[1].children[3],
     ];
     this.welcome = [
-      this.textModel.children[1].children[11],
       this.textModel.children[1].children[4],
       this.textModel.children[1].children[5],
       this.textModel.children[1].children[6],
+      this.textModel.children[1].children[7],
     ];
     this.youkoso = [
-      this.textModel.children[1].children[7],
       this.textModel.children[1].children[8],
       this.textModel.children[1].children[9],
       this.textModel.children[1].children[10],
+      this.textModel.children[1].children[11],
     ];
 
     this.nihongo.visible = false;

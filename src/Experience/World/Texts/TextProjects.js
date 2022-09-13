@@ -757,6 +757,7 @@ export default class TextProjects {
     this.project5Description =
       this.textModel.children[1].children[4].children[0];
     this.project5Image = this.textModel.children[1].children[4].children[2];
+    this.project5Image.visible = false;
     this.project5Stack = this.textModel.children[0].children[10];
 
     this.project6 = this.textModel.children[1].children[5];
@@ -1423,7 +1424,8 @@ export default class TextProjects {
       this.actualTitle = this.project5Title;
       this.actualDescription = this.project5Description;
       this.actualStack = this.project5Stack;
-      this.actualImage = this.project5Image;
+      // this.actualImage = this.project5Image;
+      this.actualImage = null;
       this.actualImageBis = null;
 
       this.visitLiveFrame.visible = false;

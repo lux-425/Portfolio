@@ -16,8 +16,8 @@ export default class Chikei {
     // Debug
     this.debug = this.experience.debug;
     this.debugObject = {};
-    this.debugObject.depthColor = '#000000';
-    this.debugObject.surfaceColor = '#ffffff';
+    this.debugObject.depthColor = '#000e75';
+    this.debugObject.surfaceColor = '#fc38ff';
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder('landscapes');
       this.setDebug();
