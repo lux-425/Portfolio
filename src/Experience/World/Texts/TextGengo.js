@@ -61,7 +61,7 @@ export default class TextGengo {
   setVariables() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    // console.log(this.textModelLeft);
+    console.log(this.textModelRight);
 
     /**
      * LEFT PANEL
@@ -98,7 +98,7 @@ export default class TextGengo {
     this.arrowTextRight = this.textModelRight.children[0].children[7];
 
     // 画像
-    for (var i = 11; i < 22; i++) {
+    for (var i = 10; i < 22; i++) {
       switch (this.textModelRight.children[0].children[i].name) {
         case 'anki':
           this.anki = this.textModelRight.children[0].children[i];
@@ -133,17 +133,14 @@ export default class TextGengo {
         case 'mnn2':
           this.mnn2 = this.textModelRight.children[0].children[i];
           break;
+        case 'jlptWaiting':
+          this.jlptWaiting = this.textModelRight.children[0].children[i];
+          break;
       }
     }
 
-    // 本
+    this.softwaresNames = this.textModelRight.children[0].children[9];
     this.honNames = this.textModelRight.children[0].children[8];
-
-    // ソフトエア
-    this.softwaresNames = this.textModelRight.children[0].children[10];
-
-    // ＪＬＰＴ
-    this.jlptWaiting = this.textModelRight.children[0].children[9];
 
     /**
      * MATERIALS
@@ -176,9 +173,8 @@ export default class TextGengo {
       transparent: true,
       opacity: 0,
     });
-    this.honNames.material = this.namesMaterial;
-    this.softwaresNames.material = this.namesMaterial;
-    this.jlptWaiting.material = this.namesMaterial;
+    // this.honNames.material = this.namesMaterial;
+    // this.softwaresNames.material = this.namesMaterial;
 
     this.panelLeftMaterial = new THREE.MeshStandardMaterial({
       emissive: 'white',
@@ -204,6 +200,7 @@ export default class TextGengo {
       this.bunproStats,
       this.anki,
       this.bunpro,
+      this.jlptWaiting,
     ];
     for (var i = 0; i < this.imagesArr.length; i++) {
       this.imagesArr[i].material.depthTest = true;
