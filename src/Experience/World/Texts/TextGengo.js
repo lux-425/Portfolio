@@ -61,7 +61,7 @@ export default class TextGengo {
   setVariables() {
     var TWEEN = require('@tweenjs/tween.js');
 
-    console.log(this.textModelRight);
+    // console.log(this.textModelRight);
 
     /**
      * LEFT PANEL

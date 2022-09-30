@@ -195,17 +195,14 @@ export default class Yubisashi {
               case 'visitHitbox':
                 switch (this.experience.world.textProjects.actualTab) {
                   case 'ichi':
-                    console.log('open ichi');
                     // window.open('');
                     break;
                   case 'ni':
-                    console.log('open ni');
                     window.open(
                       'https://kyoukyoku-garcialuc66-gmailcom.vercel.app/'
                     );
                     break;
                   case 'san':
-                    console.log('open san');
                     // window.open('');
                     break;
                 }

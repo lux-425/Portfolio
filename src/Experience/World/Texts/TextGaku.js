@@ -151,8 +151,12 @@ export default class TextGaku {
       .onStart(() => {
         this.tweenArrowTextDisappear(this.arrowTextGakuRight);
       });
+
+    this.experience.world.language == 'nihongo'
+      ? (this.rightToggleX = -0.33)
+      : (this.rightToggleX = -0.27);
     this.tweenArrowRightToggle = new TWEEN.Tween(this.arrowGakuRight.position)
-      .to({ x: -0.27 }, 500)
+      .to({ x: this.rightToggleX }, 500)
       .easing(TWEEN.Easing.Exponential.InOut)
       .onStart(() => {
         this.tweenArrowTextAppear(this.arrowTextGakuRight);

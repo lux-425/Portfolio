@@ -94,7 +94,9 @@ export default class World {
     const startButton = document.getElementById('startButton');
     startButton.addEventListener('click', () => {
       progressBarContainer.style.display = 'none';
-      this.tweenKameraHome();
+      setTimeout(() => {
+        this.tweenKameraHome();
+      }, 222);
     });
 
     this.loadingManager.onLoad = function () {
